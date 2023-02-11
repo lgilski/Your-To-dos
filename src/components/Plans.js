@@ -8,9 +8,6 @@ const Plans = function (props) {
   return (
     <Fragment>
       <div className={classes.plans}>
-        {props.plans === null && (
-          <h4 className={classes.message}>There are no plans yet</h4>
-        )}
         {props.plans.length === 0 && (
           <h4 className={classes.message}>There are no plans yet</h4>
         )}

@@ -45,7 +45,9 @@ function App() {
 
   const localStorageGet = useEffect(() => {
     const goalsFromLocalStorage = JSON.parse(localStorage.getItem('allGoals'));
-    console.log(goalsFromLocalStorage);
+
+    if (goalsFromLocalStorage === null) return;
+
     setGoals(goalsFromLocalStorage);
   }, []);
 
