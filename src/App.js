@@ -8,6 +8,8 @@ function App() {
   const [goals, setGoals] = useState([]);
   const [wasChanged, setWasChanged] = useState(false);
 
+  console.log(goals);
+
   const deleteHandler = function (goalId) {
     setGoals(previousPlans => {
       const updatedGoals = previousPlans.filter(plan => plan.id !== goalId);
