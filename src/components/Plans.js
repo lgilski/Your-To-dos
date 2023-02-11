@@ -3,8 +3,6 @@ import Card from './Card';
 import classes from './Plans.module.css';
 
 const Plans = function (props) {
-  console.log(props);
-
   return (
     <Fragment>
       <div className={classes.plans}>
