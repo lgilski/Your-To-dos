@@ -3,14 +3,13 @@ import Card from './Card';
 import classes from './Plans.module.css';
 
 const Plans = function (props) {
-  console.log(props);
-
   return (
     <Fragment>
       <div className={classes.plans}>
-        {props.plans.length === 0 && (
-          <h4 className={classes.message}>There are no plans yet</h4>
-        )}
+        {props.plans === null ||
+          (props.plans.length === 0 && (
+            <h4 className={classes.message}>There are no plans yet</h4>
+          ))}
         {props.plans &&
           props.plans.map(plan => {
             const date = new Date(plan.date);
