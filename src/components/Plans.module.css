@@ -20,12 +20,17 @@
   padding: 16px;
   font-size: 64px;
   border-radius: 9px;
+  max-width: 450px;
 }
 
 @media (max-width: 1500px) {
   .plans {
     max-width: 1000px;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .message {
+    grid-column: 1 / -1;
   }
 }
 
@@ -36,6 +41,12 @@
   }
 
   .message {
-    max-width: 500px;
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .message {
+    max-width: 320px;
   }
 }
