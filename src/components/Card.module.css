@@ -84,4 +84,12 @@
   .card {
     width: 320px;
   }
+
+  .date h3 {
+    font-size: 48px;
+  }
+
+  .date h4 {
+    font-size: 32px;
+  }
 }
