@@ -7,8 +7,6 @@ const Card = function (props) {
     props.onDelete(props.id);
   };
 
-  console.log(props.withinSevenDays);
-
   return (
     <Fragment>
       {props.withinThreeDays === 'true' && (

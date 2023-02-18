@@ -17,8 +17,6 @@ const Plans = function (props) {
             const diffTime = date - now;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            console.log(diffDays);
-
             if (diffDays === 0) {
               return (
                 <Card

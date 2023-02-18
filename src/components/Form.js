@@ -61,8 +61,6 @@ const Form = function (props) {
         id: id,
       });
 
-      console.log(updatedPlans);
-
       updatedPlans.sort(function (a, b) {
         if (!a || !b) {
           return;
