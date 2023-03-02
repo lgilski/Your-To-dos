@@ -6,7 +6,6 @@ import Plans from './components/Plans';
 
 function App() {
   const [goals, setGoals] = useState([]);
-  const [wasChanged, setWasChanged] = useState(false);
 
   const deleteHandler = function (goalId) {
     setGoals(previousPlans => {
@@ -17,31 +16,20 @@ function App() {
   };
 
   const deleteTaskHandler = function (taskId, goalId) {
-    let goalsToBeChanged = goals;
-
-    const cardWithTheCertanTask = goalsToBeChanged.filter(
-      plan => plan.id === goalId
-    );
-
-    const cardWithTheCertanTaskIndex = goalsToBeChanged
-      .map(e => e.id)
-      .indexOf(goalId);
-
-    const withoutThatTask = cardWithTheCertanTask[0].plan.filter(
-      task => task.idTask !== taskId
-    );
-
-    goalsToBeChanged[cardWithTheCertanTaskIndex].plan = withoutThatTask;
-
-    setGoals(goalsToBeChanged);
-    setWasChanged(true);
+    setGoals(previousGoals => {
+      return previousGoals.map(goal => {
+        if (goal.id === goalId) {
+          return {
+            ...goal,
+            plan: goal.plan.filter(task => task.idTask !== taskId),
+          };
+        }
+        return goal;
+      });
+    });
   };
 
-  const rerender = useEffect(() => {
-    return setWasChanged(false);
-  }, [wasChanged]);
-
-  const localStorageGet = useEffect(() => {
+  useEffect(() => {
     const goalsFromLocalStorage = JSON.parse(localStorage.getItem('allGoals'));
 
     if (goalsFromLocalStorage === null) return;
@@ -49,9 +37,9 @@ function App() {
     setGoals(goalsFromLocalStorage);
   }, []);
 
-  const localStorageSave = useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('allGoals', JSON.stringify(goals));
-  }, [wasChanged, goals]);
+  }, [goals]);
 
   return (
     <div>

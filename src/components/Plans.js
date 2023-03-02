@@ -17,66 +17,6 @@ const Plans = function (props) {
             const diffTime = date - now;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            if (diffDays === 0) {
-              return (
-                <Card
-                  key={plan.id}
-                  onDelete={props.onDelete}
-                  onTaskDelete={props.onTaskDelete}
-                  dayName={plan.days}
-                  date={plan.specificDate}
-                  text={plan.plan}
-                  id={plan.id}
-                  today='true'
-                />
-              );
-            }
-
-            // if (diffDays === 1) {
-            //   return (
-            //     <Card
-            //       key={plan.id}
-            //       onDelete={props.onDelete}
-            //       onTaskDelete={props.onTaskDelete}
-            //       dayName={plan.days}
-            //       date={plan.specificDate}
-            //       text={plan.plan}
-            //       id={plan.id}
-            //       tomorrow='true'
-            //     />
-            //   );
-            // }
-
-            if (diffDays <= 2 && diffDays >= 0) {
-              return (
-                <Card
-                  key={plan.id}
-                  onDelete={props.onDelete}
-                  onTaskDelete={props.onTaskDelete}
-                  dayName={plan.days}
-                  date={plan.specificDate}
-                  text={plan.plan}
-                  id={plan.id}
-                  withinThreeDays='true'
-                />
-              );
-            }
-
-            if (diffDays < 0) {
-              return (
-                <Card
-                  key={plan.id}
-                  onDelete={props.onDelete}
-                  onTaskDelete={props.onTaskDelete}
-                  dayName={plan.days}
-                  date={plan.specificDate}
-                  text={plan.plan}
-                  id={plan.id}
-                  happened='true'
-                />
-              );
-            }
-
             return (
               <Card
                 key={plan.id}
@@ -86,6 +26,9 @@ const Plans = function (props) {
                 date={plan.specificDate}
                 text={plan.plan}
                 id={plan.id}
+                happened={diffDays < 0 ? 'true' : ''}
+                withinThreeDays={diffDays <= 2 && diffDays >= 0 ? 'true' : ''}
+                today={diffDays === 0 ? 'true' : ''}
               />
             );
           })}
