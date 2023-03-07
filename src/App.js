@@ -6,6 +6,7 @@ import Plans from './components/Plans';
 
 function App() {
   const [goals, setGoals] = useState([]);
+  console.log(goals);
 
   const deleteHandler = function (goalId) {
     setGoals(previousPlans => {

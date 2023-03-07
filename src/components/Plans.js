@@ -27,7 +27,9 @@ const Plans = function (props) {
                 text={plan.plan}
                 id={plan.id}
                 happened={diffDays < 0 ? 'true' : ''}
-                withinThreeDays={diffDays <= 2 && diffDays >= 0 ? 'true' : ''}
+                withinThreeDays={
+                  diffDays <= 2 && diffDays >= 0 && diffDays !== 0 ? 'true' : ''
+                }
                 today={diffDays === 0 ? 'true' : ''}
               />
             );
