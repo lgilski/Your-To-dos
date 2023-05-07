@@ -30,6 +30,7 @@
   background-color: #00bfb3;
   padding: 30px 8px 4px 8px;
   border-radius: 9px;
+  margin-bottom: 8px;
 }
 
 /* .happened {
@@ -45,6 +46,7 @@
   padding: 0;
   width: 0;
   font-size: 0;
+  margin: 0;
 }
 
 .fade-small-enter-active {
@@ -53,6 +55,7 @@
   padding: 30px 8px 4px 8px;
   width: 90%;
   font-size: 24px;
+  margin-bottom: 8px;
 }
 
 .fade-small-exit {
@@ -60,6 +63,7 @@
   padding: 30px 8px 4px 8px;
   width: 90%;
   font-size: 24px;
+  margin-bottom: 8px;
 }
 
 .fade-small-exit-active {
@@ -68,4 +72,5 @@
   padding: 0;
   width: 0;
   font-size: 0;
+  margin: 0;
 }
