@@ -11,8 +11,15 @@
   gap: 32px;
 }
 
+.plansContainer {
+  position: relative;
+}
+
 .message {
-  grid-column: 2;
+  position: absolute;
+
+  left: 50%;
+  transform: translate(-50%);
 
   text-align: center;
   background-color: #03b5aa;
@@ -20,7 +27,7 @@
   padding: 16px;
   font-size: 64px;
   border-radius: 9px;
-  max-width: 450px;
+  width: 450px;
 }
 
 @media (max-width: 1500px) {
@@ -28,10 +35,10 @@
     max-width: 1000px;
     grid-template-columns: repeat(2, 1fr);
   }
-
+  /* 
   .message {
     grid-column: 1 / -1;
-  }
+  } */
 }
 
 @media (max-width: 1000px) {
@@ -40,14 +47,14 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .message {
+  /* .message {
     grid-column: 1;
-  }
+  } */
 }
 
 @media (max-width: 500px) {
   .message {
-    max-width: 320px;
-    font-size: 48px;
+    width: 320px;
+    font-size: 42px;
   }
 }

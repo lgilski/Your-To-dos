@@ -1,4 +1,3 @@
-import { Fragment, useEffect } from 'react';
 import classes from './CardElement.module.css';
 
 const CardElement = function (props) {

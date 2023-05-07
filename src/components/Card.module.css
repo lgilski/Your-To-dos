@@ -92,10 +92,6 @@
   color: #029188;
 }
 
-.happened {
-  /* color: #68d3cc; */
-}
-
 @media (max-width: 500px) {
   .card {
     width: 320px;
