@@ -25,7 +25,7 @@ const dataSlice = createSlice({
      * @param {{ payload: Card }} action
      */
     createCard(state, action) {
-      console.log('createCard', action);
+      // console.log('createCard', action);
       state.cards.push(action.payload);
 
       state.cards.sort(function (a, b) {
@@ -53,7 +53,7 @@ const dataSlice = createSlice({
      * @param {{ payload: { cardId: string, task: Task } }} action
      */
     createTask(state, action) {
-      console.log('createTask', action);
+      // console.log('createTask', action);
 
       state.cards.filter(card => {
         if (card.id !== action.payload.cardId) return card;

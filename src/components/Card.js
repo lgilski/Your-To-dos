@@ -12,8 +12,6 @@ import { useDispatch } from 'react-redux';
 const Card = function (props) {
   const { card } = props;
 
-  console.log(card);
-
   const dispatch = useDispatch();
 
   const onCardDelete = function () {

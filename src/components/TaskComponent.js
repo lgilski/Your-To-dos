@@ -14,8 +14,6 @@ const CardElement = function (props) {
     dispatch(dataActions.deleteTask({ taskId: task.id, cardId }));
   };
 
-  console.log(task.id);
-
   return (
     <div className={classes['list-element']}>
       <li>{task.content}</li>
