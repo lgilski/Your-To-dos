@@ -28,7 +28,7 @@ function HomePage() {
 
   return (
     <>
-      {<p>Welcome {email}</p>}
+      {email && <p>Welcome {email}</p>}
       <section className={classes.wrapper}>
         <div className={classes.hero}>
           <h2 className={classes['hero-text']}>
