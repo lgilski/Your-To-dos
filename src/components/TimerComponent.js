@@ -25,7 +25,9 @@ const TimerComponent = props => {
   );
 
   const startTimer = () => {
-    if (timeInSeconds === 0) return;
+    if (timeInSeconds === 0) {
+      resetTimer();
+    }
     setStarted(true);
     countDownTime.current = setInterval(() => {
       setTimeInSeconds(prevstate => prevstate - 1);
