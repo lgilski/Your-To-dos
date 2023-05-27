@@ -76,20 +76,27 @@ const TimerComponent = props => {
               ? `0${currentSeconds}`
               : currentSeconds}
           </h4>
+          {/* timerData.hours.length === 0 ? */}
           <p className={classes['timer-name']}>
             {timerData.timerName} (
-            {timerData.hours.toString().length === 1
+            {timerData.hours.length === 0
+              ? '00'
+              : timerData.hours.toString().length <= 1
               ? `0${timerData.hours}`
               : timerData.hours}
             :
-            {timerData.minutes.toString().length === 1
+            {timerData.minutes.length === 0
+              ? '00'
+              : timerData.minutes.toString().length <= 1
               ? `0${timerData.minutes}`
               : timerData.minutes}
             :
-            {timerData.seconds.toString().length === 1
+            {timerData.seconds.length === 0
+              ? '00'
+              : timerData.seconds.toString().length <= 1
               ? `0${timerData.seconds}`
               : timerData.seconds}
-            ){' '}
+            )
           </p>
         </div>
         <div className={classes['timer-buttons']}>
