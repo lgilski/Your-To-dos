@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classes from './TimerForm.module.css';
 import Button from './UI/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { timerActions } from '../store/timer';
 
 function generateUUID() {
@@ -26,16 +26,19 @@ function generateUUID() {
   });
 }
 
-function TimerForm() {
+function TimerForm({ modal, timerId, timerData }) {
+  const timers = useSelector(state => state.timers.timers);
+
   const dispatch = useDispatch();
 
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [hours, setHours] = useState(timerData?.hours || 0);
+  const [minutes, setMinutes] = useState(timerData?.minutes || 0);
+  const [seconds, setSeconds] = useState(timerData?.seconds || 0);
   const [timerName, setTimerName] = useState('Epic Timer');
 
   const onHoursChange = e => {
     setHours(e.target.value);
+    console.log(e.target.value, timerData.hours);
   };
   const onMinutesChange = e => {
     setMinutes(e.target.value);
@@ -50,6 +53,21 @@ function TimerForm() {
   const onSubmit = e => {
     e.preventDefault();
 
+    if (modal) {
+      dispatch(
+        timerActions.editTimer({
+          hours,
+          minutes,
+          seconds,
+          timerId,
+          timerName,
+        })
+      );
+
+      timerData.closeModal();
+      return;
+    }
+
     const id = generateUUID();
 
     dispatch(
@@ -58,9 +76,9 @@ function TimerForm() {
   };
 
   return (
-    <section className={classes.wrapper}>
+    <section className={`${classes.wrapper} ${modal && classes.modal} `}>
       <form className={classes.timerForm} onSubmit={onSubmit}>
-        <h4>Create new timer</h4>
+        <h4>{modal ? 'Edit your timer' : 'Create new timer'}</h4>
         <ul className={classes['timerForm-list']}>
           <li className={classes['timerForm-list--time']}>
             <div className={classes['timerForm-list--time-element']}>
@@ -71,6 +89,8 @@ function TimerForm() {
                 id='hours'
                 name='hours'
                 onChange={onHoursChange}
+                // value={modal ? timerData.hours : ''}
+                defaultValue={modal ? timerData.hours : ''}
               />
               <label htmlFor='hours'>hours</label>
             </div>
@@ -83,6 +103,9 @@ function TimerForm() {
                 id='minutes'
                 name='minutes'
                 onChange={onMinutesChange}
+                onS
+                // value={modal ? timerData.minutes : ''}
+                defaultValue={modal ? timerData.minutes : ''}
               />
               <label htmlFor='minutes'>minutes</label>
             </div>
@@ -95,6 +118,8 @@ function TimerForm() {
                 id='seconds'
                 name='seconds'
                 onChange={onSecondsChange}
+                // value={modal ? timerData.hours : ''}
+                defaultValue={modal ? timerData.seconds : ''}
               />
               <label htmlFor='seconds'>seconds</label>
             </div>
@@ -108,11 +133,13 @@ function TimerForm() {
               type='text'
               id='timer-name'
               name='timer-name'
+              maxlength='20'
               autoComplete='off'
+              defaultValue={modal ? timerData.timerName : ''}
             />
           </li>
         </ul>
-        <Button>Add timer</Button>
+        <Button>{modal ? 'Edit timer' : 'Add timer'}</Button>
       </form>
     </section>
   );

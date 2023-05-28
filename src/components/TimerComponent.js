@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import ProgressBar from './ProgressBar';
 
 import classes from './TimerComponent.module.css';
 import { useDispatch } from 'react-redux';
 import { timerActions } from '../store/timer';
+import TimerForm from './TimerForm';
+
+const ModalWindow = function ({ timerId, timerData }) {
+  console.log(timerData);
+
+  return <TimerForm modal={true} timerId={timerId} timerData={timerData} />;
+};
 
 const TimerComponent = props => {
   const dispatch = useDispatch();
@@ -16,6 +24,7 @@ const TimerComponent = props => {
     timerData.hours * 60 * 60 + timerData.minutes * 60 + timerData.seconds * 1;
 
   const [started, setStarted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [timeInSeconds, setTimeInSeconds] = useState(completeTimeInSeconds);
 
   let currentHours = Math.floor(timeInSeconds / (60 * 60));
@@ -49,21 +58,51 @@ const TimerComponent = props => {
     dispatch(timerActions.deleteTimer(timerData.id));
   };
 
+  const editTimerHandler = function () {
+    stopTimer();
+    setShowModal(true);
+  };
+
+  const closeModal = function () {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     if (timeInSeconds === 0) {
       stopTimer();
-      // resetTimer();
     }
   }, [timeInSeconds]);
 
+  useEffect(() => {
+    resetTimer();
+  }, [timerData]);
+
   return (
     <div className={classes.timer}>
+      {showModal && (
+        <>
+          {createPortal(
+            <ModalWindow
+              timerId={timerData.id}
+              timerData={{
+                hours: timerData.hours,
+                minutes: timerData.minutes,
+                seconds: timerData.seconds,
+                timerName: timerData.timerName,
+                closeModal,
+              }}
+            />,
+            document.getElementById('modal-root')
+          )}
+          <div onClick={closeModal} className={classes['timer--modal-blur']} />
+        </>
+      )}
       <button onClick={deleteHandler} className={classes['timer-close--btn']}>
         &#10006;
       </button>
       <div className={classes['timer-wrapper']}>
         <div>
-          <h4 className={classes['timer-time']}>
+          <h4 onClick={editTimerHandler} className={classes['timer-time']}>
             {currentHours.toString().length === 1
               ? `0${currentHours}`
               : currentHours}

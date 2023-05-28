@@ -66,3 +66,18 @@ li.timerForm-list--time {
   border-bottom: 3px solid #2e8d7e;
   margin: 30px 0;
 }
+
+.modal {
+  background-color: #00bfb3;
+  color: #023436;
+
+  position: fixed;
+  top: 30vh;
+  /* width: 80%; */
+  left: 50%;
+  z-index: 100;
+  overflow: hidden;
+
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
