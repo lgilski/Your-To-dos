@@ -16,9 +16,7 @@ const TimerComponent = props => {
   const dispatch = useDispatch();
 
   const countDownMethod = useSelector(state => state.timers.countDownMethod);
-  // const startAllTimers = useSelector(state => state.timers.startAllTimers);
   const resetAllTimers = useSelector(state => state.timers.resetAllTimers);
-
   const startSequence = useSelector(state => state.timers.startSequence);
   const activeIndex = useSelector(state => state.timers.activeIndex);
 
@@ -88,7 +86,21 @@ const TimerComponent = props => {
     }
   }, [activeIndex, startSequence]);
 
+  // useEffect(() => {
+  //   if (
+  //     timeInSeconds === 0 &&
+  //     countDownMethod === 'Start in sequence' &&
+  //     index === activeIndex
+  //   ) {
+  //     dispatch(timerActions.incrementActiveIndexInSequence());
+  //   }
+  // }, [timeInSeconds, countDownMethod, index, activeIndex, dispatch]);
+
   useEffect(() => {
+    if (timeInSeconds === 0) {
+      stopTimer();
+    }
+
     if (
       timeInSeconds === 0 &&
       countDownMethod === 'Start in sequence' &&
@@ -96,13 +108,7 @@ const TimerComponent = props => {
     ) {
       dispatch(timerActions.incrementActiveIndexInSequence());
     }
-  }, [timeInSeconds]);
-
-  useEffect(() => {
-    if (timeInSeconds === 0) {
-      return stopTimer();
-    }
-  }, [timeInSeconds]);
+  }, [timeInSeconds, countDownMethod, index, activeIndex, dispatch]);
 
   useEffect(() => {
     if (resetAllTimers) {
@@ -112,11 +118,6 @@ const TimerComponent = props => {
   }, [resetAllTimers]);
 
   useEffect(() => {
-    // if (countDownMethod === 'Start in sequence') {
-    //   dispatch(timerActions.stopTimersInSquence());
-    //   stopTimer();
-    // }
-
     resetTimer();
   }, [timerData]);
 

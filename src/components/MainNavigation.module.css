@@ -17,19 +17,23 @@
   position: relative;
 }
 
-.navListItem:has(a):has(.active)::before {
+.active::before {
   position: absolute;
   content: '';
   width: 100%;
   height: 3px;
   top: 50px;
+  left: 0;
   background-color: rgba(79, 203, 196);
-  /* border-bottom: 2px solid black; */
 }
 
 .navListItem .navItem-auth {
   background-color: #00bfb3 !important ;
   border-radius: 18px !important;
+}
+
+.navListItem {
+  position: relative;
 }
 
 .navListItem a,

@@ -34,7 +34,9 @@ function TimerForm({ modal, timerId, timerData }) {
   const [hours, setHours] = useState(timerData?.hours || 0);
   const [minutes, setMinutes] = useState(timerData?.minutes || 0);
   const [seconds, setSeconds] = useState(timerData?.seconds || 0);
-  const [timerName, setTimerName] = useState('Epic Timer');
+  const [timerName, setTimerName] = useState(
+    timerData?.timerName || 'Epic Timer'
+  );
 
   const onHoursChange = e => {
     setHours(e.target.value);

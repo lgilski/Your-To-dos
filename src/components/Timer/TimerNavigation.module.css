@@ -1,0 +1,35 @@
+.timerNavigation {
+  max-width: 400px;
+  margin: auto;
+}
+
+.timerNavigation-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timerNavigation-list--element,
+.timerNavigation-list--element a,
+.timerNavigation-list--element a:link,
+.timerNavigation-list--element a:visited {
+  text-decoration: none;
+  color: aliceblue;
+  list-style: none;
+  font-size: 32px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.timerNavigation-list--element a:hover,
+.timerNavigation-list--element a:active {
+  color: #4fcbc4;
+}
+
+.active::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 3px;
+  top: 50px;
+  background-color: rgba(79, 203, 196);
+}

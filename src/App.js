@@ -15,6 +15,8 @@ import { loader as cardsLoader } from './components/CardsFolder/Cards';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { dataActions } from './store';
+import TimerRoot from './pages/Roots/TimerRoot';
+import Stopwatch from './components/Timer/Stopwatch/Stopwatch';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +29,14 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'cards', element: <CardsPage />, loader: cardsLoader },
-      { path: 'timer', element: <TimerPage /> /* loader */ },
+      {
+        path: 'timer',
+        element: <TimerRoot />,
+        children: [
+          { index: true, element: <TimerPage /> },
+          { path: 'stopwatch', element: <Stopwatch /> },
+        ],
+      },
       { path: 'auth', element: <AuthPage />, action: authAction },
       {
         path: 'logout',

@@ -44,7 +44,6 @@ function MainNavigation() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Timer
             </NavLink>
