@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import update from 'immutability-helper';
+
 const initialState = {
   timers: [],
   countDownMethod: 'Manually',
@@ -78,6 +80,27 @@ const timerSlice = createSlice({
 
     incrementActiveIndexInSequence(state, action) {
       state.activeIndex += 1;
+    },
+
+    /////////////////////////////////////////
+
+    // Drag and drop implementation
+
+    dragedTimer(state, action) {
+      state.timers = update(state.timers, {
+        $splice: [
+          [action.payload.dragIndex, 1],
+          [
+            action.payload.hoverIndex,
+            0,
+            state.timers[action.payload.dragIndex],
+          ],
+        ],
+      });
+
+      localStorage.setItem('timers', JSON.stringify(state.timers));
+
+      return state;
     },
   },
 });

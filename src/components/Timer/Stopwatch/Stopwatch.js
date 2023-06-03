@@ -33,18 +33,11 @@ function Stopwatch() {
     setHours(0);
   };
 
-  // let currentHours = Math.floor(timeInSeconds / (60 * 60));
-  // let currentMinutes = Math.floor(timeInSeconds / 60 - currentHours * 60);
-  // let currentSeconds = Math.floor(
-  //   timeInSeconds - (currentHours * 60 * 60 + currentMinutes * 60)
-  // );
-
   useEffect(() => {
     const currentSeconds = Math.floor(time / 100);
 
     const currentHours = Math.floor(currentSeconds / (60 * 60));
     const currentMinutes = Math.floor(currentSeconds / 60);
-    // let currentMiliseconds = time - currentSeconds * 10;
 
     setMiliseconds(time - currentSeconds * 100);
     setSeconds(
