@@ -97,7 +97,7 @@ export async function action({ request }) {
       return response;
     }
 
-    console.log(await response.user.getIdToken());
+    // console.log(await response.user.getIdToken());
 
     const responseToken = await response.user.getIdToken();
 

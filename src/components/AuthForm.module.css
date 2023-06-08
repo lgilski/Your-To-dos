@@ -88,3 +88,31 @@
 .auth-form-submit:active {
   background-color: var(--tint-blue-50);
 }
+
+.alreadyLoggedIn-container {
+  text-align: center;
+}
+
+.alreadyLoggedIn {
+  font-size: 52px;
+  color: #e09498;
+  margin: 64px auto;
+}
+
+.returnToHomePage,
+.returnToHomePage:link,
+.returnToHomePage:visited {
+  font-size: var(--heading-XL);
+  background-color: var(--tint-orange-50);
+  color: var(--color-gray-first);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 80px;
+  transition: all 0.3s;
+}
+
+.returnToHomePage:hover,
+.returnToHomePage:active {
+  background-color: var(--shade-orange-50);
+  color: var(--tint-orange-90);
+}

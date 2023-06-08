@@ -2,17 +2,12 @@ import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
 import Subtitle from './UI/Subtitle';
-import { useEffect } from 'react';
 import { useMediaPredicate } from 'react-media-hook';
 
 function MainNavigation() {
   const { token } = useRouteLoaderData('root');
 
   const lessThan1100 = useMediaPredicate('(max-width: 1100px)');
-
-  useEffect(() => {
-    console.log(lessThan1100);
-  }, [lessThan1100]);
 
   return (
     <header className={classes.wrapper}>
