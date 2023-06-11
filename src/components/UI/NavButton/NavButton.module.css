@@ -1,0 +1,45 @@
+.btn,
+.btn:link,
+.btn:visited {
+  padding: 8px;
+  background-color: var(--tint-orange-20);
+  color: var(--color-gray-first);
+  font-weight: 500;
+  font-size: var(--heading-L);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn:hover,
+.btn:active {
+  background-color: var(--shade-orange-30);
+  color: #fff;
+}
+
+.active::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 3px;
+  top: 40px;
+  left: 0;
+  /* background-color: var(--shade-orange-50); */
+  background-color: var(--shade-blue-50);
+}
+
+.btn.authBtn,
+.btn.authBtn:link,
+.btn.authBtn:visited {
+  background-color: var(--color-blue-first);
+  color: var(--color-gray-first);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+}
+
+.btn.authBtn:hover,
+.btn.authBtn:active {
+  color: #fff;
+  background-color: var(--shade-blue-20);
+}

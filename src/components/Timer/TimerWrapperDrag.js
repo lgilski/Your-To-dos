@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { timerActions } from '../../store/timer';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import TimerComponent from './TimerComponent';
+import TimerComponent from './TimerComponent/TimerComponent';
 
 function TimerWrapper({ timerData, index }) {
   const ref = useRef(null);

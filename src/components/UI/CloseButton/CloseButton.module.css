@@ -1,0 +1,44 @@
+.btn {
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+  font-weight: 800;
+}
+
+.big {
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+}
+
+.small {
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+}
+
+.orange {
+  background-color: var(--shade-orange-50);
+  color: var(--tint-orange-90);
+}
+
+.orange:hover,
+.orange:active {
+  background-color: var(--tint-orange-90);
+  color: var(--shade-orange-50);
+}
+
+.darkBlue {
+  background-color: var(--shade-blue-50);
+  color: var(--tint-blue-80);
+}
+
+.darkBlue:hover,
+.darkBlue:active {
+  background-color: var(--tint-blue-80);
+  color: var(--shade-blue-50);
+}
+
+.orangeLigth {
+}

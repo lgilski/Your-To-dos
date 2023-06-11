@@ -6,12 +6,12 @@ import AuthPage, { action as authAction } from './pages/AuthPage';
 import CardsPage from './pages/CardsPage';
 import TimerPage from './pages/TimerPage';
 import WeatherPage from './pages/WeatherPage';
-import { action as logoutAction } from './components/Logout';
+import { action as logoutAction } from './utils/logout';
 
 import { dataLoader } from './utils/auth';
 import ErrorPage from './pages/Error';
 
-import { loader as cardsLoader } from './components/CardsFolder/Cards';
+import { loader as cardsLoader } from './components/CardsFolder/Cards/Cards';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { dataActions } from './store';
@@ -24,7 +24,6 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     id: 'root',
-    // loader: tokenLoader,
     loader: dataLoader,
     children: [
       { index: true, element: <HomePage /> },
@@ -41,7 +40,6 @@ const router = createBrowserRouter([
       {
         path: 'logout',
         action: logoutAction,
-        // loader: logoutLoader,
       },
       { path: 'weather', element: <WeatherPage /> /* loader */ },
     ],

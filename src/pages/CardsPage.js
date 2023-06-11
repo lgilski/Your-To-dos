@@ -1,8 +1,9 @@
-import FormCards from '../components/CardsFolder/FormCard';
-import Cards from '../components/CardsFolder/Cards';
+import FormCards from '../components/CardsFolder/FormCard/FormCard';
+import Cards from '../components/CardsFolder/Cards/Cards';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './CardsPage.module.css';
+import SectionHeader from '../components/UI/SectionHeader/SectionHeader';
 
 function CardsPage() {
   const { token } = useRouteLoaderData('root');
@@ -23,10 +24,11 @@ function CardsPage() {
         </section>
       )}
       {token && (
-        <div className='pageTitle-center'>
-          <h5 className='subheader'>Cards page</h5>
-          <h4 className='header'>Make your to-dos</h4>
-        </div>
+        <SectionHeader
+          className='pageTitle-center'
+          subheader='Cards page'
+          header='Start planning your days'
+        />
       )}
       {token && <FormCards />}
       {token && <Cards />}

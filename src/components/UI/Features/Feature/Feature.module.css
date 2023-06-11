@@ -1,0 +1,23 @@
+.features-element {
+  position: relative;
+  /* max-width: 400px; */
+  /* height: 180px; */
+  background-color: var(--tint-orange-20);
+
+  font-size: var(--heading-L);
+  font-weight: 500;
+  color: var(--shade-orange-90);
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-M);
+}
+
+.features-element-text {
+  margin-top: 12px;
+}
+
+.features-element-header {
+  margin-top: 12px;
+  font-weight: 800;
+  font-size: var(--heading-XL);
+}

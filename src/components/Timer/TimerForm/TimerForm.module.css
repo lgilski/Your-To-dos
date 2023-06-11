@@ -27,21 +27,13 @@
 .timerForm-list li {
   display: flex;
   flex-direction: column;
-  /* margin-top: 10px; */
 }
 
 .timerForm-list input {
   width: 200px;
-  display: block;
-  padding: 8px;
-  border-radius: 4px;
-  border: none;
-  background-color: var(--tint-orange-80);
-  font-size: var(--heading-L);
 }
 
 .timerForm-list label {
-  font-size: var(--heading-L);
   margin: 4px 0;
 }
 
@@ -63,7 +55,7 @@ li.timerForm-list--time {
   gap: 10px;
 }
 
-.timerForm-list--time-element label {
+.timerForm-list--time label {
   display: flex;
   justify-content: center;
 }

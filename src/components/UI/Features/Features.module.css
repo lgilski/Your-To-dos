@@ -1,0 +1,17 @@
+.features {
+  display: grid;
+  gap: 48px 32px;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+.features ion-icon {
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-blue-first);
+  padding: 8px;
+  border-radius: 100%;
+}

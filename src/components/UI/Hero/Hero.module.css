@@ -1,0 +1,75 @@
+.hero {
+  position: relative;
+  /* background-image: linear-gradient(
+      to right bottom,
+      rgba(216, 118, 32, 0.7) 0%,
+      rgba(236, 187, 144, 0.6) 100%
+    ), */
+  background-image: linear-gradient(
+      to right,
+      rgba(22, 12, 3, 0.7) 0%,
+      rgba(151, 82, 22, 0.7) 100% /* rgba(43, 24, 6, 0.7) 100% */
+    ),
+    url(../../../images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  /* object-fit: cover; */
+  /* aspect-ratio: 1/1; */
+  height: 75vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.hero-text {
+  margin-left: 12%;
+  max-width: 700px;
+}
+
+.hero-text-heading {
+  background-image: linear-gradient(
+    45deg,
+    var(--shade-orange-10),
+    var(--tint-orange-20)
+  );
+  background-clip: text;
+  font-size: 64px;
+  /* font-size: var(--heading-XXXL); */
+  font-weight: 800;
+  /* position: absolute; */
+  /* text-align: center; */
+  color: transparent;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+}
+
+.hero-text-p {
+  color: var(--tint-orange-90);
+  font-size: var(--heading-XL);
+  max-width: 500px;
+  font-weight: 400;
+  line-height: 160%;
+  margin: 16px 0 32px 0;
+}
+
+.mainButton,
+.mainButton:link,
+.mainButton:visited {
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: var(--heading-XL);
+  padding: 16px 32px;
+  border-radius: 80px;
+
+  background-color: var(--tint-orange-80);
+  color: var(--color-gray-first);
+}
+
+.mainButton:hover,
+.mainButton:active {
+  color: var(--tint-orange-90);
+  background-color: var(--shade-orange-50);
+}

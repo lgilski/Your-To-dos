@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import TimerNavigation from '../../components/Timer/TimerNavigation';
+import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
 
 function TimerRoot() {
   return (

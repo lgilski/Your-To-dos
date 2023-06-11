@@ -1,34 +1,12 @@
 import { useState } from 'react';
 import classes from './TimerForm.module.css';
-import Button from '../../UI/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../UI/Button/Button';
+import { useDispatch } from 'react-redux';
 import { timerActions } from '../../../store/timer';
-
-function generateUUID() {
-  var d = new Date().getTime();
-  var d2 =
-    (typeof performance !== 'undefined' &&
-      performance.now &&
-      performance.now() * 1000) ||
-    0; //Time in microseconds since page-load or 0 if unsupported
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16; //random number between 0 and 16
-    if (d > 0) {
-      //Use timestamp until depleted
-      r = (d + r) % 16 | 0;
-      d = Math.floor(d / 16);
-    } else {
-      //Use microseconds since page-load if supported
-      r = (d2 + r) % 16 | 0;
-      d2 = Math.floor(d2 / 16);
-    }
-    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-  });
-}
+import { generateUUID } from '../../../helpers/generateUUID';
+import Input from '../../UI/Input/Input';
 
 function TimerForm({ modal, timerId, timerData }) {
-  // const timers = useSelector(state => state.timers.timers);
-
   const dispatch = useDispatch();
 
   const [hours, setHours] = useState(timerData?.hours || 0);
@@ -40,7 +18,6 @@ function TimerForm({ modal, timerId, timerData }) {
 
   const onHoursChange = e => {
     setHours(e.target.value);
-    console.log(e.target.value, timerData.hours);
   };
   const onMinutesChange = e => {
     setMinutes(e.target.value);
@@ -86,53 +63,59 @@ function TimerForm({ modal, timerId, timerData }) {
         <ul className={classes['timerForm-list']}>
           <li className={classes['timerForm-list--time']}>
             <div className={classes['timerForm-list--time-element']}>
-              <input
+              <Input
+                color='orange'
+                down={true}
+                name='hours'
+                type='number'
                 min='0'
                 max='99'
-                type='number'
-                id='hours'
-                name='hours'
                 onChange={onHoursChange}
                 defaultValue={modal ? timerData.hours : ''}
+                text='Hours'
+                noMargin={true}
               />
-              <label htmlFor='hours'>Hours</label>
             </div>
             <p>:</p>
             <div className={classes['timerForm-list--time-element']}>
-              <input
+              <Input
+                color='orange'
+                down={true}
+                name='minutes'
+                type='number'
                 min='0'
                 max='59'
-                type='number'
-                id='minutes'
-                name='minutes'
                 onChange={onMinutesChange}
                 defaultValue={modal ? timerData.minutes : ''}
+                text='Minutes'
+                noMargin={true}
               />
-              <label htmlFor='minutes'>Minutes</label>
             </div>
             <p>:</p>
             <div className={classes['timerForm-list--time-element']}>
-              <input
+              <Input
+                color='orange'
+                down={true}
+                name='seconds'
+                type='number'
                 min='0'
                 max='59'
-                type='number'
-                id='seconds'
-                name='seconds'
                 onChange={onSecondsChange}
                 defaultValue={modal ? timerData.seconds : ''}
+                text='Seconds'
+                noMargin={true}
               />
-              <label htmlFor='seconds'>Seconds</label>
             </div>
           </li>
           <li className={classes.border}></li>
           <li>
-            <label htmlFor='timer-name'>Timer name</label>
-            <input
-              min='0'
-              onChange={onTimerNameChange}
+            <Input
+              color='orange'
+              name='seconds'
               type='text'
-              id='timer-name'
-              name='timer-name'
+              onChange={onTimerNameChange}
+              text='Timer name'
+              noMargin={true}
               maxLength='20'
               autoComplete='off'
               defaultValue={modal ? timerData.timerName : ''}

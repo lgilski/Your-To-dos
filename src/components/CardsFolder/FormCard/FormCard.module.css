@@ -1,0 +1,27 @@
+.form {
+  background-color: var(--tint-orange-20);
+  box-shadow: var(--shadow-M);
+  padding: 16px;
+  margin: auto;
+  border-radius: 8px;
+  max-width: 600px;
+  margin-top: 32px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 16px;
+}
+
+.formCard-heading {
+  font-size: var(--heading-XL);
+}
+
+.form input[type='date'] {
+  max-width: 180px;
+}
+
+.form Button {
+  align-self: flex-end;
+}

@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
 
 import classes from './Stopwatch.module.css';
-import Button from '../../UI/Button';
+import SectionHeader from '../../UI/SectionHeader/SectionHeader';
+import StopwatchTime from './StopwatchTime/StopwatchTime';
+import StopwatchButtons from './StopwatchButtons/StopwatchButtons';
 
 function Stopwatch() {
   const stopwatchRef = useRef();
@@ -33,57 +35,24 @@ function Stopwatch() {
 
   return (
     <>
-      <div className='pageTitle-center'>
-        <h5 className='subheader'>Stopwatch page</h5>
-        <h4 className='header'>Start counting</h4>
-      </div>
+      <SectionHeader
+        className='pageTitle-center'
+        subheader='Stopwatch page'
+        header='Start counting down'
+      />
       <div className={classes.stopwatch}>
-        <h5 className={classes.time}>
-          {currentHours.toString().length < 2
-            ? `0${currentHours}`
-            : currentHours}
-          :
-          {currentMinutes.toString().length < 2
-            ? `0${currentMinutes}`
-            : currentMinutes}
-          :
-          {currentSeconds.toString().length < 2
-            ? `0${currentSeconds}`
-            : currentSeconds}
-          :
-          {currentMiliseconds.toString().length < 2
-            ? `0${currentMiliseconds}`
-            : currentMiliseconds}
-        </h5>
-        <div className={classes.buttons}>
-          {isStoped && (
-            <Button
-              variant='circle'
-              functionality='start'
-              onClick={startStopwatch}
-            >
-              start
-            </Button>
-          )}
-          {!isStoped && (
-            <Button
-              variant='circle'
-              functionality='stop'
-              onClick={stopStopwatch}
-            >
-              stop
-            </Button>
-          )}
-          {isStoped && (
-            <Button
-              variant='circle'
-              functionality='reset'
-              onClick={resetStopwatch}
-            >
-              reset
-            </Button>
-          )}
-        </div>
+        <StopwatchTime
+          currentHours={currentHours}
+          currentMinutes={currentMinutes}
+          currentSeconds={currentSeconds}
+          currentMiliseconds={currentMiliseconds}
+        />
+        <StopwatchButtons
+          isStoped={isStoped}
+          startStopwatch={startStopwatch}
+          stopStopwatch={stopStopwatch}
+          resetStopwatch={resetStopwatch}
+        />
       </div>
     </>
   );

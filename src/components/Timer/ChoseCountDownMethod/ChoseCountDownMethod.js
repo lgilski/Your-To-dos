@@ -5,7 +5,7 @@ import classes from './ChoseCountDownMethod.module.css';
 import buttonClasses from '../TimerContent/TimerContent.module.css';
 
 import { timerActions } from '../../../store/timer';
-import Button from '../../UI/Button';
+import Button from '../../UI/Button/Button';
 
 function TimerCountDownMethod() {
   const dispatch = useDispatch();
@@ -48,25 +48,17 @@ function TimerCountDownMethod() {
       {countDownMethod === 'Start in sequence' && (
         <div className={buttonClasses['timer-buttons']}>
           {!startedSequence && (
-            <Button
-              varaint='circle'
-              functionality='start'
-              onClick={startSequence}
-            >
+            <Button variant='circle' color='start' onClick={startSequence}>
               start
             </Button>
           )}
           {startedSequence && (
-            <Button varaint='circle' functionality='stop' onClick={stopTimers}>
+            <Button variant='circle' color='stop' onClick={stopTimers}>
               stop
             </Button>
           )}
           {!startedSequence && (
-            <Button
-              varaint='circle'
-              functionality='reset'
-              onClick={resetTimers}
-            >
+            <Button variant='circle' color='reset' onClick={resetTimers}>
               reset
             </Button>
           )}

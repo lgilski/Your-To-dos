@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import DisplayTime from '../DisplayTime';
 
 import classes from './TimerContent.module.css';
-import Button from '../../UI/Button';
+import Button from '../../UI/Button/Button';
 
 function TimerContent({ functions, timerData, isCounting, currentTime }) {
   const countDownMethod = useSelector(state => state.timers.countDownMethod);
@@ -31,25 +31,21 @@ function TimerContent({ functions, timerData, isCounting, currentTime }) {
           {!isCounting && (
             <Button
               variant='circle'
-              functionality='start'
+              color='start'
               onClick={functions.startTimer}
             >
               start
             </Button>
           )}
           {isCounting && (
-            <Button
-              variant='circle'
-              functionality='stop'
-              onClick={functions.stopTimer}
-            >
+            <Button variant='circle' color='stop' onClick={functions.stopTimer}>
               stop
             </Button>
           )}
           {!isCounting && (
             <Button
               variant='circle'
-              functionality='reset'
+              color='reset'
               onClick={functions.resetTimer}
             >
               reset

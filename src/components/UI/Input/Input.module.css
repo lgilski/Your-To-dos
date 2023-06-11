@@ -1,0 +1,25 @@
+.label {
+  font-size: var(--heading-L);
+}
+
+.input {
+  width: 100%;
+  display: block;
+  padding: 8px;
+  margin: 4px 0 16px;
+  border-radius: 4px;
+  border: none;
+  font-size: var(--heading-L);
+}
+
+.input-blue {
+  background-color: var(--tint-blue-80);
+}
+
+.input-orange {
+  background-color: var(--tint-orange-80);
+}
+
+.noMargin {
+  margin: 0 !important ;
+}

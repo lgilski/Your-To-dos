@@ -1,0 +1,52 @@
+.btnClose-small {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  color: #e6f9f7;
+  text-align: center;
+}
+
+.list-element {
+  position: relative;
+  width: 90%;
+  word-wrap: break-word;
+  background-color: var(--tint-orange-80);
+  /* color: var(); */
+  padding: 30px 8px 4px 8px;
+  border-radius: 9px;
+  margin-bottom: 8px;
+}
+
+.fade-small-enter {
+  opacity: 0;
+  padding: 0;
+  width: 0;
+  font-size: 0;
+  margin: 0;
+}
+
+.fade-small-enter-active {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  padding: 30px 8px 4px 8px;
+  width: 90%;
+  font-size: var(--heading-L);
+  margin-bottom: 8px;
+}
+
+.fade-small-exit {
+  opacity: 1;
+  padding: 30px 8px 4px 8px;
+  width: 90%;
+  font-size: var(--heading-L);
+  margin-bottom: 8px;
+}
+
+.fade-small-exit-active {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  padding: 0;
+  width: 0;
+  font-size: 0;
+  margin: 0;
+}

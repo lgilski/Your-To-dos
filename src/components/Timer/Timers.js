@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import TimerComponent from './TimerComponent';
+import TimerComponent from './TimerComponent/TimerComponent';
 import { timerActions } from '../../store/timer';
 import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';

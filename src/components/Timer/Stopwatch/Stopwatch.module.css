@@ -10,19 +10,3 @@
   align-items: center;
   border-radius: 6px;
 }
-
-.time {
-  font-size: 86px;
-  color: #000;
-  margin-bottom: 42px;
-  margin-top: 24px;
-}
-
-.buttons {
-  display: flex;
-  gap: 16px;
-}
-
-.buttons button {
-  margin-bottom: 24px;
-}
