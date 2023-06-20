@@ -1,15 +1,16 @@
 .detailCard {
   width: 100%;
-  background-color: var(--tint-orange-50);
-  padding: 16px;
+  background-color: var(--tint-orange-60);
+  padding: 16px 20px;
   border-radius: 8px;
 
   margin-top: 32px;
+
+  box-shadow: var(--shadow-M);
 }
 
 .date {
   font-size: var(--heading-XXL);
-  text-decoration: underline;
 }
 
 .contentWrapper {
@@ -18,6 +19,14 @@
   /* gap: 16px; */
   grid-template-columns: repeat(4, 1fr);
   font-size: var(--heading-L);
+
+  /* background-color: antiquewhite; */
+  background-color: var(--tint-orange-80);
+  /* background-color: var(--tint-blue-80); */
+  padding: 12px 0;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .contentWrapper span {
   font-weight: 600;
@@ -33,7 +42,9 @@
   height: 80px;
   align-self: center;
 
-  background-color: var(--tint-blue-80);
+  /* background-color: var(--tint-blue-80); */
+  /* background-color: var(--tint-blue-90); */
+  background-color: #fff;
 
   border-radius: 100%;
 
@@ -55,6 +66,11 @@
   /* justify-content: center; */
   gap: 12px;
   padding: 16px;
+  border-right: 2px solid var(--tint-orange-30);
+}
+
+.content-col:last-child {
+  border: none;
 }
 
 .content-col ion-icon {
@@ -68,4 +84,14 @@
   height: 100%;
   right: 0;
   top: 0;
+}
+
+.hours {
+  padding: 24px;
+  background-color: var(--tint-orange-90);
+  display: grid;
+  gap: 12px;
+  overflow-x: scroll;
+
+  grid-template-columns: repeat(24, 150px);
 }

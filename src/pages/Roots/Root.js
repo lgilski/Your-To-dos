@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { getTokenDuration } from '../../utils/auth';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
+import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
 
 function RootLayout({ routes }) {
   const location = useLocation();
@@ -41,6 +42,17 @@ function RootLayout({ routes }) {
   return (
     <>
       <MainNavigation />
+      {/* <CSSTransition
+        key={'timerNav'}
+        timeout={200}
+        classNames='page'
+        in={location.pathname.startsWith('/timer')}
+        unmountOnExit
+      >
+        <div className='page'>
+          <TimerNavigation />
+        </div>
+      </CSSTransition> */}
       <main>
         <SwitchTransition>
           <CSSTransition

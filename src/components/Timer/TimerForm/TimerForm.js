@@ -111,7 +111,7 @@ function TimerForm({ modal, timerId, timerData }) {
           <li>
             <Input
               color='orange'
-              name='seconds'
+              name='name'
               type='text'
               onChange={onTimerNameChange}
               text='Timer name'

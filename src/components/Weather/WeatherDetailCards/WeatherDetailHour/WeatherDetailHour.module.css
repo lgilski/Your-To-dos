@@ -1,0 +1,45 @@
+.hour {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border-right: 2px solid var(--tint-blue-60);
+}
+
+.hour img {
+  width: 70px;
+  height: 70px;
+}
+
+.hour:last-child {
+  border: none;
+}
+
+.time {
+  color: var(--shade-orange-80);
+  font-size: var(--heading-L);
+}
+
+.withIcon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.temp {
+  font-size: var(--heading-M);
+  font-weight: 500;
+}
+
+.humidity ion-icon {
+  color: var(--color-blue-first);
+  height: 24px;
+  width: 24px;
+}
+
+.wind ion-icon {
+  color: var(--shade-orange-20);
+  height: 24px;
+  width: 24px;
+}

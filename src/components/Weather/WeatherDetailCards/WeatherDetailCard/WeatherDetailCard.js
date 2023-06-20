@@ -1,3 +1,4 @@
+import WeatherDetailHour from '../WeatherDetailHour/WeatherDetailHour';
 import classes from './WeatherDetailCard.module.css';
 
 function WeatherDetailCard({ weatherForecastDay }) {
@@ -39,7 +40,6 @@ function WeatherDetailCard({ weatherForecastDay }) {
             <ion-icon name='trending-down' /> min:{' '}
             <span>{weatherForecastDay.day.mintemp_c}&deg;C</span>
           </p>
-          <div className={classes.border} />
         </div>
         <div className={classes['content-col']}>
           <h6>Sun</h6>
@@ -59,7 +59,6 @@ function WeatherDetailCard({ weatherForecastDay }) {
               h
             </span>
           </p>
-          <div className={classes.border} />
         </div>
         <div className={classes['content-col']}>
           <h6>Precipitation</h6>
@@ -71,12 +70,16 @@ function WeatherDetailCard({ weatherForecastDay }) {
             <ion-icon name='snow' /> Chance of snow:{' '}
             <span>{weatherForecastDay.day.daily_chance_of_snow}%</span>
           </p>
-          <div className={classes.border} />
         </div>
         <div className={classes['content-col']}>
           <img src={weatherForecastDay.day.condition.icon} alt='' />
           <p>{weatherForecastDay.day.condition.text}</p>
         </div>
+      </div>
+      <div className={classes.hours}>
+        {weatherForecastDay.hour.map(hour => (
+          <WeatherDetailHour key={hour.time} hour={hour} />
+        ))}
       </div>
     </div>
   );

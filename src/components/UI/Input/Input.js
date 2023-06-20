@@ -20,7 +20,7 @@ const Input = forwardRef(function (
   return (
     <>
       {!down && (
-        <label className={classes.label} htmlFor={type}>
+        <label className={classes.label} htmlFor={name}>
           {text}
         </label>
       )}
@@ -34,7 +34,7 @@ const Input = forwardRef(function (
         {...props}
       />
       {down && (
-        <label className={classes.label} htmlFor={type}>
+        <label className={classes.label} htmlFor={name}>
           {text}
         </label>
       )}

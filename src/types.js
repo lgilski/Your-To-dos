@@ -79,3 +79,40 @@
  * @property {string} icon
  * @property {number} code
  */
+
+/**
+ * @typedef {Object} Hour
+ * @property {number} time_epoch
+ * @property {string} time
+ * @property {number} temp_c
+ * @property {number} temp_f
+ * @property {number} is_day
+ * @property {Condition} condition
+ * @property {number} wind_mph
+ * @property {number} wind_kph
+ * @property {number} wind_degree
+ * @property {string} wind_dir
+ * @property {number} pressure_mb
+ * @property {number} pressure_in
+ * @property {number} precip_mm
+ * @property {number} precip_in
+ * @property {number} humidity
+ * @property {number} cloud
+ * @property {number} feelslike_c
+ * @property {number} feelslike_f
+ * @property {number} windchill_c
+ * @property {number} windchill_f
+ * @property {number} heatindex_c
+ * @property {number} heatindex_f
+ * @property {number} dewpoint_c
+ * @property {number} dewpoint_f
+ * @property {number} will_it_rain
+ * @property {number} chance_of_rain
+ * @property {number} will_it_snow
+ * @property {number} chance_of_snow
+ * @property {number} vis_km
+ * @property {number} vis_miles
+ * @property {number} gust_mph
+ * @property {number} gust_kph
+ * @property {number} uv
+ */

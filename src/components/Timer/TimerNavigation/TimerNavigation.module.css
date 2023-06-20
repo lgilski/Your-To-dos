@@ -22,7 +22,7 @@
 
 .timerNavigation-list--element a:hover,
 .timerNavigation-list--element a:active {
-  color: var(--tint-blue-50);
+  color: var(--tint-orange-20);
 }
 
 .active::before {
