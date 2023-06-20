@@ -21,7 +21,7 @@ export async function fetchWeather({ city }) {
 
 export async function fetchForecast({ city }) {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${city}&days=3&aqi=no&alerts=no`
+    `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${city}&days=3&aqi=no&alerts=no`
   );
 
   const data = await response.json();
