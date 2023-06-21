@@ -101,9 +101,9 @@ function WeatherCard({ city }) {
             size='big'
           /> */}
           <div className={classes.tooltipContainer}>
-            <a className={classes.tooltipButton} id={city}>
+            <button className={classes.tooltipButton} id={city}>
               <ion-icon name='ellipsis-vertical' />
-            </a>
+            </button>
             <Tooltip
               className={classes.tooltip}
               anchorSelect={`#${city}`}
