@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
+
 /**
  *
  * @param {Object} props
@@ -91,12 +94,40 @@ function WeatherCard({ city }) {
               {weatherData.current.condition.text}
             </p>
           </div>
-          <CloseButton
+          {/* <CloseButton
             onClick={deleteWeather}
             className={classes.btn}
             color='orange'
             size='big'
-          />
+          /> */}
+          <div className={classes.tooltipContainer}>
+            <a className={classes.tooltipButton} id={city}>
+              <ion-icon name='ellipsis-vertical' />
+            </a>
+            <Tooltip
+              className={classes.tooltip}
+              anchorSelect={`#${city}`}
+              clickable
+              place='right'
+              openOnClick
+            >
+              <div className={classes.tooltipButtonWrapper}>
+                <button
+                  onClick={deleteWeather}
+                  className={classes.tooltipContentButton}
+                >
+                  Delete <ion-icon name='trash' />
+                </button>
+                <Link className={classes.tooltipContentButton} to={city}>
+                  Details <ion-icon name='stats-chart' />
+                </Link>
+                <button className={classes.tooltipContentButton}>
+                  Show on cards <ion-icon name='heart' />
+                </button>
+                {/* <button>Stop showing on cards</button> */}
+              </div>
+            </Tooltip>
+          </div>
           {/* <div className={classes.follow}>
             <ion-icon name='heart-outline' />
             <ion-icon name='heart' />
@@ -106,5 +137,9 @@ function WeatherCard({ city }) {
     </>
   );
 }
+
+// <ion-icon name="trash-outline"></ion-icon>
+// <ion-icon name="trash"></ion-icon>
+// <ion-icon name="ellipsis-vertical"></ion-icon>
 
 export default WeatherCard;
