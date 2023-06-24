@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import Button from '../../UI/Button/Button';
+import Button from '../../common/Button/Button';
 
 import classes from './FormCard.module.css';
 import { dataActions } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateUUID } from '../../../helpers/generateUUID';
-import Input from '../../UI/Input/Input';
+import Input from '../../common/Input/Input';
 
 function formatDate(date) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY

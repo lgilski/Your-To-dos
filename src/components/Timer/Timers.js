@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import TimerComponent from './TimerComponent/TimerComponent';
 import { timerActions } from '../../store/timer';
 import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
@@ -23,7 +22,6 @@ function Timers() {
   return (
     <DndProvider backend={HTML5Backend}>
       {timers.map((timer, index) => (
-        // <TimerComponent key={timer.id} timerData={timer} index={index} />
         <TimerWrapper key={timer.id} timerData={timer} index={index} />
       ))}
     </DndProvider>

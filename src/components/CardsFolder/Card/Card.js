@@ -5,19 +5,24 @@ import CardElement from '../TaskComponent/TaskComponent';
 import TaskComponentClasses from '../TaskComponent/TaskComponent.module.css';
 import { dataActions } from '../../../store';
 import { useDispatch } from 'react-redux';
-import CloseButton from '../../UI/CloseButton/CloseButton';
+import CloseButton from '../../common/CloseButton/CloseButton';
+import { useEffect, useState } from 'react';
 
 /**
- * @param {{ card: Card }} props
+ * @param {Object} props
+ * @param {Card} props.card
+ * @param {forecastData} props.forecast
  */
-const Card = function (props) {
-  const { card } = props;
+const Card = function ({ card, forecastDay }) {
+  console.log(forecastDay);
 
   const dispatch = useDispatch();
 
   const onCardDelete = function () {
     dispatch(dataActions.deleteCard({ id: card.id }));
   };
+
+  const [currentWeather, setCurrentWeather] = useState(null);
 
   const date = new Date(card.date);
   const now = new Date();
@@ -32,6 +37,16 @@ const Card = function (props) {
     diffDays <= 2 && diffDays >= 0 && diffDays !== 0 ? 'true' : '';
   const today = diffDays === 0 ? 'true' : '';
 
+  useEffect(() => {
+    if (forecastDay) {
+      setCurrentWeather(
+        forecastDay.find(day => day.date === card.date.split('T')[0])
+      );
+    }
+  }, [forecastDay, card.date]);
+
+  console.log(currentWeather);
+
   return (
     <div
       className={`${classes.card} ${
@@ -44,6 +59,13 @@ const Card = function (props) {
         color={'orange'}
         size={'big'}
       />
+      {currentWeather && (
+        <img
+          className={classes.weatherIcon}
+          src={currentWeather.day.condition.icon}
+          alt=''
+        />
+      )}
       <div className={classes.date}>
         <h3
           className={

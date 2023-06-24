@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import WeatherDetailCard from './WeatherDetailCard/WeatherDetailCard';
-import { fetchForecast } from '../../../api';
+import { fetchForecast } from '../../../api/api';
 
 import classes from './WeatherDetailCards.module.css';
-import Button from '../../UI/Button/Button';
+import Button from '../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 
@@ -14,8 +14,6 @@ import { TailSpin } from 'react-loader-spinner';
  */
 
 function WeatherDetailCards({ city }) {
-  // console.log(weatherForecast);
-
   const navigate = useNavigate();
 
   const { data: forecastData } = useQuery(

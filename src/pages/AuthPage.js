@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from '../config/firebase';
 
 function AuthPage() {
   return <AuthForm />;

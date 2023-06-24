@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { fetchForecast } from '../api';
+import { fetchForecast } from '../api/api';
 import WeatherDetailCards from '../components/Weather/WeatherDetailCards/WeatherDetailCards';
 
 function WeatherDetailPage() {

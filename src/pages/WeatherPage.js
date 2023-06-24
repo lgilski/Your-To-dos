@@ -1,5 +1,5 @@
 import WeatherForm from '../components/Weather/WeatherForm/WeatherForm';
-import SectionHeader from '../components/UI/SectionHeader/SectionHeader';
+import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 import WeatherCards from '../components/Weather/WeatherCards/WeatherCards';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';

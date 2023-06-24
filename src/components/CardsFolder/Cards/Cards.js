@@ -8,12 +8,29 @@ import cardClasses from '../Card/Card.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { dataActions } from '../../../store';
+import { useQuery } from '@tanstack/react-query';
+import { fetchForecast } from '../../../api/api';
 
 const Cards = function () {
   const dispatch = useDispatch();
 
   const cards = useSelector(state => state.data.cards);
   const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
+
+  const favorite = useSelector(state => state.weather.showOnCards);
+
+  console.log(favorite);
+
+  const { data: forecastData } = useQuery(
+    ['forecastCards', favorite],
+    () => fetchForecast({ city: favorite }),
+    {
+      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 60 * 12,
+    }
+  );
+
+  console.log(forecastData);
 
   useEffect(() => {
     if (cardsFromLocalStorage !== null) {
@@ -54,7 +71,13 @@ const Cards = function () {
             }}
             timeout={300}
           >
-            <Card key={card.id} card={card} />
+            <Card
+              key={card.id}
+              card={card}
+              forecastDay={
+                !forecastData?.message && forecastData?.forecast.forecastday
+              }
+            />
           </CSSTransition>
         ))}
       </TransitionGroup>

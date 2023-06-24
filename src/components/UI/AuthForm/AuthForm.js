@@ -1,6 +1,7 @@
 import {
   Form,
   Link,
+  useNavigate,
   useActionData,
   useNavigation,
   useSearchParams,
@@ -8,11 +9,14 @@ import {
 
 import classes from './AuthForm.module.css';
 import { getAuthToken } from '../../../utils/auth';
-import Input from '../Input/Input';
+import Input from '../../common/Input/Input';
+import { useEffect } from 'react';
 
 function AuthForm() {
   const data = useActionData();
   const navigation = useNavigation();
+
+  const navigate = useNavigate();
 
   const token = getAuthToken();
 
@@ -20,11 +24,17 @@ function AuthForm() {
   const isLogin = searchParams.get('mode') === 'login';
   const isSubmitting = navigation.state === 'submitting';
 
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token]);
+
   // FIX isLogin while transitions
 
   return (
     <div className='wrapper'>
-      {token && (
+      {/* {token && (
         <div className={classes['alreadyLoggedIn-container']}>
           <h3 className={classes.alreadyLoggedIn}>
             You are already logged in.
@@ -33,7 +43,7 @@ function AuthForm() {
             Return to home page
           </Link>
         </div>
-      )}
+      )} */}
       {!token && (
         <Form method='post' className={classes.authForm}>
           <h4>{isLogin ? 'Log in' : 'Create a new user'}</h4>

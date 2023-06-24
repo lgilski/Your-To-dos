@@ -1,4 +1,4 @@
-import Button from '../../../UI/Button/Button';
+import Button from '../../../common/Button/Button';
 
 import classes from './StopwatchButtons.module.css';
 

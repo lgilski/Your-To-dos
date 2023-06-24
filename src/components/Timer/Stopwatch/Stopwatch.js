@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import classes from './Stopwatch.module.css';
-import SectionHeader from '../../UI/SectionHeader/SectionHeader';
+import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import StopwatchTime from './StopwatchTime/StopwatchTime';
 import StopwatchButtons from './StopwatchButtons/StopwatchButtons';
 

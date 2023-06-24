@@ -1,6 +1,6 @@
 import classes from './MainNavigation.module.css';
 
-import Subtitle from '../Subtitle/Subtitle';
+import Subtitle from '../../Home/Subtitle/Subtitle';
 import { useMediaPredicate } from 'react-media-hook';
 import { useEffect, useState } from 'react';
 import clsx from '../../../utils/clsx';

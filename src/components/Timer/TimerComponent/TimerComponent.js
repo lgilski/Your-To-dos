@@ -6,7 +6,7 @@ import ProgressBar from '../../UI/ProgressBar';
 import Modal from '../Modal/ModalWindow';
 import TimerContent from '../TimerContent/TimerContent';
 import { useTimer } from '../../../hooks/useTimer';
-import CloseButton from '../../UI/CloseButton/CloseButton';
+import CloseButton from '../../common/CloseButton/CloseButton';
 
 const TimerComponent = React.forwardRef((props, ref) => {
   const timerData = props.timerData;

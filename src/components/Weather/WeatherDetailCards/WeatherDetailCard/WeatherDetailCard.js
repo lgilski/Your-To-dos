@@ -8,15 +8,11 @@ function WeatherDetailCard({ weatherForecastDay }) {
     weatherForecastDay.astro.sunset.split(':')[0] * 60 +
     12 * 60 +
     weatherForecastDay.astro.sunset.split(':')[1].split(' ')[0] * 1;
-
   const sunriseMinutes =
     weatherForecastDay.astro.sunrise.split(':')[0] * 60 +
     weatherForecastDay.astro.sunrise.split(':')[1].split(' ')[0] * 1;
-
   const daylightMinutes = sunsetMinutes - sunriseMinutes;
-
   const daylightHours = Math.floor(daylightMinutes / 60);
-
   const daylightMinutesToDisplay = daylightMinutes - daylightHours * 60;
 
   return (

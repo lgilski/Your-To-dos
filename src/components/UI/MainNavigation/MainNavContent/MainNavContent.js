@@ -3,7 +3,7 @@ import clsx from '../../../../utils/clsx';
 import NavButton from '../../NavButton/NavButton';
 
 import classes from './MainNavContent.module.css';
-import Button from '../../Button/Button';
+import Button from '../../../common/Button/Button';
 import { useMediaPredicate } from 'react-media-hook';
 import { CSSTransition } from 'react-transition-group';
 

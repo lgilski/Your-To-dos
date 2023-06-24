@@ -3,7 +3,7 @@ import Cards from '../components/CardsFolder/Cards/Cards';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './CardsPage.module.css';
-import SectionHeader from '../components/UI/SectionHeader/SectionHeader';
+import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 
 function CardsPage() {
   const { token } = useRouteLoaderData('root');

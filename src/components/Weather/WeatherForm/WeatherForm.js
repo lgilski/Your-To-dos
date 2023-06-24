@@ -1,7 +1,7 @@
-import Input from '../../UI/Input/Input';
+import Input from '../../common/Input/Input';
 
 import classes from './WeatherForm.module.css';
-import Button from '../../UI/Button/Button';
+import Button from '../../common/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { weatherActions } from '../../../store/weather';

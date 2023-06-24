@@ -1,5 +1,5 @@
 import { dataActions } from '../../../store';
-import CloseButton from '../../UI/CloseButton/CloseButton';
+import CloseButton from '../../common/CloseButton/CloseButton';
 import classes from './TaskComponent.module.css';
 
 import { useDispatch } from 'react-redux';

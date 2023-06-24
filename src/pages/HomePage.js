@@ -1,11 +1,10 @@
-import { useRouteLoaderData } from 'react-router-dom';
 import classes from './HomePage.module.css';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { dataActions } from '../store';
-import Hero from '../components/UI/Hero/Hero';
-import SectionHeader from '../components/UI/SectionHeader/SectionHeader';
-import Features from '../components/UI/Features/Features';
+import Hero from '../components/Home/Hero/Hero';
+import SectionHeader from '../components/common/SectionHeader/SectionHeader';
+import Features from '../components/Home/Features/Features';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ function HomePage() {
         />
         <Features />
       </section>
-      {/* <section className='dark-section'>
+      <section className='dark-section'>
         <div className={classes.wrapperSecond}>
           <h4 className='subheader'>What we offer</h4>
           <h3
@@ -42,7 +41,7 @@ function HomePage() {
           </h3>
           <div style={{ color: '#fff' }}>AAAAAAAAAAAA</div>
         </div>
-      </section> */}
+      </section>
       {/* <section>
         <div className='developement'>STILL IN DEVELOPEMENT</div>
       </section> */}

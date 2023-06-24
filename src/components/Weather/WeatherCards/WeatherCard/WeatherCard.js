@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import classes from './WeatherCard.module.css';
-import { fetchWeather } from '../../../../api';
-import CloseButton from '../../../UI/CloseButton/CloseButton';
-import { useDispatch } from 'react-redux';
+import { fetchWeather } from '../../../../api/api';
+import { useDispatch, useSelector } from 'react-redux';
 import { weatherActions } from '../../../../store/weather';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
-import 'react-tooltip/dist/react-tooltip.css';
-import { Tooltip } from 'react-tooltip';
+import WeatherTooltip from '../../WeatherTooltip/WeatherTooltip';
 
 /**
  *
@@ -20,17 +18,17 @@ import { Tooltip } from 'react-tooltip';
 function WeatherCard({ city }) {
   const dispatch = useDispatch();
 
+  const favorite = useSelector(state => state.weather.showOnCards);
+
   const { data: weatherData } = useQuery(
     ['weather', city],
     () => fetchWeather({ city }),
     {
       refetchOnWindowFocus: false,
-      staleTime: 4000 * 60,
-      refetchInterval: 5000 * 60,
+      staleTime: 9000 * 60,
+      refetchInterval: 10000 * 60,
     }
   );
-
-  console.log(weatherData);
 
   useEffect(() => {
     if (weatherData?.message) {
@@ -67,6 +65,14 @@ function WeatherCard({ city }) {
     dispatch(weatherActions.deleteWeather(city));
   };
 
+  const showOnCards = function () {
+    dispatch(weatherActions.showOnCards(city));
+  };
+
+  const stopShowingOnCards = function () {
+    dispatch(weatherActions.stopShowingOnCards());
+  };
+
   return (
     <>
       {!weatherData?.message && (
@@ -94,44 +100,18 @@ function WeatherCard({ city }) {
               {weatherData.current.condition.text}
             </p>
           </div>
-          {/* <CloseButton
-            onClick={deleteWeather}
-            className={classes.btn}
-            color='orange'
-            size='big'
-          /> */}
-          <div className={classes.tooltipContainer}>
-            <button className={classes.tooltipButton} id={city}>
-              <ion-icon name='ellipsis-vertical' />
-            </button>
-            <Tooltip
-              className={classes.tooltip}
-              anchorSelect={`#${city}`}
-              clickable
-              place='right'
-              openOnClick
-            >
-              <div className={classes.tooltipButtonWrapper}>
-                <button
-                  onClick={deleteWeather}
-                  className={classes.tooltipContentButton}
-                >
-                  Delete <ion-icon name='trash' />
-                </button>
-                <Link className={classes.tooltipContentButton} to={city}>
-                  Details <ion-icon name='stats-chart' />
-                </Link>
-                <button className={classes.tooltipContentButton}>
-                  Show on cards <ion-icon name='heart' />
-                </button>
-                {/* <button>Stop showing on cards</button> */}
-              </div>
-            </Tooltip>
-          </div>
-          {/* <div className={classes.follow}>
-            <ion-icon name='heart-outline' />
-            <ion-icon name='heart' />
-          </div> */}
+          <WeatherTooltip
+            city={city}
+            favorite={favorite}
+            deleteWeather={deleteWeather}
+            showOnCards={showOnCards}
+            stopShowingOnCards={stopShowingOnCards}
+          />
+          {/* {favorite === city && (
+            <div className={classes.favorite}>
+              <ion-icon name='heart'></ion-icon>
+            </div>
+          )} */}
         </div>
       )}
     </>

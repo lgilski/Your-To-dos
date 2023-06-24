@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import classes from './TimerForm.module.css';
-import Button from '../../UI/Button/Button';
+import Button from '../../common/Button/Button';
 import { useDispatch } from 'react-redux';
 import { timerActions } from '../../../store/timer';
 import { generateUUID } from '../../../helpers/generateUUID';
-import Input from '../../UI/Input/Input';
+import Input from '../../common/Input/Input';
 
 function TimerForm({ modal, timerId, timerData }) {
   const dispatch = useDispatch();

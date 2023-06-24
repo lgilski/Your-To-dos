@@ -18,9 +18,7 @@ import { dataActions } from './store';
 import TimerRoot from './pages/Roots/TimerRoot';
 import Stopwatch from './components/Timer/Stopwatch/Stopwatch';
 import WeatherRoot from './pages/Roots/WeatherRoot';
-import WeatherDetailPage, {
-  loader as weatherLoader,
-} from './pages/WeatherDetailPage';
+import WeatherDetailPage from './pages/WeatherDetailPage';
 
 const routes = [
   { index: true, element: <HomePage /> },

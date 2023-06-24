@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import DisplayTime from '../DisplayTime';
 
 import classes from './TimerContent.module.css';
-import Button from '../../UI/Button/Button';
+import Button from '../../common/Button/Button';
 
 function TimerContent({ functions, timerData, isCounting, currentTime }) {
   const countDownMethod = useSelector(state => state.timers.countDownMethod);
