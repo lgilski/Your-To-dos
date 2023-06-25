@@ -17,11 +17,12 @@
 }
 
 .message {
-  position: absolute;
+  /* position: absolute; */
 
-  left: 50%;
-  transform: translate(-50%);
+  /* left: 50%; */
+  /* transform: translate(-50%); */
 
+  margin: auto;
   text-align: center;
   background-color: var(--tint-blue-30);
   color: var(--shade-blue-90);
