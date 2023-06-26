@@ -13,6 +13,8 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
 import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
 
+// Problems with loging out too early
+
 function RootLayout({ routes }) {
   const location = useLocation();
   const currentOutlet = useOutlet();

@@ -12,8 +12,7 @@ function AuthPage() {
 }
 
 // Lack of error handling
-// Look at the reference
-// Problem with fetching cards from the firebase
+// Problem with fetching cards from the firebase????
 
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
@@ -56,7 +55,7 @@ export async function action({ request }) {
     localStorage.setItem('email', authData.email);
     const expiration = new Date();
 
-    expiration.setHours(expiration.getHours() + 1);
+    expiration.setHours(expiration.getHours() + 12);
     localStorage.setItem('expiration', expiration.toISOString());
     // } catch (err) {
     //   console.error('******ERROR******');
@@ -105,7 +104,7 @@ export async function action({ request }) {
     localStorage.setItem('email', authData.email);
     const expiration = new Date();
 
-    expiration.setHours(expiration.getHours() + 1);
+    expiration.setHours(expiration.getHours() + 12);
     localStorage.setItem('expiration', expiration.toISOString());
     // } catch (err) {
     //   console.error(err.message);

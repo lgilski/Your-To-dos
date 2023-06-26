@@ -33,6 +33,7 @@
 
 .checkBox {
   /* background-color: var(--color-orange-first); */
+  cursor: pointer;
   background-color: var(--tint-orange-90);
   border-radius: 4px;
   border: 2px solid black;
@@ -90,4 +91,30 @@
   width: 0;
   font-size: 0;
   margin: 0;
+}
+
+.fade-small-enter .checkBox {
+  width: 0;
+  height: 0;
+  border: none;
+}
+
+.fade-small-enter-active .checkBox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  transition: all 0.3s;
+}
+
+.fade-small-exit .checkBox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+}
+
+.fade-small-exit-active .checkBox {
+  width: 0;
+  height: 0;
+  border: none;
+  transition: all 0.3s;
 }
