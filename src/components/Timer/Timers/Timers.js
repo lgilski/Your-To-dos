@@ -6,6 +6,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import TimerComponent from '../TimerComponent/TimerComponent';
 
 import classes from './Timers.module.css';
+import { flushSync } from 'react-dom';
 
 function Timers() {
   const dispatch = useDispatch();
@@ -39,15 +40,10 @@ function Timers() {
     )
       return;
 
-    const timerToMove = timers[source.index];
-
-    const tasksWithoutDragged = Array.from(timers);
-    tasksWithoutDragged.splice(source.index, 1);
-
-    const tasksWithDragged = Array.from(timers);
-    tasksWithDragged.splice(destination.index, 0, timerToMove);
-
-    dispatch(timerActions.moveTimers({ destination, source, draggableId }));
+    // Same as cards in this case
+    flushSync(() => {
+      dispatch(timerActions.moveTimers({ destination, source, draggableId }));
+    });
   };
 
   const onDragStart = function (result) {

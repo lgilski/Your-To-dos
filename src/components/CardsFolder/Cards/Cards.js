@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchForecast } from '../../../api/api';
 
 import { DragDropContext } from 'react-beautiful-dnd';
+import { flushSync } from 'react-dom';
 
 const Cards = function () {
   const dispatch = useDispatch();
@@ -48,8 +49,8 @@ const Cards = function () {
   useEffect(() => {
     // Fix the jumps while dropping on other card
 
-    const foundCards = cards.filter(card =>
-      card.tasks.find(task => {
+    const foundCards = cards?.filter(card =>
+      card.tasks?.find(task => {
         return task.content.toLowerCase().includes(searched?.toLowerCase());
       })
     );
@@ -84,9 +85,12 @@ const Cards = function () {
     )
       return;
 
-    dispatch(
-      dataActions.moveTaskBetweenCards({ destination, source, draggableId })
-    );
+    // Maybe not the best, but works fine and fixes the issue
+    flushSync(() => {
+      dispatch(
+        dataActions.moveTaskBetweenCards({ destination, source, draggableId })
+      );
+    });
   };
 
   return (
