@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import classes from './WeatherCard.module.css';
-import { fetchWeather } from '../../../../api/api';
+import { fetchWeather } from '../../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { weatherActions } from '../../../../store/weather';
+import { weatherActions } from '../../../store/weather';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
-import WeatherTooltip from '../../WeatherTooltip/WeatherTooltip';
+import WeatherTooltip from '../WeatherTooltip/WeatherTooltip';
 
 /**
  *

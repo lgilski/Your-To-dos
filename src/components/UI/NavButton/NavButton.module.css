@@ -5,7 +5,7 @@
   background-color: var(--tint-orange-20);
   color: var(--color-gray-first);
   font-weight: 500;
-  font-size: var(--heading-L);
+  font-size: var(--text-huge);
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.3s;
@@ -24,13 +24,16 @@
   top: 40px;
   left: 0;
   /* background-color: var(--shade-orange-50); */
-  background-color: var(--shade-blue-50);
+  /* background-color: var(--shade-blue-50); */
+
+  background-color: var(--lime-green-500);
 }
 
 .btn.authBtn,
 .btn.authBtn:link,
 .btn.authBtn:visited {
-  background-color: var(--color-blue-first);
+  /* background-color: var(--color-blue-first); */
+  background-color: var(--lime-green-400);
   color: var(--color-gray-first);
   border-radius: 12px;
   text-decoration: none;
@@ -41,5 +44,6 @@
 .btn.authBtn:hover,
 .btn.authBtn:active {
   color: #fff;
-  background-color: var(--shade-blue-20);
+  /* background-color: var(--shade-blue-20); */
+  background-color: var(--lime-green-600);
 }

@@ -8,8 +8,7 @@ function Features() {
       <Feature
         icon='albums'
         header='Todos'
-        text='Cool and awesome cards as todos which contains your tasks for certain
-days!'
+        text='Cool and awesome cards as todos which contains your tasks!'
       />
       <Feature
         icon='partly-sunny'
@@ -19,12 +18,12 @@ days!'
       <Feature
         icon='cloud-done'
         header='Saving'
-        text='All your cards are saved on your account'
+        text='All your cards with tasks are saved on your cool account'
       />
       <Feature
         icon='timer'
         header='Timers'
-        text='You can set multiple OwO timers in sequence'
+        text='You can set multiple OwO timers in sequence and edit them'
       />
       {/* <div className={classes['features-element']}>
     <ion-icon name='search-sharp'></ion-icon>

@@ -6,9 +6,10 @@
       rgba(236, 187, 144, 0.6) 100%
     ), */
   background-image: linear-gradient(
-      to right,
+      to right top,
       rgba(22, 12, 3, 0.7) 0%,
-      rgba(151, 82, 22, 0.7) 100% /* rgba(43, 24, 6, 0.7) 100% */
+      /* rgba(43, 64, 5, 0.699) 0%, */ rgba(151, 82, 22, 0.7) 100%
+        /* rgba(43, 24, 6, 0.7) 100% */
     ),
     url(../../../assets/images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg);
   background-position: center;
@@ -22,8 +23,13 @@
 }
 
 .hero-text {
-  margin-left: 12%;
+  /* margin-left: 15%; */
   max-width: 700px;
+}
+
+.contentContainer {
+  width: 1300px;
+  margin: auto;
 }
 
 .hero-text-heading {
@@ -32,9 +38,14 @@
     var(--shade-orange-10),
     var(--tint-orange-20)
   );
+  /* background-image: linear-gradient(
+    45deg,
+    var(--lime-green-400),
+    var(--orange-400)
+  ); */
   background-clip: text;
-  font-size: var(--heading-XXXXL);
-  /* font-size: var(--heading-XXXL); */
+  font-size: var(--heading-XXXL);
+  line-height: 1.1;
   font-weight: 800;
   /* position: absolute; */
   /* text-align: center; */
@@ -46,11 +57,11 @@
 
 .hero-text-p {
   color: var(--tint-orange-90);
-  font-size: var(--heading-XL);
-  max-width: 500px;
+  font-size: var(--heading-S);
+  max-width: 540px;
   font-weight: 400;
   line-height: 160%;
-  margin: 16px 0 32px 0;
+  margin: 16px 0;
 }
 
 .mainButton,
@@ -60,7 +71,28 @@
   border: none;
   transition: all 0.3s;
   text-decoration: none;
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
+  padding: 16px 32px;
+  border-radius: 80px;
+
+  background-color: var(--lime-green-400);
+  color: var(--color-gray-first);
+}
+
+.mainButton:hover,
+.mainButton:active {
+  color: var(--lime-green-050);
+  background-color: var(--lime-green-600);
+}
+
+.secondaryButton,
+.secondaryButton:link,
+.secondaryButton:visited {
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: var(--heading-S);
   padding: 16px 32px;
   border-radius: 80px;
 
@@ -68,10 +100,16 @@
   color: var(--color-gray-first);
 }
 
-.mainButton:hover,
-.mainButton:active {
+.secondaryButton:hover,
+.secondaryButton:active {
   color: var(--tint-orange-90);
   background-color: var(--shade-orange-50);
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 @media (max-width: 1200px) {

@@ -12,13 +12,8 @@
   border-radius: 9px;
 
   color: var(--shade-orange-80);
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 }
-
-/* .card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-M);
-} */
 
 .card-black {
   /* background-color: var(--tint-orange-10); */
@@ -60,13 +55,13 @@
 
 .date h3 {
   /* font-size: 54px; */
-  font-size: var(--heading-XXXL);
+  font-size: var(--heading-L);
   font-weight: 800;
 }
 
 .date h4 {
   /* font-size: 40px; */
-  font-size: var(--heading-XXL);
+  font-size: var(--heading-S);
 }
 
 .btnClose {

@@ -65,7 +65,8 @@ function MainNavContent({ showMobile, showMobileNav }) {
           <NavButton
             onClick={lessThan1100 ? showMobileNav : null}
             className={classes.navListItem}
-            to='/auth?mode=login'
+            // to='/auth?mode=login'
+            to='/auth/login'
             auth={true}
             end={true}
           >

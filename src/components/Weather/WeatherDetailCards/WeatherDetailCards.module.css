@@ -4,7 +4,7 @@
 }
 
 .city {
-  font-size: var(--heading-XXXL);
+  font-size: var(--heading-L);
   text-align: center;
 }
 
@@ -14,7 +14,7 @@
 
 .headerWrapper button {
   position: absolute;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   font-weight: 500;
 
   top: 50%;

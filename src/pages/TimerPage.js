@@ -10,6 +10,7 @@ function TimerPage() {
         <SectionHeader
           subheader='Timers page'
           header='Measure time as you like'
+          type='medium'
         />
       </div>
       <TimerForm />

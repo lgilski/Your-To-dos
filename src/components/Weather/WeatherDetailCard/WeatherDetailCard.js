@@ -1,4 +1,4 @@
-import WeatherDetailHour from '../WeatherDetailHour/WeatherDetailHour';
+import WeatherDetailHour from '../WeatherDetailCards/WeatherDetailHour/WeatherDetailHour';
 import classes from './WeatherDetailCard.module.css';
 
 function WeatherDetailCard({ weatherForecastDay }) {

@@ -1,4 +1,5 @@
 .features {
+  text-align: center;
   display: grid;
   gap: 48px 32px;
   grid-template-columns: repeat(4, 1fr);
@@ -9,9 +10,11 @@
 }
 .features ion-icon {
   color: #fff;
-  width: 32px;
-  height: 32px;
-  background-color: var(--color-blue-first);
+  width: 36px;
+  height: 36px;
+  /* background-color: var(--color-blue-first); */
+  background-color: #fff;
+  color: var(--lime-green-400);
   padding: 8px;
   border-radius: 100%;
 }

@@ -10,7 +10,7 @@
 }
 
 .date {
-  font-size: var(--heading-XXL);
+  font-size: var(--heading-M);
 }
 
 .contentWrapper {
@@ -18,7 +18,7 @@
   display: grid;
   /* gap: 16px; */
   grid-template-columns: repeat(4, 1fr);
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 
   /* background-color: antiquewhite; */
   background-color: var(--tint-orange-80);
@@ -33,7 +33,7 @@
 }
 
 .contentWrapper h6 {
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   color: var(--shade-orange-50);
 }
 

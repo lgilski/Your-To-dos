@@ -22,7 +22,7 @@
 .name,
 .name:link,
 .name:visited {
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
   font-weight: 600;
   text-decoration: none;
   color: var(--shade-orange-90);
@@ -71,7 +71,7 @@
 }
 
 .temp {
-  font-size: var(--heading-XXXL);
+  font-size: var(--heading-XL);
 
   margin-top: auto;
 
@@ -103,7 +103,7 @@
 
 .currentCondition {
   align-self: center;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   font-weight: 500;
 }
 

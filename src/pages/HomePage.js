@@ -27,6 +27,7 @@ function HomePage() {
         <SectionHeader
           subheader='Features'
           header='We have many uwu features'
+          type='large'
         />
         <Features />
       </section>

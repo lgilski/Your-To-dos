@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import WeatherCard from './WeatherCard/WeatherCard';
+import WeatherCard from '../WeatherCard/WeatherCard';
 
 import classes from './WeatherCards.module.css';
 

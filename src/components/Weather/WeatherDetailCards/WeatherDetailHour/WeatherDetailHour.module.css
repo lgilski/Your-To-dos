@@ -18,7 +18,7 @@
 
 .time {
   color: var(--shade-orange-80);
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 }
 
 .withIcon {
@@ -28,7 +28,7 @@
 }
 
 .temp {
-  font-size: var(--heading-M);
+  font-size: var(--text-medium);
   font-weight: 500;
 }
 

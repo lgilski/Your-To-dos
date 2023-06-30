@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import WeatherDetailCard from './WeatherDetailCard/WeatherDetailCard';
+import WeatherDetailCard from '../WeatherDetailCard/WeatherDetailCard';
 import { fetchForecast } from '../../../api/api';
 
 import classes from './WeatherDetailCards.module.css';

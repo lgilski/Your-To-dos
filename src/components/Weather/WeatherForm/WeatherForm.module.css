@@ -7,13 +7,13 @@
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
   box-shadow: var(--shadow-M);
 }
 
 .heading {
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
+  margin-bottom: 20px;
 }
 
 .form Button {

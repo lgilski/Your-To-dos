@@ -18,7 +18,7 @@
   padding: 30px 8px 4px 8px;
   border-radius: 9px;
   margin-bottom: 8px;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 }
 
 .list-element li {
@@ -72,7 +72,7 @@
   transition: all 0.3s ease-in-out;
   padding: 30px 8px 4px 8px;
   width: 95%;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   margin-bottom: 8px;
 }
 
@@ -80,7 +80,7 @@
   opacity: 1;
   padding: 30px 8px 4px 8px;
   width: 95%;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   margin-bottom: 8px;
 }
 

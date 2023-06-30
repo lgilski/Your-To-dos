@@ -5,7 +5,7 @@
 }
 
 .timerForm {
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
 }
 
 .timerForm-heading {
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
 }
 
 .timerForm-list {
@@ -55,6 +55,11 @@ li.timerForm-list--time {
   flex-direction: row;
   margin-top: 20px;
   gap: 10px;
+}
+
+.timerForm-list--time > p {
+  font-size: var(--text-huge);
+  transform: translateY(5px);
 }
 
 .timerForm-list--time label {

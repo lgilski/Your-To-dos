@@ -1,10 +1,16 @@
 .authForm {
   background-color: var(--shade-blue-50);
   color: var(--tint-blue-50);
-  max-width: 500px;
+  /* background-color: var(--orange-300); */
+  /* border: 2px solid var(--lime-green-900);
+  color: #222; */
+
+  box-shadow: var(--shadow-M);
+
+  max-width: 450px;
   margin-top: 86px;
   display: flex;
-  border-radius: 4px;
+  border-radius: 8px;
 
   flex-direction: column;
   align-items: flex-start;
@@ -15,7 +21,45 @@
 
 .authForm h4 {
   font-size: 32px;
-  margin-bottom: 16px;
+  margin: 16px auto 32px;
+  color: #fff;
+}
+
+.inputsWrapper {
+  width: 98%;
+  margin: auto;
+}
+
+.otherOptions {
+  font-size: var(--text-big);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.forgotPassword,
+.forgotPassword:link,
+.forgotPassword:visited {
+  font-weight: 600;
+  /* color: var(--grey-900); */
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.forgotPassword:hover,
+.forgotPassword:active {
+  color: var(--tint-blue-30);
+}
+
+.rememberMe {
+  display: flex;
+  gap: 4px;
+  color: #fff;
+}
+
+.rememberMe input {
+  padding: 4px;
 }
 
 .auth-form--buttons {
@@ -35,14 +79,15 @@
   font-size: 24px;
   margin: 8px;
 
-  color: aliceblue;
+  color: #fff;
+  /* color: var(--grey-900); */
 
   transition: all 0.3s;
 }
 
 .auth-form--link:hover,
 .auth-form--link:active {
-  color: #4fcbc4;
+  color: var(--tint-blue-30);
 }
 
 .auth-form-submit {
@@ -55,6 +100,8 @@
   background-color: var(--color-blue-first);
   color: var(--shade-blue-90);
 
+  /* background-color: var(--lime-green-100); */
+
   width: 100%;
 
   transition: all 0.3s;
@@ -63,6 +110,7 @@
 .auth-form-submit:hover,
 .auth-form-submit:active {
   background-color: var(--tint-blue-50);
+  /* background-color: var(--lime-green-400); */
 }
 
 .alreadyLoggedIn-container {
@@ -78,7 +126,7 @@
 .returnToHomePage,
 .returnToHomePage:link,
 .returnToHomePage:visited {
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
   background-color: var(--tint-orange-50);
   color: var(--color-gray-first);
   text-decoration: none;

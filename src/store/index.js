@@ -19,6 +19,8 @@ const dataSlice = createSlice({
      * @param {{ payload: Card[] }} action
      */
     setCards(state, action) {
+      // if (!action.payload) state.cards = [];
+
       state.cards = action.payload;
       return state;
     },
@@ -36,7 +38,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid') +
           '/cards.json',
         {
           method: 'PUT',
@@ -60,7 +62,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid') +
           '/cards.json',
         {
           method: 'PUT',
@@ -91,7 +93,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid') +
           '/cards.json',
         {
           method: 'PUT',
@@ -122,7 +124,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid').split('.').join('-') +
           '/cards.json',
         {
           method: 'PUT',
@@ -160,7 +162,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid') +
           '/cards.json',
         {
           method: 'PUT',
@@ -214,7 +216,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('email').split('.').join('-') +
+          localStorage.getItem('uid') +
           '/cards.json',
         {
           method: 'PUT',

@@ -4,7 +4,7 @@
   /* height: 180px; */
   background-color: var(--tint-orange-20);
 
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
   font-weight: 500;
   color: var(--shade-orange-90);
   padding: 16px;
@@ -19,5 +19,6 @@
 .features-element-header {
   margin-top: 12px;
   font-weight: 800;
-  font-size: var(--heading-XL);
+  font-size: var(--heading-S);
+  /* font-size: var(--text-huge); */
 }

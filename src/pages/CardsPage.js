@@ -17,6 +17,7 @@ function CardsPage() {
           className='pageTitle-center'
           subheader='Cards page'
           header='Start planning your days'
+          type='medium'
         />
       )}
       {token && <FormCards />}

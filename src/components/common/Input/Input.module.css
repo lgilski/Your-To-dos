@@ -1,5 +1,5 @@
 .label {
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 }
 
 .input {
@@ -9,7 +9,7 @@
   margin: 4px 0 16px;
   border-radius: 4px;
   border: none;
-  font-size: var(--heading-L);
+  font-size: var(--text-big);
 }
 
 .input-blue {

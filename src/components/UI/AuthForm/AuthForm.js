@@ -12,7 +12,7 @@ import { getAuthToken } from '../../../utils/auth';
 import Input from '../../common/Input/Input';
 import { useEffect } from 'react';
 
-function AuthForm() {
+function AuthForm({ mode }) {
   const data = useActionData();
   const navigation = useNavigation();
 
@@ -20,15 +20,14 @@ function AuthForm() {
 
   const token = getAuthToken();
 
-  const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get('mode') === 'login';
   const isSubmitting = navigation.state === 'submitting';
+  const isLogin = mode === 'login';
 
   useEffect(() => {
     if (token) {
       navigate('/');
     }
-  }, [token]);
+  }, [token, navigate]);
 
   // FIX isLogin while transitions
 
@@ -46,7 +45,7 @@ function AuthForm() {
       )} */}
       {!token && (
         <Form method='post' className={classes.authForm}>
-          <h4>{isLogin ? 'Log in' : 'Create a new user'}</h4>
+          <h4>{isLogin ? 'Welcome back!' : 'Start your new journey!'}</h4>
           {data && data.error && (
             <ul>
               {Object.values(data.errors).map(err => (
@@ -55,38 +54,57 @@ function AuthForm() {
             </ul>
           )}
           {data && data.message && <p>{data.message}</p>}
-          <Input
-            color={'blue'}
-            name='email'
-            type='email'
-            required={true}
-            text={'Email'}
-          />
-          <Input
-            color={'blue'}
-            name='password'
-            type='password'
-            required={true}
-            text={'Password'}
-          />
-          {!isLogin && (
+          <div className={classes.inputsWrapper}>
             <Input
               color={'blue'}
-              name={'passwordRepeat'}
-              type={'password'}
+              name='email'
+              type='email'
               required={true}
-              text={'Repeat password'}
+              text={'Email'}
             />
-          )}
+            <Input
+              color={'blue'}
+              name='password'
+              type='password'
+              required={true}
+              text={'Password'}
+            />
+            {!isLogin && (
+              <Input
+                color={'blue'}
+                name={'passwordRepeat'}
+                type={'password'}
+                required={true}
+                text={'Repeat password'}
+              />
+            )}
+            {isLogin && (
+              <div className={classes.otherOptions}>
+                <div className={classes.rememberMe}>
+                  <input
+                    type='checkbox'
+                    id='Remember me'
+                    name='Remember me'
+                    value='Remember me'
+                  />
+                  <label htmlFor='Remember me'>Remember me</label>
+                </div>
+                <Link to='#' className={classes.forgotPassword}>
+                  Forgot password?
+                </Link>
+              </div>
+            )}
+          </div>
           <div className={classes['auth-form--buttons']}>
             <button className={classes['auth-form-submit']}>
               {isSubmitting ? 'Submitting...' : isLogin ? 'Log in' : 'Sign up'}
             </button>
             <Link
-              to={`?mode=${isLogin ? 'signup' : 'login'}`}
+              // to={`?mode=${isLogin ? 'signup' : 'login'}`}
+              to={`/auth/${isLogin ? 'signup' : 'login'}`}
               className={classes['auth-form--link']}
             >
-              {isLogin ? 'Create account' : 'Log in'}
+              {isLogin ? 'Create account' : 'Already have an account?'}
             </Link>
           </div>
         </Form>

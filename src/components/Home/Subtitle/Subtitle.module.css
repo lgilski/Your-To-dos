@@ -7,15 +7,13 @@
 }
 
 .subtitle {
-  font-size: var(--heading-XXXL);
+  font-size: var(--heading-L);
   color: var(--color-orange-first);
   font-weight: 800;
 }
 
 .subtitle span {
-  font-size: var(--heading-XXXL);
   color: var(--color-gray-first);
-  font-weight: 600;
 }
 
 /* @media (max-width: 800px) {

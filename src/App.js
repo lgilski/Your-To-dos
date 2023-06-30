@@ -3,7 +3,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
 import HomePage from './pages/HomePage';
-import AuthPage, { action as authAction } from './pages/AuthPage';
 import CardsPage from './pages/CardsPage';
 import TimerPage from './pages/TimerPage';
 import WeatherPage from './pages/WeatherPage';
@@ -20,6 +19,8 @@ import Stopwatch from './components/Timer/Stopwatch/Stopwatch';
 import WeatherRoot from './pages/Roots/WeatherRoot';
 import WeatherDetailPage from './pages/WeatherDetailPage';
 import { weatherActions } from './store/weather';
+import LoginPage, { action as loginAction } from './pages/LoginPage';
+import SignupPage, { action as signupAction } from './pages/SignpuPage';
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -32,7 +33,9 @@ const routes = [
       { path: 'stopwatch', element: <Stopwatch /> },
     ],
   },
-  { path: 'auth', element: <AuthPage />, action: authAction },
+  // { path: 'auth', element: <AuthPage />, action: authAction },
+  { path: 'auth/login', element: <LoginPage />, action: loginAction },
+  { path: 'auth/signup', element: <SignupPage />, action: signupAction },
   {
     path: 'logout',
     action: logoutAction,
@@ -80,15 +83,13 @@ function App() {
 
     const getDataFromDB = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_FIREBASE_LINK}${localStorage
-          .getItem('email')
-          .split('.')
-          .join('-')}.json`
+        `${process.env.REACT_APP_FIREBASE_LINK}${localStorage.getItem(
+          'uid'
+        )}/cards.json`
       );
+      const cardsData = await response.json();
 
-      const data = await response.json();
-
-      dispatch(dataActions.setCards(data.cards));
+      dispatch(dataActions.setCards(cardsData));
     };
     getDataFromDB();
   }, [dispatch]);

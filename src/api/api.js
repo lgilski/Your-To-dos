@@ -32,3 +32,13 @@ export async function fetchForecast({ city }) {
 
   return data;
 }
+
+export async function getCardsData(uid) {
+  const cardsResponse = await fetch(
+    process.env.REACT_APP_FIREBASE_LINK + uid + '/cards.json'
+  );
+
+  const cardsData = await cardsResponse.json();
+
+  return cardsData;
+}

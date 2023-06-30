@@ -22,6 +22,7 @@ function WeatherPage() {
         className='pageTitle-center'
         subheader='Weather page'
         header='Look up the weather'
+        type='medium'
       />
       <WeatherForm />
       <WeatherCards />

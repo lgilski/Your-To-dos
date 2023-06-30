@@ -58,7 +58,7 @@
   cursor: pointer;
   background-color: var(--tint-orange-70);
   color: var(--shade-orange-90);
-  font-size: var(--heading-M);
+  font-size: var(--text-medium);
 
   border: none;
   text-decoration: none;
