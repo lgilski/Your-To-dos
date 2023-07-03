@@ -92,10 +92,6 @@
 }
 
 .auth-form-submit {
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  font-size: 24px;
   font-weight: 700;
   border-radius: 4px;
   /* background-color: var(--color-blue-first); */
@@ -105,14 +101,13 @@
   background-color: var(--orange-200);
 
   width: 100%;
-
-  transition: all 0.3s;
 }
 
 .auth-form-submit:hover,
 .auth-form-submit:active {
   /* background-color: var(--tint-blue-50); */
   /* background-color: var(--lime-green-400); */
+  color: var(--orange-050);
   background-color: var(--orange-400);
 }
 

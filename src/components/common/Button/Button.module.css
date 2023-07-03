@@ -80,6 +80,17 @@
   background-color: var(--shade-blue-50);
 }
 
+.btn-color-orangeLite {
+  color: var(--grey-900);
+  background-color: var(--orange-200);
+}
+
+.btn-color-orangeLite:hover,
+.btn-color-orangeLite:active {
+  color: var(--orange-050);
+  background-color: var(--orange-400);
+}
+
 .btn-color-start {
   background-color: var(--color-orange-first);
 }

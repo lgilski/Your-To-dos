@@ -94,12 +94,18 @@
     linear-gradient(45deg, transparent 75%, hsl(22, 92%, 76%, 0.4) 75%),
     linear-gradient(-135deg, transparent 75%, hsl(22, 92%, 76%, 0.4) 75%),
     linear-gradient(135deg, transparent 75%, hsl(22, 92%, 76%, 0.4) 75%);
-  background-size: 64px 64px;
-  background-position: 32px 0, 32px 0, 0 0, 0 0;
+  background-size: 45px 45px;
+  background-position: 22.5px 0, 22.5px 0, 0 0, 0 0;
 }
 
 .withinThreeDays h3 {
   color: var(--orange-800);
+}
+
+@media (max-width: 300px) {
+  .card {
+    width: 230px;
+  }
 }
 
 .fade-enter {

@@ -13,6 +13,7 @@ import Input from '../../common/Input/Input';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { auth } from '../../../config/firebase';
+import Button from '../../common/Button/Button';
 
 function AuthForm({ mode }) {
   const data = useActionData();
@@ -105,9 +106,13 @@ function AuthForm({ mode }) {
             )}
           </div>
           <div className={classes['auth-form--buttons']}>
-            <button className={classes['auth-form-submit']}>
+            <Button
+              color='orangeLite'
+              variant='roundedSquare'
+              className={classes['auth-form-submit']}
+            >
               {isSubmitting ? 'Submitting...' : isLogin ? 'LOGIN' : 'SIGN UP'}
-            </button>
+            </Button>
             <Link
               // to={`?mode=${isLogin ? 'signup' : 'login'}`}
               to={`/auth/${isLogin ? 'signup' : 'login'}`}

@@ -1,5 +1,5 @@
 .plans {
-  max-width: 1500px;
+  max-width: 1532px;
 
   display: grid;
   /* grid-template-columns: repeat(3, 1fr); */
@@ -8,8 +8,11 @@
   margin: auto;
   margin-top: 64px;
   margin-bottom: 72px;
+  padding: 16px;
+  border-radius: 14px;
 
   gap: 32px;
+  background-color: var(--orange-200);
 }
 
 .plansContainer {
@@ -37,7 +40,7 @@
 
 @media (max-width: 1600px) {
   .plans {
-    max-width: 1200px;
+    max-width: 1232px;
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -55,7 +58,7 @@
 
 @media (max-width: 1000px) {
   .plans {
-    max-width: 600px;
+    max-width: 632px;
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -72,6 +75,18 @@
 
   .message {
     width: 320px;
+    font-size: var(--heading-XXL);
+  }
+}
+
+@media (max-width: 300px) {
+  .plans {
+    max-width: 262px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .message {
+    width: 230px;
     font-size: var(--heading-XXL);
   }
 }

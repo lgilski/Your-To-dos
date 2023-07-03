@@ -19,9 +19,9 @@ function Hero() {
               <Link to='/auth/signup' className={classes.mainButton}>
                 Get started
               </Link>
-              <Link to='#' className={classes.secondaryButton}>
+              <a href='##' className={classes.secondaryButton}>
                 Learn more
-              </Link>
+              </a>
             </div>
           </div>
         </div>

@@ -13,9 +13,9 @@ function ForgotPasswordForm() {
         name='email'
         required={true}
         text='Type your email'
-        color='orange'
+        color='green'
       />
-      <Button color='orange' variant='capsule'>
+      <Button color='orangeLite' variant='capsule'>
         Send message
       </Button>
     </Form>
