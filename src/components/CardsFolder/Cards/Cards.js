@@ -13,6 +13,7 @@ import { fetchForecast } from '../../../api/api';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 import { flushSync } from 'react-dom';
+import clsx from '../../../utils/clsx';
 
 const Cards = function () {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const Cards = function () {
     setCardsWchichContainsSearched(foundCards);
   }, [searched, cards]);
 
-  const hasCards = cards.length > 0;
+  const hasCards = cards?.length > 0;
 
   // const resultDrop = {
   //   draggableId: task.id,
@@ -111,7 +112,10 @@ const Cards = function () {
             </CSSTransition>
           )}
         </TransitionGroup>
-        <TransitionGroup component='div' className={classes.plans}>
+        <TransitionGroup
+          component='div'
+          className={clsx(classes.plans, !hasCards && classes.noBg)}
+        >
           {searched &&
             cardsWchichContainsSearched.map(card => (
               <CSSTransition

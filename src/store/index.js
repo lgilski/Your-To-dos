@@ -23,6 +23,13 @@ const dataSlice = createSlice({
     setCards(state, action) {
       // if (!action.payload) state.cards = [];
 
+      console.log(action.payload);
+
+      if (action.payload === null) {
+        state.cards = [];
+        return state;
+      }
+
       state.cards = action.payload;
       return state;
     },

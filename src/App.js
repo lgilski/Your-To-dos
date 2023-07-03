@@ -95,6 +95,11 @@ function App() {
     auth.onAuthStateChanged(user => {
       if (user) {
         console.log('aaaaaaaaa');
+
+        console.log(JSON.parse(localStorage.getItem('cards')) !== null);
+
+        // if (JSON.parse(localStorage.getItem('cards')) === []) return;
+
         const getDataFromDB = async () => {
           const response = await fetch(
             `${process.env.REACT_APP_FIREBASE_LINK}${user.uid}/cards.json`
