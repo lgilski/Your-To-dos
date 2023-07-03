@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import { useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import clsx from '../../../utils/clsx';
 
 /**
  * @param {Object} props
@@ -46,9 +47,12 @@ const Card = function ({ card, forecastDay }) {
 
   return (
     <div
-      className={`${classes.card} ${
-        happened === 'true' ? classes['card-black'] : ''
-      }`}
+      className={clsx(
+        classes.card,
+        happened === 'true' && classes['card-black'],
+        today === 'true' && classes.withinThreeDays,
+        withinThreeDays === 'true' && classes.withinThreeDays
+      )}
     >
       <CloseButton
         className={classes.btnClose}
@@ -64,17 +68,7 @@ const Card = function ({ card, forecastDay }) {
         />
       )}
       <div className={classes.date}>
-        <h3
-          className={
-            today === 'true'
-              ? classes.withinSevenDays
-              : withinThreeDays === 'true'
-              ? classes.withinSevenDays
-              : ''
-          }
-        >
-          {today === 'true' ? 'TODAY' : dayName}
-        </h3>
+        <h3>{today === 'true' ? 'TODAY' : dayName}</h3>
         {/* ID here is a date */}
         <h4>{card.id}</h4>
       </div>

@@ -39,6 +39,7 @@ function Stopwatch() {
         className='pageTitle-center'
         subheader='Stopwatch page'
         header='Start counting down'
+        type='medium'
       />
       <div className={classes.stopwatch}>
         <StopwatchTime

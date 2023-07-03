@@ -5,7 +5,7 @@ import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 
 function TimerPage() {
   return (
-    <section>
+    <section className='gray-bg'>
       <div className='pageTitle-center-partly'>
         <SectionHeader
           subheader='Timers page'

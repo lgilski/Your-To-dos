@@ -3,7 +3,7 @@ import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigat
 
 function TimerRoot() {
   return (
-    <div>
+    <div className='gray-bg'>
       <TimerNavigation />
       <Outlet />
     </div>

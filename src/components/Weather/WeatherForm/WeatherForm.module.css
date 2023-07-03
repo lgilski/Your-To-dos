@@ -3,7 +3,8 @@
   padding: 16px;
   border-radius: 8px;
   margin: auto;
-  background-color: var(--tint-orange-20);
+  /* background-color: var(--tint-orange-20); */
+  background-color: var(--orange-300);
 
   display: flex;
   flex-direction: column;

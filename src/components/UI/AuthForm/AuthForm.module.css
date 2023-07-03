@@ -1,9 +1,9 @@
 .authForm {
   background-color: var(--shade-blue-50);
   color: var(--tint-blue-50);
-  /* background-color: var(--orange-300); */
-  /* border: 2px solid var(--lime-green-900);
-  color: #222; */
+  background-color: var(--orange-200);
+  /* border: 2px solid var(--lime-green-900); */
+  color: #222;
 
   box-shadow: var(--shadow-M);
 
@@ -22,7 +22,6 @@
 .authForm h4 {
   font-size: 32px;
   margin: 16px auto 32px;
-  color: #fff;
 }
 
 .inputsWrapper {
@@ -34,28 +33,28 @@
   font-size: var(--text-big);
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
 }
 
 .forgotPassword,
 .forgotPassword:link,
 .forgotPassword:visited {
   font-weight: 600;
-  /* color: var(--grey-900); */
-  color: #fff;
+  color: var(--grey-700);
+
   text-decoration: none;
   transition: all 0.3s;
 }
 
 .forgotPassword:hover,
 .forgotPassword:active {
-  color: var(--tint-blue-30);
+  color: var(--lime-green-050);
 }
 
 .rememberMe {
   display: flex;
   gap: 4px;
-  color: #fff;
 }
 
 .rememberMe input {
@@ -76,18 +75,17 @@
 .auth-form--link,
 .auth-form--link:link,
 .auth-form--link:active {
-  font-size: 24px;
+  font-size: var(--text-huge);
+  text-decoration: none;
   margin: 8px;
-
-  color: #fff;
-  /* color: var(--grey-900); */
+  color: var(--grey-900);
 
   transition: all 0.3s;
 }
 
 .auth-form--link:hover,
 .auth-form--link:active {
-  color: var(--tint-blue-30);
+  color: var(--lime-green-100);
 }
 
 .auth-form-submit {
@@ -97,10 +95,10 @@
   font-size: 24px;
   font-weight: 700;
   border-radius: 4px;
-  background-color: var(--color-blue-first);
+  /* background-color: var(--color-blue-first); */
   color: var(--shade-blue-90);
 
-  /* background-color: var(--lime-green-100); */
+  background-color: var(--lime-green-200);
 
   width: 100%;
 
@@ -109,8 +107,8 @@
 
 .auth-form-submit:hover,
 .auth-form-submit:active {
-  background-color: var(--tint-blue-50);
-  /* background-color: var(--lime-green-400); */
+  /* background-color: var(--tint-blue-50); */
+  background-color: var(--lime-green-400);
 }
 
 .alreadyLoggedIn-container {

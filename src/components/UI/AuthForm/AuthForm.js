@@ -4,13 +4,15 @@ import {
   useNavigate,
   useActionData,
   useNavigation,
-  useSearchParams,
+  useRouteLoaderData,
 } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
-import { getAuthToken } from '../../../utils/auth';
+import { getAuthToken, getCurrentUser } from '../../../utils/auth';
 import Input from '../../common/Input/Input';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { auth } from '../../../config/firebase';
 
 function AuthForm({ mode }) {
   const data = useActionData();
@@ -18,18 +20,22 @@ function AuthForm({ mode }) {
 
   const navigate = useNavigate();
 
-  const token = getAuthToken();
+  // const token = getAuthToken();
+
+  // const user = getCurrentUser();
+
+  // const { user } = useRouteLoaderData('root');
+  // const user = useSelector(state => state.data.user);
+  const user = auth.currentUser;
 
   const isSubmitting = navigation.state === 'submitting';
   const isLogin = mode === 'login';
 
   useEffect(() => {
-    if (token) {
+    if (user) {
       navigate('/');
     }
-  }, [token, navigate]);
-
-  // FIX isLogin while transitions
+  }, [user, navigate]);
 
   return (
     <div className='wrapper'>
@@ -43,7 +49,7 @@ function AuthForm({ mode }) {
           </Link>
         </div>
       )} */}
-      {!token && (
+      {!user && (
         <Form method='post' className={classes.authForm}>
           <h4>{isLogin ? 'Welcome back!' : 'Start your new journey!'}</h4>
           {data && data.error && (
@@ -56,14 +62,14 @@ function AuthForm({ mode }) {
           {data && data.message && <p>{data.message}</p>}
           <div className={classes.inputsWrapper}>
             <Input
-              color={'blue'}
+              color={'orange'}
               name='email'
               type='email'
               required={true}
               text={'Email'}
             />
             <Input
-              color={'blue'}
+              color={'orange'}
               name='password'
               type='password'
               required={true}
@@ -71,7 +77,7 @@ function AuthForm({ mode }) {
             />
             {!isLogin && (
               <Input
-                color={'blue'}
+                color={'orange'}
                 name={'passwordRepeat'}
                 type={'password'}
                 required={true}
@@ -80,7 +86,7 @@ function AuthForm({ mode }) {
             )}
             {isLogin && (
               <div className={classes.otherOptions}>
-                <div className={classes.rememberMe}>
+                {/* <div className={classes.rememberMe}>
                   <input
                     type='checkbox'
                     id='Remember me'
@@ -88,8 +94,11 @@ function AuthForm({ mode }) {
                     value='Remember me'
                   />
                   <label htmlFor='Remember me'>Remember me</label>
-                </div>
-                <Link to='#' className={classes.forgotPassword}>
+                </div> */}
+                <Link
+                  to='/auth/forgot-password'
+                  className={classes.forgotPassword}
+                >
                   Forgot password?
                 </Link>
               </div>
@@ -97,7 +106,7 @@ function AuthForm({ mode }) {
           </div>
           <div className={classes['auth-form--buttons']}>
             <button className={classes['auth-form-submit']}>
-              {isSubmitting ? 'Submitting...' : isLogin ? 'Log in' : 'Sign up'}
+              {isSubmitting ? 'Submitting...' : isLogin ? 'LOGIN' : 'SIGN UP'}
             </button>
             <Link
               // to={`?mode=${isLogin ? 'signup' : 'login'}`}

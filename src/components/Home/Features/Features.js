@@ -13,7 +13,7 @@ function Features() {
       <Feature
         icon='partly-sunny'
         header='Weather'
-        text='You can always look up at the weather in certain places'
+        text='You can always look up the weather in certain places and more!'
       />
       <Feature
         icon='cloud-done'

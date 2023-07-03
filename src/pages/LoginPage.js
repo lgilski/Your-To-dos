@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import AuthForm from '../components/UI/AuthForm/AuthForm';
 import { auth } from '../config/firebase';
-import { json, redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import { getCardsData } from '../api/api';
 
 function LoginPage() {
@@ -37,16 +37,23 @@ export async function action({ request }) {
       return response;
     }
 
-    const responseToken = await response.user.getIdToken();
+    if (!auth.currentUser.emailVerified) {
+      return { message: 'Email must be verified.' };
+    }
+
+    // const responseToken = await response.user.getIdToken();
+
+    const user = auth.currentUser;
+    console.log(user);
 
     const uid = response.user.uid;
 
-    localStorage.setItem('token', responseToken);
-    localStorage.setItem('uid', uid);
-    const expiration = new Date();
+    // localStorage.setItem('token', responseToken);
+    // localStorage.setItem('uid', uid);
+    // const expiration = new Date();
 
-    expiration.setHours(expiration.getHours() + 12);
-    localStorage.setItem('expiration', expiration.toISOString());
+    // expiration.setHours(expiration.getHours() + 12);
+    // localStorage.setItem('expiration', expiration.toISOString());
 
     const cardsData = await getCardsData(uid);
 

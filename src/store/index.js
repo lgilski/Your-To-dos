@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import timerReducer from './timer';
 import weatherReducer from './weather';
+import { auth } from '../config/firebase';
 
 /**
  * @type {DataState}
@@ -8,6 +9,7 @@ import weatherReducer from './weather';
 const initialState = {
   cards: [],
   searched: null,
+  loading: true,
 };
 
 const dataSlice = createSlice({
@@ -38,7 +40,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid') +
+          auth.currentUser.uid +
           '/cards.json',
         {
           method: 'PUT',
@@ -62,7 +64,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid') +
+          auth.currentUser.uid +
           '/cards.json',
         {
           method: 'PUT',
@@ -93,7 +95,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid') +
+          auth.currentUser.uid +
           '/cards.json',
         {
           method: 'PUT',
@@ -124,7 +126,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid').split('.').join('-') +
+          auth.currentUser.uid.split('.').join('-') +
           '/cards.json',
         {
           method: 'PUT',
@@ -162,7 +164,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid') +
+          auth.currentUser.uid +
           '/cards.json',
         {
           method: 'PUT',
@@ -216,7 +218,7 @@ const dataSlice = createSlice({
 
       fetch(
         process.env.REACT_APP_FIREBASE_LINK +
-          localStorage.getItem('uid') +
+          auth.currentUser.uid +
           '/cards.json',
         {
           method: 'PUT',
@@ -230,6 +232,19 @@ const dataSlice = createSlice({
       localStorage.setItem('cards', JSON.stringify(state.cards));
 
       return state;
+    },
+
+    // currentUser(state, action) {
+    //   state.user = action.payload;
+
+    //   console.log(state.user);
+    //   return state;
+    // },
+
+    isLoading(state, action) {
+      console.log('aaaaa');
+
+      state.loading = action.payload;
     },
   },
 });

@@ -9,7 +9,8 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  background-color: var(--tint-orange-20);
+  /* background-color: var(--tint-orange-20); */
+  background-color: var(--orange-300);
   max-width: 500px;
   margin: auto;
 

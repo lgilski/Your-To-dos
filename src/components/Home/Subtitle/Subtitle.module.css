@@ -8,7 +8,8 @@
 
 .subtitle {
   font-size: var(--heading-L);
-  color: var(--color-orange-first);
+  /* color: var(--color-orange-first); */
+  color: var(--orange-400);
   font-weight: 800;
 }
 

@@ -14,11 +14,12 @@
   position: relative;
   width: 95%;
   word-wrap: break-word;
-  background-color: var(--tint-orange-80);
+  background-color: var(--orange-050);
   padding: 30px 8px 4px 8px;
   border-radius: 9px;
   margin-bottom: 8px;
   font-size: var(--text-big);
+  color: var(--grey-900);
 }
 
 .list-element li {
@@ -41,7 +42,8 @@
 }
 
 .done.checkBox {
-  background-color: var(--color-orange-first);
+  /* background-color: var(--color-orange-first); */
+  background-color: var(--orange-400);
   border: none;
 }
 

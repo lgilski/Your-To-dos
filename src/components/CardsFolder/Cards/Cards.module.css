@@ -25,10 +25,12 @@
 
   /* margin: auto; */
   text-align: center;
-  background-color: var(--tint-blue-30);
-  color: var(--shade-blue-90);
+  /* background-color: var(--tint-blue-30);
+  color: var(--shade-blue-90); */
+  background-color: var(--lime-green-200);
+
   padding: 16px;
-  font-size: var(--heading-XXXL);
+  font-size: var(--heading-L);
   border-radius: 9px;
   width: 450px;
 }

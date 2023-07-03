@@ -8,15 +8,15 @@
   background-image: linear-gradient(
       to right top,
       rgba(22, 12, 3, 0.7) 0%,
-      /* rgba(43, 64, 5, 0.699) 0%, */ rgba(151, 82, 22, 0.7) 100%
-        /* rgba(43, 24, 6, 0.7) 100% */
+      /* rgba(151, 82, 22, 0.7) 100% */ rgba(151, 82, 22, 0.7) 100%
     ),
     url(../../../assets/images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg);
   background-position: center;
   background-size: cover;
   /* object-fit: cover; */
   /* aspect-ratio: 1/1; */
-  height: 75vh;
+  /* height: 75vh; */
+  height: 700px;
 
   display: flex;
   align-items: center;
@@ -35,24 +35,22 @@
 .hero-text-heading {
   background-image: linear-gradient(
     45deg,
-    var(--shade-orange-10),
-    var(--tint-orange-20)
+    /* var(--shade-orange-10),
+    var(--tint-orange-20)  */ var(--orange-500),
+    var(--orange-300)
   );
   /* background-image: linear-gradient(
     45deg,
     var(--lime-green-400),
     var(--orange-400)
   ); */
+
   background-clip: text;
   font-size: var(--heading-XXXL);
   line-height: 1.1;
+  letter-spacing: -1px;
   font-weight: 800;
-  /* position: absolute; */
-  /* text-align: center; */
   color: transparent;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
 }
 
 .hero-text-p {
@@ -114,7 +112,23 @@
 
 @media (max-width: 1200px) {
   .hero-text {
-    width: 400px;
+    width: 350px;
+    text-align: center;
+    margin: auto;
+    padding: 0 12px;
+  }
+  .buttonsContainer {
+    max-width: 200px;
+    flex-direction: column;
+    margin: auto;
+    /* gap: 16px; */
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 300px) {
+  .hero-text {
+    width: 280px;
     text-align: center;
     margin: auto;
     padding: 0 12px;

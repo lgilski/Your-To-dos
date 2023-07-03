@@ -1,9 +1,11 @@
 .btn,
 .btn:link,
 .btn:visited {
-  padding: 8px;
-  background-color: var(--tint-orange-20);
-  color: var(--color-gray-first);
+  /* padding: 8px; */
+  /* background-color: var(--tint-orange-20); */
+  /* background-color: var(--orange-300); */
+  /* color: var(--color-gray-first); */
+  color: var(--grey-600);
   font-weight: 500;
   font-size: var(--text-huge);
   border-radius: 6px;
@@ -11,17 +13,28 @@
   transition: all 0.3s;
 }
 .btn:hover,
-.btn:active {
-  background-color: var(--shade-orange-30);
-  color: #fff;
+.btn:active,
+.btn.active:hover,
+.btn.active:active {
+  /* background-color: var(--shade-orange-30); */
+  /* background-color: var(--orange-600);
+  color: #fff; */
+  color: var(--orange-400);
+}
+
+.btn.active {
+  color: var(--grey-900);
 }
 
 .active::before {
+  cursor: initial;
+
   position: absolute;
   content: '';
   width: 100%;
   height: 3px;
-  top: 40px;
+  /* top: 40px; */
+  bottom: -16px;
   left: 0;
   /* background-color: var(--shade-orange-50); */
   /* background-color: var(--shade-blue-50); */
@@ -33,9 +46,11 @@
 .btn.authBtn:link,
 .btn.authBtn:visited {
   /* background-color: var(--color-blue-first); */
+  padding: 8px 16px;
   background-color: var(--lime-green-400);
   color: var(--color-gray-first);
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-radius: 6px;
   text-decoration: none;
   transition: all 0.3s;
   border: none;
@@ -47,3 +62,9 @@
   /* background-color: var(--shade-blue-20); */
   background-color: var(--lime-green-600);
 }
+
+/* @media (max-width: 1200px) {
+  .active::before {
+    top: 32px;
+  }
+} */

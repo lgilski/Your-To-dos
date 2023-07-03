@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
@@ -8,7 +8,7 @@ import TimerPage from './pages/TimerPage';
 import WeatherPage from './pages/WeatherPage';
 import { action as logoutAction } from './utils/logout';
 
-import { dataLoader } from './utils/auth';
+import { dataLoader, getCurrentUser } from './utils/auth';
 import ErrorPage from './pages/Error';
 
 import { loader as cardsLoader } from './components/CardsFolder/Cards/Cards';
@@ -21,6 +21,12 @@ import WeatherDetailPage from './pages/WeatherDetailPage';
 import { weatherActions } from './store/weather';
 import LoginPage, { action as loginAction } from './pages/LoginPage';
 import SignupPage, { action as signupAction } from './pages/SignpuPage';
+import ForgotPasswordPage, {
+  action as forgotPasswordAction,
+} from './pages/ForgotPasswordPage';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './config/firebase';
+import { TailSpin } from 'react-loader-spinner';
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -36,6 +42,11 @@ const routes = [
   // { path: 'auth', element: <AuthPage />, action: authAction },
   { path: 'auth/login', element: <LoginPage />, action: loginAction },
   { path: 'auth/signup', element: <SignupPage />, action: signupAction },
+  {
+    path: 'auth/forgot-password',
+    element: <ForgotPasswordPage />,
+    action: forgotPasswordAction,
+  },
   {
     path: 'logout',
     action: logoutAction,
@@ -64,7 +75,7 @@ const router = createBrowserRouter([
     element: <RootLayout routes={routes} />,
     errorElement: <ErrorPage />,
     id: 'root',
-    loader: dataLoader,
+    // loader: getCurrentUser,
     children: routes,
   },
 ]);
@@ -72,26 +83,30 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
+  // auth.onAuthStateChanged(user => {
+  //   console.log(user);
+  // });
 
+  useEffect(() => {
     const favorite = JSON.parse(localStorage.getItem('favorite'));
 
     dispatch(weatherActions.showOnCards(favorite));
 
-    if (cardsFromLocalStorage === null) return;
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('aaaaaaaaa');
+        const getDataFromDB = async () => {
+          const response = await fetch(
+            `${process.env.REACT_APP_FIREBASE_LINK}${user.uid}/cards.json`
+          );
+          const cardsData = await response.json();
 
-    const getDataFromDB = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_FIREBASE_LINK}${localStorage.getItem(
-          'uid'
-        )}/cards.json`
-      );
-      const cardsData = await response.json();
-
-      dispatch(dataActions.setCards(cardsData));
-    };
-    getDataFromDB();
+          dispatch(dataActions.setCards(cardsData));
+        };
+        getDataFromDB();
+      }
+      dispatch(dataActions.isLoading(false));
+    });
   }, [dispatch]);
 
   return <RouterProvider router={router} />;

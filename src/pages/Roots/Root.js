@@ -8,10 +8,12 @@ import {
 
 import MainNavigation from '../../components/UI/MainNavigation/MainNavigation';
 import { useEffect } from 'react';
-import { getTokenDuration } from '../../utils/auth';
+import { getCurrentUser, getTokenDuration } from '../../utils/auth';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
 import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
+import { useSelector } from 'react-redux';
+import { TailSpin } from 'react-loader-spinner';
 
 // Problems with loging out too early
 
@@ -21,25 +23,45 @@ function RootLayout({ routes }) {
   const { nodeRef } =
     routes.find(route => route.path === location.pathname) ?? {};
 
-  const { token } = useLoaderData();
+  // const user = useSelector(state => state.data.user);
+  const isLoading = useSelector(state => state.data.loading);
+
+  // const { user } = useLoaderData();
+
+  // const user = getCurrentUser();
 
   const submit = useSubmit();
 
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!user) {
+  //     return;
+  //   }
 
-    if (token === 'EXPIRED') {
-      submit(null, { action: '/logout', method: 'post' });
-    }
+  //   // if (token === 'EXPIRED') {
+  //   //   submit(null, { action: '/logout', method: 'post' });
+  //   // }
 
-    const tokenDuration = getTokenDuration();
+  //   // const tokenDuration = getTokenDuration();
 
-    setTimeout(() => {
-      submit(null, { action: '/logout', method: 'post' });
-    }, tokenDuration);
-  }, [token, submit]);
+  //   // setTimeout(() => {
+  //   //   submit(null, { action: '/logout', method: 'post' });
+  //   // }, tokenDuration);
+  // }, [user]);
+
+  if (isLoading) {
+    return (
+      <TailSpin
+        height='100'
+        width='100'
+        color='#d87620'
+        ariaLabel='tail-spin-loading'
+        radius='0'
+        wrapperStyle={{}}
+        wrapperClass='spinner2'
+        visible={true}
+      />
+    );
+  }
 
   return (
     <>

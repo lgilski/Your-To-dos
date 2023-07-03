@@ -1,5 +1,6 @@
 .form {
-  background-color: var(--tint-orange-20);
+  /* background-color: var(--tint-orange-20); */
+  background-color: var(--orange-300);
   box-shadow: var(--shadow-M);
   padding: 16px;
   margin: auto;
