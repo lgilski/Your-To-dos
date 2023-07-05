@@ -87,5 +87,5 @@ li.timerForm-list--time {
   border-radius: 8px;
 
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 5;
 }
