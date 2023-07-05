@@ -22,6 +22,8 @@ const Card = function ({ card, forecastDay }) {
     dispatch(dataActions.deleteCard({ id: card.id }));
   };
 
+  const [isBig, setIsBig] = useState(false);
+
   const [currentWeather, setCurrentWeather] = useState(null);
 
   const date = new Date(card.date);
@@ -43,6 +45,14 @@ const Card = function ({ card, forecastDay }) {
         forecastDay.find(day => day.date === card.date.split('T')[0])
       );
     }
+
+    // if (card.tasks.length > 10) {
+    //   setIsBig('very big');
+    // } else if (card.tasks.length > 4) {
+    //   setIsBig(true);
+    // } else {
+    //   setIsBig(false);
+    // }
   }, [forecastDay, card.date]);
 
   return (
@@ -51,7 +61,9 @@ const Card = function ({ card, forecastDay }) {
         classes.card,
         happened === 'true' && classes['card-black'],
         today === 'true' && classes.withinThreeDays,
-        withinThreeDays === 'true' && classes.withinThreeDays
+        withinThreeDays === 'true' && classes.withinThreeDays,
+        isBig === true && classes.isBig,
+        isBig === 'very big' && classes.isVeryBig
       )}
     >
       <CloseButton

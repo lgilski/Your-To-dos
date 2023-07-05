@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import classes from './Hero.module.css';
+import { auth } from '../../../config/firebase';
 
 function Hero() {
+  const user = auth.currentUser;
+
   return (
     <section>
       <div className={classes.hero}>
@@ -16,7 +19,10 @@ function Hero() {
               have a lot of fun.
             </p>
             <div className={classes.buttonsContainer}>
-              <Link to='/auth/signup' className={classes.mainButton}>
+              <Link
+                to={user ? '/cards' : '/auth/signup'}
+                className={classes.mainButton}
+              >
                 Get started
               </Link>
               <a href='##' className={classes.secondaryButton}>

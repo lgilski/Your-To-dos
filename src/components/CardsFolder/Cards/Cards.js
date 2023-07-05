@@ -14,6 +14,8 @@ import { fetchForecast } from '../../../api/api';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { flushSync } from 'react-dom';
 import clsx from '../../../utils/clsx';
+import Toolbar from '../Toolbar/Toolbar';
+import FormCards from '../FormCard/FormCard';
 
 const Cards = function () {
   const dispatch = useDispatch();
@@ -23,8 +25,8 @@ const Cards = function () {
   const searched = useSelector(state => state.data.searched);
   const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
 
-  const [cardsWchichContainsSearched, setCardsWchichContainsSearched] =
-    useState([]);
+  const [searchedIds, setSearchedIds] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const { data: forecastData } = useQuery(
     ['forecast', favorite],
@@ -48,15 +50,19 @@ const Cards = function () {
   }, []);
 
   useEffect(() => {
-    // Fix the jumps while dropping on other card
-
     const foundCards = cards?.filter(card =>
       card.tasks?.find(task => {
         return task.content.toLowerCase().includes(searched?.toLowerCase());
       })
     );
 
-    setCardsWchichContainsSearched(foundCards);
+    const cardsIds = [];
+
+    foundCards.forEach(card => {
+      cardsIds.push(card.id);
+    });
+
+    setSearchedIds(cardsIds);
   }, [searched, cards]);
 
   const hasCards = cards?.length > 0;
@@ -97,7 +103,16 @@ const Cards = function () {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={classes.plansContainer}>
-        <TransitionGroup>
+        <Toolbar setShowForm={setShowForm} />
+        {/* <FormCards
+          setShowForm={setShowForm}
+          className={!showForm && classes.hideForm}
+        /> */}
+        {showForm && <FormCards setShowForm={setShowForm} />}
+        <TransitionGroup
+          component='div'
+          className={clsx(classes.plans, !hasCards && classes.withoutCards)}
+        >
           {!hasCards && (
             <CSSTransition
               classNames={{
@@ -111,13 +126,12 @@ const Cards = function () {
               <h4 className={classes.message}>There are no plans yet</h4>
             </CSSTransition>
           )}
-        </TransitionGroup>
-        <TransitionGroup
-          component='div'
-          className={clsx(classes.plans, !hasCards && classes.noBg)}
-        >
-          {searched &&
-            cardsWchichContainsSearched.map(card => (
+          {cards.map(card => {
+            if (searched && searchedIds.indexOf(card.id) === -1) {
+              return;
+            }
+
+            return (
               <CSSTransition
                 key={card.id}
                 classNames={{
@@ -136,28 +150,8 @@ const Cards = function () {
                   }
                 />
               </CSSTransition>
-            ))}
-          {!searched &&
-            cards.map(card => (
-              <CSSTransition
-                key={card.id}
-                classNames={{
-                  enterActive: cardClasses['fade-enter-active'],
-                  enter: cardClasses['fade-enter'],
-                  exitActive: cardClasses['fade-exit-active'],
-                  exit: cardClasses['fade-exit'],
-                }}
-                timeout={300}
-              >
-                <Card
-                  key={card.id}
-                  card={card}
-                  forecastDay={
-                    !forecastData?.message && forecastData?.forecast.forecastday
-                  }
-                />
-              </CSSTransition>
-            ))}
+            );
+          })}
         </TransitionGroup>
       </div>
     </DragDropContext>

@@ -1,40 +1,54 @@
 .plans {
-  max-width: 1532px;
+  /* max-width: 1532px; */
+  position: relative;
 
   display: grid;
   /* grid-template-columns: repeat(3, 1fr); */
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
-  margin: auto;
-  margin-top: 64px;
-  margin-bottom: 72px;
+  /* margin: auto; */
+  /* margin-top: 64px; */
+  /* margin-bottom: 72px; */
   padding: 16px;
   border-radius: 14px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
   gap: 32px;
   background-color: var(--orange-200);
 }
 
-.noBg {
-  background-color: inherit;
+.withoutCards {
+  height: 190px;
 }
 
 .plansContainer {
-  position: relative;
+  max-width: 1532px;
+
+  margin: auto;
+  margin-top: 64px;
+  margin-bottom: 72px;
+}
+
+.hideForm {
+  display: none;
 }
 
 .message {
   position: absolute;
 
   left: 50%;
-  top: -32px;
+  top: 50px;
   transform: translate(-50%);
 
   /* margin: auto; */
   text-align: center;
-  /* background-color: var(--tint-blue-30);
-  color: var(--shade-blue-90); */
-  background-color: var(--lime-green-200);
+  /* background-color: var(--lime-green-200);
+  color: var(--lime-green-900); */
+  /* background-color: var(--light-blue-200);
+  color: var(--light-blue-900); */
+  background-color: var(--yellow-200);
+  color: var(--yellow-900);
 
   padding: 16px;
   font-size: var(--heading-L);
@@ -43,15 +57,21 @@
 }
 
 @media (max-width: 1600px) {
-  .plans {
+  .plansContainer {
     max-width: 1232px;
+  }
+
+  .plans {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 1400px) {
-  .plans {
+  .plansContainer {
     max-width: 1000px;
+  }
+
+  .plans {
     grid-template-columns: repeat(3, 1fr);
   }
   /* 
@@ -61,8 +81,11 @@
 }
 
 @media (max-width: 1000px) {
-  .plans {
+  .plansContainer {
     max-width: 632px;
+  }
+
+  .plans {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -71,27 +94,31 @@
   } */
 }
 
-@media (max-width: 600px) {
-  .plans {
+@media (max-width: 640px) {
+  .plansContainer {
     max-width: 300px;
+  }
+
+  .plans {
     grid-template-columns: repeat(1, 1fr);
   }
 
   .message {
-    width: 320px;
-    font-size: var(--heading-XXL);
+    width: 240px;
   }
 }
 
 @media (max-width: 300px) {
-  .plans {
+  .plansContainer {
     max-width: 262px;
+  }
+
+  .plans {
     grid-template-columns: repeat(1, 1fr);
   }
 
   .message {
     width: 230px;
-    font-size: var(--heading-XXL);
   }
 }
 

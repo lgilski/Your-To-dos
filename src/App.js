@@ -94,9 +94,9 @@ function App() {
 
     auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('aaaaaaaaa');
+        // console.log('aaaaaaaaa');
 
-        console.log(JSON.parse(localStorage.getItem('cards')) !== null);
+        // console.log(JSON.parse(localStorage.getItem('cards')) !== null);
 
         // if (JSON.parse(localStorage.getItem('cards')) === []) return;
 

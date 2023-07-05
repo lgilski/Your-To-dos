@@ -6,12 +6,15 @@ import { dataActions } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateUUID } from '../../../helpers/generateUUID';
 import Input from '../../common/Input/Input';
+import { createPortal } from 'react-dom';
+import CloseButton from '../../common/CloseButton/CloseButton';
+import clsx from '../../../utils/clsx';
 
 function formatDate(date) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY
 }
 
-const FormCards = function () {
+const FormCards = function ({ setShowForm, className }) {
   const taskInputRef = useRef();
   const [date, setDate] = useState(new Date());
 
@@ -44,30 +47,74 @@ const FormCards = function () {
     setDate(e.target.value);
   };
 
+  const hideForm = function () {
+    setShowForm(false);
+  };
+
+  // {createPortal(
+  //   <ModalWindow
+  //     timerId={timerId}
+  //     timerData={{
+  //       hours: timerData.hours,
+  //       minutes: timerData.minutes,
+  //       seconds: timerData.seconds,
+  //       timerName: timerData.timerName,
+  //       closeModal: timerData.closeModal,
+  //     }}
+  //   />,
+  //   document.getElementById('modal-root')
+  // )}
+  // {createPortal(
+  //   <div onClick={timerData.closeModal} className={classes.blur} />,
+  //   document.getElementById('overlay-root')
+  // )}
+
   return (
-    <form className={classes.form} onSubmit={onSubmit}>
-      <h4 className={classes['formCard-heading']}>Create card</h4>
-      <Input
-        autoComplete='off'
-        name={'your task'}
-        type={'text'}
-        text={'Type your plan :)'}
-        color='orange'
-        ref={taskInputRef}
-        required={true}
-      />
-      <Input
-        name={'days'}
-        type={'date'}
-        onChange={onDataChange}
-        color='orange'
-        required={true}
-        text={'On what day will it be?'}
-      />
-      <Button type='submit' variant='capsule' color='orange'>
-        Add card
-      </Button>
-    </form>
+    <>
+      {createPortal(
+        <form className={clsx(classes.form, className)} onSubmit={onSubmit}>
+          <CloseButton
+            type='button'
+            onClick={hideForm}
+            className={classes.closeButton}
+            color='orange'
+            size='big'
+          />
+          <h4 className={classes['formCard-heading']}>Create card</h4>
+          <Input
+            autoComplete='off'
+            name={'your task'}
+            type={'text'}
+            text={'Type your plan :)'}
+            color='green'
+            ref={taskInputRef}
+            required={true}
+          />
+          <Input
+            value={date}
+            name={'days'}
+            type={'date'}
+            onChange={onDataChange}
+            color='green'
+            required={true}
+            text={'On what day will it be?'}
+          />
+          <Button
+            className={classes.addBtn}
+            type='submit'
+            variant='capsule'
+            color='orangeLight'
+          >
+            Add card
+          </Button>
+        </form>,
+        document.getElementById('modal-root')
+      )}
+      {createPortal(
+        <div onClick={hideForm} className={clsx('blur', className)} />,
+        document.getElementById('overlay-root')
+      )}
+    </>
   );
 };
 

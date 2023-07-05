@@ -21,10 +21,6 @@ const dataSlice = createSlice({
      * @param {{ payload: Card[] }} action
      */
     setCards(state, action) {
-      // if (!action.payload) state.cards = [];
-
-      console.log(action.payload);
-
       if (action.payload === null) {
         state.cards = [];
         return state;
@@ -201,6 +197,8 @@ const dataSlice = createSlice({
 
       const { destination, source, draggableId } = action.payload;
 
+      console.log(action.payload);
+
       const cardDraggedFrom = state.cards.find(
         card => card.id === source.droppableId
       );
@@ -217,8 +215,16 @@ const dataSlice = createSlice({
       const cardWithDragged = state.cards.find(
         card => card.id === destination.droppableId
       );
-      const tasksWithDragged = Array.from(cardWithDragged.tasks);
-      tasksWithDragged.splice(destination.index, 0, taskToMove);
+
+      let tasksWithDragged;
+      if (cardWithDragged.tasks) {
+        tasksWithDragged = Array.from(cardWithDragged.tasks);
+        tasksWithDragged.splice(destination.index, 0, taskToMove);
+      } else {
+        tasksWithDragged = [taskToMove];
+      }
+
+      console.log(tasksWithDragged);
 
       state.cards.find(card => card.id === destination.droppableId).tasks =
         tasksWithDragged;
@@ -249,8 +255,6 @@ const dataSlice = createSlice({
     // },
 
     isLoading(state, action) {
-      console.log('aaaaa');
-
       state.loading = action.payload;
     },
   },

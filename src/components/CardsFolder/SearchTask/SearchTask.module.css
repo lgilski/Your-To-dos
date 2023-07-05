@@ -1,7 +1,28 @@
 .wrapper {
-  background-color: var(--tint-orange-60);
+  /* background-color: var(--tint-orange-60); */
   max-width: 400px;
-  margin: 64px auto;
-  padding: 8px;
-  border-radius: 8px;
+  /* margin: 64px auto; */
+  /* padding: 8px; */
+  /* border-radius: 8px; */
+}
+
+.input {
+  border: none;
+  font-size: var(--text-medium);
+  padding: 6px;
+  border-radius: 4px;
+  height: 100%;
+  transition: all 0.4s;
+  max-width: 200px;
+
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  background-color: var(--orange-050);
+}
+
+@media (max-width: 640px) {
+  .input {
+    width: 100px;
+  }
 }

@@ -1,0 +1,63 @@
+.toolbar {
+  width: 100%;
+  /* background-color: var(--orange-600); */
+  background-color: var(--orange-200);
+  padding: 8px 20px;
+
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+
+  /* border-bottom: 1px solid var(--orange-900); */
+}
+
+.toolbarContent {
+  width: 100%;
+  padding: 0 8px 8px;
+  margin: auto;
+  border-bottom: 2px solid var(--orange-600);
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.searchWrapper {
+  display: flex;
+}
+
+.hideSearch {
+  max-width: 0;
+  padding: 0;
+  /* display: none; */
+}
+
+.searchBtn {
+  cursor: pointer;
+  border: none;
+  background-color: var(--orange-100);
+  width: 38px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.shownSearch {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.searchBtn ion-icon {
+  font-weight: 800;
+  height: 28px;
+  width: 28px;
+}
+
+.searchBtn:hover,
+.searchBtn:active {
+  background-color: var(--orange-300);
+  /* color: var(--orange-050); */
+}
+
+.addBtn {
+  font-size: var(--text-big);
+  font-weight: 600;
+}

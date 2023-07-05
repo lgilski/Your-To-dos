@@ -6,6 +6,7 @@
   transition: all 0.3s;
   text-decoration: none;
   font-size: var(--heading-S);
+  font-family: 'Roboto';
 }
 
 .btn-circle {
@@ -39,11 +40,13 @@
   background-color: var(--tint-blue-80); */
   /* border: 2px var(--shade-blue-20) solid; */
   background-color: var(--lime-green-200);
+  color: var(--lime-green-900);
+  font-weight: 500;
 }
 
 .btn-color-logout:hover,
 .btn-color-logout:active {
-  background-color: var(--lime-green-300);
+  background-color: var(--lime-green-600);
   color: var(--lime-green-050);
 }
 
@@ -69,6 +72,17 @@
   background-color: var(--shade-orange-30);
 }
 
+.btn-color-orangeDark {
+  background-color: var(--orange-600);
+  color: var(--orange-050);
+}
+
+.btn-color-orangeDark:hover,
+.btn-color-orangeDark:active {
+  color: var(--tint-orange-90);
+  background-color: var(--orange-700);
+}
+
 .btn-color-blue {
   color: var(--color-gray-first);
   background-color: var(--tint-blue-80);
@@ -81,7 +95,7 @@
 }
 
 .btn-color-orangeLite {
-  color: var(--grey-900);
+  color: var(--orange-900);
   background-color: var(--orange-200);
 }
 

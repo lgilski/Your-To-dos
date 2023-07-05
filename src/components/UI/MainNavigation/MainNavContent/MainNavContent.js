@@ -6,25 +6,10 @@ import classes from './MainNavContent.module.css';
 import Button from '../../../common/Button/Button';
 import { useMediaPredicate } from 'react-media-hook';
 import { CSSTransition } from 'react-transition-group';
-import { getCurrentUser } from '../../../../utils/auth';
-import { useSelector } from 'react-redux';
 import { auth } from '../../../../config/firebase';
-import { useEffect, useState } from 'react';
 
 function MainNavContent({ showMobile, showMobileNav }) {
-  // const { user } = useRouteLoaderData('root');
-  // const user = useSelector(state => state.data.user);
-  // const user = auth.currentUser;
-
-  const [user, setUser] = useState();
-
-  console.log(user);
-
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      setUser(user);
-    });
-  }, []);
+  const user = auth.currentUser;
 
   const lessThan1100 = useMediaPredicate('(max-width: 1100px)');
 

@@ -2,8 +2,6 @@ import WeatherDetailHour from '../WeatherDetailCards/WeatherDetailHour/WeatherDe
 import classes from './WeatherDetailCard.module.css';
 
 function WeatherDetailCard({ weatherForecastDay }) {
-  console.log(weatherForecastDay);
-
   const sunsetMinutes =
     weatherForecastDay.astro.sunset.split(':')[0] * 60 +
     12 * 60 +

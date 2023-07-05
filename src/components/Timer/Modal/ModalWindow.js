@@ -1,8 +1,6 @@
 import { createPortal } from 'react-dom';
 import TimerForm from '../TimerForm/TimerForm';
 
-import classes from './ModalWindow.module.css';
-
 const ModalWindow = function ({ timerId, timerData }) {
   console.log(timerId, timerData);
 
@@ -10,8 +8,6 @@ const ModalWindow = function ({ timerId, timerData }) {
 };
 
 const Modal = function ({ timerData, timerId }) {
-  console.log(timerData);
-
   console.log(document.getElementById('modal-root'));
 
   return (
@@ -30,7 +26,7 @@ const Modal = function ({ timerData, timerId }) {
         document.getElementById('modal-root')
       )}
       {createPortal(
-        <div onClick={timerData.closeModal} className={classes.blur} />,
+        <div onClick={timerData.closeModal} className='blur' />,
         document.getElementById('overlay-root')
       )}
     </>

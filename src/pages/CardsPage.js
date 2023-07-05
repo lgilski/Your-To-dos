@@ -1,9 +1,7 @@
-import FormCards from '../components/CardsFolder/FormCard/FormCard';
 import Cards from '../components/CardsFolder/Cards/Cards';
 
 import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 import LoginToGetAccess from '../components/common/LoginToGetAccess/LoginToGetAccess';
-import SearchTask from '../components/CardsFolder/SearchTask/SearchTask';
 import { auth } from '../config/firebase';
 
 function CardsPage() {
@@ -21,8 +19,6 @@ function CardsPage() {
           type='medium'
         />
       )}
-      {user && <FormCards />}
-      {user && <SearchTask />}
       {user && <Cards />}
     </section>
   );
