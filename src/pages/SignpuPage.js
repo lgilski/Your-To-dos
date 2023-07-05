@@ -3,9 +3,9 @@ import AuthForm from '../components/UI/AuthForm/AuthForm';
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { toast } from 'react-toastify';
 
 function SignupPage() {
   return <AuthForm mode='signup' />;
@@ -40,17 +40,16 @@ export async function action({ request }) {
 
     await sendEmailVerification(auth.currentUser);
 
-    console.log(auth.currentUser.emailVerified);
-    // const responseToken = await response.user.getIdToken();
-
-    // const uid = response.user.uid;
-
-    // localStorage.setItem('token', responseToken);
-    // localStorage.setItem('uid', uid);
-    // const expiration = new Date();
-
-    // expiration.setHours(expiration.getHours() + 12);
-    // localStorage.setItem('expiration', expiration.toISOString());
+    toast.success('Verification email has been sent.', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
 
     return redirect('/');
   } catch (err) {

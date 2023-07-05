@@ -3,6 +3,7 @@ import AuthForm from '../components/UI/AuthForm/AuthForm';
 import { auth } from '../config/firebase';
 import { redirect } from 'react-router-dom';
 import { getCardsData } from '../api/api';
+import { toast } from 'react-toastify';
 
 function LoginPage() {
   return <AuthForm mode='login' />;
@@ -58,6 +59,17 @@ export async function action({ request }) {
     const cardsData = await getCardsData(uid);
 
     localStorage.setItem('cards', JSON.stringify(cardsData));
+
+    toast.success('Successfully logged in!', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
 
     return redirect('/');
   } catch (err) {

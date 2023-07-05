@@ -9,6 +9,7 @@ import Input from '../../common/Input/Input';
 import { createPortal } from 'react-dom';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import clsx from '../../../utils/clsx';
+import { toast } from 'react-toastify';
 
 function formatDate(date) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY
@@ -41,6 +42,17 @@ const FormCards = function ({ setShowForm, className }) {
       content: taskInputRef.current.value,
     };
     dispatch(dataActions.createTask({ cardId, task }));
+
+    // toast.success('Successfully added!', {
+    //   position: 'top-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: 'dark',
+    // });
   };
 
   const onDataChange = function (e) {
@@ -102,7 +114,7 @@ const FormCards = function ({ setShowForm, className }) {
           <Button
             className={classes.addBtn}
             type='submit'
-            variant='capsule'
+            variant='roundedSquare'
             color='orangeLight'
           >
             Add card

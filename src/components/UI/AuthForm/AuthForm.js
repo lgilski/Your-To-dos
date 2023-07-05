@@ -11,7 +11,6 @@ import classes from './AuthForm.module.css';
 import { getAuthToken, getCurrentUser } from '../../../utils/auth';
 import Input from '../../common/Input/Input';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { auth } from '../../../config/firebase';
 import Button from '../../common/Button/Button';
 

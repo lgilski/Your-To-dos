@@ -17,6 +17,8 @@ import clsx from '../../../utils/clsx';
 import Toolbar from '../Toolbar/Toolbar';
 import FormCards from '../FormCard/FormCard';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const Cards = function () {
   const dispatch = useDispatch();
 

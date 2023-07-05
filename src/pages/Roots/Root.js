@@ -14,6 +14,7 @@ import Footer from '../../components/UI/Footer/Footer';
 import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
 import { useSelector } from 'react-redux';
 import { TailSpin } from 'react-loader-spinner';
+import { ToastContainer } from 'react-toastify';
 
 // Problems with loging out too early
 
@@ -65,6 +66,18 @@ function RootLayout({ routes }) {
 
   return (
     <>
+      <ToastContainer
+      // position='top-center'
+      // autoClose={5000}
+      // hideProgressBar={false}
+      // newestOnTop={false}
+      // closeOnClick
+      // rtl={false}
+      // pauseOnFocusLoss
+      // draggable
+      // pauseOnHover
+      // theme='dark'
+      />
       <MainNavigation />
       {/* <CSSTransition
         key={'timerNav'}
