@@ -33,7 +33,7 @@ function Toolbar({ setShowForm }) {
         <Button
           onClick={showModal}
           className={classes.addBtn}
-          color='orangeDark'
+          color='green'
           variant='roundedSquare'
         >
           Add

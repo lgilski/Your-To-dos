@@ -10,24 +10,34 @@
   /* margin-top: 64px; */
   /* margin-bottom: 72px; */
   padding: 16px;
-  border-radius: 14px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  /* border-radius: 14px; */
+  /* border-top-left-radius: 0; */
+  /* border-top-right-radius: 0; */
 
   gap: 32px;
-  background-color: var(--orange-200);
+  /* background-color: var(--orange-200); */
+  background-color: #fff;
 }
 
 .withoutCards {
   height: 190px;
 }
 
-.plansContainer {
-  max-width: 1532px;
-
+.contentWrapper {
   margin: auto;
-  margin-top: 64px;
-  margin-bottom: 72px;
+  /* margin-top: 64px; */
+  /* padding-bottom: 72px; */
+
+  max-width: 1532px;
+  background-color: #fff;
+
+  border-radius: 18px;
+  border: 1px solid var(--grey-200);
+  overflow: hidden;
+}
+
+.plansContainer {
+  margin: auto;
 }
 
 .hideForm {
@@ -41,12 +51,7 @@
   top: 50px;
   transform: translate(-50%);
 
-  /* margin: auto; */
   text-align: center;
-  /* background-color: var(--lime-green-200);
-  color: var(--lime-green-900); */
-  /* background-color: var(--light-blue-200);
-  color: var(--light-blue-900); */
   background-color: var(--yellow-200);
   color: var(--yellow-900);
 
@@ -56,8 +61,8 @@
   width: 450px;
 }
 
-@media (max-width: 1600px) {
-  .plansContainer {
+@media (max-width: 1800px) {
+  .contentWrapper {
     max-width: 1232px;
   }
 
@@ -66,8 +71,8 @@
   }
 }
 
-@media (max-width: 1400px) {
-  .plansContainer {
+@media (max-width: 1500px) {
+  .contentWrapper {
     max-width: 1000px;
   }
 
@@ -80,8 +85,8 @@
   } */
 }
 
-@media (max-width: 1000px) {
-  .plansContainer {
+@media (max-width: 1250px) {
+  .contentWrapper {
     max-width: 632px;
   }
 
@@ -94,8 +99,8 @@
   } */
 }
 
-@media (max-width: 640px) {
-  .plansContainer {
+@media (max-width: 900px) {
+  .contentWrapper {
     max-width: 300px;
   }
 
@@ -109,7 +114,7 @@
 }
 
 @media (max-width: 300px) {
-  .plansContainer {
+  .contentWrapper {
     max-width: 262px;
   }
 

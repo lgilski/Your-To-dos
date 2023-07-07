@@ -17,15 +17,17 @@ function WeatherPage() {
   }, []);
 
   return (
-    <section className='wrapper'>
-      <SectionHeader
-        className='pageTitle-center'
-        subheader='Weather page'
-        header='Look up the weather'
-        type='medium'
-      />
-      <WeatherForm />
-      <WeatherCards />
+    <section className='grey-bg'>
+      <div className='wrapper2'>
+        <SectionHeader
+          className='pageTitle-center'
+          subheader='Weather page'
+          header='Look up the weather'
+          type='medium'
+        />
+        <WeatherForm />
+        <WeatherCards />
+      </div>
     </section>
   );
 }

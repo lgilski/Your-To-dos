@@ -1,8 +1,36 @@
+.contentWrapper {
+  max-width: 764px;
+  padding: 8px 32px;
+  margin: auto;
+  background-color: #fff;
+  border: 1px solid var(--grey-200);
+  border-radius: 20px;
+}
+
 .timersWrapper {
   max-width: 700px;
-  margin: 48px auto 64px;
+  margin: auto;
 
   display: flex;
   flex-direction: column;
+  padding-top: 16px;
   /* gap: 32px; */
+}
+
+.timerToolbar {
+  margin: auto;
+  /* width: 90%; */
+  display: flex;
+  padding: 0 8px 8px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.timerAddBtn {
+  font-size: var(--text-big);
+}
+
+.buttonsContainer {
+  margin-top: 12px;
+  justify-content: center;
 }

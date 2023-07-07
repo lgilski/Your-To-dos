@@ -1,19 +1,32 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { timerActions } from '../../../store/timer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Droppable } from 'react-beautiful-dnd';
 import TimerComponent from '../TimerComponent/TimerComponent';
 
 import classes from './Timers.module.css';
 import { flushSync } from 'react-dom';
+import TimerCountDownMethod from '../ChoseCountDownMethod/ChoseCountDownMethod';
+import Button from '../../common/Button/Button';
+
+import buttonClasses from '../TimerContent/TimerContent.module.css';
+import clsx from '../../../utils/clsx';
+import TimerForm from '../TimerForm/TimerForm';
 
 function Timers() {
   const dispatch = useDispatch();
 
-  const timers = useSelector(state => state.timers.timers);
   const formatedTimers = JSON.parse(localStorage.getItem('timers'));
+
+  const timers = useSelector(state => state.timers.timers);
   const countDownMethod = useSelector(state => state.timers.countDownMethod);
+
+  const [showForm, setShowForm] = useState(false);
+
+  const showFormHandler = function () {
+    setShowForm(prevState => !prevState);
+  };
 
   // const resultDrop = {
   //   draggableId: timer.id,
@@ -61,24 +74,40 @@ function Timers() {
   }, []);
 
   return (
-    // <DndProvider backend={HTML5Backend}>
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      <Droppable droppableId={'timersColumn'}>
-        {(provided, snapshot) => (
-          <ul
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className={classes.timersWrapper}
+      <div className={classes.contentWrapper}>
+        {showForm && <TimerForm showFormHandler={showFormHandler} />}
+        <div className={classes.timerToolbar}>
+          <TimerCountDownMethod />
+          <Button
+            onClick={showFormHandler}
+            className={classes.timerAddBtn}
+            color='green'
+            variant='roundedSquare'
           >
-            {timers.map((timer, index) => (
-              <TimerComponent key={timer.id} timerData={timer} index={index} />
-            ))}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
+            Add
+          </Button>
+        </div>
+        <Droppable droppableId={'timersColumn'}>
+          {(provided, snapshot) => (
+            <ul
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className={classes.timersWrapper}
+            >
+              {timers.map((timer, index) => (
+                <TimerComponent
+                  key={timer.id}
+                  timerData={timer}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </div>
     </DragDropContext>
-    // </DndProvider>
   );
 }
 

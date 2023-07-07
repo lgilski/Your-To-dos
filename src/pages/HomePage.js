@@ -5,11 +5,16 @@ import { dataActions } from '../store';
 import Hero from '../components/Home/Hero/Hero';
 import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 import Features from '../components/Home/Features/Features';
+import { auth } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
+
+  const user = auth.currentUser;
 
   useEffect(() => {
     if (cardsFromLocalStorage !== null) {
@@ -19,12 +24,19 @@ function HomePage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      navigate('/app/cards');
+    }
+  }, [user, navigate]);
+
   return (
     <>
       {/* {email && <p>Welcome {email}</p>} */}
       <Hero />
       <section className='wrapper'>
         <SectionHeader
+          className={classes.headerPadding}
           subheader='Features'
           header='We have many uwu features'
           type='large'

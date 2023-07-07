@@ -3,8 +3,8 @@ import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigat
 
 function TimerRoot() {
   return (
-    <div className='gray-bg'>
-      <TimerNavigation />
+    <div className='grey-bg'>
+      {/* <TimerNavigation /> */}
       <Outlet />
     </div>
   );

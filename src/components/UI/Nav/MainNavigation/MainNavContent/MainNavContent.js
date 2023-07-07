@@ -1,12 +1,12 @@
 import { Form, useRouteLoaderData } from 'react-router-dom';
-import clsx from '../../../../utils/clsx';
-import NavButton from '../../NavButton/NavButton';
+import clsx from '../../../../../utils/clsx';
+import NavButton from '../../../NavButton/NavButton';
 
 import classes from './MainNavContent.module.css';
-import Button from '../../../common/Button/Button';
+import Button from '../../../../common/Button/Button';
 import { useMediaPredicate } from 'react-media-hook';
 import { CSSTransition } from 'react-transition-group';
-import { auth } from '../../../../config/firebase';
+import { auth } from '../../../../../config/firebase';
 
 function MainNavContent({ showMobile, showMobileNav }) {
   const user = auth.currentUser;
@@ -30,7 +30,7 @@ function MainNavContent({ showMobile, showMobileNav }) {
           [classes.showMobile]: showMobile,
         })}
       >
-        <NavButton
+        {/* <NavButton
           onClick={lessThan1100 ? showMobileNav : null}
           className={classes.navListItem}
           to='/'
@@ -61,17 +61,28 @@ function MainNavContent({ showMobile, showMobileNav }) {
           end={false}
         >
           Weather
-        </NavButton>
+        </NavButton> */}
         {!user && (
           <NavButton
             onClick={lessThan1100 ? showMobileNav : null}
             className={classes.navListItem}
             // to='/auth?mode=login'
             to='/auth/login'
+            end={true}
+          >
+            Log in
+          </NavButton>
+        )}
+        {!user && (
+          <NavButton
+            onClick={lessThan1100 ? showMobileNav : null}
+            className={classes.navListItem}
+            // to='/auth?mode=login'
+            to='/auth/signup'
             auth={true}
             end={true}
           >
-            Log In
+            Sign up
           </NavButton>
         )}
         {user && (

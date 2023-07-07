@@ -1,20 +1,20 @@
 .toolbar {
   width: 100%;
   /* background-color: var(--orange-600); */
-  background-color: var(--orange-200);
+  /* background-color: var(--orange-200); */
+  /* background-color: #fff; */
   padding: 8px 20px;
 
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
-
-  /* border-bottom: 1px solid var(--orange-900); */
 }
 
 .toolbarContent {
   width: 100%;
   padding: 0 8px 8px;
   margin: auto;
-  border-bottom: 2px solid var(--orange-600);
+  /* border-bottom: 2px solid var(--orange-600); */
+  border-bottom: 1px solid var(--grey-200);
   display: flex;
   justify-content: flex-end;
   gap: 16px;
@@ -33,10 +33,14 @@
 .searchBtn {
   cursor: pointer;
   border: none;
-  background-color: var(--orange-100);
+  /* background-color: var(--orange-100); */
+  background-color: var(--lime-green-200);
+  color: var(--lime-green-900);
+  /* border: 1px solid var(--lime-green-800); */
   width: 38px;
   aspect-ratio: 1;
-  border-radius: 8px;
+  /* border-radius: 8px; */
+  border-radius: 20px;
   transition: all 0.3s;
 }
 
@@ -53,11 +57,14 @@
 
 .searchBtn:hover,
 .searchBtn:active {
-  background-color: var(--orange-300);
+  /* background-color: var(--orange-300); */
+  background-color: var(--lime-green-400);
   /* color: var(--orange-050); */
 }
 
 .addBtn {
   font-size: var(--text-big);
   font-weight: 600;
+  /* border-radius: 50px;
+  padding: 8px 12px; */
 }

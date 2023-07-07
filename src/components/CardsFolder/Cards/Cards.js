@@ -104,57 +104,60 @@ const Cards = function () {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={classes.plansContainer}>
-        <Toolbar setShowForm={setShowForm} />
-        {/* <FormCards
+      <div className={classes.contentWrapper}>
+        <div className={classes.plansContainer}>
+          <Toolbar setShowForm={setShowForm} />
+          {/* <FormCards
           setShowForm={setShowForm}
           className={!showForm && classes.hideForm}
         /> */}
-        {showForm && <FormCards setShowForm={setShowForm} />}
-        <TransitionGroup
-          component='div'
-          className={clsx(classes.plans, !hasCards && classes.withoutCards)}
-        >
-          {!hasCards && (
-            <CSSTransition
-              classNames={{
-                enterActive: classes['message-enter-active'],
-                enter: classes['message-enter'],
-                exitActive: classes['message-exit-active'],
-                exit: classes['message-exit'],
-              }}
-              timeout={300}
-            >
-              <h4 className={classes.message}>There are no plans yet</h4>
-            </CSSTransition>
-          )}
-          {cards.map(card => {
-            if (searched && searchedIds.indexOf(card.id) === -1) {
-              return;
-            }
-
-            return (
+          {showForm && <FormCards setShowForm={setShowForm} />}
+          <TransitionGroup
+            component='div'
+            className={clsx(classes.plans, !hasCards && classes.withoutCards)}
+          >
+            {!hasCards && (
               <CSSTransition
-                key={card.id}
                 classNames={{
-                  enterActive: cardClasses['fade-enter-active'],
-                  enter: cardClasses['fade-enter'],
-                  exitActive: cardClasses['fade-exit-active'],
-                  exit: cardClasses['fade-exit'],
+                  enterActive: classes['message-enter-active'],
+                  enter: classes['message-enter'],
+                  exitActive: classes['message-exit-active'],
+                  exit: classes['message-exit'],
                 }}
                 timeout={300}
               >
-                <Card
-                  key={card.id}
-                  card={card}
-                  forecastDay={
-                    !forecastData?.message && forecastData?.forecast.forecastday
-                  }
-                />
+                <h4 className={classes.message}>There are no plans yet</h4>
               </CSSTransition>
-            );
-          })}
-        </TransitionGroup>
+            )}
+            {cards.map(card => {
+              if (searched && searchedIds.indexOf(card.id) === -1) {
+                return;
+              }
+
+              return (
+                <CSSTransition
+                  key={card.id}
+                  classNames={{
+                    enterActive: cardClasses['fade-enter-active'],
+                    enter: cardClasses['fade-enter'],
+                    exitActive: cardClasses['fade-exit-active'],
+                    exit: cardClasses['fade-exit'],
+                  }}
+                  timeout={300}
+                >
+                  <Card
+                    key={card.id}
+                    card={card}
+                    forecastDay={
+                      !forecastData?.message &&
+                      forecastData?.forecast.forecastday
+                    }
+                  />
+                </CSSTransition>
+              );
+            })}
+          </TransitionGroup>
+        </div>
       </div>
     </DragDropContext>
   );

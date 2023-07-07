@@ -17,13 +17,14 @@
 }
 
 .btn-capsule {
-  padding: 12px 16px;
+  padding: 8px 16px;
   /* padding: 16px 32px; */
   border-radius: 80px;
 }
 
 .btn-roundedSquare {
-  padding: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
   /* padding: 16px 32px; */
   border-radius: 8px;
 }
@@ -59,6 +60,17 @@
 .btn-color-orange:active {
   color: var(--tint-orange-90);
   background-color: var(--shade-orange-50);
+}
+
+.btn-color-green {
+  background-color: var(--lime-green-600);
+  color: var(--lime-green-050);
+}
+
+.btn-color-green:hover,
+.btn-color-green:active {
+  color: var(--lime-green-050);
+  background-color: var(--lime-green-500);
 }
 
 .btn-color-orangeLight {

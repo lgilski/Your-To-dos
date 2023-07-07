@@ -47,13 +47,13 @@
 .btn.authBtn:visited {
   /* background-color: var(--color-blue-first); */
   padding: 8px 16px;
-  /* background-color: var(--lime-green-400);
-  color: var(--color-gray-first); */
+  /* color: var(--color-gray-first); */
   /* border-radius: 12px; */
-  background-color: var(--orange-200);
-  color: var(--orange-900);
+  /* background-color: var(--orange-200); */
+  background-color: var(--lime-green-200);
+  color: var(--lime-green-900);
 
-  border-radius: 6px;
+  border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s;
   border: none;
@@ -63,9 +63,8 @@
 .btn.authBtn:active {
   /* color: #fff; */
   /* background-color: var(--shade-blue-20); */
-  /* background-color: var(--lime-green-600); */
-  background-color: var(--orange-600);
-  color: var(--orange-050);
+  background-color: var(--lime-green-600);
+  color: var(--lime-green-050);
 }
 
 /* @media (max-width: 1200px) {

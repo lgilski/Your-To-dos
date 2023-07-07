@@ -1,13 +1,21 @@
 import React from 'react';
 
 import classes from './Subtitle.module.css';
+import { Link } from 'react-router-dom';
+import { auth } from '../../../config/firebase';
+import clsx from '../../../utils/clsx';
 
-const Subtitle = function () {
+const Subtitle = function ({ type }) {
+  const user = auth.currentUser;
+
   return (
     <div className={classes.wrapper}>
-      <h2 className={classes.subtitle}>
+      <Link
+        to={!user ? '/' : '/app/cards'}
+        className={clsx(classes.subtitle, type === 'small' && classes.small)}
+      >
         Your To-dos <span>and stuff UwU</span>
-      </h2>
+      </Link>
     </div>
   );
 };

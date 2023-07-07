@@ -1,9 +1,9 @@
 import classes from './MainNavigation.module.css';
 
-import Subtitle from '../../Home/Subtitle/Subtitle';
+import Subtitle from '../../../Home/Subtitle/Subtitle';
 import { useMediaPredicate } from 'react-media-hook';
 import { useEffect, useState } from 'react';
-import clsx from '../../../utils/clsx';
+import clsx from '../../../../utils/clsx';
 import { CSSTransition } from 'react-transition-group';
 import MainNavContent from './MainNavContent/MainNavContent';
 

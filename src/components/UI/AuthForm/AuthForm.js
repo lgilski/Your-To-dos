@@ -33,7 +33,7 @@ function AuthForm({ mode }) {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/app/cards');
     }
   }, [user, navigate]);
 

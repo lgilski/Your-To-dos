@@ -6,6 +6,8 @@
 
 import clsx from '../../../utils/clsx';
 
+import classes from './SectionHeader.module.css';
+
 function SectionHeader({ subheader, header, className, type, ...props }) {
   return (
     <div className={className}>

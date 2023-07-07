@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
 import HomePage from './pages/HomePage';
@@ -24,19 +28,42 @@ import SignupPage, { action as signupAction } from './pages/SignpuPage';
 import ForgotPasswordPage, {
   action as forgotPasswordAction,
 } from './pages/ForgotPasswordPage';
-import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/firebase';
-import { TailSpin } from 'react-loader-spinner';
 
 const routes = [
   { index: true, element: <HomePage /> },
-  { path: 'cards', element: <CardsPage />, loader: cardsLoader },
   {
-    path: 'timer',
-    element: <TimerRoot />,
+    path: 'app',
     children: [
-      { index: true, element: <TimerPage /> },
-      { path: 'stopwatch', element: <Stopwatch /> },
+      { path: 'cards', element: <CardsPage />, loader: cardsLoader },
+      {
+        path: 'timer',
+        element: <TimerRoot />,
+        children: [
+          { index: true, element: <TimerPage /> },
+          { path: 'stopwatch', element: <Stopwatch /> },
+        ],
+      },
+      {
+        path: 'logout',
+        action: logoutAction,
+      },
+      {
+        path: 'weather',
+        element: <WeatherRoot />,
+        children: [
+          {
+            index: true,
+            element: <WeatherPage />,
+          },
+          {
+            path: ':city',
+            id: 'weather-detail',
+            // loader: weatherLoader,
+            element: <WeatherDetailPage />,
+          },
+        ],
+      },
     ],
   },
   // { path: 'auth', element: <AuthPage />, action: authAction },
@@ -46,26 +73,6 @@ const routes = [
     path: 'auth/forgot-password',
     element: <ForgotPasswordPage />,
     action: forgotPasswordAction,
-  },
-  {
-    path: 'logout',
-    action: logoutAction,
-  },
-  {
-    path: 'weather',
-    element: <WeatherRoot />,
-    children: [
-      {
-        index: true,
-        element: <WeatherPage />,
-      },
-      {
-        path: ':city',
-        id: 'weather-detail',
-        // loader: weatherLoader,
-        element: <WeatherDetailPage />,
-      },
-    ],
   },
 ];
 
@@ -94,12 +101,6 @@ function App() {
 
     auth.onAuthStateChanged(user => {
       if (user) {
-        // console.log('aaaaaaaaa');
-
-        // console.log(JSON.parse(localStorage.getItem('cards')) !== null);
-
-        // if (JSON.parse(localStorage.getItem('cards')) === []) return;
-
         const getDataFromDB = async () => {
           const response = await fetch(
             `${process.env.REACT_APP_FIREBASE_LINK}${user.uid}/cards.json`

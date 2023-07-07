@@ -1,0 +1,134 @@
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--orange-100);
+  overflow-x: hidden;
+  /* padding: 16px; */
+  padding-top: 68px;
+  transition: 0.5s;
+}
+
+.contentWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* gap: 12px; */
+  list-style: none;
+  margin-top: 32px;
+}
+
+.sidenav ion-icon {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.sidenavHidden {
+  width: 58px;
+}
+
+.hideBtn {
+  cursor: pointer;
+  border: none;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  /* background-color: var(--orange-300); */
+  background-color: inherit;
+
+  transition: all 0.3s;
+  opacity: 0;
+
+  position: absolute;
+  top: 60px;
+  right: 8px;
+}
+
+.hideBtn:hover,
+.hideBtn:active {
+  background-color: var(--orange-200);
+}
+
+.hideBtnOtherPosition {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+/* .sidenavHidden ion-icon[name='chevron-forward'] {
+  display: inline-block;
+}
+
+.hideBtn ion-icon[name='chevron-forward'] {
+  display: none;
+} */
+
+.showHideBtn {
+  opacity: 1;
+}
+
+.logo {
+  font-weight: 600;
+  color: var(--orange-400);
+  text-align: center;
+}
+
+.logo span {
+  color: var(--grey-900);
+}
+
+.btnText {
+  transition: all 0.3s;
+  max-width: 100px;
+}
+
+.hideBtnText {
+  max-width: 0;
+  opacity: 0;
+}
+
+.logoutBtn {
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+
+  /* display: block; */
+  width: 100%;
+
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: var(--text-big);
+  padding: 8px 16px;
+
+  transition: all 0.3s;
+}
+
+.logoutBtn:hover,
+.logoutBtn:active {
+  background-color: var(--orange-200);
+}
+
+.logoutBtn span {
+  display: flex;
+  gap: 8px;
+
+  word-wrap: none;
+}
+
+.logoutBtn span p {
+  min-width: 100px;
+  text-align: start;
+}
+
+.divider {
+  width: 90%;
+  height: 2px;
+  background-color: var(--orange-400);
+  margin: 8px auto;
+}

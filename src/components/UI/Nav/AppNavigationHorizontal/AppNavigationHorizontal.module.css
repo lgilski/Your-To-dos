@@ -1,0 +1,17 @@
+.horizontalNav {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  /* background-color: var(--orange-050); */
+  background-color: #fff;
+  /* border-bottom: 1px solid var(--grey-200); */
+  box-shadow: var(--shadow-XS);
+
+  overflow-x: hidden;
+  /* padding: 16px; */
+  /* padding-top: 12px; */
+  padding: 12px 16px;
+  transition: 0.5s;
+}

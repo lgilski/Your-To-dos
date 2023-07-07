@@ -9,7 +9,7 @@ function CardsPage() {
   const user = auth.currentUser;
 
   return (
-    <section className='gray-bg'>
+    <section className='grey-bg padding-bottom'>
       {!user && <LoginToGetAccess />}
       {user && (
         <SectionHeader

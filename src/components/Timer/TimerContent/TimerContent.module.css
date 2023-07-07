@@ -25,6 +25,17 @@
   gap: 10px;
 }
 
+.timer-buttons ion-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.timer-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 580px) {
   .timer-time {
     font-size: 48px;

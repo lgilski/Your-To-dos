@@ -3,7 +3,8 @@
   top: 100%;
   width: 100%;
   /* border-top: 2px var(--tint-blue-50) solid; */
-  border-top: 2px var(--lime-green-300) solid;
+  /* border-top: 2px var(--lime-green-300) solid; */
+  border-top: 2px var(--grey-200) solid;
   padding: 128px 0;
 
   font-size: var(--text-medium);
@@ -11,11 +12,10 @@
   /* color: #767676; */
   color: #666;
 
-  /*  */
-
   /* background-color: var(--tint-orange-70); */
   /* background-color: var(--tint-blue-80); */
-  background-color: var(--lime-green-050);
+  /* background-color: var(--lime-green-050); */
+  background-color: var(--grey-050);
 }
 
 .container {

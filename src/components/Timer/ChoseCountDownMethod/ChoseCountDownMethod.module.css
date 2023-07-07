@@ -1,9 +1,10 @@
 .wrapper {
-  max-width: 500px;
-  margin: auto;
+  /* max-width: 500px; */
+  /* margin: auto; */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+  /* justify-content: space-between; */
 }
 
 .wrapper:not(div) .chooseCountDownType {
@@ -14,9 +15,7 @@
   max-width: 250px;
   max-height: 75px;
   border-radius: 8px;
-  padding: 16px;
   /* margin: auto; */
-  background-color: var(--shade-orange-50);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -24,8 +23,29 @@
 
 .chooseCountDownType select {
   border-radius: 9px;
-  background-color: var(--tint-orange-80);
+  /* background-color: var(--tint-orange-80); */
+  background-color: var(--lime-green-200);
   border: none;
   font-size: 20px;
   padding: 8px;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btns ion-icon {
+  height: 28px;
+  width: 28px;
+}
+
+.btns button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

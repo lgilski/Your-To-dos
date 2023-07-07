@@ -1,53 +1,30 @@
-import {
-  Outlet,
-  useLoaderData,
-  useLocation,
-  useOutlet,
-  useSubmit,
-} from 'react-router-dom';
+import { useLocation, useNavigate, useOutlet } from 'react-router-dom';
 
-import MainNavigation from '../../components/UI/MainNavigation/MainNavigation';
+import MainNavigation from '../../components/UI/Nav/MainNavigation/MainNavigation';
 import { useEffect } from 'react';
-import { getCurrentUser, getTokenDuration } from '../../utils/auth';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
-import TimerNavigation from '../../components/Timer/TimerNavigation/TimerNavigation';
 import { useSelector } from 'react-redux';
 import { TailSpin } from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
+import { auth } from '../../config/firebase';
+import AppNavigation from '../../components/UI/Nav/AppNavigation/AppNavigation';
+import clsx from '../../utils/clsx';
 
-// Problems with loging out too early
+import classes from './Root.module.css';
+import AppNavigationHorizontal from '../../components/UI/Nav/AppNavigationHorizontal/AppNavigationHorizontal';
 
 function RootLayout({ routes }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const currentOutlet = useOutlet();
   const { nodeRef } =
     routes.find(route => route.path === location.pathname) ?? {};
 
-  // const user = useSelector(state => state.data.user);
   const isLoading = useSelector(state => state.data.loading);
+  const isSidenavOpen = useSelector(state => state.data.isSidenavOpen);
 
-  // const { user } = useLoaderData();
-
-  // const user = getCurrentUser();
-
-  const submit = useSubmit();
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-
-  //   // if (token === 'EXPIRED') {
-  //   //   submit(null, { action: '/logout', method: 'post' });
-  //   // }
-
-  //   // const tokenDuration = getTokenDuration();
-
-  //   // setTimeout(() => {
-  //   //   submit(null, { action: '/logout', method: 'post' });
-  //   // }, tokenDuration);
-  // }, [user]);
+  const user = auth.currentUser;
 
   if (isLoading) {
     return (
@@ -66,31 +43,20 @@ function RootLayout({ routes }) {
 
   return (
     <>
-      <ToastContainer
-      // position='top-center'
-      // autoClose={5000}
-      // hideProgressBar={false}
-      // newestOnTop={false}
-      // closeOnClick
-      // rtl={false}
-      // pauseOnFocusLoss
-      // draggable
-      // pauseOnHover
-      // theme='dark'
-      />
-      <MainNavigation />
-      {/* <CSSTransition
-        key={'timerNav'}
-        timeout={200}
-        classNames='page'
-        in={location.pathname.startsWith('/timer')}
-        unmountOnExit
+      <ToastContainer />
+      {!user && <MainNavigation />}
+      {/* <MainNavigation /> */}
+      {user && <AppNavigation />}
+      {user && <AppNavigationHorizontal />}
+      {/* <AppNavigation /> */}
+      <main
+        className={clsx(
+          user && 'pushContent',
+          !isSidenavOpen && user && 'dontPushContent',
+          classes.main,
+          user && 'grey-bg'
+        )}
       >
-        <div className='page'>
-          <TimerNavigation />
-        </div>
-      </CSSTransition> */}
-      <main>
         <SwitchTransition>
           <CSSTransition
             key={location.pathname}
@@ -106,9 +72,8 @@ function RootLayout({ routes }) {
             )}
           </CSSTransition>
         </SwitchTransition>
-        {/* <Outlet /> */}
       </main>
-      <Footer />
+      {!user && <Footer />}
     </>
   );
 }

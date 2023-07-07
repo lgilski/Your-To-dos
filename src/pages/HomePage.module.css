@@ -6,3 +6,8 @@
 .light-header {
   color: var(--tint-blue-80);
 }
+
+.headerPadding {
+  width: 100%;
+  padding: 32px 0;
+}

@@ -65,6 +65,12 @@ export function useTimer({ completeTimeInSeconds, timerData, index }) {
   }, [activeIndex, startSequence]);
 
   useEffect(() => {
+    if (isCounting) {
+      stopTimer();
+    }
+  }, [countDownMethod]);
+
+  useEffect(() => {
     if (timeInSeconds === 0) {
       stopTimer();
     }

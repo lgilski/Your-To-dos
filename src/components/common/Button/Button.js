@@ -6,7 +6,7 @@ import clsx from '../../../utils/clsx';
 /**
  *
  * @param {Object} props
- * @param { 'orange' | 'orangeLight' | 'orangeDark' | 'blue' | 'start' | 'stop' | 'reset' | 'logout'} props.color
+ * @param { 'orange' | 'orangeLight' | 'orangeDark' | 'green' | 'blue' | 'start' | 'stop' | 'reset' | 'logout'} props.color
  * @param {'circle' | 'capsule' | 'roundedSquare' | 'logout'} props.variant
  * @param {string} props.className
  */

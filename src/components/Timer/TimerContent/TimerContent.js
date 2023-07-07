@@ -33,13 +33,19 @@ function TimerContent({ functions, timerData, isCounting, currentTime }) {
               variant='circle'
               color='start'
               onClick={functions.startTimer}
+              className={classes['timer-button']}
             >
-              start
+              <ion-icon name='play' />
             </Button>
           )}
           {isCounting && (
-            <Button variant='circle' color='stop' onClick={functions.stopTimer}>
-              stop
+            <Button
+              variant='circle'
+              color='stop'
+              onClick={functions.stopTimer}
+              className={classes['timer-button']}
+            >
+              <ion-icon name='pause' />
             </Button>
           )}
           {!isCounting && (
@@ -47,8 +53,9 @@ function TimerContent({ functions, timerData, isCounting, currentTime }) {
               variant='circle'
               color='reset'
               onClick={functions.resetTimer}
+              className={classes['timer-button']}
             >
-              reset
+              <ion-icon name='refresh' />
             </Button>
           )}
         </div>

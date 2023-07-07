@@ -9,12 +9,17 @@
 .subtitle {
   font-size: var(--heading-L);
   /* color: var(--color-orange-first); */
+  text-decoration: none;
   color: var(--orange-400);
   font-weight: 800;
 }
 
 .subtitle span {
   color: var(--color-gray-first);
+}
+
+.small {
+  font-size: var(--heading-S);
 }
 
 /* @media (max-width: 800px) {

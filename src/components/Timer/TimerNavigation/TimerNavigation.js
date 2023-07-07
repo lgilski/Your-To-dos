@@ -8,7 +8,7 @@ function TimerNavigation() {
       <ul className={classes['timerNavigation-list']}>
         <li className={classes['timerNavigation-list--element']}>
           <NavLink
-            to='/timer'
+            to='/app/timer'
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
@@ -19,7 +19,7 @@ function TimerNavigation() {
         </li>
         <li className={classes['timerNavigation-list--element']}>
           <NavLink
-            to='/timer/stopwatch'
+            to='/app/timer/stopwatch'
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }

@@ -45,7 +45,6 @@ export async function action({ request }) {
     // const responseToken = await response.user.getIdToken();
 
     const user = auth.currentUser;
-    console.log(user);
 
     const uid = response.user.uid;
 
@@ -71,9 +70,8 @@ export async function action({ request }) {
       theme: 'dark',
     });
 
-    return redirect('/');
+    return redirect('/app/cards');
   } catch (err) {
-    console.log('eeeeerrror', err.message);
     if (
       err.message === 'Firebase: Error (auth/wrong-password).' ||
       err.message === 'Firebase: Error (auth/user-not-found).'

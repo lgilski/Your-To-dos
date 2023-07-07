@@ -2,6 +2,18 @@
   max-width: 1400px;
   /* margin: 64px auto 32px; */
   margin: 0 auto 32px;
+
+  position: fixed;
+  top: 30vh;
+  width: 400px;
+  left: 50%;
+  z-index: 100;
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  transform: translate(-50%, -50%);
+  z-index: 5;
 }
 
 .timerForm {
@@ -52,6 +64,12 @@
   align-self: flex-end;
 }
 
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
 li.timerForm-list--time {
   flex-direction: row;
   margin-top: 20px;
@@ -74,7 +92,7 @@ li.timerForm-list--time {
 }
 
 .modal {
-  background-color: #00bfb3;
+  /* background-color: #00bfb3; */
   /* color: #023436; */
 
   position: fixed;

@@ -1,0 +1,45 @@
+.btn,
+.btn:link,
+.btn:visited {
+  position: relative;
+  text-decoration: none;
+  display: block;
+  color: var(--grey-900);
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.3s;
+  font-size: var(--text-big);
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--orange-200);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 8px;
+}
+
+.active::after {
+  position: absolute;
+  content: '';
+  width: 4px;
+  height: 100%;
+  /* top: 50%; */
+  top: 0;
+  right: 0;
+  /* transform: translateY(-50%); */
+  background-color: var(--orange-600);
+}
+
+.btn.active {
+  background-color: var(--orange-200);
+}
+
+.btn.active:hover,
+.btn.active:active {
+  background-color: var(--orange-300);
+}

@@ -1,10 +1,15 @@
 import { useRouteError } from 'react-router-dom';
-import MainNavigation from '../components/UI/MainNavigation/MainNavigation';
+import MainNavigation from '../components/UI/Nav/MainNavigation/MainNavigation';
 
 import PageContent from '../components/Error/PageContent';
+import { auth } from '../config/firebase';
+import AppNavigation from '../components/UI/Nav/AppNavigation/AppNavigation';
+import AppNavigationHorizontal from '../components/UI/Nav/AppNavigationHorizontal/AppNavigationHorizontal';
 
 function ErrorPage() {
   const error = useRouteError();
+
+  const user = auth.currentUser;
 
   let title = 'An error occurred!';
   let message = 'Something went wrong!';
@@ -25,7 +30,9 @@ function ErrorPage() {
 
   return (
     <>
-      <MainNavigation />
+      {!user && <MainNavigation />}
+      {user && <AppNavigation />}
+      {user && <AppNavigationHorizontal />}
       <PageContent title={title}>
         <p>{message}</p>
       </PageContent>

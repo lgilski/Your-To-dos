@@ -10,6 +10,7 @@ const initialState = {
   cards: [],
   searched: null,
   loading: true,
+  isSidenavOpen: true,
 };
 
 const dataSlice = createSlice({
@@ -197,8 +198,6 @@ const dataSlice = createSlice({
 
       const { destination, source, draggableId } = action.payload;
 
-      console.log(action.payload);
-
       const cardDraggedFrom = state.cards.find(
         card => card.id === source.droppableId
       );
@@ -224,8 +223,6 @@ const dataSlice = createSlice({
         tasksWithDragged = [taskToMove];
       }
 
-      console.log(tasksWithDragged);
-
       state.cards.find(card => card.id === destination.droppableId).tasks =
         tasksWithDragged;
 
@@ -247,15 +244,14 @@ const dataSlice = createSlice({
       return state;
     },
 
-    // currentUser(state, action) {
-    //   state.user = action.payload;
-
-    //   console.log(state.user);
-    //   return state;
-    // },
+    // Just data
 
     isLoading(state, action) {
       state.loading = action.payload;
+    },
+
+    isSidenavOpen(state, action) {
+      state.isSidenavOpen = !state.isSidenavOpen;
     },
   },
 });

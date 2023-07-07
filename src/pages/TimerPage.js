@@ -5,16 +5,16 @@ import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 
 function TimerPage() {
   return (
-    <section className='gray-bg'>
-      <div className='pageTitle-center-partly'>
+    <section className='grey-bg padding-bottom'>
+      <div className='pageTitle-center-partly padding-top'>
         <SectionHeader
           subheader='Timers page'
           header='Measure time as you like'
           type='medium'
         />
       </div>
-      <TimerForm />
-      <TimerCountDownMethod />
+      {/* <TimerForm /> */}
+      {/* <TimerCountDownMethod /> */}
       <Timers />
     </section>
   );

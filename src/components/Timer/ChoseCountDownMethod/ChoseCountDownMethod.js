@@ -31,7 +31,7 @@ function TimerCountDownMethod() {
   };
 
   return (
-    <section className={classes.wrapper}>
+    <div className={classes.wrapper}>
       <form className={classes.chooseCountDownType}>
         <div>
           <select
@@ -46,6 +46,25 @@ function TimerCountDownMethod() {
         </div>
       </form>
       {countDownMethod === 'Start in sequence' && (
+        <div className={classes.btns}>
+          {!startedSequence && (
+            <Button variant='circle' color='start' onClick={startSequence}>
+              <ion-icon name='play' />
+            </Button>
+          )}
+          {startedSequence && (
+            <Button variant='circle' color='stop' onClick={stopTimers}>
+              <ion-icon name='pause' />
+            </Button>
+          )}
+          {!startedSequence && (
+            <Button variant='circle' color='reset' onClick={resetTimers}>
+              <ion-icon name='refresh' />
+            </Button>
+          )}
+        </div>
+      )}
+      {/* {countDownMethod === 'Start in sequence' && (
         <div className={buttonClasses['timer-buttons']}>
           {!startedSequence && (
             <Button variant='circle' color='start' onClick={startSequence}>
@@ -63,8 +82,8 @@ function TimerCountDownMethod() {
             </Button>
           )}
         </div>
-      )}
-    </section>
+      )} */}
+    </div>
   );
 }
 
