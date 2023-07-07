@@ -1,5 +1,6 @@
 .main {
   transition: all 0.3s;
+  min-height: 100vh;
   /* margin-top: 86px; */
   /* padding-top: 86px; */
 }

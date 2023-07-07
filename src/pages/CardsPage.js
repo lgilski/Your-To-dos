@@ -5,7 +5,6 @@ import LoginToGetAccess from '../components/common/LoginToGetAccess/LoginToGetAc
 import { auth } from '../config/firebase';
 
 function CardsPage() {
-  // const { user } = useRouteLoaderData('root');
   const user = auth.currentUser;
 
   return (
