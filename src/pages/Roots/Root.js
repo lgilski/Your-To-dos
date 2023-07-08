@@ -54,7 +54,8 @@ function RootLayout({ routes }) {
           user && 'pushContent',
           !isSidenavOpen && user && 'dontPushContent',
           classes.main,
-          user && 'grey-bg'
+          user && 'grey-bg',
+          user && classes.allHeight
         )}
       >
         <SwitchTransition>
