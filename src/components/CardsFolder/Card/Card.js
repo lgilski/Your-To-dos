@@ -9,6 +9,7 @@ import CloseButton from '../../common/CloseButton/CloseButton';
 import { useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import clsx from '../../../utils/clsx';
+import { cardActions } from '../../../store/card';
 
 /**
  * @param {Object} props
@@ -19,7 +20,7 @@ const Card = function ({ card, forecastDay }) {
   const dispatch = useDispatch();
 
   const onCardDelete = function () {
-    dispatch(dataActions.deleteCard({ id: card.id }));
+    dispatch(cardActions.deleteCard({ id: card.id }));
   };
 
   const [isBig, setIsBig] = useState(false);

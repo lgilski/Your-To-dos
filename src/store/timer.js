@@ -82,27 +82,6 @@ const timerSlice = createSlice({
       state.activeIndex += 1;
     },
 
-    /////////////////////////////////////////
-
-    // Drag and drop implementation
-
-    // dragedTimer(state, action) {
-    //   state.timers = update(state.timers, {
-    //     $splice: [
-    //       [action.payload.dragIndex, 1],
-    //       [
-    //         action.payload.hoverIndex,
-    //         0,
-    //         state.timers[action.payload.dragIndex],
-    //       ],
-    //     ],
-    //   });
-
-    //   localStorage.setItem('timers', JSON.stringify(state.timers));
-
-    //   return state;
-    // },
-
     moveTimers(state, action) {
       const { destination, source, draggableId } = action.payload;
 

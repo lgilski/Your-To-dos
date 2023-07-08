@@ -6,6 +6,7 @@ import classes from './TaskComponent.module.css';
 import { useDispatch } from 'react-redux';
 
 import { Draggable } from 'react-beautiful-dnd';
+import { cardActions } from '../../../store/card';
 
 /**
  * @param {{ task: Task, cardId: string, index: number }} props
@@ -15,11 +16,11 @@ const CardElement = function (props) {
   const dispatch = useDispatch();
 
   const onDeleteTask = function () {
-    dispatch(dataActions.deleteTask({ taskId: task.id, cardId }));
+    dispatch(cardActions.deleteTask({ taskId: task.id, cardId }));
   };
 
   const markAsDone = function () {
-    dispatch(dataActions.markTaskAsDone({ taskId: task.id, cardId }));
+    dispatch(cardActions.markTaskAsDone({ taskId: task.id, cardId }));
   };
 
   return (

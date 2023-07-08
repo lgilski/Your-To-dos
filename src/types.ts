@@ -16,6 +16,23 @@
  * @property {Card[]} cards
  */
 
+interface CardState {
+  cards: Card[];
+  searched: string | null;
+}
+
+interface Card {
+  date: string;
+  id: string;
+  tasks: Task[];
+}
+
+interface Task {
+  content: string;
+  id: string;
+  done?: boolean;
+}
+
 /**
  * @typedef {Object} WeatherData
  * @property {WeatherLocation} location

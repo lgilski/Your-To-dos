@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import clsx from '../../../utils/clsx';
 import { toast } from 'react-toastify';
+import { cardActions } from '../../../store/card';
 
 function formatDate(date) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY
@@ -20,7 +21,7 @@ const FormCards = function ({ setShowForm, className }) {
   const [date, setDate] = useState(new Date());
 
   const dispatch = useDispatch();
-  const cards = useSelector(state => state.data.cards);
+  const cards = useSelector(state => state.cards.cards);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -29,7 +30,7 @@ const FormCards = function ({ setShowForm, className }) {
 
     if (!cards.find(card => card.id === cardId)) {
       dispatch(
-        dataActions.createCard({
+        cardActions.createCard({
           date: new Date(date).toISOString(),
           id: cardId,
           tasks: [],
@@ -41,7 +42,7 @@ const FormCards = function ({ setShowForm, className }) {
       id: generateUUID(),
       content: taskInputRef.current.value,
     };
-    dispatch(dataActions.createTask({ cardId, task }));
+    dispatch(cardActions.createTask({ cardId, task }));
 
     // toast.success('Successfully added!', {
     //   position: 'top-center',

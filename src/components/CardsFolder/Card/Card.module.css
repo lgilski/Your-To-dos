@@ -6,7 +6,8 @@
   background-color: var(--orange-100);
   /* box-shadow: var(--shadow-M); */
   box-shadow: var(--shadow-S);
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 270px;
   padding: 16px;
   border-radius: 9px;
@@ -40,6 +41,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   /* gap: 8px; */
   font-weight: 500;
 }

@@ -12,7 +12,6 @@ import TimerPage from './pages/TimerPage';
 import WeatherPage from './pages/WeatherPage';
 import { action as logoutAction } from './utils/logout';
 
-import { dataLoader, getCurrentUser } from './utils/auth';
 import ErrorPage from './pages/Error';
 
 import { loader as cardsLoader } from './components/CardsFolder/Cards/Cards';
@@ -29,6 +28,7 @@ import ForgotPasswordPage, {
   action as forgotPasswordAction,
 } from './pages/ForgotPasswordPage';
 import { auth } from './config/firebase';
+import { cardActions } from './store/card';
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -95,7 +95,7 @@ function App() {
   // });
 
   useEffect(() => {
-    const favorite = JSON.parse(localStorage.getItem('favorite'));
+    const favorite = JSON.parse(localStorage.getItem('favorite') as string);
 
     dispatch(weatherActions.showOnCards(favorite));
 
@@ -107,7 +107,7 @@ function App() {
           );
           const cardsData = await response.json();
 
-          dispatch(dataActions.setCards(cardsData));
+          dispatch(cardActions.setCards(cardsData));
         };
         getDataFromDB();
       }

@@ -18,11 +18,12 @@ import Toolbar from '../Toolbar/Toolbar';
 import FormCards from '../FormCard/FormCard';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { cardActions } from '../../../store/card';
 
 const Cards = function () {
   const dispatch = useDispatch();
 
-  const cards = useSelector(state => state.data.cards);
+  const cards = useSelector(state => state.cards.cards);
   let favorite = useSelector(state => state.weather.showOnCards);
   const searched = useSelector(state => state.data.searched);
   const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
@@ -45,9 +46,9 @@ const Cards = function () {
 
   useEffect(() => {
     if (cardsFromLocalStorage !== null) {
-      dispatch(dataActions.setCards(cardsFromLocalStorage));
+      dispatch(cardActions.setCards(cardsFromLocalStorage));
     } else {
-      dispatch(dataActions.setCards([]));
+      dispatch(cardActions.setCards([]));
     }
   }, []);
 
@@ -97,7 +98,7 @@ const Cards = function () {
     // Maybe not the best, but works fine and fixes the issue
     flushSync(() => {
       dispatch(
-        dataActions.moveTaskBetweenCards({ destination, source, draggableId })
+        cardActions.moveTaskBetweenCards({ destination, source, draggableId })
       );
     });
   };

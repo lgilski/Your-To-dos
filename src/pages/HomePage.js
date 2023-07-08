@@ -7,6 +7,7 @@ import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 import Features from '../components/Home/Features/Features';
 import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
+import { cardActions } from '../store/card';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ function HomePage() {
 
   useEffect(() => {
     if (cardsFromLocalStorage !== null) {
-      dispatch(dataActions.setCards(cardsFromLocalStorage));
+      dispatch(cardActions.setCards(cardsFromLocalStorage));
     } else {
-      dispatch(dataActions.setCards([]));
+      dispatch(cardActions.setCards([]));
     }
   }, []);
 

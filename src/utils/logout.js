@@ -6,9 +6,6 @@ import { toast } from 'react-toastify';
 export async function action() {
   try {
     await signOut(auth);
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('uid');
-    // localStorage.removeItem('expiration');
     localStorage.removeItem('cards');
 
     toast.info('You have been logged out.', {

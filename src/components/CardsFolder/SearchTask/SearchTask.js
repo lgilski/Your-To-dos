@@ -5,6 +5,7 @@ import classes from './SearchTask.module.css';
 import { dataActions } from '../../../store';
 import { useRef } from 'react';
 import clsx from '../../../utils/clsx';
+import { cardActions } from '../../../store/card';
 
 function SearchTask({ className, ...props }) {
   const ref = useRef();
@@ -12,7 +13,7 @@ function SearchTask({ className, ...props }) {
   const dispatch = useDispatch();
 
   const searchCertainTask = function () {
-    dispatch(dataActions.searchTask(ref.current.value));
+    dispatch(cardActions.searchTask(ref.current.value));
   };
 
   return (
