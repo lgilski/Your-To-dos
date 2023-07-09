@@ -82,17 +82,12 @@ const router = createBrowserRouter([
     element: <RootLayout routes={routes} />,
     errorElement: <ErrorPage />,
     id: 'root',
-    // loader: getCurrentUser,
     children: routes,
   },
 ]);
 
 function App() {
   const dispatch = useDispatch();
-
-  // auth.onAuthStateChanged(user => {
-  //   console.log(user);
-  // });
 
   useEffect(() => {
     const favorite = JSON.parse(localStorage.getItem('favorite') as string);
