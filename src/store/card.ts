@@ -12,6 +12,8 @@ const sortByDate = (a: Card, b: Card) => {
 };
 
 const saveCards = (cards: Card[]) => {
+  console.log(cards);
+
   if (auth.currentUser) {
     const db = getDatabase();
     set(ref(db, 'users/' + auth.currentUser.uid), {

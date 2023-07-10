@@ -57,8 +57,6 @@ export async function action({ request }) {
 
     const cardsData = await getCardsData(uid);
 
-    console.log(cardsData);
-
     localStorage.setItem('cards', JSON.stringify(cardsData));
 
     toast.success('Successfully logged in!', {

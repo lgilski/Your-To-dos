@@ -25,7 +25,7 @@ const Cards = function () {
   const cards = useSelector((state: WholeState) => state.cards.cards);
   let favorite = useSelector((state: WholeState) => state.weather.showOnCards);
   const searched = useSelector((state: WholeState) => state.cards.searched);
-  const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards')!);
+  // const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards')!);
 
   const [searchedIds, setSearchedIds] = useState<string[]>([]);
   const [showForm, setShowForm] = useState(false);
@@ -43,13 +43,15 @@ const Cards = function () {
     }
   );
 
-  useEffect(() => {
-    if (cardsFromLocalStorage !== null) {
-      dispatch(cardActions.setCards(cardsFromLocalStorage));
-    } else {
-      dispatch(cardActions.setCards([]));
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log(cardsFromLocalStorage);
+
+  //   if (cardsFromLocalStorage !== null || !cardsFromLocalStorage?.error) {
+  //     dispatch(cardActions.setCards(cardsFromLocalStorage));
+  //   } else {
+  //     dispatch(cardActions.setCards([]));
+  //   }
+  // }, []);
 
   useEffect(() => {
     const foundCards = cards?.filter(card =>
@@ -164,8 +166,9 @@ const Cards = function () {
 };
 
 export const loader = function () {
-  const cards = localStorage.getItem('cards');
-  return cards;
+  // const cards = localStorage.getItem('cards');
+  // return cards;
+  return null;
 };
 
 export default Cards;

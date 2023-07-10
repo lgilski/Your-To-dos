@@ -13,17 +13,17 @@ function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
+  // const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
 
   const user = auth.currentUser;
 
-  useEffect(() => {
-    if (cardsFromLocalStorage !== null) {
-      dispatch(cardActions.setCards(cardsFromLocalStorage));
-    } else {
-      dispatch(cardActions.setCards([]));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (cardsFromLocalStorage !== null || !cardsFromLocalStorage?.error) {
+  //     dispatch(cardActions.setCards(cardsFromLocalStorage));
+  //   } else {
+  //     dispatch(cardActions.setCards([]));
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (user) {

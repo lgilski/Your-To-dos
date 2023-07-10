@@ -106,11 +106,12 @@ function App() {
     dispatch(weatherActions.showOnCards(favorite));
 
     auth.onAuthStateChanged(user => {
-      if (user) {
+      if (user?.uid) {
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${user.uid}/cards`))
           .then(snapshot => {
             if (snapshot.exists()) {
+              console.log(snapshot.val());
               dispatch(cardActions.setCards(snapshot.val()));
             } else {
               console.log('No data available');
