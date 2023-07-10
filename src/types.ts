@@ -1,3 +1,10 @@
+type WholeState = {
+  data: { loading: boolean; isSidenavOpen: boolean };
+  cards: CardState;
+  timers: TimerState;
+  weather: WeatherState;
+};
+
 type CardState = {
   cards: Card[];
   searched: string | null;
@@ -47,6 +54,7 @@ type ForecastData = {
   location: WeatherLocation;
   current: Current;
   forecast: Forecast;
+  message?: string;
 };
 
 type Forecast = {

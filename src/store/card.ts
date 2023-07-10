@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { auth } from '../config/firebase';
+import { getDatabase, ref, set } from 'firebase/database';
 
 const initialState: CardState = {
   cards: [],
@@ -12,18 +13,10 @@ const sortByDate = (a: Card, b: Card) => {
 
 const saveCards = (cards: Card[]) => {
   if (auth.currentUser) {
-    fetch(
-      process.env.REACT_APP_FIREBASE_LINK +
-        auth.currentUser.uid +
-        '/cards.json',
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(cards),
-      }
-    );
+    const db = getDatabase();
+    set(ref(db, 'users/' + auth.currentUser.uid), {
+      cards: cards,
+    });
 
     localStorage.setItem('cards', JSON.stringify(cards));
   }

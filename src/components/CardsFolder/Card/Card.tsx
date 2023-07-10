@@ -13,7 +13,7 @@ const Card = function ({
   forecastDay,
 }: {
   card: Card;
-  forecastDay: Forecastday;
+  forecastDay: Forecastday | '' | undefined;
 }): JSX.Element {
   const dispatch = useDispatch();
 

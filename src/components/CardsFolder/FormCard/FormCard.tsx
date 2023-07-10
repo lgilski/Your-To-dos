@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import Button from '../../common/Button/Button';
 
 import classes from './FormCard.module.css';
-import { dataActions } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateUUID } from '../../../helpers/generateUUID';
 import Input from '../../common/Input/Input';
@@ -12,18 +11,24 @@ import clsx from '../../../utils/clsx';
 import { toast } from 'react-toastify';
 import { cardActions } from '../../../store/card';
 
-function formatDate(date) {
+function formatDate(date: any) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY
 }
 
-const FormCards = function ({ setShowForm, className }) {
-  const taskInputRef = useRef();
-  const [date, setDate] = useState(new Date());
+const FormCards = function ({
+  setShowForm,
+  className,
+}: {
+  setShowForm: Function;
+  className: any;
+}) {
+  const taskInputRef = useRef<HTMLInputElement | null>(null);
+  const [date, setDate] = useState(new Date().getTime());
 
   const dispatch = useDispatch();
-  const cards = useSelector(state => state.cards.cards);
+  const cards = useSelector((state: WholeState) => state.cards.cards);
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const cardId = formatDate(new Date(date));
@@ -40,7 +45,7 @@ const FormCards = function ({ setShowForm, className }) {
 
     const task = {
       id: generateUUID(),
-      content: taskInputRef.current.value,
+      content: taskInputRef.current!.value,
     };
     dispatch(cardActions.createTask({ cardId, task }));
 
@@ -56,31 +61,13 @@ const FormCards = function ({ setShowForm, className }) {
     // });
   };
 
-  const onDataChange = function (e) {
+  const onDataChange = function (e: React.ChangeEvent<HTMLFormElement>) {
     setDate(e.target.value);
   };
 
   const hideForm = function () {
     setShowForm(false);
   };
-
-  // {createPortal(
-  //   <ModalWindow
-  //     timerId={timerId}
-  //     timerData={{
-  //       hours: timerData.hours,
-  //       minutes: timerData.minutes,
-  //       seconds: timerData.seconds,
-  //       timerName: timerData.timerName,
-  //       closeModal: timerData.closeModal,
-  //     }}
-  //   />,
-  //   document.getElementById('modal-root')
-  // )}
-  // {createPortal(
-  //   <div onClick={timerData.closeModal} className={classes.blur} />,
-  //   document.getElementById('overlay-root')
-  // )}
 
   return (
     <>
@@ -98,7 +85,7 @@ const FormCards = function ({ setShowForm, className }) {
             autoComplete='off'
             name={'your task'}
             type={'text'}
-            text={'Type your plan :)'}
+            text={'Type your plan'}
             color='green'
             ref={taskInputRef}
             required={true}
@@ -121,11 +108,11 @@ const FormCards = function ({ setShowForm, className }) {
             Add card
           </Button>
         </form>,
-        document.getElementById('modal-root')
+        document.getElementById('modal-root') as HTMLElement
       )}
       {createPortal(
         <div onClick={hideForm} className={clsx('blur', className)} />,
-        document.getElementById('overlay-root')
+        document.getElementById('overlay-root') as HTMLElement
       )}
     </>
   );

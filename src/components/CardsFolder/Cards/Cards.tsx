@@ -7,7 +7,6 @@ import cardClasses from '../Card/Card.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { dataActions } from '../../../store';
 import { useQuery } from '@tanstack/react-query';
 import { fetchForecast } from '../../../api/api';
 
@@ -23,12 +22,12 @@ import { cardActions } from '../../../store/card';
 const Cards = function () {
   const dispatch = useDispatch();
 
-  const cards = useSelector(state => state.cards.cards);
-  let favorite = useSelector(state => state.weather.showOnCards);
-  const searched = useSelector(state => state.data.searched);
-  const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards'));
+  const cards = useSelector((state: WholeState) => state.cards.cards);
+  let favorite = useSelector((state: WholeState) => state.weather.showOnCards);
+  const searched = useSelector((state: WholeState) => state.cards.searched);
+  const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards')!);
 
-  const [searchedIds, setSearchedIds] = useState([]);
+  const [searchedIds, setSearchedIds] = useState<string[]>([]);
   const [showForm, setShowForm] = useState(false);
 
   const { data: forecastData } = useQuery(
@@ -55,11 +54,11 @@ const Cards = function () {
   useEffect(() => {
     const foundCards = cards?.filter(card =>
       card.tasks?.find(task => {
-        return task.content.toLowerCase().includes(searched?.toLowerCase());
+        return task.content.toLowerCase().includes(searched?.toLowerCase()!);
       })
     );
 
-    const cardsIds = [];
+    const cardsIds: string[] = [];
 
     foundCards.forEach(card => {
       cardsIds.push(card.id);
@@ -84,7 +83,7 @@ const Cards = function () {
   //   },
   // };
 
-  const onDragEnd = function (result) {
+  const onDragEnd = function (result: any) {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
@@ -112,7 +111,7 @@ const Cards = function () {
           setShowForm={setShowForm}
           className={!showForm && classes.hideForm}
         /> */}
-          {showForm && <FormCards setShowForm={setShowForm} />}
+          {showForm && <FormCards className={null} setShowForm={setShowForm} />}
           <TransitionGroup
             component='div'
             className={clsx(classes.plans, !hasCards && classes.withoutCards)}
@@ -132,7 +131,7 @@ const Cards = function () {
             )}
             {cards.map(card => {
               if (searched && searchedIds.indexOf(card.id) === -1) {
-                return;
+                return null;
               }
 
               return (
@@ -150,7 +149,7 @@ const Cards = function () {
                     key={card.id}
                     card={card}
                     forecastDay={
-                      !forecastData?.message &&
+                      forecastData?.message &&
                       forecastData?.forecast.forecastday
                     }
                   />

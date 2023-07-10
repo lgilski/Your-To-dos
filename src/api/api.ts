@@ -36,7 +36,7 @@ export async function fetchForecast({
 
 export async function getCardsData(uid: string): Promise<CardState> {
   const cardsResponse = await fetch(
-    process.env.REACT_APP_FIREBASE_LINK + uid + '/cards.json'
+    process.env.REACT_APP_FIREBASE_LINK + 'users/' + uid + '/cards.json'
   );
 
   const cardsData = await cardsResponse.json();

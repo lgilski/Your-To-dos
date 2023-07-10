@@ -30,6 +30,8 @@ import ForgotPasswordPage, {
 import { auth } from './config/firebase';
 import { cardActions } from './store/card';
 
+import { getDatabase, ref, set, onValue, get, child } from 'firebase/database';
+
 const routes = [
   { index: true, element: <HomePage /> },
   {
@@ -89,6 +91,15 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
 
+  /* eslint-disable no-restricted-globals */
+  // self.onpagehide = e => {
+  //   console.log('zamknięto stronę');
+  // };
+
+  // self.onpageshow = e => {
+  //   console.log('otwarto stronę');
+  // };
+
   useEffect(() => {
     const favorite = JSON.parse(localStorage.getItem('favorite') as string);
 
@@ -96,15 +107,18 @@ function App() {
 
     auth.onAuthStateChanged(user => {
       if (user) {
-        const getDataFromDB = async () => {
-          const response = await fetch(
-            `${process.env.REACT_APP_FIREBASE_LINK}${user.uid}/cards.json`
-          );
-          const cardsData = await response.json();
-
-          dispatch(cardActions.setCards(cardsData));
-        };
-        getDataFromDB();
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `users/${user.uid}/cards`))
+          .then(snapshot => {
+            if (snapshot.exists()) {
+              dispatch(cardActions.setCards(snapshot.val()));
+            } else {
+              console.log('No data available');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
       dispatch(dataActions.isLoading(false));
     });
