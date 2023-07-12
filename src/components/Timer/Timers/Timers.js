@@ -10,8 +10,6 @@ import { flushSync } from 'react-dom';
 import TimerCountDownMethod from '../ChoseCountDownMethod/ChoseCountDownMethod';
 import Button from '../../common/Button/Button';
 
-import buttonClasses from '../TimerContent/TimerContent.module.css';
-import clsx from '../../../utils/clsx';
 import TimerForm from '../TimerForm/TimerForm';
 
 function Timers() {

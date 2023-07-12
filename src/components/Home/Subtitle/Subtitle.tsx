@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../../config/firebase';
 import clsx from '../../../utils/clsx';
 
-const Subtitle = function ({ type }) {
+const Subtitle = function ({ type }: { type: string }) {
   const user = auth.currentUser;
 
   return (

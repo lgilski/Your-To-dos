@@ -95,7 +95,7 @@ li.timerForm-list--time {
   /* background-color: #00bfb3; */
   /* color: #023436; */
 
-  position: fixed;
+  /* position: fixed;
   top: 30vh;
   width: 400px;
   left: 50%;
@@ -105,5 +105,5 @@ li.timerForm-list--time {
   border-radius: 8px;
 
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 5; */
 }

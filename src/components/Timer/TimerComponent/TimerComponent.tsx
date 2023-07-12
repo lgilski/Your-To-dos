@@ -1,20 +1,23 @@
-import React from 'react';
-
 import classes from './TimerComponent.module.css';
 
 import ProgressBar from '../../UI/ProgressBar';
-import Modal from '../Modal/ModalWindow';
 import TimerContent from '../TimerContent/TimerContent';
 import { useTimer } from '../../../hooks/useTimer';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import { Draggable } from 'react-beautiful-dnd';
+import TimerForm from '../TimerForm/TimerForm';
 
-const TimerComponent = React.forwardRef((props, ref) => {
-  const timerData = props.timerData;
-  const index = props.index;
-
+const TimerComponent = function ({
+  timerData,
+  index,
+}: {
+  timerData: Timer;
+  index: number;
+}) {
   const completeTimeInSeconds =
-    timerData.hours * 60 * 60 + timerData.minutes * 60 + timerData.seconds * 1;
+    Number(timerData.hours) * 60 * 60 +
+    Number(timerData.minutes) * 60 +
+    Number(timerData.seconds);
 
   const { functions, isCounting, showModal, timeInSeconds } = useTimer({
     completeTimeInSeconds,
@@ -36,7 +39,7 @@ const TimerComponent = React.forwardRef((props, ref) => {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-          isdragging={snapshot.isDragging.toString()}
+          data-isdragging={snapshot.isDragging.toString()}
         >
           <CloseButton
             className={classes['timer-close--btn']}
@@ -45,15 +48,11 @@ const TimerComponent = React.forwardRef((props, ref) => {
             size='big'
           />
           {showModal && (
-            <Modal
-              timerId={timerData.id}
-              timerData={{
-                hours: timerData.hours,
-                minutes: timerData.minutes,
-                seconds: timerData.seconds,
-                timerName: timerData.timerName,
-                closeModal: functions.closeModal,
-              }}
+            <TimerForm
+              showFormHandler={functions.closeModal}
+              modal={true}
+              timerData={timerData}
+              closeModal={functions.closeModal}
             />
           )}
           <TimerContent
@@ -74,6 +73,6 @@ const TimerComponent = React.forwardRef((props, ref) => {
       )}
     </Draggable>
   );
-});
+};
 
 export default TimerComponent;

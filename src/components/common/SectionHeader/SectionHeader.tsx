@@ -8,7 +8,17 @@ import clsx from '../../../utils/clsx';
 
 import classes from './SectionHeader.module.css';
 
-function SectionHeader({ subheader, header, className, type, ...props }) {
+function SectionHeader({
+  subheader,
+  header,
+  className,
+  type,
+  ...props
+}: {
+  subheader: string;
+  header: string;
+  type: string;
+} & React.HtmlHTMLAttributes<HTMLDivElement>) {
   return (
     <div className={className}>
       <h4 className='subheader'>{subheader}</h4>

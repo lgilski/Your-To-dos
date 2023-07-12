@@ -2,32 +2,36 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './ChoseCountDownMethod.module.css';
 
-import buttonClasses from '../TimerContent/TimerContent.module.css';
-
 import { timerActions } from '../../../store/timer';
 import Button from '../../common/Button/Button';
+
+import * as React from 'react';
 
 function TimerCountDownMethod() {
   const dispatch = useDispatch();
 
-  const countDownMethod = useSelector(state => state.timers.countDownMethod);
-  const startedSequence = useSelector(state => state.timers.startSequence);
+  const countDownMethod = useSelector(
+    (state: WholeState) => state.timers.countDownMethod
+  );
+  const startedSequence = useSelector(
+    (state: WholeState) => state.timers.startSequence
+  );
 
   const startSequence = function () {
-    dispatch(timerActions.startTimersInSquence());
+    dispatch(timerActions.startTimersInSquence(null));
   };
 
   const stopTimers = function () {
-    dispatch(timerActions.stopTimersInSquence());
+    dispatch(timerActions.stopTimersInSquence(null));
   };
 
   const resetTimers = function () {
     dispatch(timerActions.resetTimers(true));
   };
 
-  const setMethod = function (e) {
+  const setMethod = function (e: React.ChangeEvent<HTMLSelectElement>) {
     dispatch(timerActions.setTimerCountDownMethod(e.target.value));
-    dispatch(timerActions.stopTimersInSquence());
+    dispatch(timerActions.stopTimersInSquence(null));
   };
 
   return (
@@ -64,25 +68,6 @@ function TimerCountDownMethod() {
           )}
         </div>
       )}
-      {/* {countDownMethod === 'Start in sequence' && (
-        <div className={buttonClasses['timer-buttons']}>
-          {!startedSequence && (
-            <Button variant='circle' color='start' onClick={startSequence}>
-              start
-            </Button>
-          )}
-          {startedSequence && (
-            <Button variant='circle' color='stop' onClick={stopTimers}>
-              stop
-            </Button>
-          )}
-          {!startedSequence && (
-            <Button variant='circle' color='reset' onClick={resetTimers}>
-              reset
-            </Button>
-          )}
-        </div>
-      )} */}
     </div>
   );
 }

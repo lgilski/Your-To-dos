@@ -8,8 +8,22 @@ import Input from '../../common/Input/Input';
 import { createPortal } from 'react-dom';
 import CloseButton from '../../common/CloseButton/CloseButton';
 
-function TimerForm({ modal, timerId, timerData, showFormHandler }) {
+function TimerForm({
+  modal,
+  timerData,
+  showFormHandler,
+  closeModal,
+}: {
+  modal: boolean;
+  timerData: Timer;
+  showFormHandler: () => void;
+  closeModal: () => void;
+}) {
   const dispatch = useDispatch();
+
+  console.log(timerData);
+
+  const timerId = timerData?.id;
 
   const [hours, setHours] = useState(timerData?.hours || 0);
   const [minutes, setMinutes] = useState(timerData?.minutes || 0);
@@ -18,20 +32,20 @@ function TimerForm({ modal, timerId, timerData, showFormHandler }) {
     timerData?.timerName || 'Epic Timer'
   );
 
-  const onHoursChange = e => {
+  const onHoursChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setHours(e.target.value);
   };
-  const onMinutesChange = e => {
+  const onMinutesChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setMinutes(e.target.value);
   };
-  const onSecondsChange = e => {
+  const onSecondsChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setSeconds(e.target.value);
   };
-  const onTimerNameChange = e => {
+  const onTimerNameChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setTimerName(e.target.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (modal) {
@@ -45,7 +59,7 @@ function TimerForm({ modal, timerId, timerData, showFormHandler }) {
         })
       );
 
-      timerData.closeModal();
+      closeModal();
       return;
     }
 
@@ -59,9 +73,10 @@ function TimerForm({ modal, timerId, timerData, showFormHandler }) {
   return (
     <>
       {createPortal(
-        <div className={`${classes.wrapper} ${modal && classes.modal} `}>
+        <div className={`${classes.wrapper}`}>
           <form className={classes.timerForm} onSubmit={onSubmit}>
             <CloseButton
+              type='button'
               onClick={showFormHandler}
               className={classes.closeBtn}
               color='orange'
@@ -126,7 +141,7 @@ function TimerForm({ modal, timerId, timerData, showFormHandler }) {
                   onChange={onTimerNameChange}
                   text='Timer name'
                   noMargin={true}
-                  maxLength='20'
+                  maxLength={20}
                   autoComplete='off'
                   defaultValue={modal ? timerData.timerName : ''}
                 />
@@ -137,11 +152,11 @@ function TimerForm({ modal, timerId, timerData, showFormHandler }) {
             </Button>
           </form>
         </div>,
-        document.getElementById('modal-root')
+        document.getElementById('modal-root') as HTMLElement
       )}
       {createPortal(
         <div onClick={showFormHandler} className='blur' />,
-        document.getElementById('overlay-root')
+        document.getElementById('overlay-root') as HTMLElement
       )}
     </>
   );

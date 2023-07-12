@@ -5,6 +5,11 @@ function StopwatchTime({
   currentMinutes,
   currentSeconds,
   currentMiliseconds,
+}: {
+  currentHours: number;
+  currentMinutes: number;
+  currentSeconds: number;
+  currentMiliseconds: number;
 }) {
   return (
     <h5 className={classes.time}>

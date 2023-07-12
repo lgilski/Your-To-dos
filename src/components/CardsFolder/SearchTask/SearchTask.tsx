@@ -5,13 +5,16 @@ import { useRef } from 'react';
 import clsx from '../../../utils/clsx';
 import { cardActions } from '../../../store/card';
 
-function SearchTask({ className, ...props }) {
-  const ref = useRef();
+function SearchTask({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLFormElement>) {
+  const ref = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useDispatch();
 
   const searchCertainTask = function () {
-    dispatch(cardActions.searchTask(ref.current.value));
+    dispatch(cardActions.searchTask(ref.current!.value));
   };
 
   return (

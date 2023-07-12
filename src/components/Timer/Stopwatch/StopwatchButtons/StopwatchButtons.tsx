@@ -7,6 +7,11 @@ function StopwatchButtons({
   startStopwatch,
   stopStopwatch,
   resetStopwatch,
+}: {
+  isStoped: boolean;
+  startStopwatch: () => void;
+  stopStopwatch: () => void;
+  resetStopwatch: () => void;
 }) {
   return (
     <div className={classes.buttons}>

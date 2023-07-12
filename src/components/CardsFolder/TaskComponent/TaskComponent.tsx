@@ -1,4 +1,3 @@
-import { dataActions } from '../../../store';
 import clsx from '../../../utils/clsx';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import classes from './TaskComponent.module.css';
@@ -11,8 +10,16 @@ import { cardActions } from '../../../store/card';
 /**
  * @param {{ task: Task, cardId: string, index: number }} props
  */
-const CardElement = function (props) {
-  const { task, cardId, index } = props;
+const CardElement = function ({
+  task,
+  cardId,
+  index,
+  ...props
+}: {
+  task: Task;
+  cardId: string;
+  index: number;
+}) {
   const dispatch = useDispatch();
 
   const onDeleteTask = function () {
@@ -31,13 +38,19 @@ const CardElement = function (props) {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-          isdragging={snapshot.isDragging.toString()}
+          data-isdragging={snapshot.isDragging.toString()}
         >
           <button
             onClick={markAsDone}
             className={clsx(classes.checkBox, task.done && classes.done)}
           >
             <ion-icon name='checkmark-outline' />
+            {/* <CheckmarkOutline
+              cssClasses={classes.icon}
+              color={'#fff'}
+              height='20px'
+              width='20px'
+            /> */}
           </button>
           <li className={clsx(task.done && classes.doneText)}>
             {task.content}

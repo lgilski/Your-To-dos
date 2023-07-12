@@ -1,9 +1,5 @@
-import { useEffect, useState } from 'react';
-import {
-  RouterProvider,
-  createBrowserRouter,
-  redirect,
-} from 'react-router-dom';
+import { useEffect } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
 import HomePage from './pages/HomePage';
@@ -30,7 +26,18 @@ import ForgotPasswordPage, {
 import { auth } from './config/firebase';
 import { cardActions } from './store/card';
 
-import { getDatabase, ref, set, onValue, get, child } from 'firebase/database';
+import { getDatabase, ref, get, child } from 'firebase/database';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'ion-icon': { name: string } & React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      >;
+    }
+  }
+}
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -111,7 +118,6 @@ function App() {
         get(child(dbRef, `users/${user.uid}/cards`))
           .then(snapshot => {
             if (snapshot.exists()) {
-              console.log(snapshot.val());
               dispatch(cardActions.setCards(snapshot.val()));
             } else {
               console.log('No data available');

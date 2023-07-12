@@ -9,15 +9,20 @@
   margin: auto;
 }
 
+.iconWrapper {
+  border-radius: 50px;
+  width: 52px;
+  height: 52px;
+  margin: auto;
+}
+
 .features ion-icon {
-  color: #fff;
+  /* color: #fff; */
+  padding: 8px;
   width: 36px;
   height: 36px;
-  /* background-color: var(--color-blue-first); */
-  /* background-color: #fff; */
   background-color: var(--lime-green-100);
   color: var(--lime-green-400);
-  padding: 8px;
   border-radius: 100%;
 }
 

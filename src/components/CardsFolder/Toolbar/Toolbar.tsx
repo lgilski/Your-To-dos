@@ -4,7 +4,7 @@ import SearchTask from '../SearchTask/SearchTask';
 import classes from './Toolbar.module.css';
 import clsx from '../../../utils/clsx';
 
-function Toolbar({ setShowForm }) {
+function Toolbar({ setShowForm }: { setShowForm: Function }) {
   const [showSearch, setShowSearch] = useState(false);
 
   const clickHandler = function () {

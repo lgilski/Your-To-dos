@@ -6,7 +6,8 @@ import StopwatchTime from './StopwatchTime/StopwatchTime';
 import StopwatchButtons from './StopwatchButtons/StopwatchButtons';
 
 function Stopwatch() {
-  const stopwatchRef = useRef();
+  const stopwatchRef: { current: NodeJS.Timeout | undefined } =
+    useRef(undefined);
 
   const [time, setTime] = useState(0);
   const [isStoped, setIsStoped] = useState(true);
@@ -20,7 +21,7 @@ function Stopwatch() {
   };
 
   const stopStopwatch = function () {
-    clearInterval(stopwatchRef.current);
+    clearInterval(stopwatchRef!.current);
     setIsStoped(true);
   };
 
