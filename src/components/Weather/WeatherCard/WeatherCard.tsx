@@ -9,16 +9,12 @@ import { TailSpin } from 'react-loader-spinner';
 
 import WeatherTooltip from '../WeatherTooltip/WeatherTooltip';
 
-/**
- *
- * @param {Object} props
- * @param {string} props.city
- */
-
-function WeatherCard({ city }) {
+function WeatherCard({ city }: { city: string }) {
   const dispatch = useDispatch();
 
-  const favorite = useSelector(state => state.weather.showOnCards);
+  const favorite = useSelector(
+    (state: WholeState) => state.weather.showOnCards
+  );
 
   const { data: weatherData } = useQuery(
     ['weather', city],
@@ -70,7 +66,7 @@ function WeatherCard({ city }) {
   };
 
   const stopShowingOnCards = function () {
-    dispatch(weatherActions.stopShowingOnCards());
+    dispatch(weatherActions.stopShowingOnCards(null));
   };
 
   return (
@@ -117,9 +113,5 @@ function WeatherCard({ city }) {
     </>
   );
 }
-
-// <ion-icon name="trash-outline"></ion-icon>
-// <ion-icon name="trash"></ion-icon>
-// <ion-icon name="ellipsis-vertical"></ion-icon>
 
 export default WeatherCard;

@@ -48,6 +48,7 @@ type WeatherState = {
 type WeatherData = {
   location: WeatherLocation;
   current: Current;
+  message?: string;
 };
 
 type ForecastData = {
@@ -58,16 +59,24 @@ type ForecastData = {
 };
 
 type Forecast = {
-  forecastday: Forecastday;
+  forecastday: ForecastdayArray;
 };
+
+type ForecastdayArray = {
+  date: string;
+  data_epoch: number;
+  day: Day;
+  astro: Astro;
+  hour: Hour[];
+}[];
 
 type Forecastday = {
   date: string;
   data_epoch: number;
   day: Day;
   astro: Astro;
-  hour: Hour;
-}[];
+  hour: Hour[];
+};
 
 type Day = {
   avghumidity: number;
@@ -141,7 +150,7 @@ type Current = {
 };
 
 type Condition = {
-  test: string;
+  text: string;
   icon: string;
   code: number;
 };

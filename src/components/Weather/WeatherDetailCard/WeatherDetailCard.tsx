@@ -1,14 +1,18 @@
 import WeatherDetailHour from '../WeatherDetailCards/WeatherDetailHour/WeatherDetailHour';
 import classes from './WeatherDetailCard.module.css';
 
-function WeatherDetailCard({ weatherForecastDay }) {
+function WeatherDetailCard({
+  weatherForecastDay,
+}: {
+  weatherForecastDay: Forecastday;
+}) {
   const sunsetMinutes =
-    weatherForecastDay.astro.sunset.split(':')[0] * 60 +
+    Number(weatherForecastDay.astro.sunset.split(':')[0]) * 60 +
     12 * 60 +
-    weatherForecastDay.astro.sunset.split(':')[1].split(' ')[0] * 1;
+    Number(weatherForecastDay.astro.sunset.split(':')[1].split(' ')[0]);
   const sunriseMinutes =
-    weatherForecastDay.astro.sunrise.split(':')[0] * 60 +
-    weatherForecastDay.astro.sunrise.split(':')[1].split(' ')[0] * 1;
+    Number(weatherForecastDay.astro.sunrise.split(':')[0]) * 60 +
+    Number(weatherForecastDay.astro.sunrise.split(':')[1].split(' ')[0]);
   const daylightMinutes = sunsetMinutes - sunriseMinutes;
   const daylightHours = Math.floor(daylightMinutes / 60);
   const daylightMinutesToDisplay = daylightMinutes - daylightHours * 60;

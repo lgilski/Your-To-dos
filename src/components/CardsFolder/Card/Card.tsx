@@ -13,7 +13,7 @@ const Card = function ({
   forecastDay,
 }: {
   card: Card;
-  forecastDay: Forecastday | '' | undefined;
+  forecastDay: ForecastdayArray | '' | undefined;
 }): JSX.Element {
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const Card = function ({
   // const [isBig, setIsBig] = useState(false);
 
   const [currentWeather, setCurrentWeather] = useState<
-    | { date: string; data_epoch: number; day: Day; astro: Astro; hour: Hour }
+    | { date: string; data_epoch: number; day: Day; astro: Astro; hour: Hour[] }
     | undefined
   >(undefined);
 

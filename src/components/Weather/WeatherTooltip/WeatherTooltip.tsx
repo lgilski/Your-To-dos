@@ -11,6 +11,12 @@ function WeatherTooltip({
   deleteWeather,
   showOnCards,
   stopShowingOnCards,
+}: {
+  city: string;
+  favorite: string | null;
+  deleteWeather: () => void;
+  showOnCards: () => void;
+  stopShowingOnCards: () => void;
 }) {
   return (
     <div className={classes.container}>

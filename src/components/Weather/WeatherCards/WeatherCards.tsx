@@ -4,7 +4,7 @@ import WeatherCard from '../WeatherCard/WeatherCard';
 import classes from './WeatherCards.module.css';
 
 function WeatherCards() {
-  const weather = useSelector(state => state.weather.data);
+  const weather = useSelector((state: WholeState) => state.weather.data);
 
   return (
     <div className={classes.weatherCards}>

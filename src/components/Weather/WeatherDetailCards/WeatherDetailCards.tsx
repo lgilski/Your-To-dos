@@ -7,13 +7,7 @@ import Button from '../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 
-/**
- *
- * @param {Object} props
- * @param {string} props.city
- */
-
-function WeatherDetailCards({ city }) {
+function WeatherDetailCards({ city }: { city: string }) {
   const navigate = useNavigate();
 
   const { data: forecastData } = useQuery(

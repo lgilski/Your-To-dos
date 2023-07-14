@@ -1,13 +1,7 @@
 import clsx from '../../../../utils/clsx';
 import classes from './WeatherDetailHour.module.css';
 
-/**
- *
- * @param {object} props
- * @param {Hour} props.hour
- */
-
-function WeatherDetailHour({ hour }) {
+function WeatherDetailHour({ hour }: { hour: Hour }) {
   return (
     <div className={classes.hour}>
       <div>

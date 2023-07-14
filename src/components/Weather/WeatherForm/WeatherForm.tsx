@@ -7,17 +7,17 @@ import { useRef } from 'react';
 import { weatherActions } from '../../../store/weather';
 
 function WeatherForm() {
-  const ref = useRef();
+  const ref = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
-  const error = useSelector(state => state.weather.error);
-  const weather = useSelector(state => state.weather.data);
+  const error = useSelector((state: WholeState) => state.weather.error);
+  const weather = useSelector((state: WholeState) => state.weather.data);
 
-  const setData = async function (e) {
+  const setData = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const city = ref.current.value;
-    dispatch(weatherActions.setError(null));
+    const city = ref.current!.value;
+    dispatch(weatherActions.setError(''));
 
     if (weather.find(weatherData => weatherData === city)) {
       dispatch(
