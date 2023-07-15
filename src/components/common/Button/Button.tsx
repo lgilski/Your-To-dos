@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './Button.module.css';
 import clsx from '../../../utils/clsx';
 
-interface Button extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MyButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'Circle' | 'Capsule' | 'RoundedSquare' | 'Logout';
   color:
     | 'Orange'
@@ -18,7 +18,12 @@ interface Button extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | 'Logout';
 }
 
-const Button = function ({ variant, color, className, ...otherProps }: Button) {
+const Button = function ({
+  variant,
+  color,
+  className,
+  ...otherProps
+}: MyButton) {
   return (
     <button
       className={clsx(
