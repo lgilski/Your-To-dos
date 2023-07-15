@@ -86,7 +86,7 @@ const FormCards = function ({
             name={'your task'}
             type={'text'}
             text={'Type your plan'}
-            color='green'
+            color='Green'
             ref={taskInputRef}
             required={true}
           />
@@ -95,7 +95,7 @@ const FormCards = function ({
             name={'days'}
             type={'date'}
             onChange={onDataChange}
-            color='green'
+            color='Green'
             required={true}
             text={'On what day will it be?'}
           />

@@ -71,7 +71,7 @@ function Timers() {
     } else {
       dispatch(timerActions.setTimers([]));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
