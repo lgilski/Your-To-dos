@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { timerActions } from '../store/timer';
@@ -37,7 +37,12 @@ export function useTimer({
   const [showModal, setShowModal] = useState(false);
   const [timeInSeconds, setTimeInSeconds] = useState(completeTimeInSeconds);
 
-  const startTimer = () => {
+  const resetTimer = useCallback(() => {
+    setTimeInSeconds(completeTimeInSeconds);
+    setIsCounting(false);
+  }, [completeTimeInSeconds]);
+
+  const startTimer = useCallback(() => {
     if (timeInSeconds === 0) {
       resetTimer();
     }
@@ -47,15 +52,10 @@ export function useTimer({
     countDownTime.current = setInterval(() => {
       setTimeInSeconds((prevstate) => prevstate - 1);
     }, 1000);
-  };
+  }, [resetTimer, timeInSeconds]);
 
   const stopTimer = function () {
     clearInterval(countDownTime.current);
-    setIsCounting(false);
-  };
-
-  const resetTimer = function () {
-    setTimeInSeconds(completeTimeInSeconds);
     setIsCounting(false);
   };
 
