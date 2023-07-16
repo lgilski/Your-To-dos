@@ -3,6 +3,7 @@ import DisplayTime from '../DisplayTime';
 
 import classes from './TimerContent.module.css';
 import Button from '../../common/Button/Button';
+import { Timer, WholeState } from '@/types';
 
 function TimerContent({
   functions,

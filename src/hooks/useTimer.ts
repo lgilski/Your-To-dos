@@ -82,7 +82,7 @@ export function useTimer({
     } else if (index === activeIndex) {
       startTimer();
     }
-  }, [activeIndex, startSequence]);
+  }, [activeIndex, startSequence, index, startTimer]);
 
   useEffect(() => {
     if (isCounting) {
@@ -112,11 +112,12 @@ export function useTimer({
     activeIndex,
     dispatch,
     resetAllTimers,
+    resetTimer,
   ]);
 
   useEffect(() => {
     resetTimer();
-  }, [timerData]);
+  }, [timerData, resetTimer]);
 
   return {
     functions: {

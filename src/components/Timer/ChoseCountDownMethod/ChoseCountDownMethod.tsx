@@ -6,6 +6,7 @@ import { timerActions } from '../../../store/timer';
 import Button from '../../common/Button/Button';
 
 import * as React from 'react';
+import { WholeState } from '@/types';
 
 function TimerCountDownMethod() {
   const dispatch = useDispatch();
@@ -18,11 +19,11 @@ function TimerCountDownMethod() {
   );
 
   const startSequence = function () {
-    dispatch(timerActions.startTimersInSquence(null));
+    dispatch(timerActions.startTimersInSquence());
   };
 
   const stopTimers = function () {
-    dispatch(timerActions.stopTimersInSquence(null));
+    dispatch(timerActions.stopTimersInSquence());
   };
 
   const resetTimers = function () {
@@ -31,7 +32,7 @@ function TimerCountDownMethod() {
 
   const setMethod = function (e: React.ChangeEvent<HTMLSelectElement>) {
     dispatch(timerActions.setTimerCountDownMethod(e.target.value));
-    dispatch(timerActions.stopTimersInSquence(null));
+    dispatch(timerActions.stopTimersInSquence());
   };
 
   return (

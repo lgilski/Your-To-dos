@@ -44,10 +44,6 @@ const CardComponent = function ({
 
   useEffect(() => {
     if (forecastDay) {
-      console.log(
-        forecastDay.find((day) => day.date === card.date.split('T')[0])
-      );
-
       setCurrentWeather(
         forecastDay.find((day) => day.date === card.date.split('T')[0])
       );

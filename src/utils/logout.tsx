@@ -20,7 +20,7 @@ export async function action() {
     });
 
     return redirect('/');
-  } catch (err) {
-    console.log(err);
+  } catch (err: any) {
+    new Error(err);
   }
 }

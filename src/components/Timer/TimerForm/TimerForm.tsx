@@ -22,8 +22,6 @@ function TimerForm({
 }) {
   const dispatch = useDispatch();
 
-  console.log(timerData);
-
   const timerId = timerData?.id;
 
   const [hours, setHours] = useState(timerData?.hours || 0);

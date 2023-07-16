@@ -108,11 +108,12 @@ function App() {
             if (snapshot.exists()) {
               dispatch(cardActions.setCards(snapshot.val()));
             } else {
-              console.log('No data available');
+              // console.log('No data available');
+              new Error('No data available');
             }
           })
           .catch((error) => {
-            console.error(error);
+            new Error(error);
           });
       }
       dispatch(dataActions.isLoading(false));
