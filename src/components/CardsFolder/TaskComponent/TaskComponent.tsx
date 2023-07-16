@@ -6,15 +6,12 @@ import { useDispatch } from 'react-redux';
 
 import { Draggable } from 'react-beautiful-dnd';
 import { cardActions } from '../../../store/card';
+import { Task } from '@/types';
 
-/**
- * @param {{ task: Task, cardId: string, index: number }} props
- */
 const CardElement = function ({
   task,
   cardId,
   index,
-  ...props
 }: {
   task: Task;
   cardId: string;

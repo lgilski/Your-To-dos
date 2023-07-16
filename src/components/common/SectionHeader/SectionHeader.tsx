@@ -1,3 +1,5 @@
+import React from 'react';
+
 import clsx from '../../../utils/clsx';
 
 function SectionHeader({
@@ -5,7 +7,6 @@ function SectionHeader({
   header,
   className,
   type,
-  ...props
 }: {
   subheader: string;
   header: string;

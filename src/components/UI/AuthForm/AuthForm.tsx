@@ -46,7 +46,7 @@ function AuthForm({ mode }: { mode?: string }) {
           <h4>{isLogin ? 'Welcome back!' : 'Start your new journey!'}</h4>
           {data && data.errors && (
             <ul>
-              {Object.values(data.errors).map(err => (
+              {Object.values(data.errors).map((err) => (
                 <li key={err}>{err}</li>
               ))}
             </ul>

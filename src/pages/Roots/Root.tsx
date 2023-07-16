@@ -71,7 +71,7 @@ function RootLayout({ routes }: { routes: any }) {
             }}
             unmountOnExit
           >
-            {state => (
+            {() => (
               <div ref={nodeRef} className='page'>
                 {currentOutlet}
               </div>

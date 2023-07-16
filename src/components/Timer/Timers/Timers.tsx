@@ -11,6 +11,7 @@ import TimerCountDownMethod from '../ChoseCountDownMethod/ChoseCountDownMethod';
 import Button from '../../common/Button/Button';
 
 import TimerForm from '../TimerForm/TimerForm';
+import { WholeState } from '@/types';
 
 function Timers() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Timers() {
   const [showForm, setShowForm] = useState(false);
 
   const showFormHandler = function () {
-    setShowForm(prevState => !prevState);
+    setShowForm((prevState) => !prevState);
   };
 
   // const resultDrop = {
@@ -59,9 +60,9 @@ function Timers() {
     });
   };
 
-  const onDragStart = function (result: any) {
+  const onDragStart = function () {
     if (countDownMethod === 'Start in sequence') {
-      dispatch(timerActions.stopTimersInSquence(null));
+      dispatch(timerActions.stopTimersInSquence());
     }
   };
 
@@ -91,7 +92,7 @@ function Timers() {
           </Button>
         </div>
         <Droppable droppableId={'timersColumn'}>
-          {(provided, snapshot) => (
+          {(provided) => (
             <ul
               ref={provided.innerRef}
               {...provided.droppableProps}

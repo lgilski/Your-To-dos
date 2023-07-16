@@ -16,7 +16,7 @@ const dataSlice = createSlice({
       state.loading = action.payload;
     },
 
-    isSidenavOpen(state, action) {
+    isSidenavOpen(state) {
       state.isSidenavOpen = !state.isSidenavOpen;
     },
   },

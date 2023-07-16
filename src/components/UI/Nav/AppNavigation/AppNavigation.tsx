@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { dataActions } from '../../../../store';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-router-dom';
+import { WholeState } from '@/types';
 
 function AppNavigation() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function AppNavigation() {
   const [showHideOption, setShowHideOption] = useState(false);
 
   const hideSidenav = function () {
-    dispatch(dataActions.isSidenavOpen(null));
+    dispatch(dataActions.isSidenavOpen());
   };
 
   return (

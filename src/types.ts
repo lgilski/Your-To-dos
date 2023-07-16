@@ -1,28 +1,28 @@
-type WholeState = {
+export type WholeState = {
   data: { loading: boolean; isSidenavOpen: boolean };
   cards: CardState;
   timers: TimerState;
   weather: WeatherState;
 };
 
-type CardState = {
+export type CardState = {
   cards: Card[];
-  searched: string | null;
+  searched: string | undefined;
 };
 
-type Card = {
+export type Card = {
   date: string;
   id: string;
   tasks: Task[];
 };
 
-type Task = {
+export type Task = {
   content: string;
   id: string;
   done?: boolean;
 };
 
-type TimerState = {
+export type TimerState = {
   timers: Timer[];
   countDownMethod: string;
   startAllTimers: boolean;
@@ -31,7 +31,7 @@ type TimerState = {
   startSequence: boolean;
 };
 
-type Timer = {
+export type Timer = {
   hours: number | string;
   minutes: number | string;
   seconds: number | string;
@@ -39,30 +39,30 @@ type Timer = {
   timerName: string;
 };
 
-type WeatherState = {
+export type WeatherState = {
   data: string[];
   error: string | null;
   showOnCards: string | null;
 };
 
-type WeatherData = {
+export type WeatherData = {
   location: WeatherLocation;
   current: Current;
   message?: string;
 };
 
-type ForecastData = {
+export type ForecastData = {
   location: WeatherLocation;
   current: Current;
   forecast: Forecast;
   message?: string;
 };
 
-type Forecast = {
+export type Forecast = {
   forecastday: ForecastdayArray;
 };
 
-type ForecastdayArray = {
+export type ForecastdayArray = {
   date: string;
   data_epoch: number;
   day: Day;
@@ -70,7 +70,7 @@ type ForecastdayArray = {
   hour: Hour[];
 }[];
 
-type Forecastday = {
+export type Forecastday = {
   date: string;
   data_epoch: number;
   day: Day;
@@ -78,7 +78,7 @@ type Forecastday = {
   hour: Hour[];
 };
 
-type Day = {
+export type Day = {
   avghumidity: number;
   avgtemp_c: number;
   avgtemp_f: number;
@@ -101,7 +101,7 @@ type Day = {
   uv: number;
 };
 
-type Astro = {
+export type Astro = {
   is_moon_up: number;
   is_sun_up: number;
   moon_illumination: string;
@@ -112,7 +112,7 @@ type Astro = {
   sunset: string;
 };
 
-type WeatherLocation = {
+export type WeatherLocation = {
   name: string;
   region: string;
   country: string;
@@ -123,7 +123,7 @@ type WeatherLocation = {
   localtime: string;
 };
 
-type Current = {
+export type Current = {
   last_updated_epoch: number;
   last_updated: string;
   temp_c: number;
@@ -149,13 +149,13 @@ type Current = {
   gust_kph: number;
 };
 
-type Condition = {
+export type Condition = {
   text: string;
   icon: string;
   code: number;
 };
 
-type Hour = {
+export type Hour = {
   time_epoch: number;
   time: string;
   temp_c: number;
@@ -191,9 +191,9 @@ type Hour = {
   uv: number;
 };
 
-// type Routes = Route[];
+// export type Routes = Route[];
 
-// type Route = {
+// export type Route = {
 //   index?: boolean;
 //   element: HTMLElement;
 //   path: string;

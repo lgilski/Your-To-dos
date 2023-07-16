@@ -1,3 +1,5 @@
+import { CardState, ForecastData, WeatherData } from '@/types';
+
 export async function fetchWeather({
   city,
 }: {

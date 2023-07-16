@@ -1,4 +1,4 @@
-import { Form, useRouteLoaderData } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import clsx from '../../../../../utils/clsx';
 import NavButton from '../../../NavButton/NavButton';
 
@@ -96,8 +96,8 @@ function MainNavContent({
             <Form action='/logout' method='post'>
               <Button
                 onClick={lessThan1100 ? showMobileNav : undefined}
-                variant='logout'
-                color='logout'
+                variant='Logout'
+                color='Logout'
               >
                 Log out
               </Button>

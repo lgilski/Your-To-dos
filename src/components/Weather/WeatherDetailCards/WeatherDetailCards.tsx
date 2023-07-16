@@ -6,6 +6,7 @@ import classes from './WeatherDetailCards.module.css';
 import Button from '../../common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
+import { Forecastday } from '@/types';
 
 function WeatherDetailCards({ city }: { city: string }) {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function WeatherDetailCards({ city }: { city: string }) {
             <ion-icon name='arrow-back-outline' /> Back
           </Button>
         </div>
-        {forecastData.forecast.forecastday.map(forecastday => {
+        {forecastData.forecast.forecastday.map((forecastday: Forecastday) => {
           return (
             <WeatherDetailCard
               key={forecastday.date}

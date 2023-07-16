@@ -6,6 +6,7 @@ import { useTimer } from '../../../hooks/useTimer';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import { Draggable } from 'react-beautiful-dnd';
 import TimerForm from '../TimerForm/TimerForm';
+import { Timer } from '@/types';
 
 const TimerComponent = function ({
   timerData,
@@ -25,9 +26,9 @@ const TimerComponent = function ({
     index,
   });
 
-  let currentHours = Math.floor(timeInSeconds / (60 * 60));
-  let currentMinutes = Math.floor(timeInSeconds / 60 - currentHours * 60);
-  let currentSeconds = Math.floor(
+  const currentHours = Math.floor(timeInSeconds / (60 * 60));
+  const currentMinutes = Math.floor(timeInSeconds / 60 - currentHours * 60);
+  const currentSeconds = Math.floor(
     timeInSeconds - (currentHours * 60 * 60 + currentMinutes * 60)
   );
 

@@ -13,7 +13,7 @@ function MainNavigation() {
   const [showMobile, setShowMobile] = useState(false);
 
   const showMobileNav = function () {
-    setShowMobile(prevState => !prevState);
+    setShowMobile((prevState) => !prevState);
   };
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import clsx from '../../../utils/clsx';
 import classes from './CloseButton.module.css';
 

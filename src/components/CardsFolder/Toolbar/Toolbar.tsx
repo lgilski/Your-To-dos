@@ -4,11 +4,11 @@ import SearchTask from '../SearchTask/SearchTask';
 import classes from './Toolbar.module.css';
 import clsx from '../../../utils/clsx';
 
-function Toolbar({ setShowForm }: { setShowForm: Function }) {
+function Toolbar({ setShowForm }: { setShowForm: (a: boolean) => void }) {
   const [showSearch, setShowSearch] = useState(false);
 
   const clickHandler = function () {
-    setShowSearch(prevState => !prevState);
+    setShowSearch((prevState) => !prevState);
   };
 
   const showModal = function () {

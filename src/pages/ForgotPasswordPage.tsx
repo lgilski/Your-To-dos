@@ -32,5 +32,7 @@ export async function action({ request }: { request: Request }) {
 
       return redirect('/');
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 }

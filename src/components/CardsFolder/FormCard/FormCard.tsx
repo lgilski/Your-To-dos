@@ -10,6 +10,7 @@ import CloseButton from '../../common/CloseButton/CloseButton';
 import clsx from '../../../utils/clsx';
 // import { toast } from 'react-toastify';
 import { cardActions } from '../../../store/card';
+import { WholeState } from '@/types';
 
 function formatDate(date: any) {
   return date.toLocaleDateString('pl-PL'); // DD.MM.YYYY
@@ -19,7 +20,7 @@ const FormCards = function ({
   setShowForm,
   className,
 }: {
-  setShowForm: Function;
+  setShowForm: (a: boolean) => void;
   className: any;
 }) {
   const taskInputRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +34,7 @@ const FormCards = function ({
 
     const cardId = formatDate(new Date(date));
 
-    if (!cards.find(card => card.id === cardId)) {
+    if (!cards.find((card) => card.id === cardId)) {
       dispatch(
         cardActions.createCard({
           date: new Date(date).toISOString(),

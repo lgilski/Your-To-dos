@@ -1,3 +1,4 @@
+import { Forecastday } from '@/types';
 import WeatherDetailHour from '../WeatherDetailCards/WeatherDetailHour/WeatherDetailHour';
 import classes from './WeatherDetailCard.module.css';
 
@@ -75,7 +76,7 @@ function WeatherDetailCard({
         </div>
       </div>
       <div className={classes.hours}>
-        {weatherForecastDay.hour.map(hour => (
+        {weatherForecastDay.hour.map((hour) => (
           <WeatherDetailHour key={hour.time} hour={hour} />
         ))}
       </div>

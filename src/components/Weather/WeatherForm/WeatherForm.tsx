@@ -1,10 +1,13 @@
 import Input from '../../common/Input/Input';
 
+import React from 'react';
+
 import classes from './WeatherForm.module.css';
 import Button from '../../common/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { weatherActions } from '../../../store/weather';
+import { WholeState } from '@/types';
 
 function WeatherForm() {
   const ref = useRef<HTMLInputElement | null>(null);
@@ -19,7 +22,7 @@ function WeatherForm() {
     const city = ref.current!.value;
     dispatch(weatherActions.setError(''));
 
-    if (weather.find(weatherData => weatherData === city)) {
+    if (weather.find((weatherData) => weatherData === city)) {
       dispatch(
         weatherActions.setError('You already have weather of this city')
       );

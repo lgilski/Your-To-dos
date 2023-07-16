@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
@@ -28,16 +28,16 @@ import { cardActions } from './store/card';
 
 import { getDatabase, ref, get, child } from 'firebase/database';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'ion-icon': { name: string } & React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      >;
-    }
-  }
-}
+// declare global {
+//   namespace JSX {
+//     interface IntrinsicElements {
+//       'ion-icon': { name: string } & React.DetailedHTMLProps<
+//         React.HTMLAttributes<HTMLElement>,
+//         HTMLElement
+//       >;
+//     }
+//   }
+// }
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -111,18 +111,18 @@ function App() {
 
     dispatch(weatherActions.showOnCards(favorite));
 
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged((user) => {
       if (user?.uid) {
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${user.uid}/cards`))
-          .then(snapshot => {
+          .then((snapshot) => {
             if (snapshot.exists()) {
               dispatch(cardActions.setCards(snapshot.val()));
             } else {
               console.log('No data available');
             }
           })
-          .catch(error => {
+          .catch((error) => {
             console.error(error);
           });
       }

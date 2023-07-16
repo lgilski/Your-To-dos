@@ -1,4 +1,4 @@
-import Card from '../Card/Card';
+import CardComponent from '../Card/Card';
 import classes from './Cards.module.css';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -18,12 +18,15 @@ import FormCards from '../FormCard/FormCard';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { cardActions } from '../../../store/card';
+import { WholeState } from '@/types';
 
 const Cards = function () {
   const dispatch = useDispatch();
 
   const cards = useSelector((state: WholeState) => state.cards.cards);
-  let favorite = useSelector((state: WholeState) => state.weather.showOnCards);
+  const favorite = useSelector(
+    (state: WholeState) => state.weather.showOnCards
+  );
   const searched = useSelector((state: WholeState) => state.cards.searched);
   // const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards')!);
 
@@ -54,19 +57,21 @@ const Cards = function () {
   // }, []);
 
   useEffect(() => {
-    const foundCards = cards?.filter(card =>
-      card.tasks?.find(task => {
-        return task.content.toLowerCase().includes(searched?.toLowerCase()!);
-      })
-    );
+    if (searched) {
+      const foundCards = cards?.filter((card) =>
+        card.tasks?.find((task) => {
+          return task.content.toLowerCase().includes(searched.toLowerCase()!);
+        })
+      );
 
-    const cardsIds: string[] = [];
+      const cardsIds: string[] = [];
 
-    foundCards.forEach(card => {
-      cardsIds.push(card.id);
-    });
+      foundCards.forEach((card) => {
+        cardsIds.push(card.id);
+      });
 
-    setSearchedIds(cardsIds);
+      setSearchedIds(cardsIds);
+    }
   }, [searched, cards]);
 
   const hasCards = cards?.length > 0;
@@ -131,7 +136,7 @@ const Cards = function () {
                 <h4 className={classes.message}>There are no plans yet</h4>
               </CSSTransition>
             )}
-            {cards.map(card => {
+            {cards.map((card) => {
               if (searched && searchedIds.indexOf(card.id) === -1) {
                 return null;
               }
@@ -147,7 +152,7 @@ const Cards = function () {
                   }}
                   timeout={300}
                 >
-                  <Card
+                  <CardComponent
                     key={card.id}
                     card={card}
                     forecastDay={

@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode, Ref } from 'react';
+import React, { forwardRef, ReactNode, Ref } from 'react';
 import clsx from '../../../utils/clsx';
 import classes from './Input.module.css';
 
@@ -77,5 +77,7 @@ const Input = forwardRef(function (
     </>
   );
 });
+
+Input.displayName = 'Input';
 
 export default Input;

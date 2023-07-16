@@ -1,3 +1,4 @@
+import { Timer, TimerState } from '@/types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: TimerState = {
@@ -37,7 +38,7 @@ const timerSlice = createSlice({
         timerName: string;
       }>
     ) {
-      state.timers.forEach(timer => {
+      state.timers.forEach((timer: Timer) => {
         if (timer.id !== action.payload.timerId) return timer;
 
         timer.hours = action.payload.hours;
@@ -50,7 +51,9 @@ const timerSlice = createSlice({
     },
 
     deleteTimer(state, action: PayloadAction<string>) {
-      state.timers = state.timers.filter(timer => timer.id !== action.payload);
+      state.timers = state.timers.filter(
+        (timer: Timer) => timer.id !== action.payload
+      );
 
       localStorage.setItem('timers', JSON.stringify(state.timers));
 
@@ -74,18 +77,18 @@ const timerSlice = createSlice({
       state.activeIndex = -1;
     },
 
-    startTimersInSquence(state, action) {
+    startTimersInSquence(state) {
       state.startSequence = true;
       if (state.activeIndex === -1) {
         state.activeIndex = 0;
       }
     },
 
-    stopTimersInSquence(state, action) {
+    stopTimersInSquence(state) {
       state.startSequence = false;
     },
 
-    incrementActiveIndexInSequence(state, action) {
+    incrementActiveIndexInSequence(state) {
       state.activeIndex += 1;
     },
 

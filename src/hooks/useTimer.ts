@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { timerActions } from '../store/timer';
 
+import { Timer } from '@/types';
+import { WholeState } from '@/types';
+
 export function useTimer({
   completeTimeInSeconds,
   timerData,
@@ -42,7 +45,7 @@ export function useTimer({
     setIsCounting(true);
 
     countDownTime.current = setInterval(() => {
-      setTimeInSeconds(prevstate => prevstate - 1);
+      setTimeInSeconds((prevstate) => prevstate - 1);
     }, 1000);
   };
 
@@ -62,7 +65,7 @@ export function useTimer({
 
   const editTimer = function () {
     if (countDownMethod === 'Start in sequence') {
-      dispatch(timerActions.stopTimersInSquence(null));
+      dispatch(timerActions.stopTimersInSquence());
     }
 
     stopTimer();

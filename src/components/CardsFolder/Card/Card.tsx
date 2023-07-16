@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import clsx from '../../../utils/clsx';
 import { cardActions } from '../../../store/card';
+import { Astro, Card, Day, ForecastdayArray, Hour } from '@/types';
 
-const Card = function ({
+const CardComponent = function ({
   card,
   forecastDay,
 }: {
@@ -44,11 +45,11 @@ const Card = function ({
   useEffect(() => {
     if (forecastDay) {
       console.log(
-        forecastDay.find(day => day.date === card.date.split('T')[0])
+        forecastDay.find((day) => day.date === card.date.split('T')[0])
       );
 
       setCurrentWeather(
-        forecastDay.find(day => day.date === card.date.split('T')[0])
+        forecastDay.find((day) => day.date === card.date.split('T')[0])
       );
     }
   }, [forecastDay, card.date]);
@@ -81,7 +82,7 @@ const Card = function ({
         <h4>{card.id}</h4>
       </div>
       <Droppable droppableId={card.id}>
-        {(provided: any, snapshot: any) => (
+        {(provided: any) => (
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
@@ -116,4 +117,4 @@ const Card = function ({
   );
 };
 
-export default Card;
+export default CardComponent;

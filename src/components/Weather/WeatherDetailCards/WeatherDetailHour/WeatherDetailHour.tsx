@@ -1,3 +1,4 @@
+import { Hour } from '@/types';
 import clsx from '../../../../utils/clsx';
 import classes from './WeatherDetailHour.module.css';
 

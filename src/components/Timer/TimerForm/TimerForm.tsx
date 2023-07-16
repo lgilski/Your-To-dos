@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import classes from './TimerForm.module.css';
 import Button from '../../common/Button/Button';
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { generateUUID } from '../../../helpers/generateUUID';
 import Input from '../../common/Input/Input';
 import { createPortal } from 'react-dom';
 import CloseButton from '../../common/CloseButton/CloseButton';
+import { Timer } from '@/types';
 
 function TimerForm({
   modal,

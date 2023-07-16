@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
 import WeatherTooltip from '../WeatherTooltip/WeatherTooltip';
+import { WholeState } from '@/types';
 
 function WeatherCard({ city }: { city: string }) {
   const dispatch = useDispatch();

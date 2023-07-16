@@ -1,3 +1,4 @@
+import { WeatherState } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: WeatherState = {
@@ -21,7 +22,7 @@ const weatherSlice = createSlice({
     },
 
     deleteWeather(state, action: PayloadAction<string>) {
-      state.data = state.data.filter(weather => weather !== action.payload);
+      state.data = state.data.filter((weather) => weather !== action.payload);
 
       localStorage.setItem('weather', JSON.stringify(state.data));
     },
@@ -36,7 +37,7 @@ const weatherSlice = createSlice({
       localStorage.setItem('favorite', JSON.stringify(state.showOnCards));
     },
 
-    stopShowingOnCards(state, action) {
+    stopShowingOnCards(state) {
       state.showOnCards = null;
 
       localStorage.setItem('favorite', JSON.stringify(state.showOnCards));

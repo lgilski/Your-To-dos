@@ -16,7 +16,7 @@ function Stopwatch() {
     setIsStoped(false);
 
     stopwatchRef.current = setInterval(() => {
-      setTime(prevState => prevState + 1);
+      setTime((prevState) => prevState + 1);
     }, 10);
   };
 
@@ -29,10 +29,10 @@ function Stopwatch() {
     setTime(0);
   };
 
-  let currentSeconds = Math.floor(time / 100);
-  let currentMiliseconds = time - currentSeconds * 100;
-  let currentHours = Math.floor(currentSeconds / (60 * 60));
-  let currentMinutes = Math.floor(currentSeconds / 60 - currentHours * 60);
+  const currentSeconds = Math.floor(time / 100);
+  const currentMiliseconds = time - currentSeconds * 100;
+  const currentHours = Math.floor(currentSeconds / (60 * 60));
+  const currentMinutes = Math.floor(currentSeconds / 60 - currentHours * 60);
 
   return (
     <>

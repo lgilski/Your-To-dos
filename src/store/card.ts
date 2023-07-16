@@ -2,9 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { auth } from '../config/firebase';
 import { getDatabase, ref, set } from 'firebase/database';
 
+import { CardState } from '@/types';
+import { Card } from '@/types';
+import { Task } from '@/types';
+
 const initialState: CardState = {
   cards: [],
-  searched: null,
+  searched: undefined,
 };
 
 const sortByDate = (a: Card, b: Card) => {
@@ -44,13 +48,13 @@ const cardSlice = createSlice({
     },
 
     deleteCard(state, action: PayloadAction<{ id: string }>) {
-      state.cards = state.cards.filter(card => card.id !== action.payload.id);
+      state.cards = state.cards.filter((card) => card.id !== action.payload.id);
       saveCards(state.cards);
       return state;
     },
 
     createTask(state, action: PayloadAction<{ cardId: string; task: Task }>) {
-      state.cards.forEach(card => {
+      state.cards.forEach((card) => {
         if (card.id !== action.payload.cardId) return card;
 
         card.tasks = [action.payload.task, ...card.tasks];
@@ -64,11 +68,11 @@ const cardSlice = createSlice({
       state,
       action: PayloadAction<{ cardId: string; taskId: string }>
     ) {
-      state.cards = state.cards.map(card => {
+      state.cards = state.cards.map((card) => {
         if (card.id !== action.payload.cardId) return card;
 
         card.tasks = card.tasks.filter(
-          task => task.id !== action.payload.taskId
+          (task) => task.id !== action.payload.taskId
         );
         return card;
       });
@@ -81,18 +85,18 @@ const cardSlice = createSlice({
       state,
       action: PayloadAction<{ taskId: string; cardId: string }>
     ) {
-      state.cards = state.cards.map(card => {
+      state.cards = state.cards.map((card) => {
         if (card.id !== action.payload.cardId) return card;
 
         const task = card.tasks.find(
-          task => task.id === action.payload.taskId
+          (task) => task.id === action.payload.taskId
         )?.done;
 
         if (task) {
-          card.tasks.find(task => task.id === action.payload.taskId)!.done =
+          card.tasks.find((task) => task.id === action.payload.taskId)!.done =
             false;
         } else {
-          card.tasks.find(task => task.id === action.payload.taskId)!.done =
+          card.tasks.find((task) => task.id === action.payload.taskId)!.done =
             true;
         }
 
@@ -105,7 +109,7 @@ const cardSlice = createSlice({
 
     searchTask(state, action) {
       if (action.payload.length < 1) {
-        state.searched = null;
+        state.searched = undefined;
         return state;
       }
 
@@ -133,21 +137,21 @@ const cardSlice = createSlice({
       const { destination, source, draggableId } = action.payload;
 
       const cardDraggedFrom = state.cards.find(
-        card => card.id === source.droppableId
+        (card) => card.id === source.droppableId
       );
 
       const taskToMove = cardDraggedFrom!.tasks.find(
-        task => task.id === draggableId
+        (task) => task.id === draggableId
       )!;
 
       const tasksWithoutDragged = Array.from(cardDraggedFrom!.tasks);
       tasksWithoutDragged.splice(source.index, 1);
 
-      state.cards.find(card => card.id === source.droppableId)!.tasks =
+      state.cards.find((card) => card.id === source.droppableId)!.tasks =
         tasksWithoutDragged;
 
       const cardWithDragged = state.cards.find(
-        card => card.id === destination.droppableId
+        (card) => card.id === destination.droppableId
       );
 
       let tasksWithDragged: Task[];
@@ -158,7 +162,7 @@ const cardSlice = createSlice({
         // tasksWithDragged = [taskToMove];
         tasksWithDragged = Array(taskToMove);
       }
-      state.cards.find(card => card.id === destination.droppableId)!.tasks =
+      state.cards.find((card) => card.id === destination.droppableId)!.tasks =
         tasksWithDragged;
 
       saveCards(state.cards);
