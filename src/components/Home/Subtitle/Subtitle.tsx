@@ -6,7 +6,7 @@ const Subtitle = function ({ type }: { type?: string }) {
   const user = auth.currentUser;
 
   return (
-    <div className={'flex flex-col gap-2 items-center justify-items-center '}>
+    <div className={'flex flex-col gap-2 items-center'}>
       <Link
         to={!user ? '/' : '/app/cards'}
         className={clsx(
