@@ -36,7 +36,7 @@ const Cards = function () {
   const { data: forecastData } = useQuery(
     ['forecast', favorite],
     () => {
-      if (!favorite) return null;
+      if (!favorite) return undefined;
 
       return fetchForecast({ city: favorite });
     },
@@ -157,7 +157,7 @@ const Cards = function () {
                   <CardComponent
                     key={card.id}
                     card={card}
-                    forecastDay={forecastData!.forecast.forecastday}
+                    forecastDay={forecastData?.forecast.forecastday}
                   />
                 </CSSTransition>
               );
