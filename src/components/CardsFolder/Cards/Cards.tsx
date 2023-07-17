@@ -16,7 +16,7 @@ import clsx from '../../../utils/clsx';
 import Toolbar from '../Toolbar/Toolbar';
 import FormCards from '../FormCard/FormCard';
 
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import { cardActions } from '../../../store/card';
 import { WholeState } from '@/types';
 
