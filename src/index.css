@@ -2,6 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
 
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,7 +13,7 @@
 }
 
 :root {
-  --color-orange-first: #d87620;
+  /* --color-orange-first: #d87620;
   --shade-orange-90: #160c03;
   --shade-orange-80: #2b1806;
   --shade-orange-70: #41230a;
@@ -39,7 +43,7 @@
   --color-gray-first: #333;
   --tint-gray-80: #d6d6d6;
   --tint-gray-50: #999;
-  --tint-gray-20: #5c5c5c;
+  --tint-gray-20: #5c5c5c; */
 
   /* -heading-XXXXL: 64px;
   -heading-XXXL: 40px;
@@ -149,7 +153,7 @@
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: var(--tint-orange-20) var(--tint-orange-70);
+  scrollbar-color: var(--orange-300) var(--orange-100);
 }
 
 /* Chrome, Edge, and Safari */
@@ -159,12 +163,12 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--tint-orange-70);
+  background: var(--orange-100);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--tint-orange-20);
-  border: 3px solid var(--tint-orange-70);
+  background-color: var(--orange-300);
+  border: 3px solid var(--orange-100);
   border-radius: 12px;
 }
 

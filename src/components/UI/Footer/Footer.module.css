@@ -54,21 +54,9 @@
   margin-bottom: 24px;
 }
 
-.title {
-  margin-bottom: 16px;
-  font-size: var(--text-huge);
-  font-weight: 800;
-  color: var(--color-orange-first);
-}
-
 .title span {
   font-weight: 600;
   color: var(--color-gray-first);
-}
-
-.logoCol {
-  display: flex;
-  flex-direction: column;
 }
 
 .copyright {

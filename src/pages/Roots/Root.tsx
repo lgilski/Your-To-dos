@@ -10,7 +10,6 @@ import { auth } from '../../config/firebase';
 import AppNavigation from '../../components/UI/Nav/AppNavigation/AppNavigation';
 import clsx from '../../utils/clsx';
 
-import classes from './Root.module.css';
 import AppNavigationHorizontal from '../../components/UI/Nav/AppNavigationHorizontal/AppNavigationHorizontal';
 import { WholeState } from '@/types';
 
@@ -52,11 +51,11 @@ function RootLayout({ routes }: { routes: any }) {
       {/* <AppNavigation /> */}
       <main
         className={clsx(
-          user && 'pushContent',
-          !isSidenavOpen && user && 'dontPushContent',
-          classes.main,
+          user && 'pl-[200px]',
+          !isSidenavOpen && user && 'pl-[58px]',
+          'ease-in-out duration-300 ',
           user && 'greyBg',
-          user && classes.allHeight
+          user && 'min-h-screen'
         )}
       >
         <SwitchTransition>

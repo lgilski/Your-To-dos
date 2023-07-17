@@ -1,4 +1,3 @@
-import classes from './HomePage.module.css';
 import { useEffect } from 'react';
 import Hero from '../components/Home/Hero/Hero';
 import SectionHeader from '../components/common/SectionHeader/SectionHeader';
@@ -21,9 +20,10 @@ function HomePage() {
     <>
       {/* {email && <p>Welcome {email}</p>} */}
       <Hero />
-      <section className='wrapper'>
+      <section className='max-w-[1200px] mt-16 mb-20 mx-auto'>
         <SectionHeader
-          className={classes.headerPadding}
+          // className={classes.headerPadding}
+          className='w-full py-8'
           subheader='Features'
           header='We have many uwu features'
           type='large'

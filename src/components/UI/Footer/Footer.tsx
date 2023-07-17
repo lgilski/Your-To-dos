@@ -2,12 +2,17 @@ import { Link } from 'react-router-dom';
 import classes from './Footer.module.css';
 
 function Footer() {
+  // .logoCol {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
-        <div className={classes['logo-col']}>
-          <h5 className={classes.title}>
-            Your To-dos <span>and stuff UwU</span>
+        <div className={'flex flex-col'}>
+          <h5 className={'mb-4 text-xl font-extrabold text-orange-400'}>
+            Your To-dos <span className='text-grey-900'>and stuff UwU</span>
           </h5>
           <div className={classes.icons}>
             <Link to='#'>

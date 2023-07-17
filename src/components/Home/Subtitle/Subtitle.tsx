@@ -1,6 +1,3 @@
-import React from 'react';
-
-import classes from './Subtitle.module.css';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../config/firebase';
 import clsx from '../../../utils/clsx';
@@ -9,12 +6,15 @@ const Subtitle = function ({ type }: { type?: string }) {
   const user = auth.currentUser;
 
   return (
-    <div className={classes.wrapper}>
+    <div className={'flex flex-col gap-2 items-center justify-items-center '}>
       <Link
         to={!user ? '/' : '/app/cards'}
-        className={clsx(classes.subtitle, type === 'small' && classes.small)}
+        className={clsx(
+          'text-4xl font-extrabold text-orange-400 no-underline',
+          type === 'small' && 'text-2xl'
+        )}
       >
-        Your To-dos <span>and stuff UwU</span>
+        Your To-dos <span className='text-grey-900'>and stuff UwU</span>
       </Link>
     </div>
   );

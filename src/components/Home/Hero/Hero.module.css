@@ -21,11 +21,6 @@
   background-size: cover;
 }
 
-.heroText {
-  /* margin-left: 15%; */
-  max-width: 700px;
-}
-
 .contentContainer {
   width: 1300px;
   margin: auto;
@@ -43,15 +38,6 @@
     var(--orange-300)
   );
   background-clip: text;
-}
-
-.heroTextP {
-  max-width: 540px;
-  margin: 16px 0;
-  font-size: var(--heading-s);
-  font-weight: 400;
-  line-height: 160%;
-  color: var(--tint-orange-90);
 }
 
 .mainButton,
@@ -81,10 +67,10 @@
   padding: 16px 32px;
   font-size: var(--text-huge);
   font-weight: 500;
-  color: var(--color-gray-first);
+  color: var(--orange-900);
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--tint-orange-80);
+  background-color: var(--orange-100);
   border: none;
   border-radius: 80px;
   transition: all 0.3s;
@@ -92,8 +78,8 @@
 
 .secondaryButton:hover,
 .secondaryButton:active {
-  color: var(--tint-orange-90);
-  background-color: var(--shade-orange-50);
+  color: var(--orange-050);
+  background-color: var(--orange-600);
 }
 
 .buttonsContainer {
