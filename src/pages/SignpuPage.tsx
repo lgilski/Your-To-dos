@@ -1,6 +1,7 @@
 import { redirect } from 'react-router-dom';
 import AuthForm from '../components/UI/AuthForm/AuthForm';
 import {
+  createUserWithEmailAndPassword,
   // createUserWithEmailAndPassword,
   sendEmailVerification,
 } from 'firebase/auth';
@@ -28,11 +29,11 @@ export async function action({ request }: { request: Request }) {
   }
 
   try {
-    // const response = await createUserWithEmailAndPassword(
-    //   auth,
-    //   authData.email!.toString().trim(),
-    //   authData.password!.toString()
-    // );
+    await createUserWithEmailAndPassword(
+      auth,
+      authData.email!.toString().trim(),
+      authData.password!.toString()
+    );
 
     // if (response.status === 422 || response.status === 401) {
     //   return response;
