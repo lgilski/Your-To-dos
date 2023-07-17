@@ -26,7 +26,7 @@ export async function action({ request }: { request: Request }) {
   try {
     const response = await signInWithEmailAndPassword(
       auth,
-      authData!.email!.toString(),
+      authData.email!.toString(),
       authData.password!.toString()
     );
 
@@ -43,6 +43,8 @@ export async function action({ request }: { request: Request }) {
     }
 
     // const responseToken = await response.user.getIdToken();
+
+    // console.log(responseToken);
 
     // const user = auth.currentUser;
 
