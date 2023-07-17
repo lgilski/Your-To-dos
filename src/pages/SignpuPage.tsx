@@ -5,7 +5,7 @@ import {
   sendEmailVerification,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 function SignupPage() {
   return <AuthForm mode='signup' />;
@@ -40,16 +40,16 @@ export async function action({ request }: { request: Request }) {
 
     await sendEmailVerification(auth.currentUser!);
 
-    toast.success('Verification email has been sent.', {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-    });
+    // toast.success('Verification email has been sent.', {
+    //   position: 'top-center',
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: 'dark',
+    // });
 
     return redirect('/');
   } catch (err) {

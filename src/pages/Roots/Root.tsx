@@ -5,7 +5,7 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
 import { useSelector } from 'react-redux';
 import { TailSpin } from 'react-loader-spinner';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 import { auth } from '../../config/firebase';
 import AppNavigation from '../../components/UI/Nav/AppNavigation/AppNavigation';
 import clsx from '../../utils/clsx';
@@ -43,7 +43,7 @@ function RootLayout({ routes }: { routes: any }) {
 
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       {!user && <MainNavigation />}
       {/* <MainNavigation /> */}
       {user && <AppNavigation />}

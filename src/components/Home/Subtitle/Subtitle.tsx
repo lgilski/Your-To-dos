@@ -10,8 +10,8 @@ const Subtitle = function ({ type }: { type?: string }) {
       <Link
         to={!user ? '/' : '/app/cards'}
         className={clsx(
-          'text-4xl font-extrabold text-orange-400 no-underline',
-          type === 'small' && 'text-2xl'
+          'font-extrabold text-orange-400 no-underline',
+          type === 'small' ? 'text-2xl' : 'text-4xl'
         )}
       >
         Your To-dos <span className='text-grey-900'>and stuff UwU</span>
