@@ -29,8 +29,6 @@ const CardComponent = function ({
     | undefined
   >(undefined);
 
-  console.log(currentWeather);
-
   const date = new Date(card.date);
   const now = new Date();
 
@@ -46,8 +44,6 @@ const CardComponent = function ({
 
   useEffect(() => {
     if (forecastDay) {
-      console.log(forecastDay);
-
       setCurrentWeather(
         forecastDay.find((day) => day.date === card.date.split('T')[0])
       );

@@ -21,7 +21,7 @@ const FormCards = function ({
   className,
 }: {
   setShowForm: (a: boolean) => void;
-  className: any;
+  className?: any;
 }) {
   const taskInputRef = useRef<HTMLInputElement | null>(null);
   const [date, setDate] = useState(new Date().getTime());

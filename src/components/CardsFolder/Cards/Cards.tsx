@@ -12,7 +12,7 @@ import { fetchForecast } from '../../../api/api';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 import { flushSync } from 'react-dom';
-import clsx from '../../../utils/clsx';
+import clsx from '@/utils/clsx';
 import Toolbar from '../Toolbar/Toolbar';
 import FormCards from '../FormCard/FormCard';
 
@@ -45,8 +45,6 @@ const Cards = function () {
       staleTime: 1000 * 60 * 60 * 12,
     }
   );
-
-  console.log(forecastData);
 
   // useEffect(() => {
   //   console.log(cardsFromLocalStorage);
@@ -116,11 +114,7 @@ const Cards = function () {
       <div className={classes.contentWrapper}>
         <div className={classes.plansContainer}>
           <Toolbar setShowForm={setShowForm} />
-          {/* <FormCards
-          setShowForm={setShowForm}
-          className={!showForm && classes.hideForm}
-        /> */}
-          {showForm && <FormCards className={null} setShowForm={setShowForm} />}
+          {showForm && <FormCards setShowForm={setShowForm} />}
           <TransitionGroup
             component='div'
             className={clsx(classes.plans, !hasCards && classes.withoutCards)}

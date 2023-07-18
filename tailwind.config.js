@@ -76,8 +76,18 @@ module.exports = {
         'yellow-700': '#A27C1A',
         'yellow-800': '#7C5E10',
         'yellow-900': '#513C06',
+
+        'gradient-1': 'rgb(22 12 3 / 70%)',
+        'gradient-2': 'rgb(151 82 22 / 70%)',
+      },
+      backgroundImage: {
+        'hero-pattern':
+          "linear-gradient(to right top, #160c03b3, #975216b3), url('../src/assets/images/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg')",
       },
     },
+  },
+  corePlugins: {
+    preflight: false,
   },
   plugins: [],
 };

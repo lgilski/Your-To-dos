@@ -1,4 +1,4 @@
-function toVal(mix) {
+function toVal(mix: any) {
   var k,
     y,
     str = '';
@@ -28,13 +28,13 @@ function toVal(mix) {
   return str;
 }
 
-export function clsx() {
+export function clsx(...args: any) {
   var i = 0,
     tmp,
     x,
     str = '';
-  while (i < arguments.length) {
-    if ((tmp = arguments[i++])) {
+  while (i < args.length) {
+    if ((tmp = args[i++])) {
       if ((x = toVal(tmp))) {
         str && (str += ' ');
         str += x;

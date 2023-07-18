@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from './Feature.module.css';
 
 function Feature({
   icon,
@@ -11,10 +10,12 @@ function Feature({
   text: string;
 } & React.HtmlHTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={classes['featuresElement']}>
+    <div className='relative max-w-[250px] p-4 text-lg font-medium'>
       <ion-icon name={icon} />
-      <h5 className={classes['featuresElementHeader']}>{header}</h5>
-      <p className={classes['featuresElementText']}>{text}</p>
+      <h5 className='mt-3 text-2xl font-extrabold text-lime-green-900'>
+        {header}
+      </h5>
+      <p className='mt-3'>{text}</p>
     </div>
   );
 }

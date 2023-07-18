@@ -29,21 +29,26 @@ function AuthForm({ mode }: { mode?: string }) {
     }
   }, [user, navigate]);
 
+  // .authFormButtons {
+  //   /* align-self: flex-end; */
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 12px;
+  //   align-items: center;
+  //   width: 100%;
+  //   margin-top: 12px;
+  // }
+
   return (
     <div className='wrapper'>
-      {/* {token && (
-        <div className={classes.alreadyLoggedInContainer}>
-          <h3 className={classes.alreadyLoggedIn}>
-            You are already logged in.
-          </h3>
-          <Link to='/' className={classes.returnToHomePage}>
-            Return to home page
-          </Link>
-        </div>
-      )} */}
       {!user && (
-        <Form method='post' className={classes.authForm}>
-          <h4>{isLogin ? 'Welcome back!' : 'Start your new journey!'}</h4>
+        <Form
+          method='post'
+          className='flex flex-col items-start max-w-[450px] p-6 mt-16 mx-auto text-grey-900 border border-solid border-lime-green-900 rounded-lg shadow-md'
+        >
+          <h4 className='mt-4 mx-auto mb-8 text-3xl'>
+            {isLogin ? 'Welcome back!' : 'Start your new journey!'}
+          </h4>
           {data && data.errors && (
             <ul>
               {Object.values(data.errors).map((err) => (
@@ -52,7 +57,7 @@ function AuthForm({ mode }: { mode?: string }) {
             </ul>
           )}
           {data && data.message && <p>{data.message}</p>}
-          <div className={classes.inputsWrapper}>
+          <div className='w-[98%] m-auto'>
             <Input
               color={'Green'}
               name='email'
@@ -77,7 +82,7 @@ function AuthForm({ mode }: { mode?: string }) {
               />
             )}
             {isLogin && (
-              <div className={classes.otherOptions}>
+              <div className='flex justify-end w-full text-lg'>
                 {/* <div className={classes.rememberMe}>
                   <input
                     type='checkbox'
@@ -89,14 +94,14 @@ function AuthForm({ mode }: { mode?: string }) {
                 </div> */}
                 <Link
                   to='/auth/forgot-password'
-                  className={classes.forgotPassword}
+                  className='font-semibold text-grey-700 no-underline duration-300 hover:text-lime-green-500'
                 >
                   Forgot password?
                 </Link>
               </div>
             )}
           </div>
-          <div className={classes.authFormButtons}>
+          <div className='flex flex-col gap-3 items-center w-full mt-3'>
             <Button
               color='OrangeLight'
               variant='RoundedSquare'

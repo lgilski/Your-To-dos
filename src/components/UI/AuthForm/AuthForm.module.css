@@ -1,4 +1,4 @@
-.authForm {
+/* .authForm {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -6,67 +6,66 @@
   padding: 24px;
   margin: 64px auto 0;
   margin-top: 86px;
-  color: #222;
-  /* background-color: var(--shade-blue-50); */
-  /* color: var(--tint-blue-50); */
-  /* background-color: var(--orange-200); */
-  /* background-color: var(--orange-200); */
-  border: 1px solid var(--lime-green-900);
+  color: #222; */
+/* background-color: var(--shade-blue-50); */
+/* color: var(--tint-blue-50); */
+/* background-color: var(--orange-200); */
+/* background-color: var(--orange-200); */
+/* border: 1px solid var(--lime-green-900);
   border-radius: 8px;
   box-shadow: var(--shadow-m);
-}
+} */
 
-.authForm h4 {
+/* .authForm h4 {
   margin: 16px auto 32px;
   font-size: 32px;
-}
+} */
 
-.inputsWrapper {
+/* .inputsWrapper {
   width: 98%;
   margin: auto;
-}
+} */
 
-.otherOptions {
+/* .otherOptions {
   display: flex;
-  /* justify-content: space-between; */
   justify-content: flex-end;
   width: 100%;
   font-size: var(--text-big);
-}
+} */
 
-.forgotPassword,
+/* .forgotPassword,
 .forgotPassword:link,
 .forgotPassword:visited {
   font-weight: 600;
   color: var(--grey-700);
   text-decoration: none;
   transition: all 0.3s;
-}
+} */
 
-.forgotPassword:hover,
-.forgotPassword:active {
-  /* color: var(--lime-green-050); */
-  color: var(--lime-green-500);
-}
+/* .forgotPassword:hover,
+.forgotPassword:active { */
+/* color: var(--lime-green-050); */
+/* color: var(--lime-green-500);
+} */
 
-.rememberMe {
+/* .rememberMe {
   display: flex;
   gap: 4px;
 }
 
 .rememberMe input {
   padding: 4px;
-}
+} */
 
-.authFormButtons {
-  /* align-self: flex-end; */
-  display: flex;
+/* .authFormButtons { */
+/* align-self: flex-end; */
+/* display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
   width: 100%;
   margin-top: 12px;
-}
+} */
 
 .authFormLink,
 .authFormLink:link,

@@ -62,6 +62,7 @@
 .date h4 {
   /* font-size: 40px; */
   font-size: var(--heading-s);
+  font-weight: 600;
 }
 
 .btnClose {

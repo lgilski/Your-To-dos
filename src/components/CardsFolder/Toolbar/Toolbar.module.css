@@ -32,7 +32,8 @@
 .searchBtn {
   /* border: 1px solid var(--lime-green-800); */
   width: 38px;
-  aspect-ratio: 1;
+  height: 38px;
+  /* aspect-ratio: 1; */
   color: var(--lime-green-900);
   cursor: pointer;
   /* background-color: var(--orange-100); */
@@ -52,6 +53,7 @@
   width: 28px;
   height: 28px;
   font-weight: 800;
+  vertical-align: middle;
 }
 
 .searchBtn:hover,
