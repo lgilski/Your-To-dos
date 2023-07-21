@@ -16,7 +16,11 @@ function StopwatchButtons({
   return (
     <div className={classes.buttons}>
       {isStoped && (
-        <Button variant='circle' color='start' onClick={startStopwatch}>
+        <Button
+          variant='circle'
+          color='start'
+          onClick={startStopwatch}
+        >
           start
         </Button>
       )}
@@ -26,7 +30,11 @@ function StopwatchButtons({
         </Button>
       )}
       {isStoped && (
-        <Button variant='circle' color='reset' onClick={resetStopwatch}>
+        <Button
+          variant='circle'
+          color='reset'
+          onClick={resetStopwatch}
+        >
           reset
         </Button>
       )}

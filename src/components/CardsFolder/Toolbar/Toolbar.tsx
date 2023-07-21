@@ -4,7 +4,11 @@ import SearchTask from '../SearchTask/SearchTask';
 import classes from './Toolbar.module.css';
 import clsx from '../../../utils/clsx';
 
-function Toolbar({ setShowForm }: { setShowForm: (a: boolean) => void }) {
+function Toolbar({
+  setShowForm,
+}: {
+  setShowForm: (a: boolean) => void;
+}) {
   const [showSearch, setShowSearch] = useState(false);
 
   const clickHandler = function () {
@@ -28,7 +32,9 @@ function Toolbar({ setShowForm }: { setShowForm: (a: boolean) => void }) {
           >
             <ion-icon name='search-outline' />
           </button>
-          <SearchTask className={`${!showSearch && classes.hideSearch}`} />
+          <SearchTask
+            className={`${!showSearch && classes.hideSearch}`}
+          />
         </div>
         <Button
           onClick={showModal}

@@ -20,20 +20,27 @@ const TimerComponent = function ({
     Number(timerData.minutes) * 60 +
     Number(timerData.seconds);
 
-  const { functions, isCounting, showModal, timeInSeconds } = useTimer({
-    completeTimeInSeconds,
-    timerData,
-    index,
-  });
+  const { functions, isCounting, showModal, timeInSeconds } =
+    useTimer({
+      completeTimeInSeconds,
+      timerData,
+      index,
+    });
 
   const currentHours = Math.floor(timeInSeconds / (60 * 60));
-  const currentMinutes = Math.floor(timeInSeconds / 60 - currentHours * 60);
+  const currentMinutes = Math.floor(
+    timeInSeconds / 60 - currentHours * 60
+  );
   const currentSeconds = Math.floor(
     timeInSeconds - (currentHours * 60 * 60 + currentMinutes * 60)
   );
 
   return (
-    <Draggable key={timerData.id} draggableId={timerData.id} index={index}>
+    <Draggable
+      key={timerData.id}
+      draggableId={timerData.id}
+      index={index}
+    >
       {(provided, snapshot) => (
         <div
           className={classes.timer}

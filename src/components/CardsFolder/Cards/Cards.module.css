@@ -1,20 +1,10 @@
 .plans {
-  /* max-width: 1532px; */
   position: relative;
   display: grid;
-  /* grid-template-columns: repeat(3, 1fr); */
   grid-template-columns: repeat(5, 1fr);
-  /* border-radius: 14px; */
-  /* border-top-left-radius: 0; */
-  /* border-top-right-radius: 0; */
-
   gap: 32px;
   justify-items: center;
-  /* margin: auto; */
-  /* margin-top: 64px; */
-  /* margin-bottom: 72px; */
   padding: 16px;
-  /* background-color: var(--orange-200); */
   background-color: #fff;
 }
 
@@ -23,9 +13,6 @@
 }
 
 .contentWrapper {
-  /* margin-top: 64px; */
-  /* padding-bottom: 72px; */
-
   max-width: 1532px;
   margin: auto;
   overflow: hidden;

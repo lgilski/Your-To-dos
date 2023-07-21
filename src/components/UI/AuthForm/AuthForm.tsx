@@ -6,14 +6,16 @@ import {
   useNavigation,
 } from 'react-router-dom';
 
-import classes from './AuthForm.module.css';
 import Input from '../../common/Input/Input';
 import { useEffect } from 'react';
 import { auth } from '../../../config/firebase';
 import Button from '../../common/Button/Button';
 
 function AuthForm({ mode }: { mode?: string }) {
-  const data = useActionData() as { errors?: string; message?: string };
+  const data = useActionData() as {
+    errors?: string;
+    message?: string;
+  };
   const navigation = useNavigation();
 
   const navigate = useNavigate();
@@ -29,18 +31,8 @@ function AuthForm({ mode }: { mode?: string }) {
     }
   }, [user, navigate]);
 
-  // .authFormButtons {
-  //   /* align-self: flex-end; */
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 12px;
-  //   align-items: center;
-  //   width: 100%;
-  //   margin-top: 12px;
-  // }
-
   return (
-    <div className='wrapper'>
+    <div className='max-w-[1200px] mt-16 mx-auto mb-20'>
       {!user && (
         <Form
           method='post'
@@ -103,18 +95,24 @@ function AuthForm({ mode }: { mode?: string }) {
           </div>
           <div className='flex flex-col gap-3 items-center w-full mt-3'>
             <Button
-              color='OrangeLight'
-              variant='RoundedSquare'
-              className={classes['authFormSubmit']}
+              color='OrangeLite'
+              variant='Rounded'
+              className='w-full font-bold'
             >
-              {isSubmitting ? 'Submitting...' : isLogin ? 'LOGIN' : 'SIGN UP'}
+              {isSubmitting
+                ? 'Submitting...'
+                : isLogin
+                ? 'LOGIN'
+                : 'SIGN UP'}
             </Button>
             <Link
               // to={`?mode=${isLogin ? 'signup' : 'login'}`}
               to={`/auth/${isLogin ? 'signup' : 'login'}`}
-              className={classes['authFormLink']}
+              className='m-2 text-xl text-grey-900 no-underline duration-300 hover:text-lime-green-500'
             >
-              {isLogin ? 'Create account' : 'Already have an account?'}
+              {isLogin
+                ? 'Create account'
+                : 'Already have an account?'}
             </Link>
           </div>
         </Form>

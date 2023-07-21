@@ -1,4 +1,4 @@
-import classes from './Card.module.css';
+// import classes from './Card.module.css';
 import CardElement from '../TaskComponent/TaskComponent';
 
 import { useDispatch } from 'react-redux';
@@ -22,10 +22,14 @@ const CardComponent = function ({
     dispatch(cardActions.deleteCard({ id: card.id }));
   };
 
-  // const [isBig, setIsBig] = useState(false);
-
   const [currentWeather, setCurrentWeather] = useState<
-    | { date: string; data_epoch: number; day: Day; astro: Astro; hour: Hour[] }
+    | {
+        date: string;
+        data_epoch: number;
+        day: Day;
+        astro: Astro;
+        hour: Hour[];
+      }
     | undefined
   >(undefined);
 
@@ -35,7 +39,9 @@ const CardComponent = function ({
   const diffTime = date.getTime() - now.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+  const dayName = date.toLocaleDateString('en-US', {
+    weekday: 'long',
+  });
 
   const happened = diffDays < 0 ? 'true' : '';
   const withinThreeDays =
@@ -45,7 +51,9 @@ const CardComponent = function ({
   useEffect(() => {
     if (forecastDay) {
       setCurrentWeather(
-        forecastDay.find((day) => day.date === card.date.split('T')[0])
+        forecastDay.find(
+          (day) => day.date === card.date.split('T')[0]
+        )
       );
     }
   }, [forecastDay, card.date]);
@@ -53,36 +61,48 @@ const CardComponent = function ({
   return (
     <div
       className={clsx(
-        classes.card,
-        happened === 'true' && classes.cardBlack,
-        today === 'true' && classes.withinThreeDays,
-        withinThreeDays === 'true' && classes.withinThreeDays
+        `relative flex flex-col w-[270px] p-4 text-lg text-grey-900 max-[300px]:w-[230px] ${
+          happened
+            ? 'bg-grey-warm-300'
+            : today
+            ? 'bg-orange-300'
+            : withinThreeDays
+            ? 'bg-orange-200'
+            : 'bg-orange-100'
+        } rounded-lg shadow-md duration-500 items-center`
       )}
     >
       <CloseButton
-        className={classes.btnClose}
+        // className='absolute top-1 right-1 hover:text-orange-900 bg-orange-50'
+        className='absolute top-1 right-1'
         onClick={onCardDelete}
         color={'orange'}
         size={'big'}
       />
       {currentWeather && (
         <img
-          className={classes.weatherIcon}
+          className='absolute -top-3 -left-3 w-12 h-12 bg-white rounded-full shadow-lg'
           src={currentWeather.day.condition.icon}
           alt=''
         />
       )}
-      <div className={classes.date}>
-        <h3>{today === 'true' ? 'TODAY' : dayName}</h3>
+      <div className='flex flex-col items-center pb-4'>
+        <h3
+          className={`text-4xl font-extrabold ${
+            withinThreeDays && 'text-orange-900'
+          }`}
+        >
+          {today === 'true' ? 'TODAY' : dayName}
+        </h3>
         {/* ID here is a date */}
-        <h4>{card.id}</h4>
+        <h4 className='text-2xl font-semibold'>{card.id}</h4>
       </div>
       <Droppable droppableId={card.id}>
         {(provided: any) => (
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={classes.list}
+            className='flex flex-col flex-grow font-medium list-none w-full items-center'
           >
             {/* <TransitionGroup component={null} className={classes.list}> */}
             {card.tasks?.map((task, index) => (

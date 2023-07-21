@@ -62,7 +62,11 @@ const Input = forwardRef(function (
       <input
         autoComplete={autoComplete}
         ref={ref}
-        className={clsx(classes[`input${color}`], classes.input, margin)}
+        className={clsx(
+          classes[`input${color}`],
+          classes.input,
+          margin
+        )}
         id={name}
         type={type}
         name={name}

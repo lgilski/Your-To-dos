@@ -1,4 +1,7 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+import {
+  isRouteErrorResponse,
+  useRouteError,
+} from 'react-router-dom';
 import MainNavigation from '../components/UI/Nav/MainNavigation/MainNavigation';
 
 import PageContent from '../components/Error/PageContent';

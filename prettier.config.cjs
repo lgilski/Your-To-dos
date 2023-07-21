@@ -2,8 +2,8 @@
 module.exports = {
   endOfLine: 'lf',
   jsxSingleQuote: true,
-  printWidth: 80,
-  proseWrap: 'never',
+  printWidth: 70,
+  proseWrap: 'preserve',
   quoteProps: 'as-needed',
   semi: true,
   singleQuote: true,

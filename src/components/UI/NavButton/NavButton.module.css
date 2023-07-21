@@ -3,10 +3,6 @@
 .btn:visited {
   font-size: var(--text-huge);
   font-weight: 500;
-  /* padding: 8px; */
-  /* background-color: var(--tint-orange-20); */
-  /* background-color: var(--orange-300); */
-  /* color: var(--color-gray-first); */
   color: var(--grey-600);
   text-decoration: none;
   border-radius: 6px;
@@ -16,9 +12,6 @@
 .btn:active,
 .btn.active:hover,
 .btn.active:active {
-  /* background-color: var(--shade-orange-30); */
-  /* background-color: var(--orange-600);
-  color: #fff; */
   color: var(--orange-400);
 }
 
@@ -35,22 +28,15 @@
   height: 3px;
   cursor: initial;
   content: '';
-  /* background-color: var(--shade-orange-50); */
-  /* background-color: var(--shade-blue-50); */
-
   background-color: var(--lime-green-500);
 }
 
 .btn.authBtn,
 .btn.authBtn:link,
 .btn.authBtn:visited {
-  /* background-color: var(--color-blue-first); */
   padding: 8px 16px;
   color: var(--lime-green-900);
   text-decoration: none;
-  /* color: var(--color-gray-first); */
-  /* border-radius: 12px; */
-  /* background-color: var(--orange-200); */
   background-color: var(--lime-green-200);
   border: none;
   border-radius: 50px;
@@ -60,13 +46,5 @@
 .btn.authBtn:hover,
 .btn.authBtn:active {
   color: var(--lime-green-050);
-  /* color: #fff; */
-  /* background-color: var(--shade-blue-20); */
   background-color: var(--lime-green-600);
 }
-
-/* @media (max-width: 1200px) {
-  .active::before {
-    top: 32px;
-  }
-} */

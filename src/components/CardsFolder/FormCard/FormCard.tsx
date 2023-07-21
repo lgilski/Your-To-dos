@@ -62,7 +62,9 @@ const FormCards = function ({
     // });
   };
 
-  const onDataChange = function (e: React.ChangeEvent<HTMLFormElement>) {
+  const onDataChange = function (
+    e: React.ChangeEvent<HTMLFormElement>
+  ) {
     setDate(e.target.value);
   };
 
@@ -73,7 +75,10 @@ const FormCards = function ({
   return (
     <>
       {createPortal(
-        <form className={clsx(classes.form, className)} onSubmit={onSubmit}>
+        <form
+          className={clsx(classes.form, className)}
+          onSubmit={onSubmit}
+        >
           <CloseButton
             type='button'
             onClick={hideForm}
@@ -112,7 +117,10 @@ const FormCards = function ({
         document.getElementById('modal-root') as HTMLElement
       )}
       {createPortal(
-        <div onClick={hideForm} className={clsx('blur', className)} />,
+        <div
+          onClick={hideForm}
+          className={clsx('blurElement', className)}
+        />,
         document.getElementById('overlay-root') as HTMLElement
       )}
     </>

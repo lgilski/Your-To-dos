@@ -29,6 +29,13 @@
   border-radius: 8px;
 }
 
+.btnRounded {
+  padding: 8px 16px;
+  font-weight: 500;
+  /* padding: 16px 32px; */
+  border-radius: 4px;
+}
+
 .btnLogout {
   padding: 8px 16px;
   font-size: var(--text-huge);
@@ -104,6 +111,17 @@
 .btnColorBlue:active {
   color: var(--tint-blue-80);
   background-color: var(--shade-blue-50);
+}
+
+.btnColorOrangeLite {
+  color: var(--orange-900);
+  background-color: var(--orange-200);
+}
+
+.btnColorOrangeLite:hover,
+.btnColorOrangeLite:active {
+  color: var(--orange-050);
+  background-color: var(--orange-400);
 }
 
 .btnColorOrangeLite {

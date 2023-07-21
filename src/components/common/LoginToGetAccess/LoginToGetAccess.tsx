@@ -9,7 +9,9 @@ function LoginToGetAccess() {
         Log in to get access to your cards.
       </div>
       <div className={classes.textContainer}>
-        <h2 className={classes['cardsH2']}>Don&apos;t have an account?</h2>
+        <h2 className={classes['cardsH2']}>
+          Don&apos;t have an account?
+        </h2>
         <Link to='/auth?mode=signup' className={classes.signup}>
           Sing up now
         </Link>

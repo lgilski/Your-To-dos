@@ -49,7 +49,9 @@ function WeatherCard({ city }: { city: string }) {
     );
   }
 
-  const date = new Date(weatherData.current?.last_updated_epoch * 1000);
+  const date = new Date(
+    weatherData.current?.last_updated_epoch * 1000
+  );
 
   const time = date.toLocaleTimeString('eng-UK', {
     weekday: 'short',
@@ -90,9 +92,14 @@ function WeatherCard({ city }: { city: string }) {
               </div>
             </div>
           </div>
-          <h5 className={classes.temp}>{weatherData.current.temp_c}&deg;C</h5>
+          <h5 className={classes.temp}>
+            {weatherData.current.temp_c}&deg;C
+          </h5>
           <div className={classes.iconWrapper}>
-            <img src={weatherData.current.condition.icon} alt='icon' />
+            <img
+              src={weatherData.current.condition.icon}
+              alt='icon'
+            />
             <p className={classes.currentCondition}>
               {weatherData.current.condition.text}
             </p>

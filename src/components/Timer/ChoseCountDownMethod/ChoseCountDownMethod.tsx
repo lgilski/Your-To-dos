@@ -30,7 +30,9 @@ function TimerCountDownMethod() {
     dispatch(timerActions.resetTimers(true));
   };
 
-  const setMethod = function (e: React.ChangeEvent<HTMLSelectElement>) {
+  const setMethod = function (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) {
     dispatch(timerActions.setTimerCountDownMethod(e.target.value));
     dispatch(timerActions.stopTimersInSquence());
   };
@@ -53,17 +55,29 @@ function TimerCountDownMethod() {
       {countDownMethod === 'Start in sequence' && (
         <div className={classes.btns}>
           {!startedSequence && (
-            <Button variant='Circle' color='Start' onClick={startSequence}>
+            <Button
+              variant='Circle'
+              color='Start'
+              onClick={startSequence}
+            >
               <ion-icon name='play' />
             </Button>
           )}
           {startedSequence && (
-            <Button variant='Circle' color='Stop' onClick={stopTimers}>
+            <Button
+              variant='Circle'
+              color='Stop'
+              onClick={stopTimers}
+            >
               <ion-icon name='pause' />
             </Button>
           )}
           {!startedSequence && (
-            <Button variant='Circle' color='Reset' onClick={resetTimers}>
+            <Button
+              variant='Circle'
+              color='Reset'
+              onClick={resetTimers}
+            >
               <ion-icon name='refresh' />
             </Button>
           )}

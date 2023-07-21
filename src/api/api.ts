@@ -42,7 +42,10 @@ export async function fetchForecast({
 
 export async function getCardsData(uid: string): Promise<CardState> {
   const cardsResponse = await fetch(
-    import.meta.env.VITE_FIREBASE_LINK + 'users/' + uid + '/cards.json'
+    import.meta.env.VITE_FIREBASE_LINK +
+      'users/' +
+      uid +
+      '/cards.json'
   );
 
   const cardsData = await cardsResponse.json();

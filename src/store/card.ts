@@ -48,12 +48,17 @@ const cardSlice = createSlice({
     },
 
     deleteCard(state, action: PayloadAction<{ id: string }>) {
-      state.cards = state.cards.filter((card) => card.id !== action.payload.id);
+      state.cards = state.cards.filter(
+        (card) => card.id !== action.payload.id
+      );
       saveCards(state.cards);
       return state;
     },
 
-    createTask(state, action: PayloadAction<{ cardId: string; task: Task }>) {
+    createTask(
+      state,
+      action: PayloadAction<{ cardId: string; task: Task }>
+    ) {
       state.cards.forEach((card) => {
         if (card.id !== action.payload.cardId) return card;
 
@@ -93,11 +98,13 @@ const cardSlice = createSlice({
         )?.done;
 
         if (task) {
-          card.tasks.find((task) => task.id === action.payload.taskId)!.done =
-            false;
+          card.tasks.find(
+            (task) => task.id === action.payload.taskId
+          )!.done = false;
         } else {
-          card.tasks.find((task) => task.id === action.payload.taskId)!.done =
-            true;
+          card.tasks.find(
+            (task) => task.id === action.payload.taskId
+          )!.done = true;
         }
 
         return card;
@@ -147,8 +154,9 @@ const cardSlice = createSlice({
       const tasksWithoutDragged = Array.from(cardDraggedFrom!.tasks);
       tasksWithoutDragged.splice(source.index, 1);
 
-      state.cards.find((card) => card.id === source.droppableId)!.tasks =
-        tasksWithoutDragged;
+      state.cards.find(
+        (card) => card.id === source.droppableId
+      )!.tasks = tasksWithoutDragged;
 
       const cardWithDragged = state.cards.find(
         (card) => card.id === destination.droppableId
@@ -162,8 +170,9 @@ const cardSlice = createSlice({
         // tasksWithDragged = [taskToMove];
         tasksWithDragged = Array(taskToMove);
       }
-      state.cards.find((card) => card.id === destination.droppableId)!.tasks =
-        tasksWithDragged;
+      state.cards.find(
+        (card) => card.id === destination.droppableId
+      )!.tasks = tasksWithDragged;
 
       saveCards(state.cards);
 
