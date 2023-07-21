@@ -34,7 +34,10 @@ function TimerContent({
   return (
     <div className={classes.timerWrapper}>
       <div>
-        <h4 onClick={functions.editTimer} className={classes.timerTime}>
+        <h4
+          onClick={functions.editTimer}
+          className={classes.timerTime}
+        >
           <DisplayTime time={currentTime.hours} />
           :
           <DisplayTime time={currentTime.minutes} />
@@ -43,11 +46,15 @@ function TimerContent({
         </h4>
         <p className={classes.timerName}>
           {timerData.timerName} (
-          <DisplayTime time={timerData.hours.toString()} startingTime={true} />
+          <DisplayTime
+            time={timerData.hours.toString()}
+            startingTime={true}
+          />
           :
           <DisplayTime time={timerData.minutes} startingTime={true} />
           :
-          <DisplayTime time={timerData.seconds} startingTime={true} />)
+          <DisplayTime time={timerData.seconds} startingTime={true} />
+          )
         </p>
       </div>
       {countDownMethod === 'Manually' && (

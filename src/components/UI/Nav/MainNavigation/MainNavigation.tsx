@@ -32,7 +32,10 @@ function MainNavigation() {
             onClick={showMobileNav}
           />
         )}
-        <MainNavContent showMobile={showMobile} showMobileNav={showMobileNav} />
+        <MainNavContent
+          showMobile={showMobile}
+          showMobileNav={showMobileNav}
+        />
         <CSSTransition
           classNames={{
             enterActive: classes['fade-enter-active-blur'],
@@ -43,7 +46,12 @@ function MainNavigation() {
           timeout={300}
           in={showMobile}
         >
-          <div className={clsx(classes.blur, showMobile && classes.showBlur)} />
+          <div
+            className={clsx(
+              classes.blurElement,
+              showMobile && classes.showBlur
+            )}
+          />
         </CSSTransition>
       </nav>
     </header>

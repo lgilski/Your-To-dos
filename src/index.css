@@ -72,6 +72,8 @@
   --shadow-s: 0 3px 12px -1px rgb(28 52 84 / 13%),
     0 2px 4px -1px rgb(28 55 90 / 12%);
   --shadow-xs: 0 1px 4px -1px #1c304a85;
+
+  /* aaaa */
   --rt-opacity: 1 !important;
 }
 
@@ -256,7 +258,7 @@ body {
   background-color: var(--grey-050);
 }
 
-.blur {
+.blurElement {
   position: fixed;
   top: 0;
   left: 0;

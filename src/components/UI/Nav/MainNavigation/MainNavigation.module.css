@@ -23,7 +23,7 @@
   background-color: var(--shade-orange-30);
 }
 
-.blur {
+.blurElement {
   position: fixed;
   top: 0;
   right: -100%;

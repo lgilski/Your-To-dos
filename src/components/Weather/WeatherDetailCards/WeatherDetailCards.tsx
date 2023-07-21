@@ -44,20 +44,27 @@ function WeatherDetailCards({ city }: { city: string }) {
       <div className={classes.detailWrapper}>
         <div className={classes.headerWrapper}>
           <h4 className={classes.city}>
-            {forecastData.location.name}, {forecastData.location.country}
+            {forecastData.location.name},{' '}
+            {forecastData.location.country}
           </h4>
-          <Button onClick={goBack} color='OrangeLight' variant='RoundedSquare'>
+          <Button
+            onClick={goBack}
+            color='OrangeLight'
+            variant='RoundedSquare'
+          >
             <ion-icon name='arrow-back-outline' /> Back
           </Button>
         </div>
-        {forecastData.forecast.forecastday.map((forecastday: Forecastday) => {
-          return (
-            <WeatherDetailCard
-              key={forecastday.date}
-              weatherForecastDay={forecastday}
-            />
-          );
-        })}
+        {forecastData.forecast.forecastday.map(
+          (forecastday: Forecastday) => {
+            return (
+              <WeatherDetailCard
+                key={forecastday.date}
+                weatherForecastDay={forecastday}
+              />
+            );
+          }
+        )}
       </div>
     </>
   );

@@ -22,7 +22,9 @@ const weatherSlice = createSlice({
     },
 
     deleteWeather(state, action: PayloadAction<string>) {
-      state.data = state.data.filter((weather) => weather !== action.payload);
+      state.data = state.data.filter(
+        (weather) => weather !== action.payload
+      );
 
       localStorage.setItem('weather', JSON.stringify(state.data));
     },
@@ -34,13 +36,19 @@ const weatherSlice = createSlice({
     showOnCards(state, action: PayloadAction<string>) {
       state.showOnCards = action.payload;
 
-      localStorage.setItem('favorite', JSON.stringify(state.showOnCards));
+      localStorage.setItem(
+        'favorite',
+        JSON.stringify(state.showOnCards)
+      );
     },
 
     stopShowingOnCards(state) {
       state.showOnCards = null;
 
-      localStorage.setItem('favorite', JSON.stringify(state.showOnCards));
+      localStorage.setItem(
+        'favorite',
+        JSON.stringify(state.showOnCards)
+      );
     },
   },
 });

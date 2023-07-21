@@ -1,7 +1,10 @@
 import CardComponent from '../Card/Card';
 import classes from './Cards.module.css';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 
 import cardClasses from '../Card/Card.module.css';
 
@@ -27,8 +30,9 @@ const Cards = function () {
   const favorite = useSelector(
     (state: WholeState) => state.weather.showOnCards
   );
-  const searched = useSelector((state: WholeState) => state.cards.searched);
-  // const cardsFromLocalStorage = JSON.parse(localStorage.getItem('cards')!);
+  const searched = useSelector(
+    (state: WholeState) => state.cards.searched
+  );
 
   const [searchedIds, setSearchedIds] = useState<string[]>([]);
   const [showForm, setShowForm] = useState(false);
@@ -46,21 +50,13 @@ const Cards = function () {
     }
   );
 
-  // useEffect(() => {
-  //   console.log(cardsFromLocalStorage);
-
-  //   if (cardsFromLocalStorage !== null || !cardsFromLocalStorage?.error) {
-  //     dispatch(cardActions.setCards(cardsFromLocalStorage));
-  //   } else {
-  //     dispatch(cardActions.setCards([]));
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (searched) {
       const foundCards = cards?.filter((card) =>
         card.tasks?.find((task) => {
-          return task.content.toLowerCase().includes(searched.toLowerCase()!);
+          return task.content
+            .toLowerCase()
+            .includes(searched.toLowerCase()!);
         })
       );
 
@@ -104,7 +100,11 @@ const Cards = function () {
     // Maybe not the best, but works fine and fixes the issue
     flushSync(() => {
       dispatch(
-        cardActions.moveTaskBetweenCards({ destination, source, draggableId })
+        cardActions.moveTaskBetweenCards({
+          destination,
+          source,
+          draggableId,
+        })
       );
     });
   };
@@ -117,7 +117,10 @@ const Cards = function () {
           {showForm && <FormCards setShowForm={setShowForm} />}
           <TransitionGroup
             component='div'
-            className={clsx(classes.plans, !hasCards && classes.withoutCards)}
+            className={clsx(
+              classes.plans,
+              !hasCards && classes.withoutCards
+            )}
           >
             {!hasCards && (
               <CSSTransition
@@ -129,7 +132,9 @@ const Cards = function () {
                 }}
                 timeout={300}
               >
-                <h4 className={classes.message}>There are no plans yet</h4>
+                <h4 className={classes.message}>
+                  There are no plans yet
+                </h4>
               </CSSTransition>
             )}
             {cards.map((card) => {
@@ -161,12 +166,6 @@ const Cards = function () {
       </div>
     </DragDropContext>
   );
-};
-
-export const loader = function () {
-  // const cards = localStorage.getItem('cards');
-  // return cards;
-  return null;
 };
 
 export default Cards;

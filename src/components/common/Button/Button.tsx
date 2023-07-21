@@ -3,11 +3,18 @@ import React from 'react';
 import classes from './Button.module.css';
 import clsx from '../../../utils/clsx';
 
-interface MyButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'Circle' | 'Capsule' | 'RoundedSquare' | 'Logout';
+interface MyButton
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant:
+    | 'Circle'
+    | 'Capsule'
+    | 'RoundedSquare'
+    | 'Rounded'
+    | 'Logout';
   color:
     | 'Orange'
     | 'OrangeLight'
+    | 'OrangeSuperLight'
     | 'OrangeDark'
     | 'OrangeLite'
     | 'Green'

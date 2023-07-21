@@ -18,7 +18,9 @@ function Timers() {
 
   const formatedTimers = JSON.parse(localStorage.getItem('timers')!);
 
-  const timers = useSelector((state: WholeState) => state.timers.timers);
+  const timers = useSelector(
+    (state: WholeState) => state.timers.timers
+  );
   const countDownMethod = useSelector(
     (state: WholeState) => state.timers.countDownMethod
   );
@@ -56,7 +58,9 @@ function Timers() {
 
     // Same as cards in this case
     flushSync(() => {
-      dispatch(timerActions.moveTimers({ destination, source, draggableId }));
+      dispatch(
+        timerActions.moveTimers({ destination, source, draggableId })
+      );
     });
   };
 
@@ -78,7 +82,10 @@ function Timers() {
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <div className={classes.contentWrapper}>
         {showForm && (
-          <TimerForm modal={false} showFormHandler={showFormHandler} />
+          <TimerForm
+            modal={false}
+            showFormHandler={showFormHandler}
+          />
         )}
         <div className={classes.timerToolbar}>
           <TimerCountDownMethod />

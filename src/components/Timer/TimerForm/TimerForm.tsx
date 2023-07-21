@@ -40,7 +40,9 @@ function TimerForm({
   const onSecondsChange = (e: React.ChangeEvent<HTMLFormElement>) => {
     setSeconds(e.target.value);
   };
-  const onTimerNameChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onTimerNameChange = (
+    e: React.ChangeEvent<HTMLFormElement>
+  ) => {
     setTimerName(e.target.value);
   };
 
@@ -65,7 +67,13 @@ function TimerForm({
     const id = generateUUID();
 
     dispatch(
-      timerActions.createTimer({ hours, minutes, seconds, id, timerName })
+      timerActions.createTimer({
+        hours,
+        minutes,
+        seconds,
+        id,
+        timerName,
+      })
     );
   };
 
@@ -154,7 +162,7 @@ function TimerForm({
         document.getElementById('modal-root') as HTMLElement
       )}
       {createPortal(
-        <div onClick={showFormHandler} className='blur' />,
+        <div onClick={showFormHandler} className='blurElement' />,
         document.getElementById('overlay-root') as HTMLElement
       )}
     </>

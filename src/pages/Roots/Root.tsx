@@ -1,7 +1,14 @@
-import { useLocation, useOutlet } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useOutlet,
+} from 'react-router-dom';
 
 import MainNavigation from '../../components/UI/Nav/MainNavigation/MainNavigation';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import {
+  CSSTransition,
+  SwitchTransition,
+} from 'react-transition-group';
 import Footer from '../../components/UI/Footer/Footer';
 import { useSelector } from 'react-redux';
 import { TailSpin } from 'react-loader-spinner';
@@ -12,19 +19,33 @@ import clsx from '../../utils/clsx';
 
 import AppNavigationHorizontal from '../../components/UI/Nav/AppNavigationHorizontal/AppNavigationHorizontal';
 import { WholeState } from '@/types';
+import { useEffect } from 'react';
 
 function RootLayout({ routes }: { routes: any }) {
   const location = useLocation();
   const currentOutlet = useOutlet();
-  const { nodeRef } =
-    routes.find((route: any) => route.path === location.pathname) ?? {};
+  const navigate = useNavigate();
 
-  const isLoading = useSelector((state: WholeState) => state.data.loading);
+  const { nodeRef } =
+    routes.find((route: any) => route.path === location.pathname) ??
+    {};
+
+  console.log(location);
+
+  const isLoading = useSelector(
+    (state: WholeState) => state.data.loading
+  );
   const isSidenavOpen = useSelector(
     (state: WholeState) => state.data.isSidenavOpen
   );
 
   const user = auth.currentUser;
+
+  useEffect(() => {
+    if (location.pathname.includes('app') && !isLoading && !user) {
+      navigate('/');
+    }
+  }, [isLoading]);
 
   if (isLoading) {
     return (

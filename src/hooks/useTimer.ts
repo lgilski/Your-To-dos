@@ -33,7 +33,9 @@ export function useTimer({
 
   const [isCounting, setIsCounting] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [timeInSeconds, setTimeInSeconds] = useState(completeTimeInSeconds);
+  const [timeInSeconds, setTimeInSeconds] = useState(
+    completeTimeInSeconds
+  );
 
   const startTimer = () => {
     if (timeInSeconds === 0) {

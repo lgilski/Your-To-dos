@@ -1,10 +1,8 @@
 import Feature from './Feature/Feature';
 
-import classes from './Features.module.css';
-
 function Features() {
   return (
-    <div className={classes.features}>
+    <div className='grid grid-cols-4 gap-y-12 gap-x-8 content-center justify-items-center max-w-[1100px] m-auto text-center max-[1100px]:grid-cols-2 max-[1100px]:max-w-[600px] [&_ion-icon]:w-9 [&_ion-icon]:h-9 [&_ion-icon]:p-2 [&_ion-icon]:text-lime-green-400 [&_ion-icon]:bg-lime-green-100 [&_ion-icon]:rounded-full'>
       <Feature
         icon='albums'
         header='Todos'

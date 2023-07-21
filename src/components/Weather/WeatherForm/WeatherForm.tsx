@@ -13,10 +13,16 @@ function WeatherForm() {
   const ref = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
-  const error = useSelector((state: WholeState) => state.weather.error);
-  const weather = useSelector((state: WholeState) => state.weather.data);
+  const error = useSelector(
+    (state: WholeState) => state.weather.error
+  );
+  const weather = useSelector(
+    (state: WholeState) => state.weather.data
+  );
 
-  const setData = async function (e: React.FormEvent<HTMLFormElement>) {
+  const setData = async function (
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
     const city = ref.current!.value;
@@ -24,7 +30,9 @@ function WeatherForm() {
 
     if (weather.find((weatherData) => weatherData === city)) {
       dispatch(
-        weatherActions.setError('You already have weather of this city')
+        weatherActions.setError(
+          'You already have weather of this city'
+        )
       );
       return;
     }

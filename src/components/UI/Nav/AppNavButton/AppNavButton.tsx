@@ -9,12 +9,17 @@ function AppNavButton({
   children,
   end,
   ...props
-}: { to: string; end: boolean } & React.LinkHTMLAttributes<HTMLAnchorElement>) {
+}: {
+  to: string;
+  end: boolean;
+} & React.LinkHTMLAttributes<HTMLAnchorElement>) {
   return (
     <li>
       <NavLink
         className={({ isActive }) =>
-          isActive ? clsx(classes.active, classes.btn) : clsx(classes.btn)
+          isActive
+            ? clsx(classes.active, classes.btn)
+            : clsx(classes.btn)
         }
         to={to}
         end={end}

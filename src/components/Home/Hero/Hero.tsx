@@ -14,10 +14,10 @@ function Hero() {
             Here you can keep all your todos and more!
           </h2>
           <p className='max-w-[540px] my-4 leading-[160%] text-2xl text-orange-50 max-[1200px]:w-[350px] max-[1200px]:px-0 max-[1200px]:py-3 max-[1200px]:m-auto max-[1200px]:text-center '>
-            We offer a really cool way of planing your to-dos. You will surely
-            have a lot of fun.
+            We offer a really cool way of planing your to-dos. You
+            will surely have a lot of fun.
           </p>
-          <div className='flex gap-4 mt-8 max-[1200px]:w-[160px] max-[1200px]:flex-col max-[1200px]:mx-auto max-[1200px]:mt-8'>
+          <div className='flex gap-4 mt-8 max-[1200px]:w-[180px] max-[1200px]:flex-col max-[1200px]:mx-auto max-[1200px]:mt-8 max-[1200px]:text-center'>
             <Link
               to={user ? '/cards' : '/auth/signup'}
               className='px-8 py-4 text-xl font-medium text-lime-green-900 no-underline bg-lime-green-300 rounded-full hover:text-lime-green-050 hover:bg-lime-green-600 duration-300'

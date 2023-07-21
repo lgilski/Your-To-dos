@@ -5,7 +5,9 @@ import classes from './WeatherCards.module.css';
 import { WholeState } from '@/types';
 
 function WeatherCards() {
-  const weather = useSelector((state: WholeState) => state.weather.data);
+  const weather = useSelector(
+    (state: WholeState) => state.weather.data
+  );
 
   return (
     <div className={classes.weatherCards}>

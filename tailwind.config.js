@@ -77,6 +77,13 @@ module.exports = {
         'yellow-800': '#7C5E10',
         'yellow-900': '#513C06',
 
+        'grey-warm-050': 'hsl(22deg 60% 97%)',
+        'grey-warm-100': 'hsl(22deg 50% 81%)',
+        'grey-warm-200': 'hsl(22deg 20% 62%)',
+        'grey-warm-300': 'hsl(22deg 30% 52%)',
+        'grey-warm-400': 'hsl(22deg 30% 40%)',
+        'grey-warm-500': 'hsl(22deg 39% 34%)',
+
         'gradient-1': 'rgb(22 12 3 / 70%)',
         'gradient-2': 'rgb(151 82 22 / 70%)',
       },

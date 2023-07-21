@@ -32,7 +32,9 @@ function Stopwatch() {
   const currentSeconds = Math.floor(time / 100);
   const currentMiliseconds = time - currentSeconds * 100;
   const currentHours = Math.floor(currentSeconds / (60 * 60));
-  const currentMinutes = Math.floor(currentSeconds / 60 - currentHours * 60);
+  const currentMinutes = Math.floor(
+    currentSeconds / 60 - currentHours * 60
+  );
 
   return (
     <>

@@ -25,7 +25,10 @@ function AppNavigation() {
 
   return (
     <nav
-      className={clsx(classes.sidenav, !isSidenavOpen && classes.sidenavHidden)}
+      className={clsx(
+        classes.sidenav,
+        !isSidenavOpen && classes.sidenavHidden
+      )}
       onMouseEnter={() => setShowHideOption(true)}
       onMouseLeave={() => setShowHideOption(false)}
     >

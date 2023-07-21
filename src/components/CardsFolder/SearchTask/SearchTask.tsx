@@ -5,7 +5,9 @@ import { useRef } from 'react';
 import clsx from '../../../utils/clsx';
 import { cardActions } from '../../../store/card';
 
-function SearchTask({ className }: React.HTMLAttributes<HTMLFormElement>) {
+function SearchTask({
+  className,
+}: React.HTMLAttributes<HTMLFormElement>) {
   const ref = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useDispatch();

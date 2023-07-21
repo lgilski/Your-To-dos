@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 
 import RootLayout from './pages/Roots/Root';
 import HomePage from './pages/HomePage';
@@ -10,7 +13,6 @@ import { action as logoutAction } from './utils/logout';
 
 import ErrorPage from './pages/Error';
 
-import { loader as cardsLoader } from './components/CardsFolder/Cards/Cards';
 import { useDispatch } from 'react-redux';
 import { dataActions } from './store';
 import TimerRoot from './pages/Roots/TimerRoot';
@@ -19,7 +21,9 @@ import WeatherRoot from './pages/Roots/WeatherRoot';
 import WeatherDetailPage from './pages/WeatherDetailPage';
 import { weatherActions } from './store/weather';
 import LoginPage, { action as loginAction } from './pages/LoginPage';
-import SignupPage, { action as signupAction } from './pages/SignpuPage';
+import SignupPage, {
+  action as signupAction,
+} from './pages/SignpuPage';
 import ForgotPasswordPage, {
   action as forgotPasswordAction,
 } from './pages/ForgotPasswordPage';
@@ -33,7 +37,7 @@ const routes = [
   {
     path: 'app',
     children: [
-      { path: 'cards', element: <CardsPage />, loader: cardsLoader },
+      { path: 'cards', element: <CardsPage /> },
       {
         path: 'timer',
         element: <TimerRoot />,
@@ -65,7 +69,11 @@ const routes = [
     ],
   },
   { path: 'auth/login', element: <LoginPage />, action: loginAction },
-  { path: 'auth/signup', element: <SignupPage />, action: signupAction },
+  {
+    path: 'auth/signup',
+    element: <SignupPage />,
+    action: signupAction,
+  },
   {
     path: 'auth/forgot-password',
     element: <ForgotPasswordPage />,
@@ -96,7 +104,9 @@ function App() {
   // };
 
   useEffect(() => {
-    const favorite = JSON.parse(localStorage.getItem('favorite') as string);
+    const favorite = JSON.parse(
+      localStorage.getItem('favorite') as string
+    );
 
     dispatch(weatherActions.showOnCards(favorite));
 
@@ -108,7 +118,6 @@ function App() {
             if (snapshot.exists()) {
               dispatch(cardActions.setCards(snapshot.val()));
             } else {
-              // console.log('No data available');
               new Error('No data available');
             }
           })

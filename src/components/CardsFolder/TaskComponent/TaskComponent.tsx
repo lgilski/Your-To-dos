@@ -39,7 +39,10 @@ const CardElement = function ({
         >
           <button
             onClick={markAsDone}
-            className={clsx(classes.checkBox, task.done && classes.done)}
+            className={clsx(
+              classes.checkBox,
+              task.done && classes.done
+            )}
           >
             <ion-icon name='checkmark-outline' />
             {/* <CheckmarkOutline

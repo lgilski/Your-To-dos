@@ -13,7 +13,10 @@ function StopwatchTime({
 }) {
   return (
     <h5 className={classes.time}>
-      {currentHours.toString().length < 2 ? `0${currentHours}` : currentHours}:
+      {currentHours.toString().length < 2
+        ? `0${currentHours}`
+        : currentHours}
+      :
       {currentMinutes.toString().length < 2
         ? `0${currentMinutes}`
         : currentMinutes}

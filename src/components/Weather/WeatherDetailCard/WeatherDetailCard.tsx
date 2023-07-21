@@ -10,13 +10,18 @@ function WeatherDetailCard({
   const sunsetMinutes =
     Number(weatherForecastDay.astro.sunset.split(':')[0]) * 60 +
     12 * 60 +
-    Number(weatherForecastDay.astro.sunset.split(':')[1].split(' ')[0]);
+    Number(
+      weatherForecastDay.astro.sunset.split(':')[1].split(' ')[0]
+    );
   const sunriseMinutes =
     Number(weatherForecastDay.astro.sunrise.split(':')[0]) * 60 +
-    Number(weatherForecastDay.astro.sunrise.split(':')[1].split(' ')[0]);
+    Number(
+      weatherForecastDay.astro.sunrise.split(':')[1].split(' ')[0]
+    );
   const daylightMinutes = sunsetMinutes - sunriseMinutes;
   const daylightHours = Math.floor(daylightMinutes / 60);
-  const daylightMinutesToDisplay = daylightMinutes - daylightHours * 60;
+  const daylightMinutesToDisplay =
+    daylightMinutes - daylightHours * 60;
 
   return (
     <div className={classes.detailCard}>
@@ -63,11 +68,15 @@ function WeatherDetailCard({
           <h6>Precipitation</h6>
           <p className={classes.contentColWithIcon}>
             <ion-icon name='rainy' /> Chance of rain:{' '}
-            <span>{weatherForecastDay.day.daily_chance_of_rain}%</span>
+            <span>
+              {weatherForecastDay.day.daily_chance_of_rain}%
+            </span>
           </p>
           <p className={classes.contentColWithIcon}>
             <ion-icon name='snow' /> Chance of snow:{' '}
-            <span>{weatherForecastDay.day.daily_chance_of_snow}%</span>
+            <span>
+              {weatherForecastDay.day.daily_chance_of_snow}%
+            </span>
           </p>
         </div>
         <div className={classes.contentCol}>
