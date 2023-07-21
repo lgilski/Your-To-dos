@@ -111,15 +111,15 @@ const Cards = function () {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={classes.contentWrapper}>
-        <div className={classes.plansContainer}>
+      <div className='max-w-[1532px] m-auto overflow-hidden bg-white border border-solid border-grey-200 rounded-2xl max-[1800px]:max-w-[1232px] max-[1500px]:max-w-[1000px] max-[1250px]:max-w-[632px] max-[900px]:max-w-[300px] max-[300px]:max-w-[262px]'>
+        <div className='m-auto'>
           <Toolbar setShowForm={setShowForm} />
           {showForm && <FormCards setShowForm={setShowForm} />}
           <TransitionGroup
             component='div'
             className={clsx(
-              classes.plans,
-              !hasCards && classes.withoutCards
+              'relative grid grid-cols-5 gap-8 justify-items-center p-4 bg-white max-[1800px]:grid-cols-4 max-[1500px]:grid-cols-3 max-[1250px]:grid-cols-2 max-[900px]:grid-cols-1',
+              !hasCards && 'h-[190px]'
             )}
           >
             {!hasCards && (
@@ -132,7 +132,7 @@ const Cards = function () {
                 }}
                 timeout={300}
               >
-                <h4 className={classes.message}>
+                <h4 className='absolute top-[50%] left-[50%] w-[450px] p-4 text-4xl text-yellow-900 text-center bg-yellow-200 rounded-lg translate-x-[-50%] translate-y-[-50%] max-[900px]:w-[240px] max-[300px]:w-[230px]'>
                   There are no plans yet
                 </h4>
               </CSSTransition>
