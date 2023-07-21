@@ -81,7 +81,7 @@ const CardComponent = function ({
       />
       {currentWeather && (
         <img
-          className='absolute -top-3 -left-3 w-12 h-12 bg-white rounded-full shadow-lg'
+          className='absolute -top-3 -left-3 w-12 h-12 bg-white rounded-full shadow-xl'
           src={currentWeather.day.condition.icon}
           alt=''
         />

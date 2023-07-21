@@ -79,9 +79,9 @@
 
 :root {
   /* Primary */
-  --orange-050: hsl(22deg 100% 95%);
-  --orange-100: hsl(22deg 100% 86%);
-  --orange-200: hsl(22deg 92% 76%);
+  --orange-050: #ffefe5;
+  --orange-100: #ffd2b8;
+  --orange-200: #fab389;
   --orange-300: #ef8e58;
   --orange-400: #e67635;
   --orange-500: #c65d21;
@@ -185,12 +185,7 @@ html {
 
 body {
   margin: 0;
-
-  /* margin: 0 auto;
-  max-width: 1860px; */
   background-color: #fff;
-  /* background-color: var(-tint-orange-90); */
-  /* background-color: var(-grey-050); */
 }
 
 #root {

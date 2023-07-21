@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Button from '../../common/Button/Button';
 
-import classes from './FormCard.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateUUID } from '../../../helpers/generateUUID';
 import Input from '../../common/Input/Input';
@@ -76,17 +75,22 @@ const FormCards = function ({
     <>
       {createPortal(
         <form
-          className={clsx(classes.form, className)}
+          className={clsx(
+            'fixed top-[40vh] left-[50%] z-[5] flex flex-col items-start w-[400px] max-w-[500px] p-4 mx-auto mt-8 overflow-hidden bg-white rounded-lg shadow-lg translate-x-[-50%] translate-y-[-50%] max-[420px]:max-w-[300px] max-[300px]:max-w-[240px]',
+            className
+          )}
           onSubmit={onSubmit}
         >
           <CloseButton
             type='button'
             onClick={hideForm}
-            className={classes.closeButton}
+            className='absolute top-2 right-2'
             color='orange'
             size='big'
           />
-          <h4 className={classes.formCardHeading}>Create card</h4>
+          <h4 className='flex self-center mb-5 text-3xl'>
+            Create card
+          </h4>
           <Input
             autoComplete='off'
             name={'your task'}
@@ -98,18 +102,18 @@ const FormCards = function ({
           />
           <Input
             value={date}
-            name={'days'}
-            type={'date'}
+            name='days'
+            type='date'
             onChange={onDataChange}
             color='Green'
             required={true}
-            text={'On what day will it be?'}
+            text='On what day will it be?'
           />
           <Button
-            className={classes.addBtn}
+            className='w-full mt-3'
             type='submit'
             variant='RoundedSquare'
-            color='OrangeLight'
+            color='OrangeLite'
           >
             Add card
           </Button>

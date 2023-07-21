@@ -30,8 +30,6 @@ function RootLayout({ routes }: { routes: any }) {
     routes.find((route: any) => route.path === location.pathname) ??
     {};
 
-  console.log(location);
-
   const isLoading = useSelector(
     (state: WholeState) => state.data.loading
   );
