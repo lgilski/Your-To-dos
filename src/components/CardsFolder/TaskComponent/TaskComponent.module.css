@@ -12,15 +12,12 @@
   flex-direction: row;
   gap: 4px;
   width: 95%;
-  padding: 30px 8px 4px;
+  padding: 12px 8px;
   margin-bottom: 8px;
   font-size: var(--text-big);
   color: var(--grey-900);
   word-wrap: break-word;
-  /* background-color: var(--orange-050); */
   background-color: #fff;
-
-  /* border: 1px solid var(--orange-200); */
   border: 1px solid var(--grey-200);
   border-radius: 9px;
   box-shadow: var(--shadow-s);
@@ -35,10 +32,10 @@
 
 .listElement li {
   min-width: 40%;
-  line-height: 1.2;
+  line-height: 22px;
 }
 
-.listElement ion-icon,
+.checkBox ion-icon,
 .checkBox {
   width: 20px;
   height: 20px;
@@ -62,7 +59,7 @@
   opacity: 1;
 }
 
-.listElement ion-icon {
+.checkBox ion-icon {
   color: #fff;
   opacity: 0;
 }

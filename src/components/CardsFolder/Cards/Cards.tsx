@@ -22,6 +22,7 @@ import FormCards from '../FormCard/FormCard';
 import 'react-toastify/dist/ReactToastify.css';
 import { cardActions } from '../../../store/card';
 import { WholeState } from '@/types';
+import Button from '@/components/common/Button/Button';
 
 const Cards = function () {
   const dispatch = useDispatch();
@@ -119,7 +120,7 @@ const Cards = function () {
             component='div'
             className={clsx(
               'relative grid grid-cols-5 gap-8 justify-items-center p-4 bg-white max-[1800px]:grid-cols-4 max-[1500px]:grid-cols-3 max-[1250px]:grid-cols-2 max-[900px]:grid-cols-1',
-              !hasCards && 'h-[190px]'
+              !hasCards && 'h-[500px]'
             )}
           >
             {!hasCards && (
@@ -132,9 +133,23 @@ const Cards = function () {
                 }}
                 timeout={300}
               >
-                <h4 className='absolute top-[50%] left-[50%] w-[450px] p-4 text-4xl text-yellow-900 text-center bg-yellow-200 rounded-lg translate-x-[-50%] translate-y-[-50%] max-[900px]:w-[240px] max-[300px]:w-[230px]'>
-                  There are no plans yet
-                </h4>
+                <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center w-[600px] max-[900px]:w-[240px] max-[300px]:w-[230px]'>
+                  <h4 className='p-4 text-5xl text-yellow-900 text-center rounded-lg '>
+                    There are no plans yet
+                  </h4>
+                  <p className='text-lg mb-6'>
+                    So why don&apos;t you make a new one?
+                  </p>
+                  <Button
+                    onClick={() => {
+                      setShowForm((prevState) => !prevState);
+                    }}
+                    color='Green'
+                    variant='RoundedSquare'
+                  >
+                    Create a new card
+                  </Button>
+                </div>
               </CSSTransition>
             )}
             {cards.map((card) => {
