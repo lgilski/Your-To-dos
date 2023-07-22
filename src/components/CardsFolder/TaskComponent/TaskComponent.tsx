@@ -1,5 +1,4 @@
 import clsx from '../../../utils/clsx';
-import CloseButton from '../../common/CloseButton/CloseButton';
 import classes from './TaskComponent.module.css';
 
 import { useDispatch } from 'react-redux';
@@ -7,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { cardActions } from '../../../store/card';
 import { Task } from '@/types';
+import { useRef, useEffect, useState } from 'react';
+// import useAutosizeTextArea from '@/hooks/useAutisizeTextArea';
 
 const CardElement = function ({
   task,
@@ -19,6 +20,14 @@ const CardElement = function ({
 }) {
   const dispatch = useDispatch();
 
+  const [editable, setEditable] = useState(false);
+  // const [value, setValue] = useState(task.content);
+
+  // const textAreaRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLParagraphElement>(null);
+
+  // useAutosizeTextArea(textAreaRef.current, value);
+
   const onDeleteTask = function () {
     dispatch(cardActions.deleteTask({ taskId: task.id, cardId }));
   };
@@ -27,11 +36,39 @@ const CardElement = function ({
     dispatch(cardActions.markTaskAsDone({ taskId: task.id, cardId }));
   };
 
+  const editTask = function () {
+    setEditable((prevState) => !prevState);
+  };
+
+  const EnterPress = (e: any) => {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      editTask();
+    }
+  };
+
+  const handleDoubleClick = function (e: any) {
+    console.log(e.detail);
+  };
+
+  useEffect(() => {
+    if (textAreaRef) {
+      textAreaRef.current!.focus();
+
+      const range = document.createRange();
+      const selection = window.getSelection();
+      range.selectNodeContents(textAreaRef.current!);
+      range.collapse(false);
+      selection!.removeAllRanges();
+      selection!.addRange(range);
+    }
+  }, [editable]);
+
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
-        <div
-          className={classes.listElement}
+        <li
+          className={clsx(classes.listElement, 'group')}
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
@@ -45,23 +82,38 @@ const CardElement = function ({
             )}
           >
             <ion-icon name='checkmark-outline' />
-            {/* <CheckmarkOutline
-              cssClasses={classes.icon}
-              color={'#fff'}
-              height='20px'
-              width='20px'
-            /> */}
           </button>
-          <li className={clsx(task.done && classes.doneText)}>
+          <p
+            className={clsx(
+              task.done && classes.doneText,
+              "leading-[22px] h-full border-none text-lg w-[100%] resize-none font-['Roboto'] outline-none"
+            )}
+            suppressContentEditableWarning={true}
+            contentEditable={editable}
+            onKeyDown={EnterPress}
+            ref={textAreaRef}
+            onBlur={editTask}
+            onClick={handleDoubleClick}
+          >
             {task.content}
-          </li>
-          <CloseButton
-            onClick={onDeleteTask}
-            color={'darkBlue'}
-            size={'small'}
-            className={classes.btnCloseSmall}
-          />
-        </div>
+          </p>
+          {!editable && (
+            <div className='absolute top-2 right-2 flex duration-300 opacity-0 group-hover:opacity-100 [&_ion-icon]:align-middle [&_ion-icon]:text-xl [&_ion-icon]:py-0.5 [&_ion-icon]:px-1 shadow'>
+              <button
+                className='border border-solid border-grey-200 text-base leading-none border-r bg-white rounded-l duration-300 hover:bg-lime-green-100 hover:text-lime-green-900 cursor-pointer'
+                onClick={editTask}
+              >
+                <ion-icon name='create-outline' />
+              </button>
+              <button
+                className='border border-solid border-grey-200 bg-white border-l-0 text-base leading-none rounded-r hover:text-red-500 hover:bg-red-100 duration-300 cursor-pointer'
+                onClick={onDeleteTask}
+              >
+                <ion-icon name='close-outline' />
+              </button>
+            </div>
+          )}
+        </li>
       )}
     </Draggable>
   );

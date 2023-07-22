@@ -45,14 +45,7 @@
   --tint-gray-50: #999;
   --tint-gray-20: #5c5c5c;
 
-  /* -heading-XXXXL: 64px;
-  -heading-XXXL: 40px;
-  -heading-XXL: 28px;
-  -heading-XL: 22px;
-  -heading-L: 18px;
-  -heading-M: 16px;
-  -heading-S: 14px; */
-
+  /* Fonts */
   --heading-xxxl: 72px;
   --heading-xxl: 60px;
   --heading-xl: 48px;
