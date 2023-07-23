@@ -108,7 +108,9 @@ const CardElement = function ({
           <p
             className={clsx(
               task.done && classes.doneText,
-              "leading-[22px] h-full border-none text-lg w-[100%] resize-none font-['Roboto'] outline-none"
+              `leading-[22px] h-full border-none text-lg w-[100%] resize-none font-['Roboto'] outline-none ${
+                editable && 'cursor-text'
+              }`
             )}
             suppressContentEditableWarning={true}
             contentEditable={editable}
