@@ -44,11 +44,33 @@ const CardElement = function ({
     if (e.keyCode == 13) {
       e.preventDefault();
       editTask();
+
+      dispatch(
+        cardActions.updateTask({
+          taskId: task.id,
+          cardId,
+          value: e.target.innerText,
+        })
+      );
     }
   };
 
+  const onBlur = (e: any) => {
+    editTask();
+
+    dispatch(
+      cardActions.updateTask({
+        taskId: task.id,
+        cardId,
+        value: e.target.innerText,
+      })
+    );
+  };
+
   const handleDoubleClick = function (e: any) {
-    console.log(e.detail);
+    if (e.detail === 2) {
+      editTask();
+    }
   };
 
   useEffect(() => {
@@ -92,8 +114,9 @@ const CardElement = function ({
             contentEditable={editable}
             onKeyDown={EnterPress}
             ref={textAreaRef}
-            onBlur={editTask}
+            onBlur={onBlur}
             onClick={handleDoubleClick}
+            // onInput={onValueChange}
           >
             {task.content}
           </p>
