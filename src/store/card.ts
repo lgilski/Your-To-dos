@@ -124,6 +124,28 @@ const cardSlice = createSlice({
       return state;
     },
 
+    updateTask(
+      state,
+      action: PayloadAction<{
+        taskId: string;
+        cardId: string;
+        value: string;
+      }>
+    ) {
+      state.cards = state.cards.map((card) => {
+        if (card.id === action.payload.cardId) {
+          card.tasks.find(
+            (task) => task.id === action.payload.taskId
+          )!.content = action.payload.value;
+        }
+
+        return card;
+      });
+
+      saveCards(state.cards);
+      return state;
+    },
+
     moveTaskBetweenCards(state, action) {
       // TODO: Make it better one day!!!
 
