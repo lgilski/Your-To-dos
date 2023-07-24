@@ -2,7 +2,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import AuthForm from '../components/UI/AuthForm/AuthForm';
 import { auth } from '../config/firebase';
 import { redirect } from 'react-router-dom';
-import { getCardsData } from '../api/api';
 import { toast } from 'react-toastify';
 
 function LoginPage() {
@@ -24,7 +23,7 @@ export async function action({ request }: { request: Request }) {
   }
 
   try {
-    const response = await signInWithEmailAndPassword(
+    await signInWithEmailAndPassword(
       auth,
       authData.email!.toString(),
       authData.password!.toString()
@@ -41,25 +40,6 @@ export async function action({ request }: { request: Request }) {
     if (!auth.currentUser?.emailVerified) {
       return { message: 'Email must be verified.' };
     }
-
-    // const responseToken = await response.user.getIdToken();
-
-    // console.log(responseToken);
-
-    // const user = auth.currentUser;
-
-    const uid = response.user.uid;
-
-    // localStorage.setItem('token', responseToken);
-    // localStorage.setItem('uid', uid);
-    // const expiration = new Date();
-
-    // expiration.setHours(expiration.getHours() + 12);
-    // localStorage.setItem('expiration', expiration.toISOString());
-
-    const cardsData = await getCardsData(uid);
-
-    localStorage.setItem('cards', JSON.stringify(cardsData));
 
     toast.success('Successfully logged in!', {
       position: 'top-center',
@@ -79,10 +59,9 @@ export async function action({ request }: { request: Request }) {
         err.message === 'Firebase: Error (auth/wrong-password).' ||
         err.message === 'Firebase: Error (auth/user-not-found).'
       ) {
-        return { message: 'Incorrect email or password' };
+        return { message: 'Incorrect email or password.' };
       }
       return { message: err.message };
     }
-    // throw json({ message: err.message });
   }
 }

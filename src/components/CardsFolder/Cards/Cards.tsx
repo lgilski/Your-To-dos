@@ -23,11 +23,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { cardActions } from '../../../store/card';
 import { WholeState } from '@/types';
 import Button from '@/components/common/Button/Button';
+import { TailSpin } from 'react-loader-spinner';
 
 const Cards = function () {
   const dispatch = useDispatch();
 
   const cards = useSelector((state: WholeState) => state.cards.cards);
+  const isLoading = useSelector(
+    (state: WholeState) => state.cards.isLoading
+  );
   const favorite = useSelector(
     (state: WholeState) => state.weather.showOnCards
   );
@@ -133,22 +137,39 @@ const Cards = function () {
                 }}
                 timeout={300}
               >
+                {/* message */}
                 <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center w-[600px] max-[900px]:w-[240px] max-[300px]:w-[230px]'>
-                  <h4 className='p-4 text-5xl text-yellow-900 text-center rounded-lg '>
-                    There are no plans yet
-                  </h4>
-                  <p className='text-lg mb-6'>
-                    So why don&apos;t you make a new one?
-                  </p>
-                  <Button
-                    onClick={() => {
-                      setShowForm((prevState) => !prevState);
-                    }}
-                    color='Green'
-                    variant='RoundedSquare'
-                  >
-                    Create a new card
-                  </Button>
+                  {isLoading && (
+                    <TailSpin
+                      height='100'
+                      width='100'
+                      color='#d87620'
+                      ariaLabel='tail-spin-loading'
+                      radius='0'
+                      wrapperStyle={{}}
+                      wrapperClass=''
+                      visible={true}
+                    />
+                  )}
+                  {!isLoading && (
+                    <>
+                      <h4 className='p-4 text-5xl text-yellow-900 text-center rounded-lg '>
+                        There are no plans yet
+                      </h4>
+                      <p className='text-lg mb-6'>
+                        So why don&apos;t you make a new one?
+                      </p>
+                      <Button
+                        onClick={() => {
+                          setShowForm((prevState) => !prevState);
+                        }}
+                        color='Green'
+                        variant='RoundedSquare'
+                      >
+                        Create a new card
+                      </Button>
+                    </>
+                  )}
                 </div>
               </CSSTransition>
             )}

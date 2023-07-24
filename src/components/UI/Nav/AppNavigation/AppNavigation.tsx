@@ -69,6 +69,17 @@ function AppNavigation() {
             Timers
           </p>
         </AppNavButton>
+        <AppNavButton to='/app/stopwatch' end={false}>
+          <ion-icon name='stopwatch' />
+          <p
+            className={clsx(
+              classes.btnText,
+              !isSidenavOpen && classes.hideBtnText
+            )}
+          >
+            Stopwatch
+          </p>
+        </AppNavButton>
         <AppNavButton to='/app/weather' end={false}>
           <ion-icon name='partly-sunny' />
           <p

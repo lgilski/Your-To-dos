@@ -46,6 +46,7 @@ const Input = forwardRef(function (
     down = false,
     noMargin,
     autoComplete,
+    className,
     ...otherProps
   }: Props & React.InputHTMLAttributes<any>,
   ref: Ref<HTMLInputElement>
@@ -65,7 +66,8 @@ const Input = forwardRef(function (
         className={clsx(
           classes[`input${color}`],
           classes.input,
-          margin
+          margin,
+          className
         )}
         id={name}
         type={type}

@@ -7,7 +7,6 @@ import { Draggable } from 'react-beautiful-dnd';
 import { cardActions } from '../../../store/card';
 import { Task } from '@/types';
 import { useRef, useEffect, useState } from 'react';
-// import useAutosizeTextArea from '@/hooks/useAutisizeTextArea';
 
 const CardElement = function ({
   task,
@@ -21,12 +20,7 @@ const CardElement = function ({
   const dispatch = useDispatch();
 
   const [editable, setEditable] = useState(false);
-  // const [value, setValue] = useState(task.content);
-
-  // const textAreaRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLParagraphElement>(null);
-
-  // useAutosizeTextArea(textAreaRef.current, value);
 
   const onDeleteTask = function () {
     dispatch(cardActions.deleteTask({ taskId: task.id, cardId }));
@@ -118,7 +112,6 @@ const CardElement = function ({
             ref={textAreaRef}
             onBlur={onBlur}
             onClick={handleDoubleClick}
-            // onInput={onValueChange}
           >
             {task.content}
           </p>

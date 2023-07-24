@@ -3,7 +3,7 @@ import SectionHeader from '../components/common/SectionHeader/SectionHeader';
 
 function TimerPage() {
   return (
-    <section className='greyBg paddingBttom'>
+    <section className='greyBg paddingBottom'>
       <div className='pageTitleCenterPartly paddingTop'>
         <SectionHeader
           subheader='Timers page'
