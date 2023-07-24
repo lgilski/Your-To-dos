@@ -37,6 +37,8 @@ export function useTimer({
     completeTimeInSeconds
   );
 
+  // const counter = new Worker();
+
   const startTimer = () => {
     if (timeInSeconds === 0) {
       resetTimer();
