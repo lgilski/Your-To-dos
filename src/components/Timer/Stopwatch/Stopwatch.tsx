@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
 import classes from './Stopwatch.module.css';
-import SectionHeader from '../../common/SectionHeader/SectionHeader';
 import StopwatchTime from './StopwatchTime/StopwatchTime';
 import StopwatchButtons from './StopwatchButtons/StopwatchButtons';
 
@@ -38,12 +37,6 @@ function Stopwatch() {
 
   return (
     <>
-      <SectionHeader
-        className='pageTitleCenter'
-        subheader='Stopwatch page'
-        header='Start counting down'
-        type='medium'
-      />
       <div className={classes.stopwatch}>
         <StopwatchTime
           currentHours={currentHours}

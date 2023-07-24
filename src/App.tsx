@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   RouterProvider,
   createBrowserRouter,
@@ -15,8 +15,6 @@ import ErrorPage from './pages/Error';
 
 import { useDispatch } from 'react-redux';
 import { dataActions } from './store';
-import TimerRoot from './pages/Roots/TimerRoot';
-import Stopwatch from './components/Timer/Stopwatch/Stopwatch';
 import WeatherRoot from './pages/Roots/WeatherRoot';
 import WeatherDetailPage from './pages/WeatherDetailPage';
 import { weatherActions } from './store/weather';
@@ -31,6 +29,7 @@ import { auth } from './config/firebase';
 import { cardActions } from './store/card';
 
 import { getDatabase, ref, get, child } from 'firebase/database';
+import StopwatchPage from './pages/StopwatchPage';
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -40,11 +39,11 @@ const routes = [
       { path: 'cards', element: <CardsPage /> },
       {
         path: 'timer',
-        element: <TimerRoot />,
-        children: [
-          { index: true, element: <TimerPage /> },
-          { path: 'stopwatch', element: <Stopwatch /> },
-        ],
+        element: <TimerPage />,
+      },
+      {
+        path: 'stopwatch',
+        element: <StopwatchPage />,
       },
       {
         path: 'logout',
@@ -61,7 +60,6 @@ const routes = [
           {
             path: ':city',
             id: 'weather-detail',
-            // loader: weatherLoader,
             element: <WeatherDetailPage />,
           },
         ],
@@ -94,15 +92,6 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
 
-  /* eslint-disable no-restricted-globals */
-  // self.onpagehide = e => {
-  //   console.log('zamknięto stronę');
-  // };
-
-  // self.onpageshow = e => {
-  //   console.log('otwarto stronę');
-  // };
-
   useEffect(() => {
     const favorite = JSON.parse(
       localStorage.getItem('favorite') as string
@@ -112,13 +101,16 @@ function App() {
 
     auth.onAuthStateChanged((user) => {
       if (user?.uid) {
+        dispatch(cardActions.setIsLoading(true));
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${user.uid}/cards`))
           .then((snapshot) => {
             if (snapshot.exists()) {
               dispatch(cardActions.setCards(snapshot.val()));
+              dispatch(cardActions.setIsLoading(false));
             } else {
               new Error('No data available');
+              dispatch(cardActions.setIsLoading(false));
             }
           })
           .catch((error) => {

@@ -27,8 +27,9 @@ function RootLayout({ routes }: { routes: any }) {
   const navigate = useNavigate();
 
   const { nodeRef } =
-    routes.find((route: any) => route.path === location.pathname) ??
-    {};
+    routes.find((route: any) => {
+      route.path === location.pathname;
+    }) ?? {};
 
   const isLoading = useSelector(
     (state: WholeState) => state.data.loading

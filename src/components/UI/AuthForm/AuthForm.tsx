@@ -13,11 +13,9 @@ import Button from '../../common/Button/Button';
 
 function AuthForm({ mode }: { mode?: string }) {
   const data = useActionData() as {
-    errors?: string;
     message?: string;
   };
   const navigation = useNavigation();
-
   const navigate = useNavigate();
 
   const user = auth.currentUser;
@@ -41,14 +39,14 @@ function AuthForm({ mode }: { mode?: string }) {
           <h4 className='mt-4 mx-auto mb-8 text-3xl'>
             {isLogin ? 'Welcome back!' : 'Start your new journey!'}
           </h4>
-          {data && data.errors && (
-            <ul>
-              {Object.values(data.errors).map((err) => (
-                <li key={err}>{err}</li>
-              ))}
-            </ul>
+          {data?.message && (
+            <div className='bg-red-100 w-[98%] mx-auto flex gap-3 [&_ion-icon]:w-12 [&_ion-icon]:h-12 [&_ion-icon]:text-red-300 [&_ion-icon]:ml-1 rounded mb-3'>
+              <ion-icon name='alert-circle-outline' />
+              <p className='text-lg self-center text-red-900'>
+                {data.message}
+              </p>
+            </div>
           )}
-          {data && data.message && <p>{data.message}</p>}
           <div className='w-[98%] m-auto'>
             <Input
               color={'Green'}

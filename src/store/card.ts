@@ -2,13 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { auth } from '../config/firebase';
 import { getDatabase, ref, set } from 'firebase/database';
 
-import { CardState } from '@/types';
-import { Card } from '@/types';
-import { Task } from '@/types';
+import { CardState, Task, Card } from '@/types';
 
 const initialState: CardState = {
   cards: [],
   searched: undefined,
+  isLoading: null,
 };
 
 const sortByDate = (a: Card, b: Card) => {
@@ -21,8 +20,6 @@ const saveCards = (cards: Card[]) => {
     set(ref(db, 'users/' + auth.currentUser.uid), {
       cards: cards,
     });
-
-    localStorage.setItem('cards', JSON.stringify(cards));
   }
 };
 
@@ -143,6 +140,12 @@ const cardSlice = createSlice({
       });
 
       saveCards(state.cards);
+      return state;
+    },
+
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
+
       return state;
     },
 

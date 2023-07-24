@@ -4,9 +4,9 @@
   align-items: center;
   max-width: 550px;
   padding: 20px;
-  margin: 64px auto;
+  margin: 0 auto;
   font-size: 72px;
   color: aliceblue;
   background-color: var(--tint-orange-50);
-  border-radius: 6px;
+  border-radius: 20px;
 }

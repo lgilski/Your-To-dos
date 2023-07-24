@@ -8,6 +8,7 @@ export type WholeState = {
 export type CardState = {
   cards: Card[];
   searched: string | undefined;
+  isLoading: boolean | null;
 };
 
 export type Card = {
