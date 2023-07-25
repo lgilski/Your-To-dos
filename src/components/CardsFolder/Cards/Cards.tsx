@@ -192,7 +192,7 @@ const Cards = function () {
                   <CardComponent
                     key={card.id}
                     card={card}
-                    forecastDay={forecastData?.forecast.forecastday}
+                    forecastDay={forecastData?.forecast?.forecastday}
                   />
                 </CSSTransition>
               );

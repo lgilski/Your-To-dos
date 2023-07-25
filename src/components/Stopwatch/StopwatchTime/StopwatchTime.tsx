@@ -1,18 +1,21 @@
-import classes from './StopwatchTIme.module.css';
-
 function StopwatchTime({
   currentHours,
   currentMinutes,
   currentSeconds,
   currentMiliseconds,
+  className,
+  lap,
 }: {
   currentHours: number;
   currentMinutes: number;
   currentSeconds: number;
   currentMiliseconds: number;
+  className?: any;
+  lap?: number;
 }) {
   return (
-    <h5 className={classes.time}>
+    <h5 className={className}>
+      {typeof lap === 'number' && `${lap}. `}
       {currentHours.toString().length < 2
         ? `0${currentHours}`
         : currentHours}

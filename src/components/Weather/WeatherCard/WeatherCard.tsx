@@ -69,7 +69,7 @@ function WeatherCard({ city }: { city: string }) {
   };
 
   const stopShowingOnCards = function () {
-    dispatch(weatherActions.stopShowingOnCards(null));
+    dispatch(weatherActions.stopShowingOnCards());
   };
 
   return (

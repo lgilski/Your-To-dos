@@ -5,19 +5,25 @@ export async function fetchWeather({
 }: {
   city: string;
 }): Promise<WeatherData> {
-  const response = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${
-      import.meta.env.VITE_WEATHER_KEY
-    }&q=${city}&aqi=no`
-  );
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${
+        import.meta.env.VITE_WEATHER_KEY
+      }&q=${city}&aqi=no`
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (data?.error) {
-    return data.error;
+    if (data?.error) {
+      console.log(data.error);
+      return data.error;
+    }
+
+    return data;
+  } catch (err: any) {
+    console.log(err);
+    return err;
   }
-
-  return data;
 }
 
 export async function fetchForecast({

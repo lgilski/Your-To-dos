@@ -8,11 +8,13 @@ function StopwatchButtons({
   startStopwatch,
   stopStopwatch,
   resetStopwatch,
+  addLap,
 }: {
   isStoped: boolean;
   startStopwatch: () => void;
   stopStopwatch: () => void;
   resetStopwatch: () => void;
+  addLap: () => void;
 }) {
   return (
     <div
@@ -30,11 +32,6 @@ function StopwatchButtons({
           <ion-icon name='play' />
         </Button>
       )}
-      {!isStoped && (
-        <Button variant='Circle' color='Stop' onClick={stopStopwatch}>
-          <ion-icon name='pause' />
-        </Button>
-      )}
       {isStoped && (
         <Button
           variant='Circle'
@@ -42,6 +39,16 @@ function StopwatchButtons({
           onClick={resetStopwatch}
         >
           <ion-icon name='refresh' />
+        </Button>
+      )}
+      {!isStoped && (
+        <Button variant='Circle' color='Stop' onClick={stopStopwatch}>
+          <ion-icon name='pause' />
+        </Button>
+      )}
+      {!isStoped && (
+        <Button variant='Circle' color='Reset' onClick={addLap}>
+          <ion-icon name='flag' />
         </Button>
       )}
     </div>
