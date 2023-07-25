@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import classes from './Stopwatch.module.css';
 import StopwatchTime from './StopwatchTime/StopwatchTime';
@@ -11,16 +11,23 @@ function Stopwatch() {
   const [time, setTime] = useState(0);
   const [isStoped, setIsStoped] = useState(true);
 
+  const stopwatch: Worker = useMemo(
+    () => new Worker(new URL('stopwatchWorker.ts', import.meta.url)),
+    []
+  );
+
   const startStopwatch = function () {
     setIsStoped(false);
 
-    stopwatchRef.current = setInterval(() => {
-      setTime((prevState) => prevState + 1);
-    }, 10);
+    stopwatch.postMessage(time);
+
+    stopwatch.onmessage = (e: any) => {
+      setTime(e.data);
+    };
   };
 
   const stopStopwatch = function () {
-    clearInterval(stopwatchRef!.current);
+    stopwatch.postMessage('stop');
     setIsStoped(true);
   };
 

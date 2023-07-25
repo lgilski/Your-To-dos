@@ -54,12 +54,7 @@ export function useTimer({
     }
 
     setIsCounting(true);
-
     counter.postMessage(timeInSeconds);
-
-    // countDownTime.current = setInterval(() => {
-    //   setTimeInSeconds((prevstate) => prevstate - 1);
-    // }, 1000);
 
     counter.onmessage = (e: any) => {
       setTimeInSeconds(e.data);
@@ -67,7 +62,6 @@ export function useTimer({
   };
 
   const stopTimer = function () {
-    // clearInterval(countDownTime.current);
     counter.postMessage('stop');
     setIsCounting(false);
   };
