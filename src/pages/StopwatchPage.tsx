@@ -1,4 +1,4 @@
-import Stopwatch from '@/components/Timer/Stopwatch/Stopwatch';
+import Stopwatch from '@/components/Stopwatch/Stopwatch';
 import SectionHeader from '@/components/common/SectionHeader/SectionHeader';
 
 function StopwatchPage() {
