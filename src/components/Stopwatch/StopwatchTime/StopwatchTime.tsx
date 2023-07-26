@@ -27,10 +27,12 @@ function StopwatchTime({
       {currentSeconds.toString().length < 2
         ? `0${currentSeconds}`
         : currentSeconds}
-      :
-      {currentMiliseconds.toString().length < 2
-        ? `0${currentMiliseconds}`
-        : currentMiliseconds}
+      .
+      <span>
+        {currentMiliseconds.toString().length < 2
+          ? `0${currentMiliseconds}`
+          : currentMiliseconds}
+      </span>
     </h5>
   );
 }

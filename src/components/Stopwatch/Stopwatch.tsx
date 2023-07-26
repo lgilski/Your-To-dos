@@ -63,7 +63,7 @@ function Stopwatch() {
           currentMinutes={currentMinutes}
           currentSeconds={currentSeconds}
           currentMiliseconds={currentMiliseconds}
-          className={'text-7xl mt-6 mb-10'}
+          className={'text-7xl mt-6 mb-10 [&_span]:text-6xl'}
         />
         <StopwatchButtons
           isStoped={isStoped}
