@@ -22,7 +22,7 @@ const StopwatchLapTime = function ({
             currentMinutes={time.currentMinutes}
             currentSeconds={time.currentSeconds}
             currentMiliseconds={time.currentMiliseconds}
-            lap={number++}
+            lap={number}
             // className={'odd:bg-gray-100 w-full text-center'}
           />
         );
