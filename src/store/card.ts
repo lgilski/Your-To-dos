@@ -8,6 +8,7 @@ const initialState: CardState = {
   cards: [],
   searched: undefined,
   isLoading: null,
+  hideHappened: false,
 };
 
 const sortByDate = (a: Card, b: Card) => {
@@ -147,6 +148,10 @@ const cardSlice = createSlice({
       state.isLoading = action.payload;
 
       return state;
+    },
+
+    setHideHappened(state) {
+      state.hideHappened = !state.hideHappened;
     },
 
     moveTaskBetweenCards(state, action) {

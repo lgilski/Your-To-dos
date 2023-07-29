@@ -9,6 +9,7 @@ export type CardState = {
   cards: Card[];
   searched: string | undefined;
   isLoading: boolean | null;
+  hideHappened: boolean;
 };
 
 export type Card = {
@@ -36,8 +37,11 @@ export type Timer = {
   hours: number | string;
   minutes: number | string;
   seconds: number | string;
+  timeRemaining?: number;
+  timeInSeconds: number;
   id: string;
   timerName: string;
+  isCounting: boolean;
 };
 
 export type WeatherState = {

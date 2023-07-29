@@ -38,6 +38,9 @@ const Cards = function () {
   const searched = useSelector(
     (state: WholeState) => state.cards.searched
   );
+  const hideHappened = useSelector(
+    (state: WholeState) => state.cards.hideHappened
+  );
 
   const [searchedIds, setSearchedIds] = useState<string[]>([]);
   const [showForm, setShowForm] = useState(false);
@@ -176,6 +179,29 @@ const Cards = function () {
             {cards.map((card) => {
               if (searched && searchedIds.indexOf(card.id) === -1) {
                 return null;
+              }
+
+              if (hideHappened) {
+                const now = new Date().toLocaleDateString('pl-PL');
+                const then = card.id;
+
+                const nowToFormat: any = now.split('.');
+                const thenToFormat: any = then.split('.');
+
+                const nowInSeconds = new Date(
+                  +nowToFormat[2],
+                  nowToFormat[1] - 1,
+                  +nowToFormat[0]
+                );
+                const thenInSeconds = new Date(
+                  +thenToFormat[2],
+                  thenToFormat[1] - 1,
+                  +thenToFormat[0]
+                );
+
+                if (nowInSeconds > thenInSeconds) {
+                  return null;
+                }
               }
 
               return (
