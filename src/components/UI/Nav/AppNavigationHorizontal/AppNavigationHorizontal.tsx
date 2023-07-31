@@ -18,7 +18,7 @@ function AppNavigationHorizontal() {
   };
 
   return (
-    <nav className='fixed top-0 left-0 z-[1] w-full py-3 px-4 overflow-hidden bg-white shadow-md  flex justify-between dark:bg-grey-900 duration-500 dark:border-b dark:border-white dark:border-solid dark:border-t-0 dark:border-x-0'>
+    <nav className='fixed top-0 left-0 z-[1] w-full py-3 px-4 overflow-hidden bg-white shadow-md  flex justify-between dark:bg-grey-900 duration-500 dark:border-b dark:border-grey-500 dark:border-solid dark:border-t-0 dark:border-x-0'>
       <Subtitle type={'small'} />
       <label className='relative inline-block w-14 h-7 overflow-hidden cursor-pointer'>
         <input

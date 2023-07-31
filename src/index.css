@@ -186,30 +186,6 @@ body {
   /* background-color: red; */
 }
 
-.subheader {
-  margin-bottom: 8px;
-  font-size: var(--text-huge);
-  font-weight: 600;
-  /* color: var(-color-orange-first); */
-  color: var(--orange-400);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.header {
-  font-size: var(--heading-xl);
-  /* color: var(-shade-orange-50); */
-  font-weight: 700;
-  color: var(--orange-900);
-}
-
-.headerLarge {
-  font-size: var(--heading-l);
-  /* color: var(-shade-orange-50); */
-  font-weight: 700;
-  color: var(--orange-900);
-}
-
 .darkSection {
   padding: 24px;
   margin: 48px 0;
@@ -239,11 +215,6 @@ body {
 .paddingBottom {
   padding-bottom: 64px;
   margin-top: 0;
-}
-
-.greyBg {
-  /* background-color: var(--grey-warm-050); */
-  background-color: var(--grey-050);
 }
 
 .blurElement {
@@ -358,15 +329,4 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.pushContent {
-  /* margin-left: 200px; */
-  padding-left: 200px;
-}
-
-.dontPushContent {
-  /* margin-left: 58px; */
-  padding-left: 58px;
-  /* padding-left: 0; */
 }

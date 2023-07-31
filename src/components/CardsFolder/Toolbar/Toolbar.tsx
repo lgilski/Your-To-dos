@@ -33,14 +33,24 @@ function Toolbar({
     dispatch(cardActions.setHideHappened());
   };
 
+  // .toolbarContent {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   width: 100%;
+  //   padding: 0 8px 8px;
+  //   margin: auto;
+  //   /* border-bottom: 2px solid var(--orange-600); */
+  //   border-bottom: 1px solid var(--grey-100);
+  // }
+
   return (
     <div className={classes.toolbar}>
-      <div className={classes.toolbarContent}>
+      <div className='flex justify-between pt-0 px-2 pb-2 m-auto border-x-0 border-t-0 border-b border-solid border-grey-100 dark:border-grey-600'>
         <div className='flex items-end'>
           <button
             className={`border-none bg-inherit text-base font-semibold text-grey-500 cursor-pointer duration-300 hover:text-grey-700 relative ${
               hideHappened &&
-              "after:absolute after:content-[''] after:h-[3px] after:w-full after:bg-lime-green-500 after:-bottom-[9px] after:left-0"
+              "after:absolute after:content-[''] after:h-[2px] after:w-full after:bg-lime-green-500 after:-bottom-[9px] after:left-0"
             }`}
             onClick={hideHappenedHandler}
           >

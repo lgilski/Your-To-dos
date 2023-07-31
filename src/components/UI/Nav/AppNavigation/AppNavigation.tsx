@@ -27,14 +27,14 @@ function AppNavigation() {
     <nav
       className={`fixed top-0 left-0 z-[1] ${
         !isSidenavOpen ? 'w-[58px]' : 'w-[200px]'
-      } h-full pt-[68px] overflow-hidden text-base bg-white shadow-md duration-500 [&_ion-icon]:min-w-[24px] [&_ion-icon]:min-h-[24px] dark:bg-grey-900`}
+      } h-full pt-[68px] overflow-hidden text-base bg-white shadow-md duration-500 [&_ion-icon]:min-w-[24px] [&_ion-icon]:min-h-[24px] dark:[&_ion-icon]:text-grey-050 dark:bg-grey-900 dark:border-r dark:border-solid dark:border-grey-700 dark:border-y-0 dark:border-l-0`}
       onMouseEnter={() => setShowHideOption(true)}
       onMouseLeave={() => setShowHideOption(false)}
     >
       <button
         onClick={hideSidenav}
         className={clsx(
-          classes.hideBtn,
+          'absolute top-[62px] right-2 flex items-center w-8 h-8 p-1 cursor-pointer bg-inherit border-none rounded opacity-0 duration-300 hover:bg-orange-100 dark:hover:bg-grey-800',
           showHideOption && classes.showHideBtn,
           !isSidenavOpen && classes.hideBtnOtherPosition
         )}
@@ -91,7 +91,7 @@ function AppNavigation() {
         <li>
           <Form action='/app/logout' method='post'>
             <button
-              className={`cursor-pointer py-2 px-4 bg-inherit border-none w-full font-medium text-grey-700 no-underline duration-300 dark:text-grey-100 dark:hover:bg-orange-500 hover:bg-orange-100 text-base font-['Roboto']`}
+              className={`cursor-pointer py-2 px-4 bg-inherit border-none w-full font-medium text-grey-700 no-underline duration-300 dark:text-grey-100 dark:hover:bg-grey-800 hover:bg-orange-100 text-base font-['Roboto']`}
             >
               <span className='flex gap-2 items-center'>
                 <ion-icon name='exit' />

@@ -26,8 +26,8 @@ function RootLayout({ routes }: { routes: any }) {
   const currentOutlet = useOutlet();
   const navigate = useNavigate();
 
-  const ref: { current: NodeJS.Timeout | undefined } =
-    useRef(undefined);
+  // const ref: { current: NodeJS.Timeout | undefined } =
+  //   useRef(undefined);
 
   const { nodeRef } =
     routes.find((route: any) => {
@@ -40,12 +40,12 @@ function RootLayout({ routes }: { routes: any }) {
   const isSidenavOpen = useSelector(
     (state: WholeState) => state.data.isSidenavOpen
   );
-  const activeIndex = useSelector(
-    (state: WholeState) => state.timers.activeIndex
-  );
-  const timers = useSelector(
-    (state: WholeState) => state.timers.timers
-  );
+  // const activeIndex = useSelector(
+  //   (state: WholeState) => state.timers.activeIndex
+  // );
+  // const timers = useSelector(
+  //   (state: WholeState) => state.timers.timers
+  // );
 
   const user = auth.currentUser;
 
@@ -87,8 +87,8 @@ function RootLayout({ routes }: { routes: any }) {
         className={clsx(
           user && 'pl-[200px]',
           !isSidenavOpen && user && 'pl-[58px]',
-          'ease-in-out duration-300 main dark',
-          user && 'greyBg',
+          'ease-in-out duration-300',
+          user && 'bg-grey-050 dark:bg-grey-800',
           user && 'min-h-screen'
         )}
       >

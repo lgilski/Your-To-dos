@@ -6,35 +6,6 @@
   text-align: center;
 }
 
-.listElement {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  width: 95%;
-  padding: 12px 8px 10px;
-  margin-bottom: 8px;
-  font-size: var(--text-big);
-  color: var(--grey-900);
-  word-wrap: break-word;
-  background-color: #fff;
-  border: 1px solid var(--grey-200);
-  border-radius: 9px;
-  box-shadow: var(--shadow-s);
-  transition: background-color 0.3s;
-  transition: box-shadow 0.3s;
-}
-
-.listElement:hover {
-  background-color: var(--grey-050);
-  box-shadow: var(--shadow-m);
-}
-
-.listElement li {
-  min-width: 40%;
-  line-height: 22px;
-}
-
 .checkBox ion-icon,
 .checkBox {
   width: 20px;
