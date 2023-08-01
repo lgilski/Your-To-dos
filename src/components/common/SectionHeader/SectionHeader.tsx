@@ -1,6 +1,7 @@
 import React from 'react';
 
 import clsx from '../../../utils/clsx';
+import { auth } from '@/config/firebase';
 
 function SectionHeader({
   subheader,
