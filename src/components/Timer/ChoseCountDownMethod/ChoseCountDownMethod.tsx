@@ -5,7 +5,6 @@ import classes from './ChoseCountDownMethod.module.css';
 import { timerActions } from '../../../store/timer';
 import Button from '../../common/Button/Button';
 
-import * as React from 'react';
 import { WholeState } from '@/types';
 
 function TimerCountDownMethod() {

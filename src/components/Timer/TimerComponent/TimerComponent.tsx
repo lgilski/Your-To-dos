@@ -15,16 +15,17 @@ const TimerComponent = function ({
   timerData: Timer;
   index: number;
 }) {
-  const completeTimeInSeconds =
+  const startingTime =
     Number(timerData.hours) * 60 * 60 +
     Number(timerData.minutes) * 60 +
     Number(timerData.seconds);
 
-  const { functions, showModal, timeRemaining } = useTimer({
-    // completeTimeInSeconds,
-    timerData,
-    index,
-  });
+  const { functions, showModal, isCounting, timeRemaining } =
+    useTimer({
+      startingTime,
+      timerData,
+      index,
+    });
 
   const currentHours = Math.floor(timeRemaining! / (60 * 60));
   const currentMinutes = Math.floor(
@@ -70,11 +71,12 @@ const TimerComponent = function ({
               minutes: currentMinutes,
               seconds: currentSeconds,
             }}
+            isCounting={isCounting}
             index={index}
           />
           <ProgressBar
             bgcolor={'#6c3b10'}
-            completed={(timeRemaining! / completeTimeInSeconds) * 100}
+            completed={(timeRemaining! / startingTime) * 100}
           />
         </div>
       )}

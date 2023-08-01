@@ -2,6 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import timerReducer from './timer';
 import weatherReducer from './weather';
 import cardReducer from './card';
+import stopwatchReducer from './stopwatch';
 
 const initialState = {
   loading: true,
@@ -28,6 +29,7 @@ const store = configureStore({
     cards: cardReducer,
     timers: timerReducer,
     weather: weatherReducer,
+    stopwatch: stopwatchReducer,
   },
 });
 

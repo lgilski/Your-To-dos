@@ -3,6 +3,7 @@ export type WholeState = {
   cards: CardState;
   timers: TimerState;
   weather: WeatherState;
+  stopwatch: StopwatchState;
 };
 
 export type CardState = {
@@ -42,6 +43,19 @@ export type Timer = {
   id: string;
   timerName: string;
   isCounting: boolean;
+};
+
+export type StopwatchState = {
+  isCounting: boolean;
+  currentTime: number;
+  lapTimes: LapTime[];
+};
+
+export type LapTime = {
+  currentHours: number;
+  currentMinutes: number;
+  currentSeconds: number;
+  currentMiliseconds: number;
 };
 
 export type WeatherState = {

@@ -1,22 +1,17 @@
-import {
-  useEffect,
-  useState,
-  useRef,
-  TimeHTMLAttributes,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { timerActions } from '../store/timer';
 import { Timer, WholeState } from '@/types';
 
-// const workers = new Map<string, Worker>();
+// const countingMap = new Map<string, boolean>();
 
 export function useTimer({
-  // completeTimeInSeconds,
+  startingTime,
   timerData,
   index,
 }: {
-  // completeTimeInSeconds: number;
+  startingTime: number;
   timerData: Timer;
   index: number;
 }) {
@@ -37,62 +32,76 @@ export function useTimer({
   const countDownMethod = useSelector(
     (state: WholeState) => state.timers.countDownMethod
   );
-  const timeRemaining = useSelector(
-    (state: WholeState) => state.timers.timers[index].timeRemaining
-  );
-  const startingTime = useSelector(
-    (state: WholeState) => state.timers.timers[index].timeInSeconds
-  );
-  const isCounting = useSelector(
-    (state: WholeState) => state.timers.timers[index].isCounting
-  );
 
+  // const timeRemaining = useSelector(
+  //   (state: WholeState) => state.timers.timers[index].timeRemaining
+  // );
+  // const startingTime = useSelector(
+  //   (state: WholeState) => state.timers.timers[index].timeInSeconds
+  // );
+  // const isCounting = useSelector(
+  //   (state: WholeState) => state.timers.timers[index].isCounting
+  // );
+
+  const [isCounting, setIsCounting] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(startingTime);
 
-  let now = new Date();
-  const then = new Date(now.getTime() + startingTime * 1000);
-
-  // console.log('Time remaining', timeRemaining);
-  // console.log('Starting time: ', startingTime);
+  let prevTime: number | undefined;
+  let time: number;
 
   const startTimer = () => {
-    if (timeRemaining! === 0) {
+    let timeRemainingInner = timeRemaining;
+
+    if (timeRemaining === 0) {
       resetTimer();
+      timeRemainingInner = startingTime;
     }
 
-    dispatch(timerActions.startTimer({ timerId: timerData.id }));
+    setIsCounting(true);
 
     countDownTime.current = setInterval(() => {
-      now = new Date(now.getTime() + 1000);
-      if (then.getTime() - now.getTime() === 0) {
-        stopTimer();
-        if (countDownMethod === 'Start in sequence') {
-          dispatch(timerActions.incrementActiveIndexInSequence());
-          console.log('idex higher: ', activeIndex);
-        }
+      console.log(prevTime);
+
+      if (!prevTime) {
+        prevTime = Date.now();
       }
 
-      dispatch(
-        timerActions.setRemainingTime({
-          timerId: timerData.id,
-          timeRemaining: (then.getTime() - now.getTime()) / 1000,
-        })
+      time = Math.floor(
+        timeRemainingInner! - (Date.now() - prevTime) / 1000
       );
-    }, 1000);
+
+      if (time < 0) {
+        time = 0;
+        // dispatch(
+        //   timerActions.setRemainingTime({
+        //     timerId: timerData.id,
+        //     timeRemaining: time,
+        //   })
+        // );
+
+        // dispatch(timerActions.stopTimer({ timerId: timerData.id }));
+      }
+
+      // dispatch(
+      //   timerActions.setRemainingTime({
+      //     timerId: timerData.id,
+      //     timeRemaining: time,
+      //   })
+      // );
+
+      setTimeRemaining(time);
+    }, 50);
   };
 
   const stopTimer = function () {
-    dispatch(timerActions.stopTimer({ timerId: timerData.id }));
     clearInterval(countDownTime.current);
+    setIsCounting(false);
   };
 
   const resetTimer = function () {
-    dispatch(
-      timerActions.setRemainingTime({
-        timerId: timerData.id,
-        timeRemaining: startingTime,
-      })
-    );
+    setTimeRemaining(startingTime);
+    setIsCounting(false);
   };
 
   const deleteTimer = function () {
@@ -112,8 +121,6 @@ export function useTimer({
     setShowModal(false);
   };
 
-  /////////////////////
-  /////////////////////
   useEffect(() => {
     if (!startSequence) {
       stopTimer();
@@ -121,8 +128,6 @@ export function useTimer({
       startTimer();
     }
   }, [activeIndex, startSequence]);
-  /////////////////////
-  /////////////////////
 
   useEffect(() => {
     if (isCounting) {
@@ -131,21 +136,20 @@ export function useTimer({
   }, [countDownMethod]);
 
   useEffect(() => {
-    if (timeRemaining! <= 0) {
+    if (timeRemaining === 0) {
       stopTimer();
     }
     if (resetAllTimers) {
       resetTimer();
       dispatch(timerActions.resetTimers(false));
     }
-    // if (
-    //   timeRemaining! <= 0 &&
-    //   countDownMethod === 'Start in sequence' &&
-    //   index === activeIndex
-    // ) {
-    //   console.log('Effect increment');
-    //   dispatch(timerActions.incrementActiveIndexInSequence());
-    // }
+    if (
+      timeRemaining === 0 &&
+      countDownMethod === 'Start in sequence' &&
+      index === activeIndex
+    ) {
+      dispatch(timerActions.incrementActiveIndexInSequence());
+    }
   }, [
     timeRemaining,
     countDownMethod,
@@ -155,13 +159,13 @@ export function useTimer({
     resetAllTimers,
   ]);
 
-  // useEffect(() => {
-  //   resetTimer();
-  // }, [timerData]);
-
-  // useEffect(() => {
-  //   resetTimer();
-  // }, []);
+  useEffect(() => {
+    resetTimer();
+    if (startSequence) {
+      dispatch(timerActions.stopTimersInSquence());
+      dispatch(timerActions.resetTimers(true));
+    }
+  }, [timerData]);
 
   return {
     functions: {
@@ -172,6 +176,7 @@ export function useTimer({
       editTimer,
       closeModal,
     },
+    isCounting,
     showModal,
     timeRemaining,
   };

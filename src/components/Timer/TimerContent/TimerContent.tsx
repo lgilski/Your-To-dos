@@ -9,6 +9,7 @@ function TimerContent({
   functions,
   timerData,
   currentTime,
+  isCounting,
   index,
 }: {
   functions: {
@@ -25,14 +26,24 @@ function TimerContent({
     minutes: number;
     seconds: number;
   };
+  isCounting: boolean;
   index: number;
 }) {
   const countDownMethod = useSelector(
     (state: WholeState) => state.timers.countDownMethod
   );
-  const isCounting = useSelector(
-    (state: WholeState) => state.timers.timers[index].isCounting
+  // const isCounting = useSelector(
+  //   (state: WholeState) => state.timers.timers[index].isCounting
+  // );
+  const timeRemaining = useSelector(
+    (state: WholeState) => state.timers.timers[index].timeRemaining
   );
+
+  // .timerButton {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 
   return (
     <div className={classes.timerWrapper}>
@@ -67,7 +78,9 @@ function TimerContent({
               variant='Circle'
               color='Start'
               onClick={functions.startTimer}
-              className={classes.timerButton}
+              className={`${
+                !timeRemaining ? 'hidden' : 'flex'
+              } items-center justify-center`}
             >
               <ion-icon name='play' />
             </Button>

@@ -23,6 +23,8 @@ const timerSlice = createSlice({
     },
 
     stopTimer(state, action: PayloadAction<{ timerId: string }>) {
+      console.log('stoooop');
+
       state.timers.find(
         (timer) => timer.id === action.payload.timerId
       )!.isCounting = false;
