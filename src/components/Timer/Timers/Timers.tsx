@@ -70,6 +70,7 @@ function Timers() {
     }
   };
 
+  // /////////////////////////////
   useEffect(() => {
     if (formatedTimers !== null) {
       dispatch(timerActions.setTimers(formatedTimers));
@@ -80,7 +81,7 @@ function Timers() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      <div className={classes.contentWrapper}>
+      <div className='max-w-3xl py-2 px-8 m-auto bg-white border border-solid border-grey-200 rounded-2xl dark:bg-grey-900 dark:border-grey-600'>
         {showForm && (
           <TimerForm
             modal={false}
