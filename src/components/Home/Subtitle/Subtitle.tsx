@@ -15,7 +15,9 @@ const Subtitle = function ({ type }: { type?: string }) {
         )}
       >
         Your To-dos{' '}
-        <span className='text-grey-900 dark:text-gray-50'>
+        <span
+          className={`text-grey-900 ${user && 'dark:text-gray-50'}`}
+        >
           and stuff UwU
         </span>
       </Link>
