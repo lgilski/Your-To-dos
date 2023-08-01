@@ -1,5 +1,4 @@
 import clsx from '../../../utils/clsx';
-import classes from './TaskComponent.module.css';
 
 import { useDispatch } from 'react-redux';
 
@@ -80,41 +79,12 @@ const CardElement = function ({
     }
   }, [editable]);
 
-  //   .checkBox ion-icon,
-  // .checkBox {
-  //   width: 20px;
-  //   height: 20px;
-  // }
-
-  // .checkBox {
-  //   cursor: pointer;
-  //   background-color: transparent;
-  //   border: 2px solid black;
-  //   border-radius: 4px;
-  //   transition: background-color 0.3s;
-  // }
-
-  // .done.checkBox {
-  //   /* background-color: var(--color-orange-first); */
-  //   background-color: var(--orange-400);
-  //   border: none;
-  // }
-
-  // .done.checkBox ion-icon {
-  //   opacity: 1;
-  // }
-
-  // .checkBox ion-icon {
-  //   color: #fff;
-  //   opacity: 0;
-  // }
-
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <li
           className={clsx(
-            'relative flex flex-row gap-1 w-[95%] pt-3 px-2 pb-2.5 mb-2 text-lg text-grey-900 break-words group bg-white border border-solid border-grey-200 rounded-lg shadow-sm hover:bg-grey-050 hover:shadow-md dark:hover:bg-grey-700 dark:bg-grey-800 dark:text-grey-050 dark:border-grey-600'
+            'relative flex flex-row gap-1 w-[95%] pt-3 px-2 pb-2.5 mb-2 text-lg text-grey-900 break-words group bg-white border border-solid border-grey-200 rounded-lg shadow-sm hover:bg-grey-050 hover:shadow-md dark:hover:bg-grey-700 dark:bg-grey-800 dark:text-grey-050 dark:border-grey-600 transition-colors duration-300'
           )}
           {...provided.dragHandleProps}
           {...provided.draggableProps}
@@ -124,15 +94,17 @@ const CardElement = function ({
           <button
             onClick={markAsDone}
             className={clsx(
-              classes.checkBox,
-              task.done && classes.done
+              'cursor-pointer  border-2 border-solid border-black dark:border-white rounded transition-colors w-5 h-5 [&_ion-icon]:w-5 [&_ion-icon]:h-5 [&_ion-icon]:text-white',
+              task.done
+                ? 'border-none [&_ion-icon]:opacity-100 bg-orange-400'
+                : 'border-2 [&_ion-icon]:opacity-0 bg-transparent'
             )}
           >
             <ion-icon name='checkmark-outline' />
           </button>
           <p
             className={clsx(
-              task.done && classes.doneText,
+              task.done && 'text-grey-400 line-through',
               `leading-[22px] h-full border-none text-lg w-[100%] resize-none font-['Roboto'] outline-none min-w-[40%] ${
                 editable && 'cursor-text'
               }`
