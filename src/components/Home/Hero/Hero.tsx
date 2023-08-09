@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../../config/firebase';
 
 function Hero() {
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   return (
     <section className='relative flex items-center h-[700px] bg-hero-pattern bg-cover bg-center'>
@@ -19,7 +19,7 @@ function Hero() {
           </p>
           <div className='flex gap-4 mt-8 max-[1200px]:w-[180px] max-[1200px]:flex-col max-[1200px]:mx-auto max-[1200px]:mt-8 max-[1200px]:text-center'>
             <Link
-              to={user ? '/cards' : '/auth/signup'}
+              to={userVerified ? '/cards' : '/auth/signup'}
               className='px-8 py-4 text-xl font-medium text-lime-green-900 no-underline bg-lime-green-300 rounded-full hover:text-lime-green-050 hover:bg-lime-green-600 duration-300'
             >
               Get started

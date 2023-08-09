@@ -15,7 +15,7 @@ function MainNavContent({
   showMobile: boolean;
   showMobileNav: () => void;
 }) {
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   const lessThan1100 = useMediaPredicate('(max-width: 1100px)');
 
@@ -68,7 +68,7 @@ function MainNavContent({
         >
           Weather
         </NavButton> */}
-        {!user && (
+        {!userVerified && (
           <NavButton
             onClick={lessThan1100 ? showMobileNav : undefined}
             className={classes.navListItem}
@@ -79,7 +79,7 @@ function MainNavContent({
             Log in
           </NavButton>
         )}
-        {!user && (
+        {!userVerified && (
           <NavButton
             onClick={lessThan1100 ? showMobileNav : undefined}
             className={classes.navListItem}
@@ -91,7 +91,7 @@ function MainNavContent({
             Sign up
           </NavButton>
         )}
-        {user && (
+        {userVerified && (
           <li>
             <Form action='/logout' method='post'>
               <Button

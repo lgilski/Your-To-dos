@@ -5,12 +5,12 @@ import LoginToGetAccess from '../components/common/LoginToGetAccess/LoginToGetAc
 import { auth } from '../config/firebase';
 
 function CardsPage() {
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   return (
     <section className='greyBg paddingBottom'>
-      {!user && <LoginToGetAccess />}
-      {user && (
+      {!userVerified && <LoginToGetAccess />}
+      {userVerified && (
         <SectionHeader
           className='pageTitleCenter paddingTop'
           subheader='Cards page'
@@ -18,7 +18,7 @@ function CardsPage() {
           type='medium'
         />
       )}
-      {user && <Cards />}
+      {userVerified && <Cards />}
     </section>
   );
 }

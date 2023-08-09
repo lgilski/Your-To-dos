@@ -27,8 +27,6 @@ function useStopwatch({
   let prevTime: number | undefined;
   let time = 0;
 
-  console.log(currentTime);
-
   const startStopwatch = function () {
     const innerTime = currentTime;
 

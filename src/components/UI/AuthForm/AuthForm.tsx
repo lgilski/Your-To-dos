@@ -18,20 +18,20 @@ function AuthForm({ mode }: { mode?: string }) {
   const navigation = useNavigation();
   const navigate = useNavigate();
 
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   const isSubmitting = navigation.state === 'submitting';
   const isLogin = mode === 'login';
 
   useEffect(() => {
-    if (user) {
+    if (userVerified) {
       navigate('/app/cards');
     }
-  }, [user, navigate]);
+  }, [userVerified, navigate]);
 
   return (
     <div className='max-w-[1200px] mt-16 mx-auto mb-20'>
-      {!user && (
+      {!userVerified && (
         <Form
           method='post'
           className='flex flex-col items-start max-w-[450px] p-6 mt-16 mx-auto text-grey-900 border border-solid border-lime-green-900 rounded-lg shadow-md'

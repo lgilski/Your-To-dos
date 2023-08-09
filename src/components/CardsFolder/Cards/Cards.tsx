@@ -156,10 +156,10 @@ const Cards = function () {
                   )}
                   {!isLoading && (
                     <>
-                      <h4 className='p-4 text-5xl text-yellow-900 text-center rounded-lg '>
+                      <h4 className='p-4 text-5xl text-yellow-600 text-center rounded-lg dark:text-yellow-500'>
                         There are no plans yet
                       </h4>
-                      <p className='text-lg mb-6'>
+                      <p className='text-lg mb-6 dark:text-grey-400'>
                         So why don&apos;t you make a new one?
                       </p>
                       <Button

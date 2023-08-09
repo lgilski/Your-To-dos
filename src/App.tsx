@@ -30,6 +30,7 @@ import { cardActions } from './store/card';
 
 import { getDatabase, ref, get, child } from 'firebase/database';
 import StopwatchPage from './pages/StopwatchPage';
+import CommunityPage from './pages/CommunityPage';
 
 const routes = [
   { index: true, element: <HomePage /> },
@@ -45,10 +46,7 @@ const routes = [
         path: 'stopwatch',
         element: <StopwatchPage />,
       },
-      {
-        path: 'logout',
-        action: logoutAction,
-      },
+
       {
         path: 'weather',
         element: <WeatherRoot />,
@@ -63,6 +61,14 @@ const routes = [
             element: <WeatherDetailPage />,
           },
         ],
+      },
+      {
+        path: 'community',
+        element: <CommunityPage />,
+      },
+      {
+        path: 'logout',
+        action: logoutAction,
       },
     ],
   },
@@ -100,7 +106,7 @@ function App() {
     dispatch(weatherActions.showOnCards(favorite));
 
     auth.onAuthStateChanged((user) => {
-      if (user?.uid) {
+      if (user?.uid && user.emailVerified) {
         dispatch(cardActions.setIsLoading(true));
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${user.uid}/cards`))

@@ -13,7 +13,7 @@ function SectionHeader({
   header: string;
   type: 'large' | 'medium';
 } & React.HtmlHTMLAttributes<HTMLDivElement>) {
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   return (
     <div className={className}>
@@ -26,7 +26,7 @@ function SectionHeader({
             type === 'large'
               ? 'text-5xl'
               : type === 'medium' && 'text-4xl'
-          } text-orange-900 ${user && 'dark:text-white'}`
+          } text-orange-900 ${userVerified && 'dark:text-white'}`
         )}
       >
         {header}

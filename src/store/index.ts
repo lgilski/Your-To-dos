@@ -7,6 +7,8 @@ import stopwatchReducer from './stopwatch';
 const initialState = {
   loading: true,
   isSidenavOpen: true,
+  areSettingsOpen: false,
+  currentSettingsPage: 'My account',
 };
 
 const dataSlice = createSlice({
@@ -19,6 +21,18 @@ const dataSlice = createSlice({
 
     isSidenavOpen(state) {
       state.isSidenavOpen = !state.isSidenavOpen;
+    },
+
+    openSettings(state) {
+      state.areSettingsOpen = true;
+    },
+
+    closeSettings(state) {
+      state.areSettingsOpen = false;
+    },
+
+    setCurrentSettingsPage(state, action) {
+      state.currentSettingsPage = action.payload;
     },
   },
 });

@@ -3,12 +3,12 @@ import { auth } from '../../../config/firebase';
 import clsx from '../../../utils/clsx';
 
 const Subtitle = function ({ type }: { type?: string }) {
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   return (
     <div>
       <Link
-        to={!user ? '/' : '/app/cards'}
+        to={!userVerified ? '/' : '/app/cards'}
         className={clsx(
           'font-extrabold text-orange-400 no-underline',
           type === 'small' ? 'text-2xl' : 'text-4xl'
@@ -16,7 +16,9 @@ const Subtitle = function ({ type }: { type?: string }) {
       >
         Your To-dos{' '}
         <span
-          className={`text-grey-900 ${user && 'dark:text-gray-50'}`}
+          className={`text-grey-900 ${
+            userVerified && 'dark:text-gray-50'
+          }`}
         >
           and stuff UwU
         </span>

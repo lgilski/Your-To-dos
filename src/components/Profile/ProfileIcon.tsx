@@ -1,0 +1,84 @@
+import { auth } from '@/config/firebase';
+import { useState } from 'react';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { toast } from 'react-toastify';
+import { updateProfile } from 'firebase/auth';
+
+const ProfileIcon = function ({ settings }: { settings?: boolean }) {
+  const user = auth.currentUser;
+
+  const [showDeleteImage, setShowDeleteImage] = useState(false);
+
+  const showDeleteImageHandler = function () {
+    if (settings) {
+      setShowDeleteImage(true);
+    }
+  };
+
+  const hideDeleteImageHandler = function () {
+    if (settings) {
+      setShowDeleteImage(false);
+    }
+  };
+
+  const deleteProfileImage = async function () {
+    const storage = getStorage();
+
+    const imgRef = ref(storage, `images/${user!.uid}`);
+
+    await deleteObject(imgRef);
+
+    updateProfile(user!, {
+      photoURL: '',
+    });
+
+    toast.success('Image has been successfully deleted!', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+  };
+
+  return (
+    <div className='relative'>
+      <div
+        className={`${
+          settings
+            ? 'w-[100px] h-[100px] min-w-[100px] min-h-[100px]'
+            : 'min-w-[32px] min-h-[32px] w-[32px] h-[32px]'
+        }  block rounded-full overflow-hidden border-2 border-solid border-orange-100  ${
+          !user?.photoURL &&
+          'bg-orange-400 [&_ion-icon]:w-full [&_ion-icon]:h-full [&_ion-icon]:translate-y-[6.25%] dark:[&_ion-icon]:text-black'
+        } ${user?.photoURL && 'flex justify-center'}`}
+        onMouseEnter={showDeleteImageHandler}
+        onMouseLeave={hideDeleteImageHandler}
+      >
+        {!user?.photoURL ? (
+          <ion-icon name='person' />
+        ) : (
+          <>
+            <img
+              className={`object-fit inline-block w-full h-full`}
+              src={user?.photoURL}
+            />
+            {showDeleteImage && user.photoURL && (
+              <button
+                className='border-none cursor-pointer absolute rounded-full p-1 bg-red-200 text-red-800 leading-none w-8 h-8 [&_ion-icon]:w-6 [&_ion-icon]:h-6 [&_ion-icon]:align-middle right-0 top-0 duration-300 hover:bg-red-300'
+                onClick={deleteProfileImage}
+              >
+                <ion-icon name='close-outline' />
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProfileIcon;

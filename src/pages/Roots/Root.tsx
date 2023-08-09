@@ -19,7 +19,7 @@ import clsx from '../../utils/clsx';
 
 import AppNavigationHorizontal from '../../components/UI/Nav/AppNavigationHorizontal/AppNavigationHorizontal';
 import { WholeState } from '@/types';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect } from 'react';
 
 function RootLayout({ routes }: { routes: any }) {
   const location = useLocation();
@@ -47,10 +47,14 @@ function RootLayout({ routes }: { routes: any }) {
   //   (state: WholeState) => state.timers.timers
   // );
 
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   useEffect(() => {
-    if (location.pathname.includes('app') && !isLoading && !user) {
+    if (
+      location.pathname.includes('app') &&
+      !isLoading &&
+      !userVerified
+    ) {
       navigate('/');
     }
   }, [isLoading]);
@@ -80,16 +84,16 @@ function RootLayout({ routes }: { routes: any }) {
   return (
     <>
       <ToastContainer />
-      {!user && <MainNavigation />}
-      {user && <AppNavigation />}
-      {user && <AppNavigationHorizontal />}
+      {!userVerified && <MainNavigation />}
+      {userVerified && <AppNavigation />}
+      {userVerified && <AppNavigationHorizontal />}
       <main
         className={clsx(
-          user && 'pl-[200px]',
-          !isSidenavOpen && user && 'pl-[58px]',
+          userVerified && 'pl-[200px]',
+          !isSidenavOpen && userVerified && 'pl-[58px]',
           'ease-in-out duration-300',
-          user && 'bg-grey-050 dark:bg-grey-800',
-          user && 'min-h-screen'
+          userVerified && 'bg-grey-050 dark:bg-grey-800',
+          userVerified && 'min-h-screen'
         )}
       >
         <SwitchTransition>
@@ -113,7 +117,7 @@ function RootLayout({ routes }: { routes: any }) {
           </CSSTransition>
         </SwitchTransition>
       </main>
-      {!user && <Footer />}
+      {!userVerified && <Footer />}
     </>
   );
 }

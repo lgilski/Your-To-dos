@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom';
 function HomePage() {
   const navigate = useNavigate();
 
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   useEffect(() => {
-    if (user) {
+    if (userVerified) {
       navigate('/app/cards');
     }
-  }, [user, navigate]);
+  }, [userVerified, navigate]);
 
   return (
     <>

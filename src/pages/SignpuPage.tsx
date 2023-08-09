@@ -29,11 +29,13 @@ export async function action({ request }: { request: Request }) {
   }
 
   try {
-    await createUserWithEmailAndPassword(
+    const response = await createUserWithEmailAndPassword(
       auth,
       authData.email!.toString().trim(),
       authData.password!.toString()
     );
+
+    console.log(response);
 
     // if (response.status === 422 || response.status === 401) {
     //   return response;

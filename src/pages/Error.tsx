@@ -12,7 +12,7 @@ import AppNavigationHorizontal from '../components/UI/Nav/AppNavigationHorizonta
 function ErrorPage() {
   const error = useRouteError();
 
-  const user = auth.currentUser;
+  const userVerified = auth.currentUser?.emailVerified;
 
   let title = 'An error occurred!';
   let message = 'Something went wrong!';
@@ -35,9 +35,9 @@ function ErrorPage() {
 
   return (
     <>
-      {!user && <MainNavigation />}
-      {user && <AppNavigation />}
-      {user && <AppNavigationHorizontal />}
+      {!userVerified && <MainNavigation />}
+      {userVerified && <AppNavigation />}
+      {userVerified && <AppNavigationHorizontal />}
       <PageContent title={title}>
         <p>{message}</p>
       </PageContent>

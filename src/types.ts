@@ -1,5 +1,10 @@
 export type WholeState = {
-  data: { loading: boolean; isSidenavOpen: boolean };
+  data: {
+    loading: boolean;
+    isSidenavOpen: boolean;
+    areSettingsOpen: boolean;
+    currentSettingsPage: string;
+  };
   cards: CardState;
   timers: TimerState;
   weather: WeatherState;
