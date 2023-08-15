@@ -52,12 +52,21 @@ function useChat({
   const db = getDatabase();
 
   const [messages, setMessages] = useState<
-    { message: string; date: any; sender: string }[] | []
+    | {
+        message: string;
+        date: any;
+        sender: string;
+        photoURL?: string;
+      }[]
+    | []
   >([]);
   const [requests, setRequests] = useState<Friend[] | []>([]);
   const [combinedId, setCombinedId] = useState<string>();
   const [friends, setFriends] = useState<Friend[] | []>([]);
-  const [currentFriend, setCurrentfriend] = useState<string>();
+  const [currentFriend, setCurrentfriend] = useState<{
+    displayName: string;
+    photoURL: string;
+  }>();
 
   const [displayAddFriendsModal, setDisplayAddFriendsModal] =
     useState(false);
@@ -137,13 +146,16 @@ function useChat({
         : friend.uid + user.uid;
 
     setCombinedId(combinedId);
-    setCurrentfriend(friend.displayName);
+    setCurrentfriend({
+      displayName: friend.displayName,
+      photoURL: friend.photoURL,
+    });
   };
 
   function sendMessage(e: React.FormEvent) {
     e.preventDefault();
 
-    get(child(ref(db), 'chats/' + combinedId));
+    if (messageRef!.current!.value === '') return;
 
     update(ref(db, 'chats/' + combinedId), {
       messages: [
@@ -224,9 +236,9 @@ function useChat({
 
     onValue(
       ref(db, 'chats/' + combinedId + '/messages'),
-      (messages) => {
-        if (messages.exists()) {
-          setMessages(messages.val());
+      (messagesData) => {
+        if (messagesData.exists()) {
+          setMessages(messagesData.val());
         } else {
           setMessages([]);
         }
