@@ -83,7 +83,7 @@ const ProfileIcon = function ({
           <>
             <img
               className={`object-cover inline-block w-full h-full`}
-              src={friend ? src!.toString() : user!.photoURL}
+              src={friend ? src?.toString() : user?.photoURL}
             />
             {showDeleteImage && user!.photoURL && (
               <button
