@@ -113,6 +113,8 @@ function ChatView() {
                   ? user.displayName
                   : currentFriend?.displayName;
 
+              console.log(photo);
+
               return (
                 <div
                   className={`flex px-4 py-0.5 gap-2 last:mb-2`}

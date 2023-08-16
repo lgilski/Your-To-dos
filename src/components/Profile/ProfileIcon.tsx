@@ -18,13 +18,21 @@ const ProfileIcon = function ({
 }) {
   const user = auth.currentUser;
 
-  // let photo;
+  let photo;
 
   // if (src) {
   //   photo = src;
   // }
 
   console.log(src);
+
+  if (friend && src) {
+    photo = src;
+  } else if (friend && !src) {
+    photo = null;
+  } else if (user?.photoURL) {
+    photo = user?.photoURL;
+  }
 
   const [showDeleteImage, setShowDeleteImage] = useState(false);
 
@@ -86,13 +94,15 @@ const ProfileIcon = function ({
         onMouseEnter={showDeleteImageHandler}
         onMouseLeave={hideDeleteImageHandler}
       >
-        {!user?.photoURL || (friend && !src) ? (
+        {}
+
+        {!photo ? (
           <ion-icon name='person' />
         ) : (
           <>
             <img
               className={`object-cover inline-block w-full h-full`}
-              src={src ? src?.toString() : user?.photoURL}
+              src={photo}
             />
             {showDeleteImage && user!.photoURL && (
               <button
