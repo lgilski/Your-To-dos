@@ -7,14 +7,24 @@ import { getDatabase, update, ref as dbRef } from 'firebase/database';
 
 const ProfileIcon = function ({
   settings,
+  friend,
   size,
   src,
 }: {
   settings?: boolean;
+  friend?: boolean;
   size?: 'medium' | 'semi-medium';
   src?: string;
 }) {
   const user = auth.currentUser;
+
+  // let photo;
+
+  // if (src) {
+  //   photo = src;
+  // }
+
+  console.log(src);
 
   const [showDeleteImage, setShowDeleteImage] = useState(false);
 
@@ -76,7 +86,7 @@ const ProfileIcon = function ({
         onMouseEnter={showDeleteImageHandler}
         onMouseLeave={hideDeleteImageHandler}
       >
-        {!user?.photoURL && !src ? (
+        {!user?.photoURL || (friend && !src) ? (
           <ion-icon name='person' />
         ) : (
           <>

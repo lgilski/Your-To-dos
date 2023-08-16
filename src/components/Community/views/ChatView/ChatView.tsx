@@ -39,7 +39,10 @@ function ChatView() {
       />
 
       <div className='flex flex-col'>
-        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[740px] py-4'>
+        <div
+          onScroll={functions.handleScroll}
+          className='flex flex-col dark:text-grey-200 overflow-y-scroll max-h-[740px] pt-4'
+        >
           {messages &&
             messages.map((message, index) => {
               const date = new Date(message.date).toLocaleDateString(
@@ -110,15 +113,17 @@ function ChatView() {
                   ? user.displayName
                   : currentFriend?.displayName;
 
-              console.log(onlyMessage);
-
               return (
                 <div
                   className={`flex px-4 py-0.5 gap-2 last:mb-2`}
                   key={message.date}
                 >
                   {!onlyMessage && (
-                    <ProfileIcon size='semi-medium' src={photo!} />
+                    <ProfileIcon
+                      size='semi-medium'
+                      friend
+                      src={photo!}
+                    />
                   )}
                   <div className='flex flex-col gap-1'>
                     {!onlyMessage && (

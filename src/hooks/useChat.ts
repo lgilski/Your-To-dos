@@ -71,6 +71,7 @@ function useChat({
     displayName: string;
     photoURL: string;
   }>();
+  const [atTheBottom, setAtTheBottom] = useState<boolean>();
 
   const [displayAddFriendsModal, setDisplayAddFriendsModal] =
     useState(false);
@@ -175,6 +176,13 @@ function useChat({
     setCurrentMessage('');
   }
 
+  // function handleScroll(e) {
+  //   setAtTheBottom(
+  //     e.target.scrollHeight - e.target.scrollTop ===
+  //       e.target.clientHeight
+  //   );
+  // }
+
   useEffect(() => {
     onValue(
       ref(
@@ -243,20 +251,26 @@ function useChat({
     onValue(
       ref(db, 'chats/' + combinedId + '/messages'),
       (messagesData) => {
+        // const bottom = atTheBottom;
+
         if (messagesData.exists()) {
           setMessages(messagesData.val());
         } else {
           setMessages([]);
         }
 
-        if (
-          messagesData.val()[messagesData.val().length - 1].sender ===
-          user.uid
-        )
-          dummy.current?.scrollIntoView({ behavior: 'smooth' });
+        // if (
+        //   (messagesData.exists() &&
+        //     messagesData.val()[messagesData.val().length - 1]
+        //       .sender !== user.uid) ||
+        //   !bottom
+        // )
+        //   return;
+
+        dummy.current?.scrollIntoView({ behavior: 'instant' });
       }
     );
-  }, [combinedId]);
+  }, [combinedId, atTheBottom]);
 
   return {
     currentFriend,
@@ -271,6 +285,7 @@ function useChat({
       ingnoreFriendRequest,
       goToChat,
       sendMessage,
+      // handleScroll,
     },
   };
 }

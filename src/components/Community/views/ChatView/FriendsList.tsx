@@ -41,7 +41,11 @@ function FriendsList({
                 key={friend.uid}
                 className='flex items-center gap-4 hover:bg-orange-200 px-2 py-2 rounded duration-300 cursor-pointer dark:hover:bg-grey-600'
               >
-                <ProfileIcon size='medium' src={friend.photoURL} />
+                <ProfileIcon
+                  size='medium'
+                  friend
+                  src={friend.photoURL}
+                />
                 <div className='text-2xl font-normal'>
                   {friend.displayName}
                 </div>
