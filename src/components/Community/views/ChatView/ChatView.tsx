@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 
 function ChatView() {
   const messageRef = useRef<HTMLInputElement | null>(null);
+  const dummy = useRef<HTMLDivElement | null>(null);
   const user = auth.currentUser;
 
   const [currentMessage, setCurrentMessage] = useState<
@@ -23,7 +24,7 @@ function ChatView() {
     friends,
     displayAddFriendsModal,
     functions,
-  } = useChat({ currentMessage, setCurrentMessage });
+  } = useChat({ currentMessage, setCurrentMessage, dummy });
 
   return (
     // w-[95%] h-[96%]
@@ -144,6 +145,7 @@ function ChatView() {
                 </div>
               );
             })}
+          <div ref={dummy} />
         </div>
         {currentFriend && (
           <form

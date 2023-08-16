@@ -12,7 +12,7 @@ import {
   set,
   update,
 } from 'firebase/database';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 async function getMyFriendRequestsOnce({
   user,
@@ -45,9 +45,11 @@ async function getMyFriendsOnce({
 function useChat({
   currentMessage,
   setCurrentMessage,
+  dummy,
 }: {
   currentMessage: string | undefined;
   setCurrentMessage: (a: any) => any;
+  dummy: RefObject<HTMLDivElement | null>;
 }) {
   // const navigate = useNavigation();
   const user = auth.currentUser!;
@@ -246,6 +248,7 @@ function useChat({
         } else {
           setMessages([]);
         }
+        dummy.current?.scrollIntoView({ behavior: 'smooth' });
       }
     );
   }, [combinedId]);
