@@ -2,8 +2,7 @@ import { auth } from '@/config/firebase';
 import ProfileIcon from '../../../Profile/ProfileIcon';
 import FriendsList from './FriendsList';
 import useChat from '@/hooks/useChat';
-import { useRef, useState } from 'react';
-import { child, get, getDatabase, ref } from 'firebase/database';
+import { useRef } from 'react';
 
 function ChatView() {
   const messageRef = useRef<HTMLInputElement | null>(null);
@@ -18,8 +17,6 @@ function ChatView() {
     functions,
   } = useChat({ messageRef });
 
-  console.log(messages);
-
   return (
     <div className='max-w-[95%] h-[96%] bg-white mx-auto rounded-2xl border border-solid border-grey-200 dark:border-grey-600 dark:bg-grey-850 duration-500 grid grid-cols-[300px_1fr_220px] overflow-hidden relative shadow-md'>
       {/* <div className='absolute w-full top-0 left-0 h-12 bg-green-500'>
@@ -32,16 +29,64 @@ function ChatView() {
       />
 
       <div className='flex flex-col'>
-        <div className='flex flex-col gap-2 dark:text-grey-200 overflow-auto max-h-[730px] '>
+        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[730px] '>
           {messages &&
-            messages.map((message) => {
+            messages.map((message, index) => {
               const date = new Date(message.date).toLocaleDateString(
                 'pl-PL'
               );
-              const time =
-                new Date(message.date).getHours() +
-                ':' +
-                new Date(message.date).getMinutes();
+
+              const hours = new Date(message.date).getHours();
+              let minutes: string | number = new Date(
+                message.date
+              ).getMinutes();
+
+              if (
+                new Date(message.date).getMinutes().toString()
+                  .length < 2
+              )
+                minutes =
+                  '0' +
+                  new Date(message.date).getMinutes().toString();
+
+              const time = hours + ':' + minutes;
+
+              let onlyMessage = false;
+              let nextDiff;
+
+              if (messages[index - 1]) {
+                const before = Math.floor(
+                  new Date(messages[index - 1].date).getTime() /
+                    1000 /
+                    60
+                );
+                const now = Math.floor(
+                  new Date(message.date).getTime() / 1000 / 60
+                );
+                const diff = now - before;
+
+                if (
+                  diff <= 3 &&
+                  messages[index - 1].sender === message.sender
+                ) {
+                  onlyMessage = true;
+                } else {
+                  onlyMessage = false;
+                }
+              }
+
+              if (messages[index + 1]) {
+                const now = Math.floor(
+                  new Date(message.date).getTime() / 1000 / 60
+                );
+                const after = Math.floor(
+                  new Date(messages[index + 1].date).getTime() /
+                    1000 /
+                    60
+                );
+
+                nextDiff = after - now;
+              }
 
               let photo: string | null | undefined =
                 currentFriend?.photoURL;
@@ -55,22 +100,37 @@ function ChatView() {
                   ? user.displayName
                   : currentFriend?.displayName;
 
+              console.log(onlyMessage);
+
               return (
                 <div
-                  className='flex px-4 py-1 gap-2 last:mb-2'
+                  className={`flex px-4 py-0.5 gap-2 last:mb-2`}
                   key={message.date}
                 >
-                  <ProfileIcon size='semi-medium' src={photo!} />
+                  {!onlyMessage && (
+                    <ProfileIcon size='semi-medium' src={photo!} />
+                  )}
                   <div className='flex flex-col gap-1'>
-                    <div className='flex items-baseline gap-2'>
-                      <div className='text-grey-100 font-medium'>
-                        {sentBy}
+                    {!onlyMessage && (
+                      <div className='flex items-baseline gap-2'>
+                        <div className='text-grey-100 font-medium'>
+                          {sentBy}
+                        </div>
+                        <p className='text-xs text-grey-400'>
+                          {date} {time}
+                        </p>
                       </div>
-                      <p className='text-xs text-grey-400'>
-                        {date} {time}
-                      </p>
-                    </div>
-                    <p>{message.message}</p>
+                    )}
+                    <p
+                      className={`${onlyMessage && 'pl-12'} ${
+                        messages[index + 1] &&
+                        messages[index + 1].sender !==
+                          message.sender &&
+                        'mb-4'
+                      } ${nextDiff! >= 3 && 'mb-4'}`}
+                    >
+                      {message.message}
+                    </p>
                   </div>
                 </div>
               );
