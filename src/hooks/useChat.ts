@@ -43,9 +43,11 @@ async function getMyFriendsOnce({
 }
 
 function useChat({
-  messageRef,
+  currentMessage,
+  setCurrentMessage,
 }: {
-  messageRef: React.RefObject<HTMLInputElement | null>;
+  currentMessage: string | undefined;
+  setCurrentMessage: (a: any) => any;
 }) {
   // const navigate = useNavigation();
   const user = auth.currentUser!;
@@ -155,18 +157,20 @@ function useChat({
   function sendMessage(e: React.FormEvent) {
     e.preventDefault();
 
-    if (messageRef!.current!.value === '') return;
+    if (!currentMessage) return;
 
     update(ref(db, 'chats/' + combinedId), {
       messages: [
         ...messages,
         {
-          message: messageRef!.current!.value,
+          message: currentMessage,
           sender: user.uid,
           date: serverTimestamp(),
         },
       ],
     });
+
+    setCurrentMessage('');
   }
 
   useEffect(() => {

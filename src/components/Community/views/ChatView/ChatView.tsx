@@ -2,11 +2,19 @@ import { auth } from '@/config/firebase';
 import ProfileIcon from '../../../Profile/ProfileIcon';
 import FriendsList from './FriendsList';
 import useChat from '@/hooks/useChat';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function ChatView() {
   const messageRef = useRef<HTMLInputElement | null>(null);
   const user = auth.currentUser;
+
+  const [currentMessage, setCurrentMessage] = useState<
+    string | undefined
+  >();
+
+  function onMessageChange() {
+    setCurrentMessage(messageRef.current?.value);
+  }
 
   const {
     currentFriend,
@@ -15,10 +23,11 @@ function ChatView() {
     friends,
     displayAddFriendsModal,
     functions,
-  } = useChat({ messageRef });
+  } = useChat({ currentMessage, setCurrentMessage });
 
   return (
-    <div className='max-w-[95%] h-[96%] bg-white mx-auto rounded-2xl border border-solid border-grey-200 dark:border-grey-600 dark:bg-grey-850 duration-500 grid grid-cols-[300px_1fr_220px] overflow-hidden relative shadow-md'>
+    // w-[95%] h-[96%]
+    <div className=' w-[1600px] h-[800px] bg-white mx-auto rounded-2xl border border-solid border-grey-200 dark:border-grey-600 dark:bg-grey-850 duration-500 grid grid-cols-[300px_1fr_220px] overflow-hidden relative shadow-md'>
       {/* <div className='absolute w-full top-0 left-0 h-12 bg-green-500'>
         AAAAAAAAAA
       </div> */}
@@ -29,7 +38,7 @@ function ChatView() {
       />
 
       <div className='flex flex-col'>
-        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[730px] '>
+        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[700px] '>
           {messages &&
             messages.map((message, index) => {
               const date = new Date(message.date).toLocaleDateString(
@@ -113,7 +122,7 @@ function ChatView() {
                   <div className='flex flex-col gap-1'>
                     {!onlyMessage && (
                       <div className='flex items-baseline gap-2'>
-                        <div className='text-grey-100 font-medium'>
+                        <div className=' dark:text-grey-100 font-medium'>
                           {sentBy}
                         </div>
                         <p className='text-xs text-grey-400'>
@@ -139,10 +148,13 @@ function ChatView() {
         {currentFriend && (
           <form
             onSubmit={functions.sendMessage}
+            // w-full / absolute bottom-0 left-0 w-[70%]+
             className='w-full mt-auto px-4 pb-2'
           >
             <input
               ref={messageRef}
+              value={currentMessage}
+              onChange={onMessageChange}
               className='w-full border-none bg-orange-200 text-lg p-1 rounded placeholder:text-orange-700'
               placeholder={`You are typing with ${currentFriend.displayName}`}
             />
