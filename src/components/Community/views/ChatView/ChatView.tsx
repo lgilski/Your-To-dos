@@ -39,7 +39,7 @@ function ChatView() {
       />
 
       <div className='flex flex-col'>
-        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[700px] '>
+        <div className='flex flex-col dark:text-grey-200 overflow-auto max-h-[740px] py-4'>
           {messages &&
             messages.map((message, index) => {
               const date = new Date(message.date).toLocaleDateString(
@@ -137,7 +137,7 @@ function ChatView() {
                         messages[index + 1].sender !==
                           message.sender &&
                         'mb-4'
-                      } ${nextDiff! >= 3 && 'mb-4'}`}
+                      } ${nextDiff! > 3 && 'mb-4'}`}
                     >
                       {message.message}
                     </p>

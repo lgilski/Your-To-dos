@@ -248,7 +248,12 @@ function useChat({
         } else {
           setMessages([]);
         }
-        dummy.current?.scrollIntoView({ behavior: 'smooth' });
+
+        if (
+          messagesData.val()[messagesData.val().length - 1].sender ===
+          user.uid
+        )
+          dummy.current?.scrollIntoView({ behavior: 'smooth' });
       }
     );
   }, [combinedId]);
