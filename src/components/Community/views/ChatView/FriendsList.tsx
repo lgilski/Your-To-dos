@@ -47,7 +47,7 @@ function FriendsList({
     setCurrentFriendsListSection: (e: any) => void;
   };
 }) {
-  console.log(requests.length);
+  console.log(requests);
 
   return (
     <div className='dark:bg-inherit flex flex-col h-full overflow-y-auto relative'>
@@ -106,6 +106,8 @@ function FriendsList({
         {requests.length > 0 &&
           friendsListSection === 'Requests' &&
           requests.map((request) => {
+            console.log(request);
+
             return (
               <ChatRequest
                 key={request.uid}

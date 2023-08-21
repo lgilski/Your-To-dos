@@ -11,6 +11,8 @@ function ChatRequest({
     ingnoreFriendRequest: (sentRequest: Friend) => Promise<void>;
   };
 }) {
+  console.log(request);
+
   return (
     <div className='flex items-center p-2 justify-between'>
       <div className='flex items-center gap-4'>
