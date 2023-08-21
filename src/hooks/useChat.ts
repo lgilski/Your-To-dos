@@ -1,5 +1,5 @@
 import { auth } from '@/config/firebase';
-import { Friend } from '@/types';
+import { Friend, Message, UserChat } from '@/types';
 import { User } from 'firebase/auth';
 import {
   Database,
@@ -9,7 +9,6 @@ import {
   onValue,
   ref,
   serverTimestamp,
-  set,
   update,
 } from 'firebase/database';
 import { RefObject, useEffect, useState } from 'react';
@@ -51,27 +50,21 @@ function useChat({
   setCurrentMessage: (a: any) => any;
   dummy: RefObject<HTMLDivElement | null>;
 }) {
-  // const navigate = useNavigation();
   const user = auth.currentUser!;
   const db = getDatabase();
 
-  const [messages, setMessages] = useState<
-    | {
-        message: string;
-        date: any;
-        sender: string;
-        photoURL?: string;
-      }[]
-    | []
-  >([]);
+  const [messages, setMessages] = useState<Message[] | []>([]);
   const [requests, setRequests] = useState<Friend[] | []>([]);
-  const [combinedId, setCombinedId] = useState<string>();
+  const [combinedId, setCombinedId] = useState<string | null>();
   const [friends, setFriends] = useState<Friend[] | []>([]);
-  const [currentFriend, setCurrentfriend] = useState<{
-    displayName: string;
-    photoURL: string;
-  }>();
-  const [atTheBottom, setAtTheBottom] = useState<boolean>();
+  const [chats, setChats] = useState<UserChat[] | []>([]);
+  const [friendsListSection, setFriendsListSection] = useState<
+    'All' | 'Requests' | 'Add friend'
+  >('All');
+  const [currentFriend, setCurrentfriend] = useState<Friend | null>(
+    null
+  );
+  // const [atTheBottom, setAtTheBottom] = useState<boolean>();
 
   const [displayAddFriendsModal, setDisplayAddFriendsModal] =
     useState(false);
@@ -104,7 +97,7 @@ function useChat({
 
     update(ref(db, 'usersPublicData/' + user?.uid), {
       requests: [...requestWithoutAcceptedArray],
-      friends: [sentRequest, ...currentFriendsArray],
+      friends: [{ uid: sentRequest.uid }, ...currentFriendsArray],
     });
 
     const senderFriends = await get(
@@ -131,9 +124,7 @@ function useChat({
     return;
   };
 
-  const ingnoreFriendRequest = async function (sentRequest: {
-    uid: string;
-  }) {
+  const ingnoreFriendRequest = async function (sentRequest: Friend) {
     const myRequests = await getMyFriendRequestsOnce({ user, db });
     const requestWithoutRejected = myRequests
       .val()
@@ -145,22 +136,65 @@ function useChat({
   };
 
   const goToChat = async function (friend: Friend) {
-    const combinedId =
+    const combinedIdInner =
       user.uid > friend.uid
         ? user.uid + friend.uid
         : friend.uid + user.uid;
 
-    setCombinedId(combinedId);
+    setCombinedId(combinedIdInner);
     setCurrentfriend({
       displayName: friend.displayName,
       photoURL: friend.photoURL,
+      uid: friend.uid,
     });
+
+    // const chatData = await get(
+    //   child(
+    //     ref(db),
+    //     'userChats/' + friend!.uid + '/' + combinedIdInner
+    //   )
+    // );
+
+    // console.log(chatData.exists());
+
+    // console.log(friend.uid, user.uid);
+
+    // if (!chatData.exists()) {
+    //   await update(
+    //     ref(db, 'userChats/' + user.uid + '/' + combinedIdInner),
+    //     {
+    //       userInfo: {
+    //         uid: currentFriend?.uid,
+    //         displayName: currentFriend?.displayName,
+    //         // userName: currentFriend?.userName,
+    //         photoURL: currentFriend?.photoURL || null,
+    //       },
+    //       date: serverTimestamp(),
+    //     }
+    //   );
+    //   console.log('owo');
+    //   await update(
+    //     ref(db, 'userChats/' + friend!.uid + '/' + combinedIdInner),
+    //     {
+    //       userInfo: {
+    //         uid: user?.uid,
+    //         displayName: user?.displayName,
+    //         // userName: userPublicData.val().userName,
+    //         photoURL: user?.photoURL || null,
+    //       },
+    //       date: serverTimestamp(),
+    //     }
+    //   );
+    //   console.log('uwu');
+    // }
   };
 
   function sendMessage(e: React.FormEvent) {
     e.preventDefault();
 
     if (!currentMessage) return;
+
+    setCurrentMessage('');
 
     update(ref(db, 'chats/' + combinedId), {
       messages: [
@@ -173,7 +207,40 @@ function useChat({
       ],
     });
 
-    setCurrentMessage('');
+    // get(child(ref(db), 'usersPublicData/' + user.uid)).then(
+    //   (userPublicData) => {}
+    // );
+    update(
+      ref(db, 'userChats/' + currentFriend!.uid + '/' + combinedId),
+      {
+        userInfo: {
+          uid: user?.uid,
+          displayName: user?.displayName,
+          // userName: userPublicData.val().userName,
+          photoURL: user?.photoURL,
+        },
+        date: serverTimestamp(),
+      }
+    );
+    update(ref(db, 'userChats/' + user.uid + '/' + combinedId), {
+      userInfo: {
+        uid: currentFriend?.uid,
+        displayName: currentFriend?.displayName,
+        // userName: currentFriend?.userName,
+        photoURL: currentFriend?.photoURL || null,
+      },
+      date: serverTimestamp(),
+    });
+  }
+
+  function goToFriendsList() {
+    setCurrentfriend(null);
+    setMessages([]);
+    setCombinedId(null);
+  }
+
+  function setCurrentFriendsListSection(e) {
+    setFriendsListSection(e.target.innerText);
   }
 
   // function handleScroll(e) {
@@ -194,6 +261,8 @@ function useChat({
 
         if (myFriends) {
           myFriends.forEach(async (friend: { uid: string }) => {
+            console.log(friend);
+
             const requestData = await get(
               child(ref(db), 'usersPublicData/' + friend?.uid)
             );
@@ -204,6 +273,8 @@ function useChat({
               )
             )
               return;
+
+            console.log(requestData.val());
 
             setFriends((prevState: any) => [
               requestData.val(),
@@ -259,6 +330,8 @@ function useChat({
           setMessages([]);
         }
 
+        // console.log(friends.sort((a,b) => ));
+
         // if (
         //   (messagesData.exists() &&
         //     messagesData.val()[messagesData.val().length - 1]
@@ -266,18 +339,28 @@ function useChat({
         //   !bottom
         // )
         //   return;
-
-        dummy.current?.scrollIntoView({ behavior: 'instant' });
       }
     );
-  }, [combinedId, atTheBottom]);
+  }, [combinedId]);
+
+  useEffect(() => {
+    dummy.current?.scrollIntoView({ behavior: 'instant' });
+  }, [messages]);
+
+  useEffect(() => {
+    onValue(ref(db, 'userChats/' + user.uid), (userChat) => {
+      if (userChat.exists()) setChats(Object.values(userChat.val()));
+    });
+  }, []);
 
   return {
     currentFriend,
     messages,
+    chats,
     requests,
     friends,
     displayAddFriendsModal,
+    friendsListSection,
     functions: {
       closeAddFriendsModal,
       openAddFriendsModal,
@@ -285,6 +368,8 @@ function useChat({
       ingnoreFriendRequest,
       goToChat,
       sendMessage,
+      goToFriendsList,
+      setCurrentFriendsListSection,
       // handleScroll,
     },
   };

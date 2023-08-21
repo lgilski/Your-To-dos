@@ -7,7 +7,6 @@ import Input from '../../common/Input/Input';
 import { createPortal } from 'react-dom';
 import CloseButton from '../../common/CloseButton/CloseButton';
 import clsx from '../../../utils/clsx';
-// import { toast } from 'react-toastify';
 import { cardActions } from '../../../store/card';
 import { WholeState } from '@/types';
 

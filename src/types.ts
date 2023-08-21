@@ -217,7 +217,24 @@ export type Hour = {
 
 export type Friend = {
   displayName: string;
-  userName: string;
+  userName?: string;
   photoURL: string;
   uid: string;
+};
+
+export type Message = {
+  message: string;
+  date: number;
+  sender: string;
+  photoURL?: string;
+};
+
+export type UserChat = {
+  userInfo: {
+    displayName: string;
+    userName: string;
+    uid: string;
+    photoURL: string;
+  };
+  date: number;
 };

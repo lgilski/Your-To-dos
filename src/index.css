@@ -152,22 +152,22 @@
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: var(--orange-300) var(--orange-100);
+  scrollbar-color: var(--orange-300) inherit;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 16px;
+  width: 8px;
   /* display: none; */
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--orange-100);
+  background: inherit;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--orange-300);
-  border: 3px solid var(--orange-100);
+  border: 1px solid inherit;
   border-radius: 12px;
 }
 

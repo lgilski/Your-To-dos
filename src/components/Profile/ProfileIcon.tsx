@@ -20,12 +20,6 @@ const ProfileIcon = function ({
 
   let photo;
 
-  // if (src) {
-  //   photo = src;
-  // }
-
-  console.log(src);
-
   if (friend && src) {
     photo = src;
   } else if (friend && !src) {
