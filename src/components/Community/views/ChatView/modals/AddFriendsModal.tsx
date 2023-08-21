@@ -94,7 +94,7 @@ function AddFriendsModal({
             type='text'
             id='friendName'
             name='friendName'
-            className='border border-lime-green-800 bg-lime-green-100 rounded py-1 px-2 text-base mb-4'
+            className='border lowercase border-lime-green-800 bg-lime-green-100 rounded py-1 px-2 text-base mb-4'
           />
           {/* <Button
             disabled={isSubmitting}

@@ -5,7 +5,6 @@ import { useRef, useState } from 'react';
 import ChatsList from './views/ChatView/ChatsList';
 import ChatMessage from './views/ChatView/ChatMessage';
 import ChatInput from './views/ChatView/ChatInput';
-import ChatRequest from './views/ChatView/ChatRequest';
 
 function Chat() {
   const messageRef = useRef<HTMLInputElement | null>(null);
@@ -32,6 +31,8 @@ function Chat() {
   } = useChat({ currentMessage, setCurrentMessage, dummy });
 
   const sortedChats = chats.sort((a, b) => b.date - a.date);
+
+  console.log(friendsListSection);
 
   return (
     <div className=' w-[1600px] h-[800px] bg-white mx-auto rounded-2xl border border-solid border-grey-200 dark:border-grey-600 dark:bg-grey-850 duration-500 grid grid-cols-[300px_1fr] overflow-hidden relative shadow-md'>

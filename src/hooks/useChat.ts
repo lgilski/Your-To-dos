@@ -240,7 +240,9 @@ function useChat({
   }
 
   function setCurrentFriendsListSection(e) {
-    setFriendsListSection(e.target.innerText);
+    console.log(e.target.innerText.split('\n')[0]);
+
+    setFriendsListSection(e.target.innerText.split('\n')[0]);
   }
 
   // function handleScroll(e) {
