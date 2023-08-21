@@ -14,7 +14,7 @@ function FriendsNavButton({
   return (
     <button
       onClick={handler}
-      className={`border-none rounded-lg px-2 py-1 text-xl font-semibold cursor-pointer ${
+      className={`relative border-none rounded-lg px-2 py-1 text-xl font-semibold cursor-pointer ${
         friendsListSection === children
           ? 'bg-orange-100 dark:bg-grey-700'
           : 'bg-orange-050 dark:bg-grey-800'
@@ -47,6 +47,8 @@ function FriendsList({
     setCurrentFriendsListSection: (e: any) => void;
   };
 }) {
+  console.log(requests.length);
+
   return (
     <div className='dark:bg-inherit flex flex-col h-full overflow-y-auto relative'>
       <div className='bg-inherit py-4 px-8 border-x-0 border-t-0 border-b border-solid dark:border-grey-600 border-grey-200 w-full mx-auto flex gap-4'>
@@ -61,6 +63,11 @@ function FriendsList({
           handler={functions.setCurrentFriendsListSection}
         >
           Requests
+          {requests.length > 0 && (
+            <p className='absolute top-[-8px] right-[-8px] bg-orange-500 rounded-full text-sm w-5'>
+              {requests.length < 10 ? requests.length : '+9'}
+            </p>
+          )}
         </FriendsNavButton>
         <button
           onClick={functions.openAddFriendsModal}
