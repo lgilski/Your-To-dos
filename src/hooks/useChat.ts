@@ -261,8 +261,6 @@ function useChat({
 
         if (myFriends) {
           myFriends.forEach(async (friend: { uid: string }) => {
-            console.log(friend);
-
             const requestData = await get(
               child(ref(db), 'usersPublicData/' + friend?.uid)
             );
@@ -273,8 +271,6 @@ function useChat({
               )
             )
               return;
-
-            console.log(requestData.val());
 
             setFriends((prevState: any) => [
               requestData.val(),
