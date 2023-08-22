@@ -27,7 +27,10 @@ function AddFriendsModal({
     const users = await get(child(ref(db), 'usersPublicData'));
 
     users.forEach(function (user: any) {
-      if (user.val().userName === e.target[0].value) {
+      if (
+        user.val().userName === e.target[0].value &&
+        user.val().uid !== addingUser?.uid
+      ) {
         get(
           child(ref(db), 'usersPublicData/' + user.key + '/requests')
         )

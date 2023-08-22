@@ -21,6 +21,7 @@ function Chat() {
 
   const {
     currentFriend,
+    searchedFriend,
     chats,
     messages,
     requests,
@@ -44,6 +45,7 @@ function Chat() {
       <div className='flex flex-col'>
         {!currentFriend && (
           <FriendsList
+            searchedFriend={searchedFriend}
             requests={requests}
             friendsListSection={friendsListSection}
             friends={friends}

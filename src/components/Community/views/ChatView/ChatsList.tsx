@@ -39,7 +39,11 @@ function ChatsList({
       <div className='bg-inherit py-4 px-4 border-x-0 border-t-0 border-b border-solid dark:border-grey-600 border-grey-200 w-full mx-auto'>
         <button
           onClick={functions.goToFriendsList}
-          className='border-none bg-inherit dark:text-grey-100 rounded-lg px-2 py-1 text-xl w-full font-semibold cursor-pointer duration-300 hover:bg-orange-100 dark:hover:bg-grey-600 text-left [&_ion-icon]:w-5 [&_ion-icon]:h-5 flex items-center gap-2'
+          className={`border-none ${
+            !currentFriend
+              ? 'dark:bg-grey-700 bg-orange-200'
+              : 'bg-inherit'
+          } dark:text-grey-100 rounded-lg px-2 py-1 text-xl w-full font-semibold cursor-pointer duration-300 hover:bg-orange-100 dark:hover:bg-grey-600 text-left [&_ion-icon]:w-5 [&_ion-icon]:h-5 flex items-center gap-2`}
         >
           <ion-icon name='people' /> Friends
         </button>

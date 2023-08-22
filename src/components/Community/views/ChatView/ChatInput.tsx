@@ -22,7 +22,7 @@ function ChatInput({
         ref={messageRef}
         value={currentMessage}
         onChange={onMessageChange}
-        className='w-full border-none bg-orange-200 text-lg p-1 rounded placeholder:text-orange-700'
+        className='w-full border-none bg-orange-200 text-lg py-1 px-2 rounded placeholder:text-orange-700 focus:outline-none'
         placeholder={`You are typing with ${displayName}`}
       />
     </form>

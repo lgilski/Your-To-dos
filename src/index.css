@@ -172,10 +172,8 @@
 }
 
 html {
-  /* font-family: 'Rubik', sans-serif; */
   overflow-x: hidden;
   font-family: Roboto, sans-serif;
-  /* overflow-y: scroll; */
 }
 
 body {
@@ -185,7 +183,6 @@ body {
 
 #root {
   min-height: 100vh;
-  /* background-color: red; */
 }
 
 .darkSection {

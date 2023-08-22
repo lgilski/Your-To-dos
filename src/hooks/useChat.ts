@@ -53,10 +53,15 @@ function useChat({
   const user = auth.currentUser!;
   const db = getDatabase();
 
+  // Move all these states to REDUX
+
   const [messages, setMessages] = useState<Message[] | []>([]);
   const [requests, setRequests] = useState<Friend[] | []>([]);
   const [combinedId, setCombinedId] = useState<string | null>();
   const [friends, setFriends] = useState<Friend[] | []>([]);
+  const [searchedFriend, setSearchedFriend] = useState<string | null>(
+    null
+  );
   const [chats, setChats] = useState<UserChat[] | []>([]);
   const [friendsListSection, setFriendsListSection] = useState<
     'All' | 'Requests' | 'Add friend'
@@ -239,10 +244,14 @@ function useChat({
     setCombinedId(null);
   }
 
-  function setCurrentFriendsListSection(e) {
-    console.log(e.target.innerText.split('\n')[0]);
+  function setCurrentFriendsListSection(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    setFriendsListSection(e.target.innerText);
+  }
 
-    setFriendsListSection(e.target.innerText.split('\n')[0]);
+  function setCurrentSearchedFriend(e) {
+    setSearchedFriend(e.target.value);
   }
 
   // function handleScroll(e) {
@@ -353,6 +362,7 @@ function useChat({
 
   return {
     currentFriend,
+    searchedFriend,
     messages,
     chats,
     requests,
@@ -368,6 +378,7 @@ function useChat({
       sendMessage,
       goToFriendsList,
       setCurrentFriendsListSection,
+      setCurrentSearchedFriend,
       // handleScroll,
     },
   };
