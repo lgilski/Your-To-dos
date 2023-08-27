@@ -3,6 +3,7 @@ import timerReducer from './timer';
 import weatherReducer from './weather';
 import cardReducer from './card';
 import stopwatchReducer from './stopwatch';
+import chatReducer from './chat';
 
 const initialState = {
   loading: true,
@@ -44,6 +45,7 @@ const store = configureStore({
     timers: timerReducer,
     weather: weatherReducer,
     stopwatch: stopwatchReducer,
+    chat: chatReducer,
   },
 });
 

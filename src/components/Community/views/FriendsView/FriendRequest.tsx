@@ -1,7 +1,7 @@
 import ProfileIcon from '@/components/Profile/ProfileIcon';
 import { Friend } from '@/types';
 
-function ChatRequest({
+function FriendRequest({
   request,
   handlers,
 }: {
@@ -37,4 +37,4 @@ function ChatRequest({
   );
 }
 
-export default ChatRequest;
+export default FriendRequest;

@@ -1,53 +1,44 @@
-import { User } from 'firebase/auth';
+import { auth } from '@/config/firebase';
+import { Friend, Message } from '@/types';
+
+function calculateDateDifferenceInDays(targetDate: Date) {
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+  const timeDifference = targetDate.getTime() - currentDate.getTime();
+  const daysDifference = Math.floor(
+    timeDifference / (1000 * 60 * 60 * 24)
+  );
+
+  return daysDifference;
+}
+
+function addLeadingZero(num: number) {
+  return num < 10 ? '0' + num : String(num);
+}
 
 function formatMessageData(
-  message: {
-    message: string;
-    date: any;
-    sender: string;
-    photoURL?: string | undefined;
-  },
-  messages: {
-    message: string;
-    date: any;
-    sender: string;
-    photoURL?: string | undefined;
-  }[],
+  message: Message,
+  messages: Message[],
   index: number,
-  currentFriend:
-    | { displayName: string; photoURL: string; uid: string }
-    | null
-    | undefined,
-  user: User | null
+  currentFriend: Friend | null
 ) {
+  const user = auth.currentUser;
+
   const date = new Date(message.date).toLocaleDateString('pl-PL');
   let dateToDisplay = date;
 
-  const today = new Date().toLocaleDateString('pl-PL');
+  const dateDifferenceInDays = calculateDateDifferenceInDays(
+    new Date(message.date)
+  );
 
-  if (
-    date.split('.')[2] === today.split('.')[2] &&
-    date.split('.')[1] === today.split('.')[1]
-  ) {
-    if (
-      Number(today.split('.')[0]) - Number(date.split('.')[0]) ===
-      0
-    ) {
-      dateToDisplay = 'Today at';
-    }
-    if (
-      Number(today.split('.')[0]) - Number(date.split('.')[0]) ===
-      1
-    ) {
-      dateToDisplay = 'Yesterday at';
-    }
+  if (dateDifferenceInDays === -1) {
+    dateToDisplay = 'Yesterday at';
+  } else if (dateDifferenceInDays === 0) {
+    dateToDisplay = 'Today at';
   }
 
   const hours = new Date(message.date).getHours();
-  let minutes: string | number = new Date(message.date).getMinutes();
-
-  if (new Date(message.date).getMinutes().toString().length < 2)
-    minutes = '0' + new Date(message.date).getMinutes().toString();
+  const minutes = addLeadingZero(new Date(message.date).getMinutes());
 
   const time = hours + ':' + minutes;
 

@@ -1,0 +1,49 @@
+import { useSelector } from 'react-redux';
+import ChatMessage from './ChatMessage';
+import { WholeState } from '@/types';
+
+function ChatView({ onSubmit, onMessageChange, dummy, value }) {
+  const myMessages = useSelector(
+    (state: WholeState) => state.chat.myMessages
+  );
+  const currentFriend = useSelector(
+    (state: WholeState) => state.chat.currentFriend
+  );
+
+  return (
+    <>
+      {myMessages.length > 0 && (
+        <div
+          // onScroll={functions.handleScroll}
+          className='flex flex-col dark:text-grey-200 overflow-y-scroll max-h-[740px] pt-4'
+        >
+          {myMessages.map((message, index) => {
+            return (
+              <ChatMessage
+                index={index}
+                message={message}
+                key={message.date}
+              />
+            );
+          })}
+          <div ref={dummy} />
+        </div>
+      )}
+      {currentFriend && (
+        <form
+          onSubmit={onSubmit}
+          className='w-full mt-auto px-4 pb-2'
+        >
+          <input
+            value={value}
+            onChange={onMessageChange}
+            className='w-full border-none bg-orange-200 text-lg py-1 px-2 rounded placeholder:text-orange-700 focus:outline-none'
+            placeholder={`You are typing with ${currentFriend.displayName}`}
+          />
+        </form>
+      )}
+    </>
+  );
+}
+
+export default ChatView;

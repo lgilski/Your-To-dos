@@ -1,5 +1,5 @@
 import { StopwatchState } from '@/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: StopwatchState = {
   isCounting: false,

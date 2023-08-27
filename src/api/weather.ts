@@ -1,4 +1,4 @@
-import { CardState, ForecastData, WeatherData } from '@/types';
+import { ForecastData, WeatherData } from '@/types';
 
 export async function fetchWeather({
   city,
@@ -15,13 +15,11 @@ export async function fetchWeather({
     const data = await response.json();
 
     if (data?.error) {
-      console.log(data.error);
       return data.error;
     }
 
     return data;
   } catch (err: any) {
-    console.log(err);
     return err;
   }
 }
@@ -44,17 +42,4 @@ export async function fetchForecast({
   }
 
   return data;
-}
-
-export async function getCardsData(uid: string): Promise<CardState> {
-  const cardsResponse = await fetch(
-    import.meta.env.VITE_FIREBASE_LINK +
-      'users/' +
-      uid +
-      '/cards.json'
-  );
-
-  const cardsData = await cardsResponse.json();
-
-  return cardsData;
 }

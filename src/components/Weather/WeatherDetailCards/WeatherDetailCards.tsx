@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import WeatherDetailCard from '../WeatherDetailCard/WeatherDetailCard';
-import { fetchForecast } from '../../../api/api';
+import { fetchForecast } from '../../../api/weather';
 
 import classes from './WeatherDetailCards.module.css';
 import Button from '../../common/Button/Button';

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import classes from './WeatherCard.module.css';
-import { fetchWeather } from '../../../api/api';
+import { fetchWeather } from '../../../api/weather';
 import { useDispatch, useSelector } from 'react-redux';
 import { weatherActions } from '../../../store/weather';
 import { Link } from 'react-router-dom';

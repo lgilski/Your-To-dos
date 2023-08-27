@@ -1,21 +1,22 @@
 import ProfileIcon from '@/components/Profile/ProfileIcon';
 import formatMessageData from '@/helpers/formatMessageData';
-import { Friend, Message } from '@/types';
-import { User } from 'firebase/auth';
+import { Message, WholeState } from '@/types';
+import { useSelector } from 'react-redux';
 
 function ChatMessage({
   message,
-  messages,
   index,
-  currentFriend,
-  user,
 }: {
   message: Message;
-  messages: Message[];
   index: number;
-  currentFriend: Friend | null;
-  user: User | null;
 }) {
+  const currentFriend = useSelector(
+    (state: WholeState) => state.chat.currentFriend
+  );
+  const myMessages = useSelector(
+    (state: WholeState) => state.chat.myMessages
+  );
+
   const {
     onlyMessage,
     photo,
@@ -23,13 +24,7 @@ function ChatMessage({
     dateToDisplay,
     time,
     nextDiff,
-  } = formatMessageData(
-    message,
-    messages,
-    index,
-    currentFriend,
-    user
-  );
+  } = formatMessageData(message, myMessages, index, currentFriend);
 
   return (
     <div className={`flex px-4 py-0.5 gap-2 last:mb-2`}>
@@ -49,8 +44,8 @@ function ChatMessage({
         )}
         <p
           className={`${onlyMessage && 'pl-12'} ${
-            messages[index + 1] &&
-            messages[index + 1].sender !== message.sender &&
+            myMessages[index + 1] &&
+            myMessages[index + 1].sender !== message.sender &&
             'mb-4'
           } ${nextDiff! > 3 && 'mb-4'}`}
         >

@@ -1,4 +1,5 @@
 import { auth } from '@/config/firebase';
+import { WholeState } from '@/types';
 import {
   child,
   get,
@@ -6,14 +7,14 @@ import {
   ref,
   update,
 } from 'firebase/database';
-import { createPortal } from 'react-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-function AddFriendsModal({
-  closeAddFriendsModal,
-}: {
-  closeAddFriendsModal: () => void;
-}) {
+function AddFriends() {
+  const currentFriendListSecton = useSelector(
+    (state: WholeState) => state.chat.currentFriendListSecton
+  );
+
   const addingUser = auth.currentUser;
 
   const addFriend = async function (e: React.FormEvent) {
@@ -76,48 +77,32 @@ function AddFriendsModal({
 
   return (
     <>
-      {createPortal(
-        <form
-          onSubmit={addFriend}
-          className='p-8 rounded flex flex-col w-96 fixed top-2/4 left-2/4 -translate-y-1/2 -translate-x-1/2 z-[11] bg-grey-050 dark:text-grey-100 dark:bg-grey-800'
-        >
-          {/* <h5 className='text-base pb-1 font-extrabold text-red-400'>
-            Delete account
-          </h5> */}
-          <p className={`pb-8 text-lg font-medium`}>
-            To add a friend type a user name.
-          </p>
-          {/* {error && <p className='mb-4 text-red-400'>{error}</p>} */}
-          <label htmlFor='friendName'>Friend&apos;s user name</label>
-          <input
-            required
-            // ref={passwordRef}
-            autoComplete='off'
-            type='text'
-            id='friendName'
-            name='friendName'
-            className='border lowercase border-lime-green-800 bg-lime-green-100 rounded py-1 px-2 text-base mb-4'
-          />
-          {/* <Button
-            disabled={isSubmitting}
-            type='submit'
-            color='OrangeLite'
-            variant='Rounded'
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </Button> */}
-        </form>,
-        document.getElementById('modal-root') as HTMLElement
-      )}
-      {createPortal(
-        <div
-          onClick={closeAddFriendsModal}
-          className='fixed top-0 left-0 z-10 w-full h-screen bg-[rgba(0,0,0,0.75)]'
-        />,
-        document.getElementById('overlay-root') as HTMLElement
+      {currentFriendListSecton === 'Add friend' && (
+        <form onSubmit={addFriend} className='flex flex-col'>
+          <h5 className='text-2xl'>Add friend</h5>
+          <label htmlFor='addFriend' className='mb-3 text-base'>
+            Type your friend&apos;s user name to sent request
+          </label>
+          <div className='bg-orange-050 dark:bg-grey-900 px-2 py-3 rounded-lg flex justify-between w-full'>
+            <input
+              className='bg-inherit border-none w-full text-lg px-1 py-1 focus:outline-none dark:text-grey-100'
+              maxLength={32}
+              placeholder="Type your friend's user name to sent request"
+              type='text'
+              name='addFriend'
+              autoComplete='off'
+            />
+            <button
+              type='submit'
+              className='mx-2 text-xl whitespace-nowrap bg-lime-green-200 border-none rounded hover:bg-lime-green-300 font-medium text-lime-green-800 py-1 px-2 cursor-pointer'
+            >
+              Send friend request
+            </button>
+          </div>
+        </form>
       )}
     </>
   );
 }
 
-export default AddFriendsModal;
+export default AddFriends;

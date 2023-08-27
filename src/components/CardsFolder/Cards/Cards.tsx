@@ -11,7 +11,7 @@ import cardClasses from '../Card/Card.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchForecast } from '../../../api/api';
+import { fetchForecast } from '../../../api/weather';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 import { flushSync } from 'react-dom';

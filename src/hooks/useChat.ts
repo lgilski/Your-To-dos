@@ -1,8 +1,15 @@
-import { auth } from '@/config/firebase';
-import { Friend, Message, UserChat } from '@/types';
-import { User } from 'firebase/auth';
 import {
-  Database,
+  getMyFriendRequestsOnce,
+  getMyFriendsOnce,
+  onMyCurrentChatMessageChange,
+  onMyFriendsChange,
+  onMyRequestsChange,
+  updateMyAndFriendCurrentUserChats,
+} from '@/api/chat';
+import { auth } from '@/config/firebase';
+import { chatActions } from '@/store/chat';
+import { Friend, WholeState } from '@/types';
+import {
   child,
   get,
   getDatabase,
@@ -11,80 +18,38 @@ import {
   serverTimestamp,
   update,
 } from 'firebase/database';
-import { RefObject, useEffect, useState } from 'react';
-
-async function getMyFriendRequestsOnce({
-  user,
-  db,
-}: {
-  user: User;
-  db: Database;
-}) {
-  const requests = await get(
-    child(ref(db), 'usersPublicData/' + user?.uid + '/requests')
-  );
-
-  return requests;
-}
-
-async function getMyFriendsOnce({
-  user,
-  db,
-}: {
-  user: User;
-  db: Database;
-}) {
-  const friends = await get(
-    child(ref(db), 'usersPublicData/' + user?.uid + '/friends')
-  );
-
-  return friends;
-}
+import { RefObject, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function useChat({
-  currentMessage,
-  setCurrentMessage,
   dummy,
 }: {
-  currentMessage: string | undefined;
-  setCurrentMessage: (a: any) => any;
   dummy: RefObject<HTMLDivElement | null>;
 }) {
+  const dispatch = useDispatch();
   const user = auth.currentUser!;
   const db = getDatabase();
 
-  // Move all these states to REDUX
-
-  const [messages, setMessages] = useState<Message[] | []>([]);
-  const [requests, setRequests] = useState<Friend[] | []>([]);
-  const [combinedId, setCombinedId] = useState<string | null>();
-  const [friends, setFriends] = useState<Friend[] | []>([]);
-  const [searchedFriend, setSearchedFriend] = useState<string | null>(
-    null
+  const currentFriend = useSelector(
+    (state: WholeState) => state.chat.currentFriend
   );
-  const [chats, setChats] = useState<UserChat[] | []>([]);
-  const [friendsListSection, setFriendsListSection] = useState<
-    'All' | 'Requests' | 'Add friend'
-  >('All');
-  const [currentFriend, setCurrentfriend] = useState<Friend | null>(
-    null
+  const currentCombinedId = useSelector(
+    (state: WholeState) => state.chat.currentCombinedId
   );
-  // const [atTheBottom, setAtTheBottom] = useState<boolean>();
-
-  const [displayAddFriendsModal, setDisplayAddFriendsModal] =
-    useState(false);
-
-  const closeAddFriendsModal = function () {
-    setDisplayAddFriendsModal(false);
-  };
-
-  const openAddFriendsModal = function () {
-    setDisplayAddFriendsModal(true);
-  };
+  const myMessages = useSelector(
+    (state: WholeState) => state.chat.myMessages
+  );
 
   const acceptFriendRequest = async function (sentRequest: Friend) {
-    const requests = await getMyFriendRequestsOnce({ user, db });
-    const friends = await getMyFriendsOnce({ user, db });
+    // /////////////////////
+    // REFACTOR
+    // ////////////////////
+
+    console.log('aaaaaaaaaaaa');
+
+    const requests = await getMyFriendRequestsOnce(user, db);
+    const friends = await getMyFriendsOnce(user, db);
 
     let currentFriendsArray;
     let senderFriendsArray;
@@ -96,9 +61,11 @@ function useChat({
       currentFriendsArray = [];
     }
 
-    const requestWithoutAcceptedArray = requests
-      .val()
-      .filter((request: any) => request.uid !== sentRequest.uid);
+    const requestWithoutAcceptedArray = requests.exists()
+      ? requests
+          .val()
+          .filter((request: any) => request.uid !== sentRequest.uid)
+      : [];
 
     update(ref(db, 'usersPublicData/' + user?.uid), {
       requests: [...requestWithoutAcceptedArray],
@@ -125,12 +92,10 @@ function useChat({
         ...senderFriendsArray,
       ],
     });
-
-    return;
   };
 
   const ingnoreFriendRequest = async function (sentRequest: Friend) {
-    const myRequests = await getMyFriendRequestsOnce({ user, db });
+    const myRequests = await getMyFriendRequestsOnce(user, db);
     const requestWithoutRejected = myRequests
       .val()
       .filter((request: any) => request.uid !== sentRequest.uid);
@@ -141,247 +106,95 @@ function useChat({
   };
 
   const goToChat = async function (friend: Friend) {
-    const combinedIdInner =
+    const innerCombinedId =
       user.uid > friend.uid
         ? user.uid + friend.uid
         : friend.uid + user.uid;
 
-    setCombinedId(combinedIdInner);
-    setCurrentfriend({
-      displayName: friend.displayName,
-      photoURL: friend.photoURL,
-      uid: friend.uid,
-    });
-
-    // const chatData = await get(
-    //   child(
-    //     ref(db),
-    //     'userChats/' + friend!.uid + '/' + combinedIdInner
-    //   )
-    // );
-
-    // console.log(chatData.exists());
-
-    // console.log(friend.uid, user.uid);
-
-    // if (!chatData.exists()) {
-    //   await update(
-    //     ref(db, 'userChats/' + user.uid + '/' + combinedIdInner),
-    //     {
-    //       userInfo: {
-    //         uid: currentFriend?.uid,
-    //         displayName: currentFriend?.displayName,
-    //         // userName: currentFriend?.userName,
-    //         photoURL: currentFriend?.photoURL || null,
-    //       },
-    //       date: serverTimestamp(),
-    //     }
-    //   );
-    //   console.log('owo');
-    //   await update(
-    //     ref(db, 'userChats/' + friend!.uid + '/' + combinedIdInner),
-    //     {
-    //       userInfo: {
-    //         uid: user?.uid,
-    //         displayName: user?.displayName,
-    //         // userName: userPublicData.val().userName,
-    //         photoURL: user?.photoURL || null,
-    //       },
-    //       date: serverTimestamp(),
-    //     }
-    //   );
-    //   console.log('uwu');
-    // }
+    dispatch(chatActions.setCurrentCombinedId(innerCombinedId));
+    dispatch(
+      chatActions.setCurrentfriend({
+        displayName: friend.displayName,
+        photoURL: friend.photoURL,
+        uid: friend.uid,
+      })
+    );
   };
 
-  function sendMessage(e: React.FormEvent) {
-    e.preventDefault();
+  function sendMessage(messageToSend: string) {
+    if (!messageToSend) return;
 
-    if (!currentMessage) return;
-
-    setCurrentMessage('');
-
-    update(ref(db, 'chats/' + combinedId), {
+    update(ref(db, 'chats/' + currentCombinedId), {
       messages: [
-        ...messages,
+        ...myMessages,
         {
-          message: currentMessage,
+          message: messageToSend,
           sender: user.uid,
           date: serverTimestamp(),
         },
       ],
     });
 
-    // get(child(ref(db), 'usersPublicData/' + user.uid)).then(
-    //   (userPublicData) => {}
-    // );
-    update(
-      ref(db, 'userChats/' + currentFriend!.uid + '/' + combinedId),
-      {
-        userInfo: {
-          uid: user?.uid,
-          displayName: user?.displayName,
-          // userName: userPublicData.val().userName,
-          photoURL: user?.photoURL,
-        },
-        date: serverTimestamp(),
-      }
-    );
-    update(ref(db, 'userChats/' + user.uid + '/' + combinedId), {
-      userInfo: {
-        uid: currentFriend?.uid,
-        displayName: currentFriend?.displayName,
-        // userName: currentFriend?.userName,
-        photoURL: currentFriend?.photoURL || null,
-      },
-      date: serverTimestamp(),
+    updateMyAndFriendCurrentUserChats({
+      currentCombinedId,
+      currentFriend,
+      db,
+      user,
     });
   }
 
   function goToFriendsList() {
-    setCurrentfriend(null);
-    setMessages([]);
-    setCombinedId(null);
+    dispatch(chatActions.setCurrentfriend(null));
+    dispatch(chatActions.setCurrentCombinedId(null));
+    dispatch(chatActions.setMyMessages([]));
   }
 
-  function setCurrentFriendsListSection(
+  function setCurrentFriendsViewSection(
     e: React.FormEvent<HTMLFormElement>
   ) {
-    setFriendsListSection(e.target.innerText);
+    dispatch(
+      chatActions.setCurrentFriendsViewSection(e.target.innerText)
+    );
   }
 
   function setCurrentSearchedFriend(e) {
-    setSearchedFriend(e.target.value);
+    dispatch(chatActions.setSearchedFriend(e.target.value));
   }
 
-  // function handleScroll(e) {
-  //   setAtTheBottom(
-  //     e.target.scrollHeight - e.target.scrollTop ===
-  //       e.target.clientHeight
-  //   );
-  // }
-
   useEffect(() => {
-    onValue(
-      ref(
-        db,
-        'usersPublicData/' + auth!.currentUser!.uid + '/friends'
-      ),
-      (snapshot) => {
-        const myFriends = snapshot.val();
-
-        if (myFriends) {
-          myFriends.forEach(async (friend: { uid: string }) => {
-            const requestData = await get(
-              child(ref(db), 'usersPublicData/' + friend?.uid)
-            );
-
-            if (
-              friends.some(
-                (friendState) => friendState.uid === friend.uid
-              )
-            )
-              return;
-
-            setFriends((prevState: any) => [
-              requestData.val(),
-              ...prevState,
-            ]);
-          });
-        } else {
-          setFriends([]);
-        }
-      }
-    );
-
-    onValue(
-      ref(
-        db,
-        'usersPublicData/' + auth!.currentUser!.uid + '/requests'
-      ),
-      (snapshot) => {
-        const myRequests = snapshot.val();
-
-        if (myRequests) {
-          myRequests.forEach(async (request: { uid: string }) => {
-            const requesterData = await get(
-              child(ref(db), 'usersPublicData/' + request.uid)
-            );
-
-            if (
-              requests.some(
-                (requestState) => requestState.uid === request.uid
-              )
-            )
-              return;
-
-            setRequests((prevState: any) => [
-              requesterData.val(),
-              ...prevState,
-            ]);
-          });
-        } else {
-          setRequests([]);
-        }
-      }
-    );
-
-    onValue(
-      ref(db, 'chats/' + combinedId + '/messages'),
-      (messagesData) => {
-        // const bottom = atTheBottom;
-
-        if (messagesData.exists()) {
-          setMessages(messagesData.val());
-        } else {
-          setMessages([]);
-        }
-
-        // console.log(friends.sort((a,b) => ));
-
-        // if (
-        //   (messagesData.exists() &&
-        //     messagesData.val()[messagesData.val().length - 1]
-        //       .sender !== user.uid) ||
-        //   !bottom
-        // )
-        //   return;
-      }
-    );
-  }, [combinedId]);
+    onMyFriendsChange({ dispatch, user, db });
+    onMyRequestsChange({ dispatch, user, db });
+    onMyCurrentChatMessageChange({ dispatch, currentCombinedId, db });
+  }, [currentCombinedId]);
 
   useEffect(() => {
     dummy.current?.scrollIntoView({ behavior: 'instant' });
-  }, [messages]);
+  }, [myMessages]);
 
   useEffect(() => {
     onValue(ref(db, 'userChats/' + user.uid), (userChat) => {
-      if (userChat.exists()) setChats(Object.values(userChat.val()));
+      if (userChat.exists())
+        dispatch(
+          chatActions.setUserChats(Object.values(userChat.val()))
+        );
     });
   }, []);
 
-  return {
-    currentFriend,
-    searchedFriend,
-    messages,
-    chats,
-    requests,
-    friends,
-    displayAddFriendsModal,
-    friendsListSection,
-    functions: {
-      closeAddFriendsModal,
-      openAddFriendsModal,
-      acceptFriendRequest,
-      ingnoreFriendRequest,
-      goToChat,
-      sendMessage,
-      goToFriendsList,
-      setCurrentFriendsListSection,
-      setCurrentSearchedFriend,
-      // handleScroll,
-    },
+  useEffect(() => {
+    dispatch(chatActions.setSearchedFriend(null));
+  }, [currentFriend]);
+
+  const functions = {
+    acceptFriendRequest,
+    ingnoreFriendRequest,
+    goToChat,
+    sendMessage,
+    goToFriendsList,
+    setCurrentFriendsViewSection,
+    setCurrentSearchedFriend,
   };
+
+  return functions;
 }
 
 export default useChat;

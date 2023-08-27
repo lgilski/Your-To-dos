@@ -1,44 +1,26 @@
 import ProfileIcon from '@/components/Profile/ProfileIcon';
-import { Friend } from '@/types';
+import { Friend, WholeState } from '@/types';
+import { useSelector } from 'react-redux';
 
 function ChatsList({
-  sortedChats,
-  functions,
-  currentFriend,
+  goToChat,
+  goToFriendsList,
 }: {
-  sortedChats:
-    | {
-        userInfo: {
-          displayName: string;
-          userName: string;
-          uid: string;
-          photoURL: string;
-        };
-        date: number;
-      }[]
-    | [];
-  currentFriend:
-    | {
-        displayName: string;
-        photoURL: string;
-        uid: string;
-      }
-    | null
-    | undefined;
-  functions: {
-    closeAddFriendsModal: () => void;
-    openAddFriendsModal: () => void;
-    acceptFriendRequest: (sentRequest: Friend) => Promise<void>;
-    ingnoreFriendRequest: (request: Friend) => Promise<void>;
-    goToChat: (friend: Friend) => void;
-    goToFriendsList: () => void;
-  };
+  goToChat: (friend: Friend) => void;
+  goToFriendsList: () => void;
 }) {
+  const currentFriend = useSelector(
+    (state: WholeState) => state.chat.currentFriend
+  );
+  const userChats = useSelector(
+    (state: WholeState) => state.chat.userChats
+  );
+
   return (
     <div className='bg-orange-050 dark:bg-grey-800 flex flex-col overflow-y-auto'>
       <div className='bg-inherit py-4 px-4 border-x-0 border-t-0 border-b border-solid dark:border-grey-600 border-grey-200 w-full mx-auto'>
         <button
-          onClick={functions.goToFriendsList}
+          onClick={goToFriendsList}
           className={`border-none ${
             !currentFriend
               ? 'dark:bg-grey-700 bg-orange-200'
@@ -49,11 +31,11 @@ function ChatsList({
         </button>
       </div>
       <div className='flex flex-col px-4 pt-4 dark:text-grey-100'>
-        {sortedChats.length > 0 &&
-          sortedChats.map((chat) => {
+        {userChats.length > 0 &&
+          userChats.map((chat) => {
             return (
               <div
-                onClick={() => functions.goToChat(chat.userInfo)}
+                onClick={() => goToChat(chat.userInfo)}
                 key={chat.userInfo.uid}
                 className={`flex items-center gap-4 ${
                   currentFriend?.uid === chat.userInfo.uid &&

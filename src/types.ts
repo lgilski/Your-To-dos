@@ -9,6 +9,7 @@ export type WholeState = {
   timers: TimerState;
   weather: WeatherState;
   stopwatch: StopwatchState;
+  chat: ChatState;
 };
 
 export type CardState = {
@@ -237,4 +238,15 @@ export type UserChat = {
     photoURL: string;
   };
   date: number;
+};
+
+export type ChatState = {
+  myMessages: Message[] | [];
+  myRequests: Friend[] | [];
+  myFriends: Friend[] | [];
+  userChats: UserChat[] | [];
+  currentFriend: Friend | null;
+  currentCombinedId: string | null;
+  searchedFriend: string | null;
+  currentFriendListSecton: 'All' | 'Requests' | 'Add friend';
 };

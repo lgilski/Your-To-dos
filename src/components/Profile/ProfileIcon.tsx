@@ -88,8 +88,6 @@ const ProfileIcon = function ({
         onMouseEnter={showDeleteImageHandler}
         onMouseLeave={hideDeleteImageHandler}
       >
-        {}
-
         {!photo ? (
           <ion-icon name='person' />
         ) : (
