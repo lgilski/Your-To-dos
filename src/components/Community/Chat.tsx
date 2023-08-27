@@ -23,6 +23,10 @@ function Chat() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (currentMessage && currentMessage?.trimEnd().length <= 0)
+      return;
+
     functions.sendMessage(currentMessage!);
     setCurrentMessage('');
   };

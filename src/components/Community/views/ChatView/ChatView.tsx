@@ -30,6 +30,7 @@ function ChatView({ onSubmit, onMessageChange, dummy, value }) {
         </div>
       )}
       {currentFriend && (
+        // Make input clear / change when changing chats
         <form
           onSubmit={onSubmit}
           className='w-full mt-auto px-4 pb-2'

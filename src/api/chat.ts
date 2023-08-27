@@ -54,8 +54,6 @@ export function onMyRequestsChange({
     (snapshot) => {
       const myRequestsData = snapshot.val();
 
-      console.log(myRequestsData);
-
       if (myRequestsData) {
         myRequestsData.forEach(async (request: { uid: string }) => {
           const requesterData = await get(
