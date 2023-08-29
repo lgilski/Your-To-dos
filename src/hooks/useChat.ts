@@ -105,7 +105,9 @@ function useChat({
     });
   };
 
-  const goToChat = async function (friend: Friend) {
+  const goToChat = async function (e, friend: Friend) {
+    if (e) if (e.currentTarget != e.target) return;
+
     const innerCombinedId =
       user.uid > friend.uid
         ? user.uid + friend.uid
