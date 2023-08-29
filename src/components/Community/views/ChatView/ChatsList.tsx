@@ -6,7 +6,7 @@ function ChatsList({
   goToChat,
   goToFriendsList,
 }: {
-  goToChat: (friend: Friend) => void;
+  goToChat: (e: Event | null, friend: Friend) => void;
   goToFriendsList: () => void;
 }) {
   const currentFriend = useSelector(
@@ -35,7 +35,7 @@ function ChatsList({
           userChats.map((chat) => {
             return (
               <div
-                onClick={() => goToChat(chat.userInfo)}
+                onClick={() => goToChat(null, chat.userInfo)}
                 key={chat.userInfo.uid}
                 className={`flex items-center gap-4 ${
                   currentFriend?.uid === chat.userInfo.uid &&

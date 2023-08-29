@@ -1,6 +1,7 @@
 import ProfileIcon from '@/components/Profile/ProfileIcon';
 import { WholeState } from '@/types';
 import { useSelector } from 'react-redux';
+import { Tooltip } from 'react-tooltip';
 
 function FriendsList({ setCurrentSearchedFriend, goToChat }) {
   const currentFriendListSecton = useSelector(
@@ -34,21 +35,44 @@ function FriendsList({ setCurrentSearchedFriend, goToChat }) {
             return;
 
           return (
-            <div
-              onClick={() => goToChat(friend)}
-              key={friend.uid}
-              className={`flex items-center gap-4 
-                hover:bg-orange-100 px-2 py-2 rounded duration-300 cursor-pointer dark:hover:bg-grey-600`}
-            >
-              <ProfileIcon
-                size='medium'
-                friend
-                src={friend.photoURL}
-              />
-              <div className='text-2xl font-normal'>
-                {friend.displayName}
+            <>
+              <div
+                onClick={(e) => goToChat(e, friend)}
+                key={friend.uid}
+                className='flex items-center justify-between hover:bg-orange-100 px-2 py-2 rounded duration-300 cursor-pointer dark:hover:bg-grey-600'
+              >
+                <div className='flex items-center gap-4'>
+                  <ProfileIcon
+                    size='medium'
+                    friend
+                    src={friend.photoURL}
+                  />
+                  <div className='text-2xl font-normal'>
+                    {friend.displayName}
+                  </div>
+                </div>
+                <div className='flex gap-3'>
+                  <button
+                    onClick={() => goToChat(null, friend)}
+                    className='border-none w-8 h-8 rounded-full [&_ion-icon]:w-5 [&_ion-icon]:h-5 cursor-pointer bg-orange-300 hover:bg-orange-400 duration-300 '
+                  >
+                    <ion-icon name='chatbox' />
+                  </button>
+                  <button
+                    data-tooltip-id='friend-info'
+                    onClick={() => console.log('uwu')}
+                    className='border-none w-8 h-8 rounded-full [&_ion-icon]:w-5 [&_ion-icon]:h-5 cursor-pointer bg-orange-300 hover:bg-orange-400 duration-300'
+                  >
+                    <ion-icon name='ellipsis-vertical' />
+                  </button>
+                </div>
               </div>
-            </div>
+              <Tooltip id='friend-info' clickable openOnClick>
+                <button className='border-none bg-inherit text-lg text-red-400 hover:bg-red-400 dark:hover:text-red-50 hover:text-red-50 px-2 py-1 cursor-pointer'>
+                  Delete friend
+                </button>
+              </Tooltip>
+            </>
           );
         })}
 

@@ -79,7 +79,7 @@ function AddFriends() {
     <>
       {currentFriendListSecton === 'Add friend' && (
         <form onSubmit={addFriend} className='flex flex-col'>
-          <h5 className='text-2xl'>Add friend</h5>
+          <h5 className='text-2xl font-medium'>Add friend</h5>
           <label htmlFor='addFriend' className='mb-3 text-base'>
             Type your friend&apos;s user name to send request
           </label>
