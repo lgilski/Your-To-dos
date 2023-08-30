@@ -3,7 +3,11 @@ import { WholeState } from '@/types';
 import { useSelector } from 'react-redux';
 import { Tooltip } from 'react-tooltip';
 
-function FriendsList({ setCurrentSearchedFriend, goToChat }) {
+function FriendsList({
+  setCurrentSearchedFriend,
+  goToChat,
+  deleteFriend,
+}) {
   const currentFriendListSecton = useSelector(
     (state: WholeState) => state.chat.currentFriendListSecton
   );
@@ -60,7 +64,6 @@ function FriendsList({ setCurrentSearchedFriend, goToChat }) {
                   </button>
                   <button
                     data-tooltip-id='friend-info'
-                    onClick={() => console.log('uwu')}
                     className='border-none w-8 h-8 rounded-full [&_ion-icon]:w-5 [&_ion-icon]:h-5 cursor-pointer bg-orange-300 hover:bg-orange-400 duration-300'
                   >
                     <ion-icon name='ellipsis-vertical' />
@@ -68,7 +71,10 @@ function FriendsList({ setCurrentSearchedFriend, goToChat }) {
                 </div>
               </div>
               <Tooltip id='friend-info' clickable openOnClick>
-                <button className='border-none bg-inherit text-lg text-red-400 hover:bg-red-400 dark:hover:text-red-50 hover:text-red-50 px-2 py-1 cursor-pointer'>
+                <button
+                  onClick={() => deleteFriend(friend)}
+                  className='border-none bg-inherit text-lg text-red-400 hover:bg-red-400 dark:hover:text-red-50 hover:text-red-50 px-2 py-1 cursor-pointer'
+                >
                   Delete friend
                 </button>
               </Tooltip>

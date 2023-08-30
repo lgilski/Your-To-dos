@@ -228,6 +228,7 @@ export type Message = {
   date: number;
   sender: string;
   photoURL?: string;
+  canNotSendMessage?: boolean;
 };
 
 export type UserChat = {

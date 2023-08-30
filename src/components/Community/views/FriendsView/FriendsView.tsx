@@ -14,6 +14,7 @@ function FriendsView({
     goToChat: (friend: Friend) => Promise<void>;
     setCurrentFriendsViewSection: (e: any) => void;
     setCurrentSearchedFriend: (e: any) => void;
+    deleteFriend: (friend: Friend) => void;
   };
 }) {
   const currentFriend = useSelector(
@@ -35,6 +36,7 @@ function FriendsView({
               setCurrentSearchedFriend={
                 functions.setCurrentSearchedFriend
               }
+              deleteFriend={functions.deleteFriend}
             />
             <FriendRequestsList
               acceptFriendRequest={functions.acceptFriendRequest}

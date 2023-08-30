@@ -13,11 +13,10 @@ function FriendRequestsList({
     (state: WholeState) => state.chat.currentFriendListSecton
   );
 
-  console.log(myRequests);
-
   return (
     <>
-      {myRequests.length > 0 &&
+      {myRequests !== null &&
+        myRequests.length > 0 &&
         currentFriendListSecton === 'Requests' &&
         myRequests.map((request) => {
           return (
@@ -31,7 +30,8 @@ function FriendRequestsList({
             />
           );
         })}
-      {myRequests.length === 0 &&
+      {myRequests !== null &&
+        myRequests.length === 0 &&
         currentFriendListSecton === 'Requests' && (
           <h5 className='absolute text-4xl text-yellow-600 dark:text-yellow-500 top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2'>
             There are no requests yet
