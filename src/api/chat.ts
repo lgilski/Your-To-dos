@@ -26,11 +26,12 @@ export function onMyFriendsChange({
     ref(db, 'usersPublicData/' + user!.uid + '/friends'),
     (snapshot) => {
       const myFriendsData = snapshot.val();
+      dispatch(chatActions.clearMyFriends());
 
       if (myFriendsData) {
-        myFriendsData.forEach(async (friend: { uid: string }) => {
+        myFriendsData.forEach(async (myFriend: { uid: string }) => {
           const requestData = await get(
-            child(ref(db), 'usersPublicData/' + friend?.uid)
+            child(ref(db), 'usersPublicData/' + myFriend?.uid)
           );
 
           dispatch(chatActions.setMyFriends(requestData.val()));

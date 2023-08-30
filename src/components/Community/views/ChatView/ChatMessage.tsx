@@ -29,13 +29,19 @@ function ChatMessage({
   return (
     <div className={`flex px-4 py-0.5 gap-2 last:mb-2`}>
       {!onlyMessage && (
-        <ProfileIcon size='semi-medium' friend src={photo!} />
+        <ProfileIcon
+          size='semi-medium'
+          friend
+          src={message.canNotSendMessage ? null : photo!}
+        />
       )}
       <div className='flex flex-col gap-1'>
         {!onlyMessage && (
           <div className='flex items-baseline gap-2'>
             <div className=' dark:text-grey-100 font-medium'>
-              {sentBy}
+              {message.canNotSendMessage
+                ? 'Your To-dos and stuff UwU'
+                : sentBy}
             </div>
             <p className='text-xs text-grey-400'>
               {dateToDisplay} {time}

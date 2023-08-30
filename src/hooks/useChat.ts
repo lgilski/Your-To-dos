@@ -18,7 +18,7 @@ import {
   serverTimestamp,
   update,
 } from 'firebase/database';
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -40,13 +40,18 @@ function useChat({
   const myMessages = useSelector(
     (state: WholeState) => state.chat.myMessages
   );
+  const myRequests = useSelector(
+    (state: WholeState) => state.chat.myRequests
+  );
+
+  const [requestsBeforeUpdate, setRequestsBeforeUpdate] = useState<
+    number | null
+  >(null);
 
   const acceptFriendRequest = async function (sentRequest: Friend) {
     // /////////////////////
     // REFACTOR
     // ////////////////////
-
-    console.log('aaaaaaaaaaaa');
 
     const requests = await getMyFriendRequestsOnce(user, db);
     const friends = await getMyFriendsOnce(user, db);
@@ -123,8 +128,34 @@ function useChat({
     );
   };
 
-  function sendMessage(messageToSend: string) {
+  async function sendMessage(messageToSend: string) {
     if (!messageToSend) return;
+
+    // Check if friends
+
+    const myFriends = await getMyFriendsOnce(user, db);
+
+    const hasThisFriend = myFriends
+      .val()
+      .find((myFriend) => myFriend.uid === currentFriend?.uid);
+
+    if (!hasThisFriend) {
+      console.log('nonono');
+
+      dispatch(
+        chatActions.setMyMessages([
+          ...myMessages,
+          {
+            message:
+              "You can't send message to this user because you are not friends. Send friend request to this user first.",
+            sender: user.uid,
+            date: Date.now(),
+            canNotSendMessage: true,
+          },
+        ])
+      );
+      return;
+    }
 
     update(ref(db, 'chats/' + currentCombinedId), {
       messages: [
@@ -163,11 +194,53 @@ function useChat({
     dispatch(chatActions.setSearchedFriend(e.target.value));
   }
 
+  async function deleteFriend(friend: Friend) {
+    const myFriendsData = await getMyFriendsOnce(user, db);
+    const friendFriendsData = await get(
+      child(ref(db), 'usersPublicData/' + friend.uid + '/friends')
+    );
+
+    const myFriendsWithoutDeleted: { uid: string }[] | [] = [];
+    const friendFriendsWithoutDeleted: { uid: string }[] | [] = [];
+
+    myFriendsData.forEach((myFriend) => {
+      myFriend.val().uid !== friend.uid &&
+        myFriendsWithoutDeleted.push(myFriend.val());
+    });
+
+    friendFriendsData.forEach((friend) => {
+      friend.val().uid !== user.uid &&
+        friendFriendsWithoutDeleted.push(friend.val());
+    });
+
+    update(ref(db, 'usersPublicData/' + user.uid), {
+      friends: [...myFriendsWithoutDeleted],
+    });
+    update(ref(db, 'usersPublicData/' + friend.uid), {
+      friends: [...friendFriendsWithoutDeleted],
+    });
+  }
+
   useEffect(() => {
     onMyFriendsChange({ dispatch, user, db });
     onMyRequestsChange({ dispatch, user, db });
     onMyCurrentChatMessageChange({ dispatch, currentCombinedId, db });
   }, [currentCombinedId]);
+
+  useEffect(() => {
+    if (
+      requestsBeforeUpdate !== null &&
+      requestsBeforeUpdate < myRequests.length
+    ) {
+      var audio = new Audio(
+        '/src/assets/notifications/MessageNotification.mp3'
+      );
+      audio.play();
+    }
+    if (myRequests.length > 0) {
+      setRequestsBeforeUpdate(myRequests.length);
+    } else setRequestsBeforeUpdate(0);
+  }, [myRequests]);
 
   useEffect(() => {
     dummy.current?.scrollIntoView({ behavior: 'instant' });
@@ -194,6 +267,7 @@ function useChat({
     goToFriendsList,
     setCurrentFriendsViewSection,
     setCurrentSearchedFriend,
+    deleteFriend,
   };
 
   return functions;
