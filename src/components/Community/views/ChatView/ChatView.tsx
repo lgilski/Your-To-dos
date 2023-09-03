@@ -10,7 +10,7 @@ function ChatView({ onSubmit, onMessageChange, dummy, value }) {
     (state: WholeState) => state.chat.currentFriend
   );
 
-  console.log(myMessages);
+  // console.log(myMessages);
 
   return (
     <>

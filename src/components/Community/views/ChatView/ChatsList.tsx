@@ -39,7 +39,7 @@ function ChatsList({
               <div
                 onClick={() => goToChat(null, chat.userInfo)}
                 key={chat.userInfo.uid}
-                className={`flex items-center gap-4 ${
+                className={`flex items-center relative gap-4 ${
                   currentFriend?.uid === chat.userInfo.uid &&
                   'bg-orange-200 dark:bg-grey-700'
                 } hover:bg-orange-100 px-2 py-2 rounded duration-300 cursor-pointer dark:hover:bg-grey-600`}
@@ -52,6 +52,13 @@ function ChatsList({
                 <div className='text-2xl font-normal'>
                   {chat.userInfo.displayName}
                 </div>
+                {chat.newMessages && (
+                  <div className='absolute bg-grey-800 rounded-full w-7 h-7 p-1 left-10 top-0'>
+                    <p className='bg-red-400 text-red-50 w-full h-full rounded-full font-medium text-sm flex justify-center items-center'>
+                      {chat.newMessages > 9 ? '+9' : chat.newMessages}
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}

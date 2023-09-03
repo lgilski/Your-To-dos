@@ -32,7 +32,7 @@ function FriendsNavButton({
         {children}
       </button>
       {valueAsNotification && valueAsNotification.length > 0 && (
-        <p className='absolute text-orange-100 top-[-8px] right-[-8px] bg-orange-500 rounded-full font-medium text-sm w-5 text-center'>
+        <p className='absolute text-red-100 top-[-8px] right-[-8px] bg-red-400 rounded-full font-medium text-sm w-5 text-center'>
           {valueAsNotification.length < 10
             ? valueAsNotification.length
             : '+9'}

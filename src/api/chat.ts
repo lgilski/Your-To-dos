@@ -101,6 +101,15 @@ export function updateMyAndFriendCurrentUserChats({
   user: User | null;
   db: Database;
 }) {
+  // userInfo: {
+  //   displayName: string;
+  //   userName: string;
+  //   uid: string;
+  //   photoURL: string;
+  // };
+  // date: number;
+  // lastCheck: number;
+  // newMessages: number;
   update(
     ref(
       db,

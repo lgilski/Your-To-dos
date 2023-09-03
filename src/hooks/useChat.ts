@@ -48,8 +48,6 @@ function useChat({
     number | null
   >(null);
 
-  // const [newMessages, setNewMessages] = useState<number>(0);
-
   const acceptFriendRequest = async function (sentRequest: Friend) {
     // /////////////////////
     // REFACTOR
@@ -131,12 +129,17 @@ function useChat({
       })
     );
 
-    // update(
-    //   ref(db, 'userChats/' + user!.uid + '/' + innerCombinedId),
-    //   {
-    //     lastCheck: Date.now(),
-    //   }
-    // );
+    const currentUserChat = await get(
+      child(ref(db), 'userChats/' + user!.uid + '/' + innerCombinedId)
+    );
+
+    if (currentUserChat.exists())
+      update(
+        ref(db, 'userChats/' + user!.uid + '/' + innerCombinedId),
+        {
+          lastCheck: serverTimestamp(),
+        }
+      );
   };
 
   async function sendMessage(messageToSend: string) {
@@ -175,12 +178,12 @@ function useChat({
       ],
     });
 
-    // updateMyAndFriendCurrentUserChats({
-    //   currentCombinedId,
-    //   currentFriend,
-    //   db,
-    //   user,
-    // });
+    updateMyAndFriendCurrentUserChats({
+      currentCombinedId,
+      currentFriend,
+      db,
+      user,
+    });
   }
 
   function goToFriendsList() {
@@ -261,37 +264,42 @@ function useChat({
     dummy.current?.scrollIntoView({ behavior: 'instant' });
   }, [myMessages]);
 
-  // //////////////////////
-  // //////////////////////
-
   useEffect(() => {
-    onValue(ref(db, 'userChats/' + user.uid), (userChats) => {
-      // userChats.forEach(async (userChat) => {
-      //   const chat = await get(
-      //     child(ref(db), 'chats/' + userChat.key)
-      //   );
+    // ////////////////////////////////////////////////
+    // ////////////////////////////////////////////////
+    // To many rerenders. Got to find better solution
+    // ////////////////////////////////////////////////
+    // ////////////////////////////////////////////////
 
-      //   chat.val().messages.forEach((messages) => {
-      //     // console.log(userChat.val().lastCheck, messages.date);
-      //     if (messages.date > userChat.val().lastCheck) {
-      //       console.log('added one');
-      //       setNewMessages((prevState) => prevState + 1);
-      //     }
-      //   });
-      // });
+    onValue(ref(db, 'userChats/' + user.uid), (userChats) => {
+      userChats.forEach((userChat) => {
+        let i = 0;
+        get(child(ref(db), 'chats/' + userChat.key)).then((chat) => {
+          chat.val().messages.forEach((message) => {
+            console.log(message, message.sender !== user.uid);
+
+            if (
+              message.date > userChat.val().lastCheck &&
+              message.sender !== user.uid
+            ) {
+              i++;
+              dispatch(
+                chatActions.setNewMessages({
+                  numberOfNewMessages: i,
+                  userChatWith: userChat.val().userInfo.uid,
+                })
+              );
+            }
+          });
+        });
+      });
 
       if (userChats.exists())
-        // Add a number of new messages to userChat
-
         dispatch(
           chatActions.setUserChats(Object.values(userChats.val()))
         );
     });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(newMessages);
-  // }, [newMessages]);
 
   useEffect(() => {
     dispatch(chatActions.setSearchedFriend(null));

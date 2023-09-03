@@ -46,6 +46,8 @@ const chatSlice = createSlice({
     },
     clearMyFriends(state) {
       state.myFriends = [];
+
+      return state;
     },
     setMyRequests(state, action: PayloadAction<Friend | null>) {
       if (!action.payload) {
@@ -65,6 +67,20 @@ const chatSlice = createSlice({
     },
     setMyMessages(state, action: PayloadAction<Message[] | []>) {
       state.myMessages = action.payload;
+      return state;
+    },
+    setNewMessages(
+      state,
+      action: PayloadAction<{
+        numberOfNewMessages: number;
+        userChatWith: string;
+      }>
+    ) {
+      state.userChats.find(
+        (userChat) =>
+          userChat.userInfo.uid === action.payload.userChatWith
+      )!.newMessages = action.payload.numberOfNewMessages;
+
       return state;
     },
     setUserChats(state, action) {

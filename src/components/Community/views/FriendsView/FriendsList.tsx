@@ -45,7 +45,10 @@ function FriendsList({
                 key={friend.uid}
                 className='flex items-center justify-between hover:bg-orange-100 px-2 py-2 rounded duration-300 cursor-pointer dark:hover:bg-grey-600'
               >
-                <div className='flex items-center gap-4'>
+                <div
+                  onClick={() => goToChat(null, friend)}
+                  className='flex items-center gap-4'
+                >
                   <ProfileIcon
                     size='medium'
                     friend
