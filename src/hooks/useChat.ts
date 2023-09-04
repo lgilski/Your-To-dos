@@ -118,6 +118,7 @@ function useChat({
         ? user.uid + friend.uid
         : friend.uid + user.uid;
 
+    off(ref(db, 'userChats/' + user.uid));
     off(ref(db, 'chats/' + currentCombinedId + '/messages'));
 
     dispatch(chatActions.setCurrentCombinedId(innerCombinedId));
@@ -187,6 +188,7 @@ function useChat({
   }
 
   function goToFriendsList() {
+    off(ref(db, 'userChats/' + user.uid));
     off(ref(db, 'chats/' + currentCombinedId + '/messages'));
     dispatch(chatActions.setCurrentFriend(null));
     dispatch(chatActions.setCurrentCombinedId(null));
@@ -250,7 +252,7 @@ function useChat({
       requestsBeforeUpdate !== null &&
       requestsBeforeUpdate < myRequests.length
     ) {
-      var audio = new Audio(
+      const audio = new Audio(
         '/src/assets/notifications/MessageNotification.mp3'
       );
       audio.play();
@@ -261,23 +263,39 @@ function useChat({
   }, [myRequests]);
 
   useEffect(() => {
+    if (currentCombinedId) {
+      update(
+        ref(db, 'userChats/' + user!.uid + '/' + currentCombinedId),
+        {
+          lastCheck: serverTimestamp(),
+        }
+      );
+    }
+  }, [myMessages, currentCombinedId]);
+
+  useEffect(() => {
     dummy.current?.scrollIntoView({ behavior: 'instant' });
   }, [myMessages]);
 
   useEffect(() => {
     // ////////////////////////////////////////////////
     // ////////////////////////////////////////////////
-    // To many rerenders. Got to find better solution
+    // Too many rerenders. Got to find better solution
     // ////////////////////////////////////////////////
     // ////////////////////////////////////////////////
 
     onValue(ref(db, 'userChats/' + user.uid), (userChats) => {
+      // Add an if check for new message change
+
+      if (userChats.exists())
+        dispatch(
+          chatActions.setUserChats(Object.values(userChats.val()))
+        );
+
       userChats.forEach((userChat) => {
         let i = 0;
         get(child(ref(db), 'chats/' + userChat.key)).then((chat) => {
           chat.val().messages.forEach((message) => {
-            console.log(message, message.sender !== user.uid);
-
             if (
               message.date > userChat.val().lastCheck &&
               message.sender !== user.uid
@@ -293,13 +311,8 @@ function useChat({
           });
         });
       });
-
-      if (userChats.exists())
-        dispatch(
-          chatActions.setUserChats(Object.values(userChats.val()))
-        );
     });
-  }, []);
+  }, [currentFriend]);
 
   useEffect(() => {
     dispatch(chatActions.setSearchedFriend(null));
