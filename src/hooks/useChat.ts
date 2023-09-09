@@ -27,6 +27,8 @@ function useChat({
 }: {
   dummy: RefObject<HTMLDivElement | null>;
 }) {
+  // Clean up!!!!!!
+
   const dispatch = useDispatch();
   const user = auth.currentUser!;
   const db = getDatabase();
@@ -43,28 +45,28 @@ function useChat({
   const myRequests = useSelector(
     (state: WholeState) => state.chat.myRequests
   );
+  const isLoadingData = useSelector(
+    (state: WholeState) => state.chat.isLoadingData
+  );
+  const userChats = useSelector(
+    (state: WholeState) => state.chat.userChats
+  );
 
   const [requestsBeforeUpdate, setRequestsBeforeUpdate] = useState<
     number | null
   >(null);
 
+  const [prevUserChats, setPrevUserChats] = useState<any>(null);
+
   const acceptFriendRequest = async function (sentRequest: Friend) {
-    // /////////////////////
-    // REFACTOR
-    // ////////////////////
-
     const requests = await getMyFriendRequestsOnce(user, db);
-    const friends = await getMyFriendsOnce(user, db);
-
-    let currentFriendsArray;
-    let senderFriendsArray;
-    const currentFriends = friends.val();
-
-    currentFriendsArray = currentFriends;
-
-    if (!currentFriends) {
-      currentFriendsArray = [];
-    }
+    const myFriendsData = await getMyFriendsOnce(user, db);
+    const senderFriendsData = await get(
+      child(
+        ref(db),
+        'usersPublicData/' + sentRequest.uid + '/friends'
+      )
+    );
 
     const requestWithoutAcceptedArray = requests.exists()
       ? requests
@@ -72,29 +74,22 @@ function useChat({
           .filter((request: any) => request.uid !== sentRequest.uid)
       : [];
 
+    // Update my friends and my requests
     update(ref(db, 'usersPublicData/' + user?.uid), {
       requests: [...requestWithoutAcceptedArray],
-      friends: [{ uid: sentRequest.uid }, ...currentFriendsArray],
+      friends: [
+        { uid: sentRequest.uid },
+        ...(myFriendsData.val() || []),
+      ],
     });
 
-    const senderFriends = await get(
-      child(
-        ref(db),
-        'usersPublicData/' + sentRequest.uid + '/friends'
-      )
-    );
-    senderFriendsArray = senderFriends.val();
-
-    if (!senderFriends.val()) {
-      senderFriendsArray = [];
-    }
-
+    // Add me as a friend to the request sender
     update(ref(db, 'usersPublicData/' + sentRequest.uid), {
       friends: [
         {
           uid: user?.uid,
         },
-        ...senderFriendsArray,
+        ...(senderFriendsData.val() || []),
       ],
     });
   };
@@ -121,6 +116,9 @@ function useChat({
     off(ref(db, 'userChats/' + user.uid));
     off(ref(db, 'chats/' + currentCombinedId + '/messages'));
 
+    if (innerCombinedId !== currentCombinedId)
+      dispatch(chatActions.setLoadingData(true));
+
     dispatch(chatActions.setCurrentCombinedId(innerCombinedId));
     dispatch(
       chatActions.setCurrentFriend({
@@ -141,13 +139,13 @@ function useChat({
           lastCheck: serverTimestamp(),
         }
       );
+    // dispatch(chatActions.setLoadingData(false));
   };
 
   async function sendMessage(messageToSend: string) {
     if (!messageToSend) return;
 
     const myFriends = await getMyFriendsOnce(user, db);
-
     const hasThisFriend = myFriends
       .val()
       .find((myFriend) => myFriend.uid === currentFriend?.uid);
@@ -248,21 +246,6 @@ function useChat({
   }, [currentCombinedId]);
 
   useEffect(() => {
-    if (
-      requestsBeforeUpdate !== null &&
-      requestsBeforeUpdate < myRequests.length
-    ) {
-      const audio = new Audio(
-        '/src/assets/notifications/MessageNotification.mp3'
-      );
-      audio.play();
-    }
-    if (myRequests.length > 0) {
-      setRequestsBeforeUpdate(myRequests.length);
-    } else setRequestsBeforeUpdate(0);
-  }, [myRequests]);
-
-  useEffect(() => {
     if (currentCombinedId) {
       update(
         ref(db, 'userChats/' + user!.uid + '/' + currentCombinedId),
@@ -274,39 +257,82 @@ function useChat({
   }, [myMessages, currentCombinedId]);
 
   useEffect(() => {
-    dummy.current?.scrollIntoView({ behavior: 'instant' });
+    if (
+      requestsBeforeUpdate !== null &&
+      requestsBeforeUpdate < myRequests.length
+    ) {
+      const audio = new Audio(
+        '/src/assets/notifications/mixkit-long-pop-2358.wav'
+      );
+      audio.play();
+    }
+    if (myRequests.length > 0) {
+      setRequestsBeforeUpdate(myRequests.length);
+    } else setRequestsBeforeUpdate(0);
+  }, [myRequests]);
+
+  useEffect(() => {
+    if (!prevUserChats) return setPrevUserChats(userChats);
+
+    userChats.forEach((userChat) => {
+      const prevVersion = prevUserChats.find(
+        (prevUserChat) =>
+          prevUserChat.userInfo.uid === userChat.userInfo.uid
+      );
+
+      if (
+        prevVersion &&
+        (userChat.newMessages > prevVersion.newMessages ||
+          (!prevVersion.newMessages && userChat.newMessages))
+      ) {
+        const audio = new Audio(
+          '/src/assets/notifications/mixkit-long-pop-2358.wav'
+        );
+        audio.play();
+      }
+    });
+
+    setPrevUserChats(userChats);
+  }, [userChats]);
+
+  useEffect(() => {
+    dispatch(chatActions.setLoadingData(false));
   }, [myMessages]);
 
   useEffect(() => {
-    // ////////////////////////////////////////////////
-    // ////////////////////////////////////////////////
-    // Too many rerenders. Got to find better solution
-    // ////////////////////////////////////////////////
-    // ////////////////////////////////////////////////
+    dummy.current?.scrollIntoView({ behavior: 'instant' });
+  }, [myMessages, isLoadingData]);
+
+  useEffect(() => {
+    let a = 0;
 
     onValue(ref(db, 'userChats/' + user.uid), (userChats) => {
-      // Add an if check for new message change
-
-      if (userChats.exists())
+      if (userChats.exists() && a === 0)
         dispatch(
           chatActions.setUserChats(Object.values(userChats.val()))
         );
 
+      a++;
+
       userChats.forEach((userChat) => {
         let i = 0;
+        let itemProcessed = 0;
         get(child(ref(db), 'chats/' + userChat.key)).then((chat) => {
           chat.val().messages.forEach((message) => {
+            itemProcessed++;
             if (
               message.date > userChat.val().lastCheck &&
               message.sender !== user.uid
             ) {
               i++;
-              dispatch(
-                chatActions.setNewMessages({
-                  numberOfNewMessages: i,
-                  userChatWith: userChat.val().userInfo.uid,
-                })
-              );
+
+              if (itemProcessed === chat.val().messages.length)
+                dispatch(
+                  chatActions.setNewMessages({
+                    numberOfNewMessages: i,
+                    userChatWith: userChat.val().userInfo.uid,
+                  })
+                );
             }
           });
         });
@@ -315,6 +341,7 @@ function useChat({
   }, [currentFriend]);
 
   useEffect(() => {
+    // Clear the search bar
     dispatch(chatActions.setSearchedFriend(null));
   }, [currentFriend]);
 

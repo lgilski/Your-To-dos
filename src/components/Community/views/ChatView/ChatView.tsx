@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import ChatMessage from './ChatMessage';
 import { WholeState } from '@/types';
+import { TailSpin } from 'react-loader-spinner';
 
 function ChatView({ onSubmit, onMessageChange, dummy, value }) {
   const myMessages = useSelector(
@@ -9,30 +10,42 @@ function ChatView({ onSubmit, onMessageChange, dummy, value }) {
   const currentFriend = useSelector(
     (state: WholeState) => state.chat.currentFriend
   );
-
-  // console.log(myMessages);
+  const isLoadingData = useSelector(
+    (state: WholeState) => state.chat.isLoadingData
+  );
 
   return (
     <>
       {myMessages.length > 0 && (
         <div
           // onScroll={functions.handleScroll}
-          className='flex flex-col dark:text-grey-200 overflow-y-scroll max-h-[740px] pt-4'
+          className='flex flex-col dark:text-grey-200 overflow-y-scroll h-[740px] pt-4'
         >
-          {myMessages.map((message, index) => {
-            return (
-              <ChatMessage
-                index={index}
-                message={message}
-                key={message.date}
-              />
-            );
-          })}
+          {isLoadingData && (
+            <TailSpin
+              height='100'
+              width='100'
+              color='#d87620'
+              ariaLabel='tail-spin-loading'
+              radius='0'
+              wrapperStyle={{}}
+              wrapperClass='m-auto align-middle'
+            />
+          )}
+          {!isLoadingData &&
+            myMessages.map((message, index) => {
+              return (
+                <ChatMessage
+                  index={index}
+                  message={message}
+                  key={message.date}
+                />
+              );
+            })}
           <div ref={dummy} />
         </div>
       )}
       {currentFriend && (
-        // Make input clear / change when changing chats
         <form
           onSubmit={onSubmit}
           className='w-full mt-auto px-4 pb-2'

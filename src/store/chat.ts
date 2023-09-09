@@ -11,6 +11,7 @@ const initialState: ChatState = {
   currentCombinedId: null,
   searchedFriend: null,
   currentFriendListSecton: 'All',
+  isLoadingData: false,
 };
 
 const chatSlice = createSlice({
@@ -89,8 +90,14 @@ const chatSlice = createSlice({
       state.userChats.sort((a, b) => b.date - a.date);
       return state;
     },
+    setLoadingData(state, action: PayloadAction<boolean>) {
+      state.isLoadingData = action.payload;
+
+      return state;
+    },
     setCurrentFriend(state, action: PayloadAction<Friend | null>) {
       state.currentFriend = action.payload;
+
       return state;
     },
     setCurrentCombinedId(

@@ -1,5 +1,6 @@
 import { auth } from '@/config/firebase';
 import { Friend, Message } from '@/types';
+import { child, get, getDatabase, ref } from 'firebase/database';
 
 function calculateDateDifferenceInDays(targetDate: Date) {
   const currentDate = new Date();
@@ -78,10 +79,23 @@ function formatMessageData(
     photo = user.photoURL;
   }
 
+  // const db = getDatabase();
+
+  // const senderData = await get(
+  //   child(ref(db), 'usersPublicData/' + message.sender)
+  // );
+
+  // // console.log(senderData.val());
+
+  // const sentBy = senderData.val().displayName;
+  // const photo = senderData.val().photoURL;
+
   const sentBy =
     message.sender === user?.uid
       ? user.displayName
       : currentFriend?.displayName;
+
+  // console.log('bozooooooooooooooo');
 
   return {
     onlyMessage,

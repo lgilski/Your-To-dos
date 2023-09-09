@@ -252,4 +252,5 @@ export type ChatState = {
   currentCombinedId: string | null;
   searchedFriend: string | null;
   currentFriendListSecton: 'All' | 'Requests' | 'Add friend';
+  isLoadingData: boolean;
 };
