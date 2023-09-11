@@ -21,7 +21,7 @@ function AddFriends() {
     e.preventDefault();
 
     const db = getDatabase();
-    const sendingUser = await get(
+    const addingUserData = await get(
       child(ref(db), 'usersPublicData/' + addingUser?.uid)
     );
     const users = await get(child(ref(db), 'usersPublicData'));
@@ -29,7 +29,10 @@ function AddFriends() {
     users.forEach(function (user: any) {
       if (
         user.val().userName === e.target[0].value &&
-        user.val().uid !== addingUser?.uid
+        user.val().uid !== addingUser?.uid &&
+        !addingUserData
+          .val()
+          .friends.find((friend) => friend.uid === user.val().uid)
       ) {
         get(
           child(ref(db), 'usersPublicData/' + user.key + '/requests')
@@ -38,7 +41,7 @@ function AddFriends() {
             let alreadySent;
 
             snapshot.forEach((request) => {
-              if (request.val().uid === sendingUser.val().uid) {
+              if (request.val().uid === addingUserData.val().uid) {
                 alreadySent = true;
               }
             });

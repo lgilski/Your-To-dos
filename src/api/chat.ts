@@ -1,6 +1,6 @@
 import store from '@/store';
 import { chatActions } from '@/store/chat';
-import { Friend } from '@/types';
+import { Friend, Message } from '@/types';
 import { AnyAction } from '@reduxjs/toolkit';
 import { User } from 'firebase/auth';
 import {
@@ -82,7 +82,13 @@ export function onMyCurrentChatMessageChange({
     ref(db, 'chats/' + currentCombinedId + '/messages'),
     (messagesData) => {
       if (messagesData.exists()) {
-        dispatch(chatActions.setMyMessages(messagesData.val()));
+        dispatch(
+          chatActions.setMyMessages(
+            messagesData
+              .val()
+              .filter((message: Message) => message !== null)
+          )
+        );
       } else {
         dispatch(chatActions.setMyMessages([]));
       }

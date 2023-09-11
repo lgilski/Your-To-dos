@@ -8,7 +8,7 @@ import {
 } from '@/api/chat';
 import { auth } from '@/config/firebase';
 import { chatActions } from '@/store/chat';
-import { Friend, WholeState } from '@/types';
+import { Friend, Message, UserChat, WholeState } from '@/types';
 import {
   child,
   get,
@@ -16,6 +16,7 @@ import {
   off,
   onValue,
   ref,
+  remove,
   serverTimestamp,
   update,
 } from 'firebase/database';
@@ -27,8 +28,6 @@ function useChat({
 }: {
   dummy: RefObject<HTMLDivElement | null>;
 }) {
-  // Clean up!!!!!!
-
   const dispatch = useDispatch();
   const user = auth.currentUser!;
   const db = getDatabase();
@@ -148,7 +147,9 @@ function useChat({
     const myFriends = await getMyFriendsOnce(user, db);
     const hasThisFriend = myFriends
       .val()
-      .find((myFriend) => myFriend.uid === currentFriend?.uid);
+      .find(
+        (myFriend: Friend) => myFriend.uid === currentFriend?.uid
+      );
 
     if (!hasThisFriend) {
       dispatch(
@@ -232,6 +233,30 @@ function useChat({
     });
   }
 
+  async function deleteMessage(message: Message) {
+    const deletedMessageIndex = myMessages.findIndex(
+      (myMessage) => myMessage.date === message.date
+    );
+
+    remove(
+      ref(
+        db,
+        'chats/' +
+          currentCombinedId +
+          '/messages/' +
+          deletedMessageIndex
+      )
+    );
+  }
+
+  async function setEditedMessage() {
+    console.log('uwu');
+
+    // const editedMessageIndex = myMessages.findIndex(
+    //   (myMessage) => myMessage.date === message.date
+    // );
+  }
+
   useEffect(() => {
     onMyFriendsChange({ dispatch, user, db });
     onMyRequestsChange({ dispatch, user, db });
@@ -276,7 +301,7 @@ function useChat({
 
     userChats.forEach((userChat) => {
       const prevVersion = prevUserChats.find(
-        (prevUserChat) =>
+        (prevUserChat: UserChat) =>
           prevUserChat.userInfo.uid === userChat.userInfo.uid
       );
 
@@ -304,21 +329,22 @@ function useChat({
   }, [myMessages, isLoadingData]);
 
   useEffect(() => {
-    let a = 0;
+    // let a = 0;
 
     onValue(ref(db, 'userChats/' + user.uid), (userChats) => {
-      if (userChats.exists() && a === 0)
+      // if (userChats.exists() && a === 0)
+      if (userChats.exists())
         dispatch(
           chatActions.setUserChats(Object.values(userChats.val()))
         );
 
-      a++;
+      // a++;
 
       userChats.forEach((userChat) => {
         let i = 0;
         let itemProcessed = 0;
         get(child(ref(db), 'chats/' + userChat.key)).then((chat) => {
-          chat.val().messages.forEach((message) => {
+          chat.val().messages.forEach((message: Message) => {
             itemProcessed++;
             if (
               message.date > userChat.val().lastCheck &&
@@ -354,6 +380,8 @@ function useChat({
     setCurrentFriendsViewSection,
     setCurrentSearchedFriend,
     deleteFriend,
+    deleteMessage,
+    setEditedMessage,
   };
 
   return functions;
