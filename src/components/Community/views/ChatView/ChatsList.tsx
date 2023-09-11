@@ -16,8 +16,6 @@ function ChatsList({
     (state: WholeState) => state.chat.userChats
   );
 
-  // console.log(userChats);
-
   return (
     <div className='bg-orange-050 dark:bg-grey-800 flex flex-col overflow-y-auto'>
       <div className='bg-inherit py-4 px-4 border-x-0 border-t-0 border-b border-solid dark:border-grey-600 border-grey-200 w-full mx-auto'>

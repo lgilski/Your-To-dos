@@ -44,6 +44,8 @@ function Chat() {
           onSubmit={onSubmit}
           dummy={dummy}
           value={currentMessage}
+          deleteMessage={functions.deleteMessage}
+          editMessage={functions.setEditedMessage}
         />
       </div>
     </div>

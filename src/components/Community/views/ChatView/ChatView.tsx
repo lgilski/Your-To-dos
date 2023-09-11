@@ -3,7 +3,14 @@ import ChatMessage from './ChatMessage';
 import { WholeState } from '@/types';
 import { TailSpin } from 'react-loader-spinner';
 
-function ChatView({ onSubmit, onMessageChange, dummy, value }) {
+function ChatView({
+  onSubmit,
+  onMessageChange,
+  dummy,
+  value,
+  deleteMessage,
+  setEditedMessage,
+}) {
   const myMessages = useSelector(
     (state: WholeState) => state.chat.myMessages
   );
@@ -19,7 +26,7 @@ function ChatView({ onSubmit, onMessageChange, dummy, value }) {
       {myMessages.length > 0 && (
         <div
           // onScroll={functions.handleScroll}
-          className='flex flex-col dark:text-grey-200 overflow-y-scroll h-[740px] pt-4'
+          className='flex flex-col dark:text-grey-200 overflow-y-scroll h-[740px] ml-2 pt-4'
         >
           {isLoadingData && (
             <TailSpin
@@ -39,6 +46,8 @@ function ChatView({ onSubmit, onMessageChange, dummy, value }) {
                   index={index}
                   message={message}
                   key={message.date}
+                  deleteMessage={deleteMessage}
+                  setEditedMessage={setEditedMessage}
                 />
               );
             })}
