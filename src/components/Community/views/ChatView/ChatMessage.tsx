@@ -124,7 +124,7 @@ function ChatMessage({
           >
             {message.message}{' '}
             {message.edited && (
-              <span className='text-xs dark:text-grey-400 text-grey-300 pl-2'>
+              <span className='text-xs dark:text-grey-400 text-grey-300 pl-1'>
                 (edited)
               </span>
             )}
