@@ -25,7 +25,7 @@ function WeatherDetailCard({
   return (
     <div
       className={
-        'w-full py-4 px-5 mt-8 bg-orange-vivid-200 rounded-md shadow-sm'
+        'w-full py-4 px-5 mt-8 bg-white dark:bg-cool-grey-900 dark:text-orange-vivid-050 rounded-md shadow-sm'
       }
     >
       <h5 className={'text-xl'}>{weatherForecastDay.date} </h5>
@@ -36,10 +36,10 @@ function WeatherDetailCard({
       >
         <div
           className={
-            ' relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0'
+            'relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0 [&_ion-icon]:w-5 [&_ion-icon]:h-5 [&_ion-icon]:mr-1'
           }
         >
-          <h6 className='text-lg text-orange-vivid-900'>
+          <h6 className='text-lg text-orange-vivid-900 dark:text-orange-vivid-500'>
             Temperature
           </h6>
           <p className={'flex gap1 items-center'}>
@@ -60,10 +60,12 @@ function WeatherDetailCard({
         </div>
         <div
           className={
-            ' relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0'
+            'relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0 [&_ion-icon]:w-5 [&_ion-icon]:h-5 [&_ion-icon]:mr-1'
           }
         >
-          <h6 className='text-lg text-orange-vivid-900'>Sun</h6>
+          <h6 className='text-lg text-orange-vivid-900 dark:text-orange-vivid-500'>
+            Sun
+          </h6>
           <p>
             Sunrise at <span>{weatherForecastDay.astro.sunrise}</span>
           </p>
@@ -83,10 +85,10 @@ function WeatherDetailCard({
         </div>
         <div
           className={
-            ' relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0'
+            'relative flex flex-col gap-4 p-4 border-r-2 border-solid border-orange-vivid-600 border-l-0 border-y-0 [&_ion-icon]:w-5 [&_ion-icon]:h-5 [&_ion-icon]:mr-1'
           }
         >
-          <h6 className='text-lg text-orange-vivid-900'>
+          <h6 className='text-lg text-orange-vivid-900 dark:text-orange-vivid-500'>
             Precipitation
           </h6>
           <p className={'flex gap1 items-center'}>
@@ -104,7 +106,7 @@ function WeatherDetailCard({
         </div>
         <div className={' relative flex flex-col gap-4 p-4 '}>
           <img
-            className='self-center w-20 h-20 mb-auto bg-white rounded-md shadow-sm'
+            className='self-center w-20 h-20 mb-auto bg-orange-vivid-050 dark:bg-white rounded-md shadow-sm'
             src={weatherForecastDay.day.condition.icon}
             alt=''
           />
@@ -113,7 +115,7 @@ function WeatherDetailCard({
       </div>
       <div
         className={
-          'grid grid-cols-[repeat(24,_150px)] gap-4  p-6 overflow-x-scroll bg-orange-vivid-100  rounded-t-md'
+          'grid grid-cols-[repeat(24,_150px)] gap-4  p-6 overflow-x-scroll text-black bg-orange-vivid-050 dark:bg-orange-vivid-100  rounded-t-md'
         }
       >
         {weatherForecastDay.hour.map((hour) => (
