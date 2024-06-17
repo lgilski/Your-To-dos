@@ -115,7 +115,7 @@ function WeatherDetailCard({
       </div>
       <div
         className={
-          'grid grid-cols-[repeat(24,_150px)] gap-4  p-6 overflow-x-scroll text-black bg-orange-vivid-050 dark:bg-orange-vivid-100  rounded-t-md'
+          'grid grid-cols-[repeat(24,_150px)] gap-4  p-6 overflow-x-scroll bg-orange-vivid-050 dark:bg-cool-grey-800 dark:text-white rounded-t-md'
         }
       >
         {weatherForecastDay.hour.map((hour) => (
