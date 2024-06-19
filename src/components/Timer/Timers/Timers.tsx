@@ -17,6 +17,13 @@ function Timers() {
   const dispatch = useDispatch();
 
   const formatedTimers = JSON.parse(localStorage.getItem('timers')!);
+  const [totalTime, setTotalTime] = useState<number>(0);
+  const totalHours = Math.floor(totalTime / 3600);
+  const totalMinutes = Math.floor(
+    (totalTime - totalHours * 3600) / 60
+  );
+  const totalSeconds =
+    totalTime - totalHours * 3600 - totalMinutes * 60;
 
   const timers = useSelector(
     (state: WholeState) => state.timers.timers
@@ -106,6 +113,17 @@ function Timers() {
   //   margin-top: 12px;
   // }
 
+  useEffect(() => {
+    const time = timers.reduce(
+      (acc, currentValue) => acc + currentValue.timeInSeconds,
+      0
+    );
+
+    setTotalTime(time);
+  }, [timers]);
+
+  console.log(timers);
+
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <div className='max-w-2xl py-2 px-8 m-auto bg-white border border-solid border-cool-grey-200 rounded-md dark:bg-cool-grey-900 dark:border-cool-grey-600'>
@@ -140,6 +158,16 @@ function Timers() {
             Add
           </button>
         </div>
+        {totalTime > 0 && (
+          <div className='flex dark:text-white bg-orange-vivid-050 dark:bg-cool-grey-800 mt-4 rounded-md py-2 justify-center text-lg gap-2'>
+            <p className=''>Total time</p>
+            <p className=''>
+              {totalHours}:
+              {totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes}:
+              {totalSeconds < 10 ? `0${totalSeconds}` : totalSeconds}
+            </p>
+          </div>
+        )}
         {timers.length > 0 ? (
           <Droppable droppableId={'timersColumn'}>
             {(provided) => (

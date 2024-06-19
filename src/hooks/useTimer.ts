@@ -61,13 +61,13 @@ export function useTimer({
     setIsCounting(true);
 
     countDownTime.current = setInterval(() => {
-      console.log(prevTime);
+      // console.log(prevTime);
 
       if (!prevTime) {
         prevTime = Date.now();
       }
 
-      time = Math.floor(
+      time = Math.ceil(
         timeRemainingInner! - (Date.now() - prevTime) / 1000
       );
 
