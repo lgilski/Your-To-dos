@@ -8,7 +8,7 @@ function FriendsNav({ setCurrentFriendsViewSection }) {
   );
 
   return (
-    <div className='bg-inherit py-4 px-8 border-x-0 border-t-0 border-b border-solid dark:border-cool-grey-600 border-cool-grey-200 w-full mx-auto flex gap-4'>
+    <div className='bg-inherit py-4 px-8 border-x-0 border-t-0 border-b border-solid dark:border-cool-grey-600 dark:bg-cool-grey-900 border-cool-grey-200 w-full mx-auto flex gap-4'>
       <FriendsNavButton handler={setCurrentFriendsViewSection}>
         All
       </FriendsNavButton>

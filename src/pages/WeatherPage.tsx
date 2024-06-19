@@ -27,9 +27,11 @@ function WeatherPage() {
     }
   }, [dispatch]);
 
+  // max-[1800px]:max-w-[1232px] max-[1500px]:max-w-[1000px] max-[1250px]:max-w-[632px] max-[900px]:max-w-[300px] max-[300px]:max-w-[262px]
+
   return (
     <section className='greyBg pb-16 pt-32 mt-0'>
-      <div className='max-w-7xl m-auto overflow-hidden px-8 bg-white border border-solid border-cool-grey-200 rounded-md max-[1800px]:max-w-[1232px] max-[1500px]:max-w-[1000px] max-[1250px]:max-w-[632px] max-[900px]:max-w-[300px] max-[300px]:max-w-[262px] dark:bg-cool-grey-900 dark:border-cool-grey-600'>
+      <div className='max-w-7xl m-auto overflow-hidden px-8 bg-white border border-solid border-cool-grey-200 rounded-md  dark:bg-cool-grey-900 dark:border-cool-grey-600'>
         {/* <div className='max-w-[1200px] mx-auto'> */}
         <div className={'w-full py-2 '}>
           <div className='flex justify-end pt-0 px-2 pb-2 m-auto border-x-0 border-t-0 border-b border-solid border-cool-grey-200 dark:border-cool-grey-600'>

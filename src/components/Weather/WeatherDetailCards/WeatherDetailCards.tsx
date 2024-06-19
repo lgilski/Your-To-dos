@@ -39,21 +39,42 @@ function WeatherDetailCards({ city }: { city: string }) {
     navigate(-1);
   };
 
+  // .city {
+  //   font-size: var(--heading-l);
+  //   text-align: center;
+  // }
+
+  // .headerWrapper {
+  //   position: relative;
+  // }
+
+  // .headerWrapper button {
+  //   position: absolute;
+  //   top: 50%;
+  //   font-size: var(--text-big);
+  //   font-weight: 500;
+  //   /* left: 20%; */
+  //   transform: translateY(-50%);
+  // }
+
+  // .headerWrapper button ion-icon {
+  //   vertical-align: middle;
+  // }
+
   return (
     <>
-      <div className={classes.detailWrapper}>
+      <div className={'max-w-5xl mx-auto pt-32 pb-20'}>
         <div className={classes.headerWrapper}>
-          <h4 className={classes.city}>
+          <h4 className={'text-lg text-center dark:text-white'}>
             {forecastData.location.name},{' '}
             {forecastData.location.country}
           </h4>
-          <Button
+          <button
             onClick={goBack}
-            color='OrangeLight'
-            variant='RoundedSquare'
+            className='rounded-md border-none px-4 py-2 bg-orange-vivid-700 hover:bg-orange-vivid-800 duration-300 text-orange-vivid-050 cursor-pointer'
           >
             <ion-icon name='arrow-back-outline' /> Back
-          </Button>
+          </button>
         </div>
         {forecastData.forecast.forecastday.map(
           (forecastday: Forecastday) => {

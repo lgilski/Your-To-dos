@@ -26,7 +26,7 @@ function ChatView({
       {myMessages.length > 0 && (
         <div
           // onScroll={functions.handleScroll}
-          className='flex flex-col dark:text-cool-grey-200 overflow-y-scroll h-[740px] ml-2 pt-4'
+          className='flex flex-col  dark:text-cool-grey-200 overflow-y-scroll max-h-[740px] ml-2 pt-4'
         >
           {isLoadingData && (
             <TailSpin

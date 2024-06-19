@@ -86,7 +86,7 @@ function AddFriends() {
           <label htmlFor='addFriend' className='mb-3 text-base'>
             Type your friend&apos;s user name to send request
           </label>
-          <div className='bg-orange-vivid-050 dark:bg-cool-grey-900 px-2 py-3 rounded-lg flex justify-between w-full'>
+          <div className='bg-orange-vivid-050 dark:bg-cool-grey-800 px-2 py-3 rounded-lg flex justify-between w-full'>
             <input
               className='lowercase bg-inherit border-none w-full text-lg px-1 py-1 focus:outline-none dark:text-cool-grey-100'
               maxLength={32}

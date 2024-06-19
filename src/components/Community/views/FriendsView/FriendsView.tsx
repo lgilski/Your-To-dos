@@ -30,7 +30,7 @@ function FriendsView({
               functions.setCurrentFriendsViewSection
             }
           />
-          <div className='flex flex-col px-4 pt-4 dark:text-cool-grey-100 h-full'>
+          <div className='flex flex-col px-4 pt-4 dark:bg-cool-grey-900 dark:text-cool-grey-100 h-full'>
             <FriendsList
               goToChat={functions.goToChat}
               setCurrentSearchedFriend={

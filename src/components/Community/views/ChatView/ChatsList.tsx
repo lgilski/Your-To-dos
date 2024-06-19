@@ -25,7 +25,7 @@ function ChatsList({
             !currentFriend
               ? 'dark:bg-cool-grey-700 bg-orange-vivid-200'
               : 'bg-inherit'
-          } dark:text-cool-grey-100 rounded-lg px-2 py-1 text-xl w-full font-semibold cursor-pointer duration-300 hover:bg-orange-vivid-100 dark:hover:bg-cool-grey-600 text-left [&_ion-icon]:w-5 [&_ion-icon]:h-5 flex items-center gap-2`}
+          } dark:text-cool-grey-100 rounded-md px-4 py-2 text-lg w-full font-semibold cursor-pointer duration-300 hover:bg-orange-vivid-100 dark:hover:bg-cool-grey-600 text-left [&_ion-icon]:w-5 [&_ion-icon]:h-5 flex items-center gap-2`}
         >
           <ion-icon name='people' /> Friends
         </button>

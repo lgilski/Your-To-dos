@@ -23,7 +23,7 @@ function FriendsList({
       {myFriends.length > 0 && currentFriendListSecton === 'All' && (
         <input
           onChange={setCurrentSearchedFriend}
-          className={`bg-lime-green-100 dark:bg-cool-grey-800 dark:text-cool-grey-100 rounded mb-4 border-none py-1 px-2 text-base w-full focus:outline-none`}
+          className={`bg-orange-vivid-100  dark:bg-cool-grey-800 dark:text-cool-grey-100 rounded mb-4 border-none py-1 px-2 text-base w-full focus:outline-none`}
           placeholder='Search friend'
         />
       )}

@@ -37,7 +37,7 @@ function Chat() {
         goToChat={functions.goToChat}
         goToFriendsList={functions.goToFriendsList}
       />
-      <div className='flex flex-col'>
+      <div className='flex flex-col dark:bg-cool-grey-900'>
         <FriendsView functions={functions} />
         <ChatView
           onMessageChange={onMessageChange}
