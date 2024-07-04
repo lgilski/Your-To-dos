@@ -20,6 +20,7 @@ function Chat() {
       <div className='flex flex-col  dark:bg-cool-grey-900'>
         <FriendsView functions={functions} />
         <ChatView
+          setTypingTimestamp={functions.setTypingTimestamp}
           sendMessage={functions.sendMessage}
           dummy={dummy}
           deleteMessage={functions.deleteMessage}

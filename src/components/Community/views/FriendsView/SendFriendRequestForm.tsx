@@ -10,14 +10,16 @@ import {
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-function AddFriends() {
+function SendFriendRequestForm() {
   const currentFriendListSecton = useSelector(
     (state: WholeState) => state.chat.currentFriendListSecton
   );
 
   const addingUser = auth.currentUser;
 
-  const addFriend = async function (e: React.FormEvent) {
+  const sendRequest = async function (e: React.FormEvent) {
+    console.log('Trying to send request');
+
     e.preventDefault();
 
     const db = getDatabase();
@@ -32,7 +34,7 @@ function AddFriends() {
         user.val().uid !== addingUser?.uid &&
         !addingUserData
           .val()
-          .friends.find((friend) => friend.uid === user.val().uid)
+          .friends?.find((friend) => friend.uid === user.val().uid)
       ) {
         get(
           child(ref(db), 'usersPublicData/' + user.key + '/requests')
@@ -81,9 +83,9 @@ function AddFriends() {
   return (
     <>
       {currentFriendListSecton === 'Add friend' && (
-        <form onSubmit={addFriend} className='flex flex-col'>
+        <form onSubmit={sendRequest} className='flex flex-col'>
           <h5 className='text-2xl font-medium'>Add friend</h5>
-          <label htmlFor='addFriend' className='mb-3 text-base'>
+          <label htmlFor='sendRequest' className='mb-3 text-base'>
             Type your friend&apos;s user name to send request
           </label>
           <div className='bg-orange-vivid-050 dark:bg-cool-grey-800 px-2 py-3 rounded-lg flex justify-between w-full'>
@@ -92,7 +94,7 @@ function AddFriends() {
               maxLength={32}
               placeholder="Type your friend's user name to send request"
               type='text'
-              name='addFriend'
+              name='sendRequest'
               autoComplete='off'
             />
             <button
@@ -108,4 +110,4 @@ function AddFriends() {
   );
 }
 
-export default AddFriends;
+export default SendFriendRequestForm;

@@ -60,7 +60,9 @@ function useChat({
 
   const acceptFriendRequest = async function (sentRequest: Friend) {
     const requests = await getMyFriendRequestsOnce(user, db);
-    const myFriendsData = await getMyFriendsOnce(user, db);
+    const myFriendsData = (await getMyFriendsOnce(user, db))
+      .val()
+      .filter((el) => el != null);
     const senderFriendsData = await get(
       child(
         ref(db),
@@ -77,10 +79,7 @@ function useChat({
     // Update my friends and my requests
     update(ref(db, 'usersPublicData/' + user?.uid), {
       requests: [...requestWithoutAcceptedArray],
-      friends: [
-        { uid: sentRequest.uid },
-        ...(myFriendsData.val() || []),
-      ],
+      friends: [{ uid: sentRequest.uid }, ...(myFriendsData || [])],
     });
 
     // Add me as a friend to the request sender
@@ -189,7 +188,31 @@ function useChat({
     });
   }
 
+  function setTypingTimestamp() {
+    update(
+      ref(
+        db,
+        'chats/' +
+          currentCombinedId +
+          '/lastTypingTimestamps/' +
+          user?.uid
+      ),
+      {
+        timestamp: serverTimestamp(),
+      }
+    );
+  }
+
   function goToFriendsList() {
+    off(
+      ref(
+        db,
+        'chats/' +
+          currentCombinedId +
+          '/lastTypingTimestamps/' +
+          user?.uid
+      )
+    );
     off(ref(db, 'userChats/' + user.uid));
     off(ref(db, 'chats/' + currentCombinedId + '/messages'));
     dispatch(chatActions.setCurrentFriend(null));
@@ -273,16 +296,17 @@ function useChat({
     });
   }, [currentCombinedId]);
 
-  useEffect(() => {
-    if (currentCombinedId) {
-      update(
-        ref(db, 'userChats/' + user!.uid + '/' + currentCombinedId),
-        {
-          lastCheck: serverTimestamp(),
-        }
-      );
-    }
-  }, [myMessages, currentCombinedId]);
+  // Problem is, that when this changes the lastCheck property when there's no info about the user, it brakes everything
+  // useEffect(() => {
+  //   if (currentCombinedId) {
+  //     update(
+  //       ref(db, 'userChats/' + user!.uid + '/' + currentCombinedId),
+  //       {
+  //         lastCheck: serverTimestamp(),
+  //       }
+  //     );
+  //   }
+  // }, [myMessages, currentCombinedId]);
 
   useEffect(() => {
     if (
@@ -302,23 +326,25 @@ function useChat({
   useEffect(() => {
     if (!prevUserChats) return setPrevUserChats(userChats);
 
-    userChats.forEach((userChat) => {
-      const prevVersion = prevUserChats.find(
-        (prevUserChat: UserChat) =>
-          prevUserChat.userInfo.uid === userChat.userInfo.uid
-      );
-
-      if (
-        prevVersion &&
-        (userChat.newMessages > prevVersion.newMessages ||
-          (!prevVersion.newMessages && userChat.newMessages))
-      ) {
-        const audio = new Audio(
-          '/src/assets/notifications/mixkit-long-pop-2358.wav'
+    userChats
+      .filter((el) => el.userInfo)
+      .forEach((userChat) => {
+        const prevVersion = prevUserChats.find(
+          (prevUserChat: UserChat) =>
+            prevUserChat?.userInfo.uid === userChat?.userInfo.uid
         );
-        audio.play();
-      }
-    });
+
+        if (
+          prevVersion &&
+          (userChat.newMessages > prevVersion.newMessages ||
+            (!prevVersion.newMessages && userChat.newMessages))
+        ) {
+          const audio = new Audio(
+            '/src/assets/notifications/mixkit-long-pop-2358.wav'
+          );
+          audio.play();
+        }
+      });
 
     setPrevUserChats(userChats);
   }, [userChats]);
@@ -347,7 +373,7 @@ function useChat({
         let i = 0;
         let itemProcessed = 0;
         get(child(ref(db), 'chats/' + userChat.key)).then((chat) => {
-          chat.val().messages.forEach((message: Message) => {
+          chat.val()?.messages.forEach((message: Message) => {
             itemProcessed++;
             if (
               message.date > userChat.val().lastCheck &&
@@ -385,6 +411,7 @@ function useChat({
     deleteFriend,
     deleteMessage,
     setEditedMessage,
+    setTypingTimestamp,
   };
 
   return functions;

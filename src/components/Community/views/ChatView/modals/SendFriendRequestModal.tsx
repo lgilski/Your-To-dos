@@ -9,7 +9,7 @@ import {
 import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
 
-function AddFriendsModal({
+function SendFriendRequestModal({
   closeAddFriendsModal,
 }: {
   closeAddFriendsModal: () => void;
@@ -120,4 +120,4 @@ function AddFriendsModal({
   );
 }
 
-export default AddFriendsModal;
+export default SendFriendRequestModal;

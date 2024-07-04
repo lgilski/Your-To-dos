@@ -13,37 +13,51 @@ import {
 } from 'react';
 import MessagesList from './MessagesList';
 import { Form } from 'react-router-dom';
+import { getDatabase, onValue, ref } from 'firebase/database';
 
 function ChatView({
   sendMessage,
   dummy,
   deleteMessage,
+  setTypingTimestamp,
   editMessage,
 }: {
   sendMessage: (messageToSend: string) => Promise<void>;
   dummy: MutableRefObject<HTMLDivElement | null>;
   deleteMessage: (message: Message) => Promise<void>;
+  setTypingTimestamp: () => void;
   editMessage: () => Promise<void>;
 }) {
+  const db = getDatabase();
+
   const currentFriend = useSelector(
     (state: WholeState) => state.chat.currentFriend
   );
   const isLoadingData = useSelector(
     (state: WholeState) => state.chat.isLoadingData
   );
-
-  // const inputRef = useRef<HTMLInputElement>(null);
+  const currentCombinedId = useSelector(
+    (state: WholeState) => state.chat.currentCombinedId
+  );
+  const myMessages = useSelector(
+    (state: WholeState) => state.chat.myMessages
+  );
 
   const [currentMessage, setCurrentMessage] = useState<
     string | undefined
   >(undefined);
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [lastWritingTimestamp, setLastWritingTimestamp] = useState<
+    number | null
+  >(null);
+
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const onMessageChange: ComponentProps<'input'>['onChange'] = (
     event
   ) => {
     setCurrentMessage(event.target.value);
+    setTypingTimestamp();
   };
 
   const onSubmit = (e: React.FormEvent) => {
@@ -57,24 +71,79 @@ function ChatView({
     setCurrentMessage('');
   };
 
+  useEffect(() => {
+    onValue(
+      ref(
+        db,
+        'chats/' +
+          currentCombinedId +
+          '/lastTypingTimestamps/' +
+          currentFriend?.uid
+      ),
+      (writingTimestamp: any) => {
+        if (writingTimestamp.exists()) {
+          setLastWritingTimestamp(writingTimestamp.val().timestamp);
+        }
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    // This handles displaying when someone is typing
+
+    let timer = null;
+
+    if (
+      // When someone you are chating with sends message, stop showing that he/she is typing
+
+      myMessages[myMessages.length - 1]?.sender ===
+        currentFriend?.uid &&
+      lastWritingTimestamp &&
+      myMessages[myMessages.length - 1]?.date > lastWritingTimestamp
+    ) {
+      return setIsTyping(false);
+    }
+
+    // If last typing was at max 5 seconds ago, display that he/she is typing and after 5 seconds stop displaying
+    if (
+      lastWritingTimestamp &&
+      (lastWritingTimestamp - Date.now()) / 1000 > -5
+    ) {
+      setIsTyping(true);
+
+      timer = setTimeout(() => setIsTyping(false), 5 * 1000);
+    }
+
+    return () => {
+      // When there's new last typing, then close the timeout
+
+      if (!timer) return;
+
+      clearTimeout(timer);
+    };
+  }, [lastWritingTimestamp, myMessages]);
+
+  useEffect(() => {
+    console.log(myMessages);
+  }, [myMessages]);
+
   return (
     <>
       <MessagesList
         dummy={dummy}
         deleteMessage={deleteMessage}
         isLoadingData={isLoadingData}
-        // currentEditedMessage={currentEditedMessage}
-        // setCurrentEditedMessage={setCurrentEditedMessage}
       />
 
       {currentFriend && (
         <Form
           onSubmit={onSubmit}
-          className='w-full mt-auto px-4 pb-4 pt-2'
+          className='w-full mt-auto px-4 pb-4 pt-4 relative'
         >
+          {isTyping && (
+            <div className='dark:text-white absolute text-sm -top-1'>{`${currentFriend.displayName} is typing...`}</div>
+          )}
           <input
-            // ref={inputRef}
-            // value={inputRef.current?.value}
             value={currentMessage}
             onChange={onMessageChange}
             className='w-full border-none bg-orange-vivid-200 text-lg py-1 px-2 rounded placeholder:text-orange-vivid-700 focus:outline-none'
