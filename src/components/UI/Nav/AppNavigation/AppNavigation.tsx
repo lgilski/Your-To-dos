@@ -42,7 +42,7 @@ function AppNavigation() {
         openOnClick
         className={classes.tooltip}
       >
-        <div className='flex flex-col text-cool-grey-900 [&_ion-icon]:min-w-[24px] [&_ion-icon]:min-h-[24px]'>
+        <div className='flex flex-col text-cool-grey-900 bg-orange-vivid-100 [&_ion-icon]:min-w-[24px] [&_ion-icon]:min-h-[24px]'>
           <button
             onClick={showSettings}
             className={`cursor-pointer py-2 px-4 bg-inherit border-none w-full font-medium text-cool-grey-900 no-underline duration-300 hover:bg-orange-vivid-300 text-base font-['Roboto']`}
