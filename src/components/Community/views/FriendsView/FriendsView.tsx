@@ -3,7 +3,7 @@ import FriendsNav from './FriendsNav';
 import FriendsList from './FriendsList';
 import FriendRequestsList from './FriendRequestsList';
 import { useSelector } from 'react-redux';
-import AddFriends from './AddFriends';
+import SendFriendRequestForm from './SendFriendRequestForm';
 
 function FriendsView({
   functions,
@@ -48,7 +48,7 @@ function FriendsView({
               acceptFriendRequest={functions.acceptFriendRequest}
               ingnoreFriendRequest={functions.ingnoreFriendRequest}
             />
-            <AddFriends />
+            <SendFriendRequestForm />
           </div>
         </div>
       )}
