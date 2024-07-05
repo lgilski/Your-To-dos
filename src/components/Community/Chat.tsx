@@ -3,6 +3,8 @@ import useChat from '@/hooks/useChat';
 import { ComponentProps, useRef, useState } from 'react';
 import ChatsList from './views/ChatView/ChatsList';
 import ChatView from './views/ChatView/ChatView';
+import { useSelector } from 'react-redux';
+import { WholeState } from '@/types';
 
 function Chat() {
   const dummy = useRef<HTMLDivElement | null>(null);
@@ -10,6 +12,10 @@ function Chat() {
   const functions = useChat({
     dummy,
   });
+
+  const currentFriend = useSelector(
+    (state: WholeState) => state.chat.currentFriend
+  );
 
   return (
     <div className=' max-w-[1600px] h-[calc(100vh-120px)] bg-white mx-auto rounded-md border border-solid border-cool-grey-200 dark:border-cool-grey-600 dark:bg-cool-grey-850 duration-500 grid grid-cols-[300px_1fr] overflow-hidden relative shadow-md'>
@@ -19,13 +25,15 @@ function Chat() {
       />
       <div className='flex flex-col  dark:bg-cool-grey-900'>
         <FriendsView functions={functions} />
-        <ChatView
-          setTypingTimestamp={functions.setTypingTimestamp}
-          sendMessage={functions.sendMessage}
-          dummy={dummy}
-          deleteMessage={functions.deleteMessage}
-          editMessage={functions.setEditedMessage}
-        />
+        {currentFriend && (
+          <ChatView
+            setTypingTimestamp={functions.setTypingTimestamp}
+            sendMessage={functions.sendMessage}
+            dummy={dummy}
+            deleteMessage={functions.deleteMessage}
+            editMessage={functions.setEditedMessage}
+          />
+        )}
       </div>
     </div>
   );
