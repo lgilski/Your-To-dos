@@ -125,9 +125,9 @@ function ChatView({
     };
   }, [lastWritingTimestamp, myMessages]);
 
-  // useEffect(() => {
-  //   console.log(myMessages);
-  // }, [myMessages]);
+  useEffect(() => {
+    console.log(isTyping);
+  }, [isTyping]);
 
   return (
     <>
