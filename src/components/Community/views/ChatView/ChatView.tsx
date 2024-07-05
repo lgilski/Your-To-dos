@@ -91,7 +91,7 @@ function ChatView({
   useEffect(() => {
     // This handles displaying when someone is typing
 
-    console.log(lastWritingTimestamp);
+    console.log('last writing timestamp::::', lastWritingTimestamp);
 
     let timer = null;
 
@@ -126,7 +126,7 @@ function ChatView({
   }, [lastWritingTimestamp, myMessages]);
 
   useEffect(() => {
-    console.log(isTyping);
+    console.log('Is typing', isTyping);
   }, [isTyping]);
 
   return (
