@@ -14,8 +14,7 @@ function Footer() {
               'mb-4 text-xl font-extrabold text-orange-vivid-400'
             }
           >
-            Your To-dos{' '}
-            <span className='text-cool-grey-900'>and stuff UwU</span>
+            Your <span className='text-cool-grey-900'>To-dos</span>
           </h5>
           <div
             className={
