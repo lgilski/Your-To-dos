@@ -1,8 +1,8 @@
-# Your To-Dos 📋
+# Your To-Dos
 
 A comprehensive, feature-rich learning project built with modern web technologies. A full-stack application combining task management, time tracking, weather information, and community features.
 
-## 🎓 About This Project
+## About This Project
 
 This is an **educational project** designed to learn and practice:
 
@@ -14,42 +14,42 @@ This is an **educational project** designed to learn and practice:
 - API integration and data fetching
 - Responsive web design with Tailwind CSS
 
-## ✨ Features
+## Features
 
-### 📝 Task Management
+### Task Management
 
 - Create, read, update, and delete tasks with rich features
 - Drag-and-drop interface for organizing tasks
 - Search functionality to quickly find tasks
 - Task categorization and filtering
 
-### ⏱️ Time Tracking Tools
+### Time Tracking Tools
 
 - **Timer**: Create countdowns with customizable time settings
 - **Stopwatch**: Track elapsed time with lap functionality
 - Multiple timers running simultaneously
 
-### 🌤️ Weather Information
+### Weather Information
 
 - Real-time weather data display
 - Weather forecasts and detailed information
 - Location-based weather queries
 - Integration with external weather APIs
 
-### 💬 Community Features
+### Community Features
 
 - Real-time chat functionality
 - Community engagement and messaging
 - Collaborative space for users
 
-### 👤 User Management
+### User Management
 
 - Firebase authentication
 - User profiles and settings
 - Secure login and signup
 - Password recovery functionality
 
-### 🎨 UI/UX Enhancements
+### UI/UX Enhancements
 
 - Toast notifications for user feedback
 - Tooltips and interactive help
@@ -57,14 +57,14 @@ This is an **educational project** designed to learn and practice:
 - Smooth animations and transitions
 - Mobile-responsive design
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend Framework
 
-- **React 18** - UI library
-- **TypeScript** - Type-safe JavaScript
-- **Vite** - Lightning-fast build tool
-- **React Router DOM** - Client-side routing
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **React Router DOM**
 
 ### State Management
 
@@ -74,14 +74,14 @@ This is an **educational project** designed to learn and practice:
 
 ### Styling
 
-- **Tailwind CSS** - Utility-first CSS framework
-- **PostCSS** - CSS processing
-- **CSS Modules** - Component-scoped styling
+- **Tailwind CSS**
+- **PostCSS**
+- **CSS Modules**
 
 ### Backend & Authentication
 
-- **Firebase** - Real-time database, authentication, and hosting
-- **Firebase Admin SDK** - Backend Firebase operations
+- **Firebase**
+- **Firebase Admin SDK**
 
 ### UI Components & Libraries
 
@@ -99,7 +99,7 @@ This is an **educational project** designed to learn and practice:
 - **Prettier** - Code formatting
 - **Stylelint** - CSS linting
 
-## 📦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -154,7 +154,7 @@ npm run build
 npm start
 ```
 
-## 🧪 Testing & Development
+## Testing & Development
 
 **Run tests:**
 
