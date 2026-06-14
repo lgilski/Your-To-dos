@@ -12,7 +12,7 @@ This is an **educational project** designed to learn and practice:
 - Advanced UI patterns
 - Modern tooling and development workflows
 - API integration and data fetching
-- Responsive web design with Tailwind CSS
+- Partially responsive web design with Tailwind CSS
 
 ## Features
 
@@ -54,7 +54,7 @@ This is an **educational project** designed to learn and practice:
 - Toast notifications for user feedback
 - Loading spinners and progress indicators
 - Smooth animations and transitions
-- Mobile-responsive design
+- Partially mobile-responsive design
 
 ## Technology Stack
 
