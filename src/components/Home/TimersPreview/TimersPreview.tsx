@@ -6,9 +6,9 @@ import HomePageFeature from '../HomePageFeature';
 
 function TimersPreview() {
   return (
-    <section className='bg-orange-vivid-050  py-32'>
-      <div className='max-w-[1200px] mx-auto'>
-        <div className='flex gap-24 w-full'>
+    <section className='bg-orange-vivid-050 py-32 max-md:px-4 max-sm:py-16'>
+      <div className='max-w-[1200px] mx-auto  max-[1200px]:max-w-2xl'>
+        <div className='flex gap-24 w-full max-[1200px]:flex-col max-md:gap-8 '>
           <div className='w-full'>
             <SectionHeader
               className='w-full pb-8 '
@@ -38,15 +38,11 @@ function TimersPreview() {
               />
             </div>
           </div>
-          <div className='relative w-full'>
+          <div className='w-full '>
             <img
               src={timersPreviewTwo}
-              className='aspect-auto w-full shadow-md'
+              className='aspect-auto w-full shadow-md '
             />
-            {/* <img
-            src={timersPreview}
-            className='scale-75 shadow-md absolute top-0 left-0'
-            /> */}
           </div>
         </div>
       </div>

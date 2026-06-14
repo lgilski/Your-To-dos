@@ -4,7 +4,7 @@ import HomePageFeature from '../HomePageFeature';
 
 function CardsPreview() {
   return (
-    <section className='max-w-[1200px] py-32 mx-auto flex gap-24 max-[1200px]:flex-col max-[1200px]:max-w-2xl'>
+    <section className='max-w-[1200px] py-32 mx-auto flex gap-24 max-[1200px]:flex-col-reverse max-[1200px]:max-w-2xl max-md:gap-8 max-md:px-4 max-sm:py-16'>
       <div className='w-full relative'>
         {/* <div className='absolute rounded-full bg-orange-vivid-400 h-[600px] w-[600px] inset-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 bg-[radial-gradient(169.40%_89.55%_at_94.76%_6.29%,rgba(0,0,0,0.40)_0%,rgba(255,255,255,0.00)_100%)]' /> */}
         <img

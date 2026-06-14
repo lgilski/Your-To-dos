@@ -5,7 +5,7 @@ function CommuntityPreview() {
   //
 
   return (
-    <section className='max-w-[1200px] py-32 mx-auto gap-24 max-[1200px]:flex-col max-[1200px]:max-w-2xl'>
+    <section className='max-w-[1200px] py-32 mx-auto max-[1200px]:max-w-2xl  max-md:px-4'>
       <div className='flex flex-col items-center'>
         <SectionHeader
           className='w-full pb-2 text-center'
@@ -13,13 +13,13 @@ function CommuntityPreview() {
           header='Get in touch with your friends'
           type='large'
         />
-        <p className='w-[560px] text-center pb-8'>
+        <p className='w-[560px] text-center pb-8 max-[560px]:w-full'>
           Get in touch with your friends without the houstle in one
           place.
         </p>
         <img
           src={ChatPreview}
-          className='aspect-auto w-[900px] drop-shadow-lg'
+          className='aspect-auto w-[900px] drop-shadow-lg max-[900px]:w-full'
         />
       </div>
     </section>

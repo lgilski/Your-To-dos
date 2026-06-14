@@ -7,10 +7,10 @@ function Hero() {
   const userVerified = auth.currentUser?.emailVerified;
 
   return (
-    <section className='relative flex items-center h-[800px] bg-orange-vivid-050 overflow-hidden'>
+    <section className='relative flex items-center h-[800px] bg-orange-vivid-050 overflow-hidden max-md:h-[600px]'>
       <div className='w-[1300px] m-auto'>
         <div className='max-w-[700px] max-[1200px]:m-auto relative'>
-          <h2 className='text-6xl font-extrabold leading-[1.1] tracking-tight text-orange-vivid-400 max-[1200px]:text-center'>
+          <h2 className='text-6xl font-extrabold leading-[1.1] tracking-tight text-orange-vivid-400 max-[1200px]:text-center max-md:text-5xl'>
             Here you can keep all your todos and more!
           </h2>
           <p className='max-w-[540px] my-4 leading-[160%] text-xl text-cool-grey-500 max-[1200px]:w-[350px] max-[1200px]:px-0 max-[1200px]:py-3 max-[1200px]:m-auto max-[1200px]:text-center '>

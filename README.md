@@ -61,13 +61,13 @@ This is an **educational project** designed to learn and practice:
 - **React 18**
 - **TypeScript**
 - **Vite**
-- **React Router DOM**
+- **React Router**
 
 ### State Management
 
 - **Redux Toolkit** - Predictable state management
 - **React Redux** - React bindings for Redux
-- **TanStack React Query** - Server state management
+- **TanStack Query** - Server state management
 
 ### Styling
 
@@ -96,89 +96,7 @@ This is an **educational project** designed to learn and practice:
 - **Prettier** - Code formatting
 - **Stylelint** - CSS linting
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm or yarn package manager
-
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone <repository-url>
-cd Todos
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Create a `.env` file with your Firebase configuration:
-
-```
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-```
-
-### Running the Application
-
-**Development server:**
-
-```bash
-npm run dev
-```
-
-The app will be available at `http://localhost:3000`
-
-**Production build:**
-
-```bash
-npm run build
-```
-
-**Start production build:**
-
-```bash
-npm start
-```
-
-## Testing & Development
-
-**Run tests:**
-
-```bash
-npm run test
-```
-
-**Storybook (component library):**
-
-```bash
-npm run storybook
-```
-
-**Code formatting:**
-
-```bash
-npm run prettier:fix
-```
-
-**Linting:**
-
-```bash
-npm run lint:fix
-npm run stylelint:fix
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -194,7 +112,7 @@ src/
 └── utils/            # Utility functions
 ```
 
-## 🚀 Key Learning Outcomes
+## Key Learning Outcomes
 
 This project demonstrates:
 
