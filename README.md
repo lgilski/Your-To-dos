@@ -21,7 +21,8 @@ This is an **educational project** designed to learn and practice:
 - Create, read, update, and delete tasks with rich features
 - Drag-and-drop interface for organizing tasks
 - Search functionality to quickly find tasks
-- Task categorization and filtering
+- Task filtering
+- Weather forecast integration
 
 ### Time Tracking Tools
 
